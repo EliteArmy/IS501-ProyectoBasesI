@@ -1,16 +1,17 @@
-<html lang="es">
-
+<html lang="en">
+  
   <head>
-
+    
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <link rel="Coffee Icon" href="../img/trivago.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="Coffee Icon" href="../img/...">
 
-    <title>Registrarse en NotTrivago</title>
-
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/rafael-custom-css.css">
-    <link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/ariel-custom.css">
+    <link rel="stylesheet" type="text/css" href="../fontawesome-5.0.9/web-fonts/css/fontawesome-all.min.css">
+
+    <title>Registrarse en [PlaceHolder]</title>
 
   </head>
 
@@ -21,7 +22,7 @@
   		<div class="navbar-header text-center">
 
 				<a class="foto" href="../index.html">
-					<img src="../img/notTrivago.png" alt="NotTrivago" height="44" width="152">
+					<img src="../img/not[Placeholder].png" alt="Not[Placeholder]" height="44" width="152">
 				</a>
 
 	  		<div class="collapse navbar-collapse float-derecha">
@@ -42,20 +43,19 @@
 		<div class="envoltorio-total">
 
 			<div class="container-fluid">
-	      <div class="row">
-			  	<section class="envoltura-exterior-cajas-registro">
-			  		<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+	      <div class="row justify-content-md-center">
+		  		<div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
 
 			  			<div class="text-left parrafo-con-margin">
-			  				<h3 style="margin-top:-8px;">
-					  		<strong>Crea una cuenta para tener más opciones en trivago. ¡Es gratis!</strong>
+			  				<h3>
+					  		<strong>Crea una cuenta para tener más opciones en [Placeholder]. ¡Es gratis!</strong>
 					  		</h3>
 			  			</div>
 
 			  			<div class="container-fluid">
 	          		<div class="row">
 
-							  	<div class="envoltura-caja-registro col-xs-12 col-sm-6 col-md-6 col-lg-6">
+							  	<div class="envoltura-caja-registro col-xs-12 col-sm-12 col-md-6 col-lg-6">
 							  		<div class="caja-registro">
 
 							  			<h2 class="titulo-caja-registro">
@@ -93,7 +93,7 @@
 										</div>
 									</div>
 
-									<div class="envoltura-caja-registro col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<div class="envoltura-caja-registro col-xs-12 col-sm-12 col-md-6 col-lg-6">
 										<div class="caja-registro">
 											<h2 class="titulo-caja-registro">
 												Regístrate con tu e-mail
@@ -171,7 +171,7 @@
 							</div>
 
 							<div class="text-left parrafo-con-margin">
-								<p>	Al hacer clic en «Registrarse», estás aceptando <a href="#">los términos y condiciones</a> y la <a href="#">política de privacidad </a>  de trivago.
+								<p>	Al hacer clic en «Registrarse», estás aceptando <a href="#">los términos y condiciones</a> y la <a href="#">política de privacidad </a>  de [Placeholder].
 								</p>
 
 								<p class="barrita-top">
@@ -189,25 +189,20 @@
 							</div>
 
 						</div>
-					</section>
 
 				</div>
 			</div>
 		</div>
 
 	  <!-- ========================================================== -->
-	  <!-- Placed at the end of the document so the pages load faster -->
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-
-	  <!-- jQuery -->
-	  <script src="..js/jquery.min.js"></script>
+	  <!-- jQuery Primero -->
+	  <script src="../javascript/jquery-3.3.1.min.js"></script>
 
 	  <!-- Bootstrap Core JavaScript -->
-	  <script src="../js/bootstrap.min.js"></script>
+	  <script src="../javascript/bootstrap.min.js"></script>
 
 	  <!-- Custom JavaScript -->
-	  <script src="../js/usuario/controlador-usuario.js"></script>
+	  <script src="../javascript/usuario/controlador-usuario.js"></script>
 	  <!--<script src="../..js/funcionalidades.js"></script>-->
 
   </body>
