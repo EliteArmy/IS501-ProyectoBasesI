@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="Coffee Icon" href="../img/ico.ico">
+    <link rel="icon" href="../img/favicon.ico">
 		
 		<title>Registrarse en [PlaceHolder]</title>
     
