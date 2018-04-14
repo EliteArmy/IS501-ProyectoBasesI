@@ -8,7 +8,7 @@ $(document).ready(function(){
 		data: "",
 		method: "POST",
 		success: function(resultado){
-			alert(resultado)
+			//alert(resultado)
 			$("#div-informacion").html(resultado);
 		},
 		error: function(e){

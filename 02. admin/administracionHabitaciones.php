@@ -139,7 +139,7 @@
                   <th>IdHabitacion</th>
                   <th>Numero Habitacion</th>
                   <th>Numero Piso</th>
-                  <th>Estadp</th>
+                  <th>Estado</th>
                   <th>Descripcion</th>
                   <th>Tipo Categoria</th>
                   <th>Tipo Habitación</th>
