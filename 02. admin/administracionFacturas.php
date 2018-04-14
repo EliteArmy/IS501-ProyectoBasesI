@@ -136,13 +136,15 @@
               
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombre</th>
-                  <th>FechaIngreso</th>
-                  <th>FechaSalida</th>
-                  <th>Estado</th>
-                  <th>Sucursal</th>
-                  <th>Superior</th>
+                  <th>IdFactura</th>
+                  <th>Numero Factura</th>
+                  <th>Fecha Emision</th>
+                  <th>Coste Reservacion</th>
+                  <th>Coste Pedido</th>
+                  <th>Coste Producto</th>
+                  <th>Coste Total</th>
+                  <th>Cambio</th>
+                  <th>Observacion</th>
                 </tr>
               </thead>
 
@@ -254,7 +256,7 @@
     <script src="../javascript/bootstrap.min.js"></script>
 
     <!-- Custom Javascript -->
-    <script src="../javascript/controlador.js"></script>
+    <script src="../javascript/controladores/controlador-factura.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

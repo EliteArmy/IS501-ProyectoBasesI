@@ -70,14 +70,14 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="administracionFacturas.php">
                   <!--<span data-feather="bar-chart-2"></span>-->
                   <i class="far fa-money-bill-alt"></i>
                   Facturas
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="administracionHabitaciones.php">
                   <!--<span data-feather="layers"></span>-->
                   <i class="fas fa-bed"></i>
                   Habitaciones
@@ -138,11 +138,10 @@
               
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>IdSucursal</th>
                   <th>Nombre</th>
-                  <th>Cantidad Hab.</th>
+                  <th>Cantidad Habitaciones</th>
                   <th>Telefono</th>
-                  <th>Email</th>
                   <th>Direccion</th>
                   <th>Descripcion</th>
                 </tr>
@@ -256,7 +255,7 @@
     <script src="../javascript/bootstrap.min.js"></script>
 
     <!-- Custom Javascript -->
-    <script src="../javascript/controlador.js"></script>
+    <script src="../javascript/controladores/controlador-sucursal.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

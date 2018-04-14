@@ -136,13 +136,13 @@
               
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombre</th>
-                  <th>FechaIngreso</th>
-                  <th>FechaSalida</th>
-                  <th>Estado</th>
-                  <th>Sucursal</th>
-                  <th>Superior</th>
+                  <th>IdHabitacion</th>
+                  <th>Numero Habitacion</th>
+                  <th>Numero Piso</th>
+                  <th>Estadp</th>
+                  <th>Descripcion</th>
+                  <th>Tipo Categoria</th>
+                  <th>Tipo Habitación</th>
                 </tr>
               </thead>
 
@@ -254,7 +254,7 @@
     <script src="../javascript/bootstrap.min.js"></script>
 
     <!-- Custom Javascript -->
-    <script src="../javascript/controlador.js"></script>
+    <script src="../javascript/controladores/controlador-habitacion.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

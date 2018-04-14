@@ -155,7 +155,7 @@
 			
 		}
 
-		// --- Función Futura  ---
+		// --- Función Futura ---
 		public static function nombreFuncion2 ($conexion){
 
 		}
@@ -167,9 +167,3 @@
 
 	}
 ?>
-
-
-
-
-
-

@@ -70,14 +70,14 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="administracionFacturas.php">
                   <!--<span data-feather="bar-chart-2"></span>-->
                   <i class="far fa-money-bill-alt"></i>
                   Facturas
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="administracionHabitaciones.php">
                   <!--<span data-feather="layers"></span>-->
                   <i class="fas fa-bed"></i>
                   Habitaciones

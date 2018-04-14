@@ -75,7 +75,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="administracionHabitaciones.php">
+                <a class="nav-link" href="administracionHabitacion.php">
                   <!--<span data-feather="layers"></span>-->
                   <i class="fas fa-bed"></i>
                   Habitaciones
@@ -137,12 +137,12 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombre</th>
-                  <th>FechaIngreso</th>
-                  <th>FechaSalida</th>
-                  <th>Estado</th>
-                  <th>Sucursal</th>
-                  <th>Superior</th>
+                  <th>Titulo</th>
+                  <th>Titulo</th>
+                  <th>Titulo</th>
+                  <th>Titulo</th>
+                  <th>Titulo</th>
+                  <th>Titulo</th>
                 </tr>
               </thead>
 

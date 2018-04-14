@@ -1,0 +1,103 @@
+Variables de Tablas:
+// Persona - Ya hay clase
+idPersona
+primerNombre
+segundoNombre
+primerApellido
+segundoApellido
+email
+password
+genero
+direccion
+fechaNacimiento
+imagenIdentificacion
+
+
+// Cliente - Ya hay clase
+idCliente
+fechaRegistro
+estado
+idPersona
+
+
+// Empleado - Ya hay clase
+idEmpleado
+codigoEmpleado
+fechaIngreso
+fechaSalida
+estado
+idPersona
+idSucursal
+idEmpleadoSuperior
+
+
+// Factura - Ya hay clase
+idFactura
+numFactura
+fechaEmision
+costeReservacion
+costePedido
+costeProducto
+costeTotal
+cambio
+observacion
+idCliente
+idEmpleado
+idTipoFactura
+idModoPago
+
+
+// Reservacion - Ya hay clase
+idReservacion
+fechaReservacion
+fechaEntrada
+fechaSalida
+camaSupletoria
+estado
+observacion
+idCliente
+
+
+// Sucursal - Ya hay clase
+idSucursal
+nombre
+cantidadHabitaciones
+telefono
+email
+direccion
+descripcion
+idRestaurante
+idHotel
+
+
+// Habitacion - Ya hay clase
+idHabitacion
+numeroHabitacion
+numeroPiso
+estado
+descripcion
+idTipoCategoria
+idTipoHabitacion
+idSucursal
+
+
+// Servicio
+idServicio
+tipoServicio
+descripcion
+
+
+// Producto
+idProducto
+nombre
+codigoBarra
+precioCompra
+precioVenta
+fechaIngreso
+fechaVencimiento
+existencia
+marca
+descripcion
+idCategoriaProducto
+idBodega
+
