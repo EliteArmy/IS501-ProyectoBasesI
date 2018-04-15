@@ -1,4 +1,5 @@
--- Procedimiento 01: 
+-- Procedimiento 01:
+--Obtiene la Lista de Empleados de la Base
 DROP PROCEDURE IF EXISTS SP_ObtenerEmpleados;
  
 DELIMITER $$
@@ -14,5 +15,39 @@ BEGIN
 END $$
 DELIMITER ;
 
--- CALL SP_ObtenerEmpleados()
+-- CALL SP_ObtenerEmpleados;
 -- El comando CALL invoca un procedimiento definido préviamente con CREATE PROCEDURE.
+
+-- -------------------------------
+-- Procedimiento 02:
+-- Calcula las ganancias por año
+DROP PROCEDURE IF EXISTS SP_FechaEmision;
+
+DELIMITER $$
+CREATE PROCEDURE SP_FechaEmision()
+
+BEGIN
+
+	SELECT YEAR(fac.fechaEmision) Año, fac.fechaEmision, SUM(fac.costeTotal) AS Ganancias 
+	FROM factura fac
+	GROUP BY Año;
+
+END $$
+DELIMITER ;
+
+-- CALL SP_FechaEmision;
+
+-- -------------------------------
+-- Procedimiento 03:
+
+
+
+-- -------------------------------
+-- Procedimiento 04:
+
+
+
+-- -------------------------------
+-- Procedimiento 05:
+
+
