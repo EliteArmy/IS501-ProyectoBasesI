@@ -1,0 +1,80 @@
+SIN MODULO 	- 03 TABLAS
+HOTEL 		- 04 TABLAS
+HABITACICONES 	- 06 TABLAS
+RRHH 		- 09 TABLAS
+CANTABILIDAD 	- 09 TABLAS
+RESTAURANTE   	- 07 TABLAS
+INVENTARIO    	- 05 TABLAS
+TOTAL: 		- 43 TABLAS
+
+
+Cambios A la Base: 
+- Eliminacion de Tabla Ubicacion
+- Union de Empleado y Sucursal
+- Creacion de Tabla Hotel
+- Creacion de Tabla precios
+- Relacion Reflexiva con Empleado
+- Creacion de tabla TipoFactura
+- Creacion de Tabla Mesa
+- Campo creado en DetalleFactura de descripcionReservacion
+- Creacion de Tabla EncabezadoPlanilla
+- Eliminacion de Campos en tabla PagoPlanilla
+- Adicion de campos en Cliente
+- Habitacion: numeroHabitacion
+- Precios -> Precio
+- Reservacion removi costoAlojamiento
+- Habitacion ahora ya no tiene el campo precio
+- Persona ahora tiene password y genero
+- TipoCategoria y TipoHabitacion ya no tienen precio
+- Se agrego costeReservacion, costeTotal, costeProducto, costePedido a Factura
+- Se elimino PrecioVenta de DetalleFactura
+- Cambio del tipo para las imagenes de persona y plato
+- Empleado ya no tiene login y password, se dejo en Persona
+
+Pagina para llenar base: https://www.mockaroo.com/
+
+TABLAS:
+Persona
+Telefono
+Cliente
+Hotel
+Servicio
+Sucursal_Servicio
+Sucursal
+Habitacion
+Reservacion
+Habitacion_Reservacion
+TipoHabitacion
+TipoCategoria
+Precio
+Empleado
+Cargo
+Cargo_Empleado
+PagoPlanilla
+CuentaBancaria
+Banco
+TipoCuenta
+EncabezadoPlanilla
+ExperienciaLaboral
+Factura
+ModoPago
+DetalleFactura
+Descuento
+Factura_Descuento
+Impuesto
+Factura_Impuesto
+TipoRecargo
+TipoFactura
+Producto
+CategoriaProducto
+Bodega
+Proveedor
+Producto_Proveedor
+Restaurante
+Menu
+Plato
+Plato_Producto
+Plato_Pedido
+Pedido
+Mesa
+
