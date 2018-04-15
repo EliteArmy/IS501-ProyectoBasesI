@@ -141,11 +141,12 @@
                   <th>Id</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
-                  <th>email</th>
-                  <th>Fecha Nacimiento</th>
-                  <th>Fecha Ingreso</th>
-                  <th>estado</th>
-                  <th>direccion</th>
+                  <th>Email</th>
+                  <th>Fecha Nac.</th>
+                  <th>Fecha Ing.</th>
+                  <th>Estado</th>
+                  <th>Direccion</th>
+                  <th>Opciones</th>
                 </tr>
               </thead>
 

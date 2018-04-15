@@ -127,13 +127,16 @@
 
 		// --- Función para obtener la Lista de Empleados ---
 		public static function obtenerListaEmpleados ($conexion) {
-			
+			/*
 			$resultado = $conexion->ejecutarConsulta(
 				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
 				emp.fechaIngreso, emp.estado, per.direccion
 				FROM Persona per 
 				INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)'
 			);
+			*/
+
+			$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerEmpleados");
 
 			while($fila = $conexion->obtenerFila($resultado)){
 
@@ -146,13 +149,23 @@
 						echo 		'<td>' . $fila["fechaIngreso"] . '</td>';
 						echo 		'<td>' . $fila["estado"] . '</td>';
 						echo 		'<td>' . $fila["direccion"] . '</td>';
+						echo '<td><button type="button" onclick="editarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-edit"></span></button>  
+											<button type="button" onclick="eliminarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 						echo '</tr>';
 			}
 		}
 
-		// --- Función Futura ---
-		public static function nombreFuncion ($conexion) {
+
+		// --- Función para Eliminar Empleados ---
+		public static function eliminarEmpleado ($conexion, $idEmpleado) {
 			
+			//echo "Entra en la funcion";
+			$resultado = $conexion->ejecutarConsulta(
+				"DELETE per FROM persona per
+					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona) 
+					WHERE emp.idEmpleado = '$idEmpleado'
+				");
+
 		}
 
 		// --- Función Futura ---
@@ -167,3 +180,5 @@
 
 	}
 ?>
+
+
