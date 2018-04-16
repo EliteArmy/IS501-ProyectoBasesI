@@ -21,10 +21,10 @@ DELIMITER ;
 -- -------------------------------
 -- Procedimiento 02:
 -- Calcula las ganancias por año
-DROP PROCEDURE IF EXISTS SP_FechaEmision;
+DROP PROCEDURE IF EXISTS SP_GananciaAnual;
 
 DELIMITER $$
-CREATE PROCEDURE SP_FechaEmision()
+CREATE PROCEDURE SP_GananciaAnual()
 
 BEGIN
 
@@ -35,14 +35,14 @@ BEGIN
 END $$
 DELIMITER ;
 
--- CALL SP_FechaEmision;
+-- CALL SP_GananciaAnual;
 
 -- -------------------------------
 -- Procedimiento 03:
-DROP PROCEDURA IF EXISTS SP_RegistrarClientes;
+DROP PROCEDURA IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
-CREATE PROCEDURE SP_RegistrarClientes()
+CREATE PROCEDURE SP_RegistrarCliente()
 
 BEGIN
 
