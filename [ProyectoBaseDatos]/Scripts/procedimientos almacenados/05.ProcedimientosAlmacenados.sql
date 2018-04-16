@@ -39,7 +39,7 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 03:
-DROP PROCEDURA IF EXISTS SP_RegistrarCliente;
+DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
 CREATE PROCEDURE SP_RegistrarCliente(
@@ -47,31 +47,67 @@ CREATE PROCEDURE SP_RegistrarCliente(
 						IN segundoNombre VARCHAR(20),
 						IN primerApellido VARCHAR(20),
 						IN segundoApellido VARCHAR(20),
-						IN direccion VARCHAR(100),
-						IN telefono VARCHAR(15),
 						IN email VARCHAR(50),
+						IN password VARCHAR(45),
 						IN genero VARCHAR(1),
-						IN contraseña VARCHAR(45),
-						IN fechanacimiento DATE,
-						OUT mensajeError VARCHAR(200),
+						IN direccion VARCHAR(100),
+						IN fechaNacimiento DATE,
+						IN telefono VARCHAR(15),
+						OUT mensaje VARCHAR(200),
 						OUT ocurrioError BOOLEAN)
 
 SP:BEGIN
 
 	DECLARE tempMensaje VARCHAR(200);
 
+	START TRANSACTION;
+
 	SET tempMensaje = '';
-	SET mensajeError = '';
+	SET mensaje = '';
 	SET ocurrioError = TRUE;
 
 		IF primerNombre = '' THEN
-			SET mensajeError='Nombre de usuario es un campo requerido';
+			SET mensaje='Nombre de usuario es un campo requerido';
 			LEAVE SP;
 		END IF;
+
+		IF primerApellido = '' THEN
+			SET mensaje='Apellido de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		IF email = '' THEN
+			SET mensaje='El Correo de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		IF password = '' THEN
+			SET mensaje='La password de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		IF direccion = '' THEN
+			SET mensaje='La direccion de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password,
+		 genero, direccion, fechaNacimiento, imagenIdentificacion) 
+		VALUES (NULL, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password,
+		 genero, direccion, fechaNacimiento, NULL);
+
+		INSERT INTO cliente (idCliente, fechaRegistro, estado, idPersona) 
+		VALUES (NULL, NOW(), 'Activo', LAST_INSERT_ID());
+
+		SET ocurrioError = FALSE;
+		SET mensaje = "Cliente Registrado Exitosamente";
+		COMMIT;
 
 END $$ 
 DELIMITER ;
 
+-- CALL SP_RegistrarCliente('Claudy', 'Emily', 'Klulisekes', 'Bartlomie', 'ebartlomfhfieczak5j@ask.com', '03c345ae8bd4c13f4eb2eb6dde0a92e0', 'F', '6 Westridge Drive', '1966-07-13', '50495203354', @mensaje, @ocurrioError);
+-- SELECT @mensaje;
 
 -- -------------------------------
 -- Procedimiento 04:
