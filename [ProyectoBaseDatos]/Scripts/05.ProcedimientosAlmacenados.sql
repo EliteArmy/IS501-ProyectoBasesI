@@ -39,7 +39,17 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 03:
+DROP PROCEDURA IF EXISTS SP_RegistrarClientes;
 
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarClientes()
+
+BEGIN
+
+	SELECT
+
+END $$ 
+DELIMITER ;
 
 
 -- -------------------------------
