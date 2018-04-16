@@ -42,7 +42,18 @@ DELIMITER ;
 DROP PROCEDURA IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
-CREATE PROCEDURE SP_RegistrarCliente()
+CREATE PROCEDURE SP_RegistrarCliente(
+IN primerNombre VARCHAR(20),
+IN segundoNombre VARCHAR(20),
+IN primerApellido VARCHAR(20),
+IN segundoApellido VARCHAR(20),
+IN direccion VARCHAR(100),
+IN telefono ,
+IN email ,
+IN genero ,
+IN contraseña ,
+IN fechanacimiento 
+)
 
 BEGIN
 
