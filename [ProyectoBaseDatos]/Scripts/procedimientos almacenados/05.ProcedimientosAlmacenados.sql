@@ -43,21 +43,31 @@ DROP PROCEDURA IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
 CREATE PROCEDURE SP_RegistrarCliente(
-IN primerNombre VARCHAR(20),
-IN segundoNombre VARCHAR(20),
-IN primerApellido VARCHAR(20),
-IN segundoApellido VARCHAR(20),
-IN direccion VARCHAR(100),
-IN telefono ,
-IN email ,
-IN genero ,
-IN contraseña ,
-IN fechanacimiento 
-)
+						IN primerNombre VARCHAR(20),
+						IN segundoNombre VARCHAR(20),
+						IN primerApellido VARCHAR(20),
+						IN segundoApellido VARCHAR(20),
+						IN direccion VARCHAR(100),
+						IN telefono VARCHAR(15),
+						IN email VARCHAR(50),
+						IN genero VARCHAR(1),
+						IN contraseña VARCHAR(45),
+						IN fechanacimiento DATE,
+						OUT mensajeError VARCHAR(200),
+						OUT ocurrioError BOOLEAN)
 
-BEGIN
+SP:BEGIN
 
-	SELECT
+	DECLARE tempMensaje VARCHAR(200);
+
+	SET tempMensaje = '';
+	SET mensajeError = '';
+	SET ocurrioError = TRUE;
+
+		IF primerNombre = '' THEN
+			SET mensajeError='Nombre de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
 
 END $$ 
 DELIMITER ;
