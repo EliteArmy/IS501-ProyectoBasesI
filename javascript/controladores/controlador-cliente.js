@@ -68,7 +68,7 @@ function cargarListaClientes(){
 		data: "",
 		method: "POST",
 		success: function(resultado){
-			alert(resultado)
+			//alert(resultado)
 			$("#div-informacion").html(resultado);
 		},
 		error: function(e){
@@ -87,7 +87,7 @@ function eliminarCliente(idCliente){
 		method: "POST",
 		success: function(resultado){
 			//$("#div-resultado-insert").html(respuesta);
-			alert(resultado);
+			//alert(resultado);
 			cargarListaClientes();
 		},
 		error: function(err){

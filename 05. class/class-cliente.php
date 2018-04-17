@@ -83,15 +83,16 @@
 
 		// --- Función para obtener la Lista de Clientes ---
 		public static function obternerListaClientes ($conexion) {
-
+			/*
+			// Ahora se maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerClientes
 			$resultado = $conexion->ejecutarConsulta (
 				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
 						cli.fechaRegistro, cli.estado, per.direccion
 				FROM Persona per
 				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)'
 			);
-
-			//$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerClientes);
+			*/
+			$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerClientes");
 
 			while ($fila = $conexion->obtenerFila($resultado)) {
 
@@ -114,12 +115,12 @@
 		// --- Función para Eliminar Clientes de la Base de Datos ---
 		public static function eliminarCliente ($conexion, $idCliente){
 
-			//echo: "Entra en la función";
+			//echo "Entra en la función";
 			$resultado = $conexion->ejecutarConsulta(
 				"DELETE per 
 					FROM persona per
 					INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
-					WHERE emp.idCliente = '$idCliente'
+					WHERE per.idPersona = '$idCliente'
 				");
 		}
 

@@ -165,7 +165,7 @@
 				"DELETE per 
 					FROM persona per
 					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona) 
-					WHERE emp.idEmpleado = '$idEmpleado'
+					WHERE per.idPersona = '$idEmpleado'
 				");
 		}
 

@@ -23,7 +23,7 @@
 	 		//echo "Entra en el case Eliminar Cliente";
 	 		include ("../05. class/class-cliente.php");
 			Cliente::eliminarCliente($conexion, $_POST["idPersona"]);
-			echo "Registro de Cliente Eliminado";
+			//echo "Registro de Cliente Eliminado";
 	 	break;
 	 	
 	 	default:

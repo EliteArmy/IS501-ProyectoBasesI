@@ -1,10 +1,9 @@
-Eliminar Clientes
 Actualizar Clientes
 
 Actualizar Empleados
 
-Terminar el procedimiento almacenado de empleado
+Terminar el Procedimiento Almacenado de Empleado
 
-Crear el Procedimiento almacenado de Clientes
+Terminar el Procedimiento Almacenado de Clientes
 
 

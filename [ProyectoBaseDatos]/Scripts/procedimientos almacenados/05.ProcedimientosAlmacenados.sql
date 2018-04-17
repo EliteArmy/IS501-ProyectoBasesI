@@ -1,5 +1,5 @@
 -- Procedimiento 01:
---Obtiene la Lista de Empleados de la Base
+-- Obtiene la Lista de Empleados de la Base
 DROP PROCEDURE IF EXISTS SP_ObtenerEmpleados;
  
 DELIMITER $$
@@ -18,8 +18,30 @@ DELIMITER ;
 -- CALL SP_ObtenerEmpleados;
 -- El comando CALL invoca un procedimiento definido préviamente con CREATE PROCEDURE.
 
+
 -- -------------------------------
 -- Procedimiento 02:
+-- Obtiene la Lista de Clientes de la Base
+DROP PROCEDURE IF EXISTS SP_ObtenerClientes;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ObtenerClientes()
+
+BEGIN
+
+		SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
+				cli.fechaRegistro, cli.estado, per.direccion
+			FROM Persona per
+			INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona);
+
+END $$
+DELIMITER ;
+
+-- CALL SP_ObtenerClientes;
+
+
+-- -------------------------------
+-- Procedimiento 03:
 -- Calcula las ganancias por año
 DROP PROCEDURE IF EXISTS SP_GananciaAnual;
 
@@ -38,7 +60,7 @@ DELIMITER ;
 -- CALL SP_GananciaAnual;
 
 -- -------------------------------
--- Procedimiento 03:
+-- Procedimiento 04:
 DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
@@ -110,7 +132,7 @@ DELIMITER ;
 -- SELECT @mensaje;
 
 -- -------------------------------
--- Procedimiento 04:
+-- Procedimiento 05:
 DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
 
 DELIMITER $$
@@ -143,6 +165,6 @@ DELIMITER ;
 
 
 -- -------------------------------
--- Procedimiento 05:
+-- Procedimiento 06:
 
 
