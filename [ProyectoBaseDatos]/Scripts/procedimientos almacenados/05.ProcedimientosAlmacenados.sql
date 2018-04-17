@@ -111,7 +111,21 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 04:
+--Obtiene la Lista de Clientes de la Base
+DROP PROCEDURE IF EXISTS SP_ObtenerClientes;
+ 
+DELIMITER $$
+CREATE PROCEDURE SP_ObtenerClientes()
 
+BEGIN
+
+  SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
+          ,cli.fechaRegistro, cli.estado, per.direccion
+    FROM Persona per 
+    INNER JOIN cliente cli ON (per.idPersona = cli.idPersona);
+
+END $$
+DELIMITER ;
 
 
 -- -------------------------------

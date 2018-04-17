@@ -31,7 +31,6 @@
 				$fechaIngreso,
 				$fechaSalida,
 				$estado,
-				$idPersona,
 				$idSucursal,
 				$idEmpleadoSuperior) {
 			parent::__construct(

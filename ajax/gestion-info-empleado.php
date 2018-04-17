@@ -4,21 +4,7 @@
 	$conexion = new Conexion();
 	
 	switch ($_GET["accion"]) {
-		/*
-		case "nombre-empleado":
-			echo "Entra en el case";
-	 		include ("../05. class/class-.php");
-			Class::nombreFuncion($conexion);
-
-	 	break;
-	 	
-	 	case "editar-empleado":
-	 		echo "Entra en el case ";
-	 		include ("../05. class/class-.php");
-			Class::nombreFuncion($conexion);
-
-	 	break;
-		*/
+	
 	 	case "eliminar-empleado":
 	 		//echo "Entra en el case Eliminar Empleado";
 	 		include ("../05. class/class-empleado.php");

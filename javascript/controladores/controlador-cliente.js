@@ -3,7 +3,7 @@ $(document).ready(function(){
 	
 	//alert("Se cargo el documento");
 
-		$.ajax({
+		/*$.ajax({
 		url: "../ajax/get-info.php?accion=obtener-clientes",
 		data: "",
 		method: "POST",
@@ -14,7 +14,7 @@ $(document).ready(function(){
 		error: function(e){
 			alert ("Error: " + e);
 		}
-	});
+	});*/
 		
 	/*
 	$.ajax({
@@ -65,20 +65,51 @@ $(document).ready(function(){
 		}
 	});	
 */
-	cargarListaPersonas();
+	cargarListaClientes();
 
 	//alert("Se termino de cargar");
 
 });
 /* --- Fin --- */
 
-/* -- Obtener Personas -- */
-function cargarListaPersonas(){
+//Funcion que obtiene la lista de clientes 
+function cargarListaClientes(){
 	
-	//alert("Entra en la funcion ajax");
-	
-	
+	//alert("Entra en la funcion");
+	$.ajax({
+		url: "../ajax/get-info.php?accion=obtener-clientes",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado)
+			//alert("cargo los empleados");
+			$("#div-informacion").html(resultado);
+		},
+		error: function(e){
+			alert ("Error: " + e);
+		}
+	});
 }
+
+// Funcion que cliente un cliente usando el idCliente
+function eliminarCliente(idCliente){
+	
+	//alert("Entra en la funcion");
+	$.ajax({
+		url: "../ajax/gestion-info-cliente.php?accion=eliminar-cliente",
+		data: "idPersona="+idCliente,
+		method: "POST",
+		success: function(resultado){
+			//$("#div-resultado-insert").html(respuesta);
+			//alert(resultado);
+			cargarListaClientes();
+		},
+		error: function(err){
+			alert("Error: " + err);
+		}
+	});
+}
+
 
 
 $("#btn-guardar").click(function(){
