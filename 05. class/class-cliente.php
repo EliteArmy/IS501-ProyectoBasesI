@@ -82,15 +82,27 @@
 		}
 
 		// --- Función para obtener la Lista de Clientes ---
+<<<<<<< HEAD
 		public static function obtenerListaClientes ($conexion) {
 
 			/*$resultado = $conexion->ejecutarConsulta (
+=======
+		public static function obternerListaClientes ($conexion) {
+			/*
+			// Ahora se maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerClientes
+			$resultado = $conexion->ejecutarConsulta (
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
 						cli.fechaRegistro, cli.estado, per.direccion
 				FROM Persona per
 				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)'
+<<<<<<< HEAD
 			);*/
 
+=======
+			);
+			*/
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 			$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerClientes");
 
 			while ($fila = $conexion->obtenerFila($resultado)) {
@@ -105,12 +117,18 @@
 				echo 		'<td>' . $fila["estado"] . '</td>';
 				echo 		'<td>' . $fila["direccion"] . '</td>';
 				echo '<td><button type="button" onclick="editarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-edit"></span></button>  
+<<<<<<< HEAD
 											<button type="button" onclick="eliminarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 						echo '</tr>';
+=======
+									<button type="button" onclick="eliminarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+				echo '</tr>';
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 
 			}
 		}
 
+<<<<<<< HEAD
 		//Función que elimina los clientes
 		public static function eliminarCliente ($conexion, $idCliente) {
 			
@@ -125,7 +143,18 @@
 
 		// --- Función Futura ---
 		public static function nombreFuncion ($conexion){
+=======
+		// --- Función para Eliminar Clientes de la Base de Datos ---
+		public static function eliminarCliente ($conexion, $idCliente){
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 
+			//echo "Entra en la función";
+			$resultado = $conexion->ejecutarConsulta(
+				"DELETE per 
+					FROM persona per
+					INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
+					WHERE per.idPersona = '$idCliente'
+				");
 		}
 
 		// --- Función Futura ---

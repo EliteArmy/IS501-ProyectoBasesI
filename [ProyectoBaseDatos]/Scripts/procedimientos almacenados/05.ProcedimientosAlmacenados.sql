@@ -1,5 +1,5 @@
 -- Procedimiento 01:
---Obtiene la Lista de Empleados de la Base
+-- Obtiene la Lista de Empleados de la Base
 DROP PROCEDURE IF EXISTS SP_ObtenerEmpleados;
  
 DELIMITER $$
@@ -18,8 +18,30 @@ DELIMITER ;
 -- CALL SP_ObtenerEmpleados;
 -- El comando CALL invoca un procedimiento definido préviamente con CREATE PROCEDURE.
 
+
 -- -------------------------------
 -- Procedimiento 02:
+-- Obtiene la Lista de Clientes de la Base
+DROP PROCEDURE IF EXISTS SP_ObtenerClientes;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ObtenerClientes()
+
+BEGIN
+
+		SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
+				cli.fechaRegistro, cli.estado, per.direccion
+			FROM Persona per
+			INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona);
+
+END $$
+DELIMITER ;
+
+-- CALL SP_ObtenerClientes;
+
+
+-- -------------------------------
+-- Procedimiento 03:
 -- Calcula las ganancias por año
 DROP PROCEDURE IF EXISTS SP_GananciaAnual;
 
@@ -38,7 +60,7 @@ DELIMITER ;
 -- CALL SP_GananciaAnual;
 
 -- -------------------------------
--- Procedimiento 03:
+-- Procedimiento 04:
 DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
@@ -110,6 +132,7 @@ DELIMITER ;
 -- SELECT @mensaje;
 
 -- -------------------------------
+<<<<<<< HEAD
 -- Procedimiento 04:
 --Obtiene la Lista de Clientes de la Base
 DROP PROCEDURE IF EXISTS SP_ObtenerClientes;
@@ -123,12 +146,41 @@ BEGIN
           ,cli.fechaRegistro, cli.estado, per.direccion
     FROM Persona per 
     INNER JOIN cliente cli ON (per.idPersona = cli.idPersona);
+=======
+-- Procedimiento 05:
+DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarEmpleado(
+						IN primerNombre VARCHAR(20),
+						IN segundoNombre VARCHAR(20),
+						IN primerApellido VARCHAR(20),
+						IN segundoApellido VARCHAR(20),
+						IN email VARCHAR(50),
+						IN password VARCHAR(45),
+						IN genero VARCHAR(1),
+						IN direccion VARCHAR(100),
+						IN fechaNacimiento DATE,
+						IN telefono VARCHAR(15),
+						OUT mensaje VARCHAR(200),
+						OUT ocurrioError BOOLEAN)
+
+SP:BEGIN
+
+	DECLARE tempMensaje VARCHAR(200);
+
+	START TRANSACTION;
+
+	SET tempMensaje = '';
+	SET mensaje = '';
+	SET ocurrioError = TRUE;
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 
 END $$
 DELIMITER ;
 
 
 -- -------------------------------
--- Procedimiento 05:
+-- Procedimiento 06:
 
 

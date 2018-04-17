@@ -2,6 +2,7 @@
 $(document).ready(function(){
 	
 	//alert("Se cargo el documento");
+<<<<<<< HEAD
 
 		/*$.ajax({
 		url: "../ajax/get-info.php?accion=obtener-clientes",
@@ -15,6 +16,8 @@ $(document).ready(function(){
 			alert ("Error: " + e);
 		}
 	});*/
+=======
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 		
 	/*
 	$.ajax({
@@ -72,17 +75,27 @@ $(document).ready(function(){
 });
 /* --- Fin --- */
 
+<<<<<<< HEAD
 //Funcion que obtiene la lista de clientes 
 function cargarListaClientes(){
 	
 	//alert("Entra en la funcion");
+=======
+// -- Funcion que Obtiene la lista de Clientes -- 
+function cargarListaClientes(){
+	
+	//alert("Entra en la funcion Ajax");
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 	$.ajax({
 		url: "../ajax/get-info.php?accion=obtener-clientes",
 		data: "",
 		method: "POST",
 		success: function(resultado){
 			//alert(resultado)
+<<<<<<< HEAD
 			//alert("cargo los empleados");
+=======
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 			$("#div-informacion").html(resultado);
 		},
 		error: function(e){
@@ -91,7 +104,11 @@ function cargarListaClientes(){
 	});
 }
 
+<<<<<<< HEAD
 // Funcion que cliente un cliente usando el idCliente
+=======
+// Funcion que Elimina un Cliente usando el idCliente
+>>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 function eliminarCliente(idCliente){
 	
 	//alert("Entra en la funcion");
