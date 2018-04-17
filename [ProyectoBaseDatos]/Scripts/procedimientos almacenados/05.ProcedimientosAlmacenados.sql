@@ -111,7 +111,35 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 04:
+DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
 
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarEmpleado(
+						IN primerNombre VARCHAR(20),
+						IN segundoNombre VARCHAR(20),
+						IN primerApellido VARCHAR(20),
+						IN segundoApellido VARCHAR(20),
+						IN email VARCHAR(50),
+						IN password VARCHAR(45),
+						IN genero VARCHAR(1),
+						IN direccion VARCHAR(100),
+						IN fechaNacimiento DATE,
+						IN telefono VARCHAR(15),
+						OUT mensaje VARCHAR(200),
+						OUT ocurrioError BOOLEAN)
+
+SP:BEGIN
+
+	DECLARE tempMensaje VARCHAR(200);
+
+	START TRANSACTION;
+
+	SET tempMensaje = '';
+	SET mensaje = '';
+	SET ocurrioError = TRUE;
+
+END $$
+DELIMITER ;
 
 
 -- -------------------------------

@@ -59,10 +59,10 @@ $(document).ready(function(){
 });
 /* --- Fin --- */
 
-//Funcion que obtiene la lista de Empleados -- 
+// -- Funcion que obtiene la lista de Empleados -- 
 function cargarListaEmpleados(){
 	
-	//alert("Entra en la funcion");
+	//alert("Entra en la funcion Ajax");
 	$.ajax({
 		url: "../ajax/get-info.php?accion=obtener-empleados",
 		data: "",

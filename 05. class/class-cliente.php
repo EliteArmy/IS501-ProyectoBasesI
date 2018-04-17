@@ -91,6 +91,8 @@
 				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)'
 			);
 
+			//$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerClientes);
+
 			while ($fila = $conexion->obtenerFila($resultado)) {
 
 				echo '<tr>';
@@ -102,14 +104,23 @@
 				echo 		'<td>' . $fila["fechaRegistro"] . '</td>';
 				echo 		'<td>' . $fila["estado"] . '</td>';
 				echo 		'<td>' . $fila["direccion"] . '</td>';
+				echo '<td><button type="button" onclick="editarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-edit"></span></button>  
+									<button type="button" onclick="eliminarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 				echo '</tr>';
 
 			}
 		}
 
-		// --- Función Futura ---
-		public static function nombreFuncion ($conexion){
+		// --- Función para Eliminar Clientes de la Base de Datos ---
+		public static function eliminarCliente ($conexion, $idCliente){
 
+			//echo: "Entra en la función";
+			$resultado = $conexion->ejecutarConsulta(
+				"DELETE per 
+					FROM persona per
+					INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
+					WHERE emp.idCliente = '$idCliente'
+				");
 		}
 
 		// --- Función Futura ---
