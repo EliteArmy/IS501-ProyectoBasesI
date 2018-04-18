@@ -7,7 +7,6 @@
 		protected $idCliente;
 		protected $fechaRegistro;
 		protected $estado;
-		protected $idPersona;
 
 		public function __construct(
 				$idPersona,
@@ -41,7 +40,6 @@
 			$this->idCliente = $idCliente;
 			$this->fechaRegistro = $fechaRegistro;
 			$this->estado = $estado;
-			$this->idPersona = $idPersona;
 		}
 
 
@@ -64,13 +62,6 @@
 		}
 		public function setEstado($estado){
 			$this->estado = $estado;
-		}
-
-		public function getIdPersona(){
-			return $this->idPersona;
-		}
-		public function setIdPersona($idPersona){
-			$this->idPersona = $idPersona;
 		}
 
 		public function __toString(){
