@@ -96,6 +96,22 @@ function eliminarCliente(idCliente){
 	});
 }
 
+function editarCliente(idCliente){
+	var parametros = "idPersona="+idCliente;
+	$.ajax({
+		url:"ajax/gestion-info-cliente.php?accion=editar-cliente",
+		method: "POST",
+		data:parametros,
+		dataType:"json",
+		success:function(resultado){		 
+
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+
 
 
 $("#btn-guardar").click(function(){

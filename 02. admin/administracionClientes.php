@@ -147,6 +147,7 @@
                     <th>Fecha Reg</th>
                     <th>Estado</th>
                     <th>Direccion</th>
+                    <th>Opciones</th>
                   </tr>
                 </thead>
 

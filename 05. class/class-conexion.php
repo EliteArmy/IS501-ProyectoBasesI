@@ -19,12 +19,21 @@
 			);
 		}
 
+
 		public function ejecutarConsulta($sql){
 			return mysqli_query ($this->link, $sql);
 		}
 
+		public function ejecutarInstruccion($sql){
+			return $this->enlace->query($sql);
+		}
+		
 		public function obtenerFila($resultado){
 			return mysqli_fetch_array ($resultado);
+		}
+
+		public function obtenerRegistro($resultado){
+			return mysqli_fetch_assoc($resultado);
 		}
 
 		public function cerrarConexion(){

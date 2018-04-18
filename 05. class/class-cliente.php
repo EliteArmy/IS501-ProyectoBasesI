@@ -81,7 +81,7 @@
 		}
 
 		// --- Función para obtener la Lista de Clientes ---
-		public static function obternerListaClientes ($conexion) {
+		public static function obtenerListaClientes ($conexion) {
 			/*
 			// Ahora se maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerClientes
 			$resultado = $conexion->ejecutarConsulta (
@@ -183,9 +183,35 @@
 
 		// --- Función Futura ---
 		public static function editarCliente ($conexion, $idPersona){
-
+			$sql = sprintf(
+					"UPDATE persona
+					SET primerNombre = '%s',
+						primerApellido = '%s',
+						email = '%s',
+						fechaNacimiento = '%s',
+						direccion = '%s',
+					WHERE idPersona='%s'",
+					$conexion->getLink()->real_escape_string(stripslashes( $this->primerNombre)),
+					$conexion->getLink()->real_escape_string(stripslashes( $this->primerApellido)),
+					$conexion->getLink()->real_escape_string(stripslashes( $this->email)),
+					$conexion->getLink()->real_escape_string(stripslashes( $this->fechaNacimiento)),
+					$conexion->getLink()->real_escape_string(stripslashes( $this->fechaRegistro)),
+					$conexion->getLink()->real_escape_string(stripslashes( $this->estado)),
+					$conexion->getLink()->real_escape_string(stripslashes( $this->direccion))
+			);
 			
+			$resultadoUpdate = $conexion->ejecutarInstruccion($sql);
+			$resultado=array();
+			if ($resultadoUpdate === TRUE) {
+				$resultado["codigo"]=1;
+				$resultado["mensaje"]="Exito, el  cliente fue actualizado";
+			} else {
+				$resultado["codigo"]=0;
+				$resultado["mensaje"]="Error: " . $sql . "<br>" . $conexion->getEnlace()->error;
+			}
+			echo json_encode($resultado);
 		}
+
 
 		// --- Función Futura ---
 		public static function nombreFuncion3 ($conexion){
