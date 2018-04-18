@@ -51,6 +51,7 @@
 			$this->fechaIngreso = $fechaIngreso;
 			$this->fechaSalida = $fechaSalida;
 			$this->estado = $estado;
+			$this->idPersona = $idPersona;
 			$this->idSucursal = $idSucursal;
 			$this->idEmpleadoSuperior = $idEmpleadoSuperior;
 		}
@@ -89,6 +90,13 @@
 		}
 		public function setEstado($estado){
 			$this->estado = $estado;
+		}
+
+		public function getIdPersona(){
+			return $this->idPersona;
+		}
+		public function setIdPersona($idPersona){
+			$this->idPersona = $idPersona;
 		}
 
 		public function getIdSucursal(){
@@ -152,7 +160,7 @@
 								<!-- Modal Header -->
 								<div class="modal-header">
 									<h5 class="modal-title" id="myModalLabel">
-									Información sobre el Cliente</h5>
+									Información sobre el Empleado</h5>
 								</div>
 							<!-- Modal Body -->
 							<div class="modal-body">
@@ -219,7 +227,7 @@
 		}
 
 		// --- Función Futura ---
-		public static function nombreFuncion2 ($conexion){
+		public static function editarEmpleado ($conexion){
 
 		}
 
