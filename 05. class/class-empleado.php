@@ -31,7 +31,6 @@
 				$fechaIngreso,
 				$fechaSalida,
 				$estado,
-				$idPersona,
 				$idSucursal,
 				$idEmpleadoSuperior) {
 			parent::__construct(
@@ -150,9 +149,67 @@
 						echo 		'<td>' . $fila["fechaIngreso"] . '</td>';
 						echo 		'<td>' . $fila["estado"] . '</td>';
 						echo 		'<td>' . $fila["direccion"] . '</td>';
-						echo '<td><button type="button" onclick="editarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-edit"></span></button>  
-											<button type="button" onclick="eliminarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
-						echo '</tr>';
+						echo '<td><button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm">
+   					<span class="fas fa-edit"></span>
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="modalForm" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h5 class="modal-title" id="myModalLabel">
+									Información sobre el Cliente</h5>
+								</div>
+							<!-- Modal Body -->
+							<div class="modal-body">
+								<p class="statusMsg"></p>
+								<form role="form">
+									<div class="form-group">
+										<label for="inputName">Nombre</label>
+										<input type="text" class="form-control" id="inputName" placeholder="Ingrese el nombre"</input>
+									</div>
+									<div class="form-group">
+									    <label for="inputEmail">Apellido</label>
+									   	<input type="email" class="form-control" id="inputEmail" placeholder="Ingrese el apellido"</input>
+									</div>
+									<div class="form-group">
+									    <label for="inputMessage">Email</label>
+									    <input class="form-control" id="inputMessage" placeholder="Ingrese el correo electrónico"></input>
+									</div>
+									<div class="form-group">
+										<label for="inputName">Fecha Nacimiento</label>
+										<input type="date" class="form-control" id="inputName"</input>
+									</div>
+									<div class="form-group">
+										<label for="inputName">Fecha Ingreso</label>
+										<input type="date" class="form-control" id="inputName"</input>
+									</div>
+									<div class="form-group">
+									Estado
+									    <select name="slc-pais" id="slc-pais" class="form-control">
+											<option>---Seleccione un estado---</option>
+											<option value="1">Activo</option>
+											<option value="2">Inactivo</option>
+										</select>
+									</div>
+									<div class="form-group">
+				                        <label for="inputMessage">Dirección</label>
+				                        <textarea class="form-control" id="inputMessage" placeholder="Ingrese la dirección"></textarea>
+				                    </div>
+								</form>
+							</div>
+							<!-- Modal Footer -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+								<button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">Guardar</button>
+							</div>
+						 </div>
+					</div>
+				</div>  
+				<button type="button" onclick="eliminarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+				echo '</tr>';
 			}
 		}
 
