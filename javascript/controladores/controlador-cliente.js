@@ -2,19 +2,6 @@
 $(document).ready(function(){
 	
 	//alert("Se cargo el documento");
-
-		/*$.ajax({
-		url: "../ajax/get-info.php?accion=obtener-clientes",
-		data: "",
-		method: "POST",
-		success: function(resultado){
-			//alert(resultado)
-			$("#div-informacion").html(resultado);
-		},
-		error: function(e){
-			alert ("Error: " + e);
-		}
-	});*/
 		
 	/*
 	$.ajax({
@@ -72,17 +59,16 @@ $(document).ready(function(){
 });
 /* --- Fin --- */
 
-//Funcion que obtiene la lista de clientes 
+// -- Funcion que Obtiene la lista de Clientes -- 
 function cargarListaClientes(){
 	
-	//alert("Entra en la funcion");
+	//alert("Entra en la funcion Ajax");
 	$.ajax({
 		url: "../ajax/get-info.php?accion=obtener-clientes",
 		data: "",
 		method: "POST",
 		success: function(resultado){
 			//alert(resultado)
-			//alert("cargo los empleados");
 			$("#div-informacion").html(resultado);
 		},
 		error: function(e){
@@ -91,7 +77,7 @@ function cargarListaClientes(){
 	});
 }
 
-// Funcion que cliente un cliente usando el idCliente
+// Funcion que Elimina un Cliente usando el idCliente
 function eliminarCliente(idCliente){
 	
 	//alert("Entra en la funcion");

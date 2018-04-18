@@ -132,21 +132,6 @@ DELIMITER ;
 -- SELECT @mensaje;
 
 -- -------------------------------
-<<<<<<< HEAD
--- Procedimiento 04:
---Obtiene la Lista de Clientes de la Base
-DROP PROCEDURE IF EXISTS SP_ObtenerClientes;
- 
-DELIMITER $$
-CREATE PROCEDURE SP_ObtenerClientes()
-
-BEGIN
-
-  SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
-          ,cli.fechaRegistro, cli.estado, per.direccion
-    FROM Persona per 
-    INNER JOIN cliente cli ON (per.idPersona = cli.idPersona);
-=======
 -- Procedimiento 05:
 DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
 
@@ -174,7 +159,6 @@ SP:BEGIN
 	SET tempMensaje = '';
 	SET mensaje = '';
 	SET ocurrioError = TRUE;
->>>>>>> d1926eb86475f58bc6bc06287eb9b85a8f7f7eb7
 
 END $$
 DELIMITER ;

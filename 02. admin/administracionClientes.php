@@ -135,6 +135,7 @@
           <h2>Lista de Clientes</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
+              <div id="">
               
                 <thead>
                   <tr>
@@ -146,7 +147,6 @@
                     <th>Fecha Reg</th>
                     <th>Estado</th>
                     <th>Direccion</th>
-                    <th>Opciones</th>
                   </tr>
                 </thead>
 
@@ -209,6 +209,7 @@
                   -->
                 </tbody>
 
+              </div>
             </table>
 
           </div>

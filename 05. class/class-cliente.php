@@ -9,7 +9,6 @@
 		protected $estado;
 		protected $idPersona;
 
-
 		public function __construct(
 				$idPersona,
 				$primerNombre,
@@ -25,7 +24,8 @@
 
 				$idCliente,
 				$fechaRegistro,
-				$estado) {
+				$estado,
+				$idPersona) {
 			parent::__construct(
 					$idPersona,
 					$primerNombre,
@@ -82,15 +82,16 @@
 		}
 
 		// --- Función para obtener la Lista de Clientes ---
-		public static function obtenerListaClientes ($conexion) {
-
-			/*$resultado = $conexion->ejecutarConsulta (
+		public static function obternerListaClientes ($conexion) {
+			/*
+			// Ahora se maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerClientes
+			$resultado = $conexion->ejecutarConsulta (
 				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
 						cli.fechaRegistro, cli.estado, per.direccion
 				FROM Persona per
 				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)'
-			);*/
-
+			);
+			*/
 			$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerClientes");
 
 			while ($fila = $conexion->obtenerFila($resultado)) {
@@ -105,27 +106,22 @@
 				echo 		'<td>' . $fila["estado"] . '</td>';
 				echo 		'<td>' . $fila["direccion"] . '</td>';
 				echo '<td><button type="button" onclick="editarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-edit"></span></button>  
-											<button type="button" onclick="eliminarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
-						echo '</tr>';
+									<button type="button" onclick="eliminarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+				echo '</tr>';
 
 			}
 		}
 
-		//Función que elimina los clientes
-		public static function eliminarCliente ($conexion, $idCliente) {
-			
-			//echo "Entra en la funcion";
+		// --- Función para Eliminar Clientes de la Base de Datos ---
+		public static function eliminarCliente ($conexion, $idCliente){
+
+			//echo "Entra en la función";
 			$resultado = $conexion->ejecutarConsulta(
-				"DELETE per FROM persona per
+				"DELETE per 
+					FROM persona per
 					INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
-					WHERE cli.idCliente = '$idCliente'
+					WHERE per.idPersona = '$idCliente'
 				");
-
-		}
-
-		// --- Función Futura ---
-		public static function nombreFuncion ($conexion){
-
 		}
 
 		// --- Función Futura ---

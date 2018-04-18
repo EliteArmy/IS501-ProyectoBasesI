@@ -31,6 +31,7 @@
 				$fechaIngreso,
 				$fechaSalida,
 				$estado,
+				$idPersona,
 				$idSucursal,
 				$idEmpleadoSuperior) {
 			parent::__construct(
@@ -127,6 +128,7 @@
 		// --- Función para obtener la Lista de Empleados ---
 		public static function obtenerListaEmpleados ($conexion) {
 			/*
+			// Ahora se maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerEmpleados
 			$resultado = $conexion->ejecutarConsulta(
 				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
 				emp.fechaIngreso, emp.estado, per.direccion
@@ -155,16 +157,16 @@
 		}
 
 
-		// --- Función para Eliminar Empleados ---
+		// --- Función para Eliminar Empleados de la Base de Datos ---
 		public static function eliminarEmpleado ($conexion, $idEmpleado) {
 			
 			//echo "Entra en la funcion";
 			$resultado = $conexion->ejecutarConsulta(
-				"DELETE per FROM persona per
+				"DELETE per 
+					FROM persona per
 					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona) 
-					WHERE emp.idEmpleado = '$idEmpleado'
+					WHERE per.idPersona = '$idEmpleado'
 				");
-
 		}
 
 		// --- Función Futura ---

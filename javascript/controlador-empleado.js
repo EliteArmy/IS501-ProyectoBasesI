@@ -2,6 +2,19 @@
 $(document).ready(function(){
 	
 	//alert("Se cargo el documento");
+
+		$.ajax({
+		url: "../ajax/get-info.php?accion=obtener-empleados",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado)
+			$("#div-informacion").html(resultado);
+		},
+		error: function(e){
+			alert ("Error: " + e);
+		}
+	});
 		
 	/*
 	$.ajax({
@@ -52,67 +65,20 @@ $(document).ready(function(){
 		}
 	});	
 */
-	cargarListaEmpleados();
+	cargarListaPersonas();
 
 	//alert("Se termino de cargar");
 
 });
 /* --- Fin --- */
 
-// -- Funcion que obtiene la lista de Empleados -- 
-function cargarListaEmpleados(){
+/* -- Obtener Personas -- */
+function cargarListaPersonas(){
 	
-	//alert("Entra en la funcion Ajax");
-	$.ajax({
-		url: "../ajax/get-info.php?accion=obtener-empleados",
-		data: "",
-		method: "POST",
-		success: function(resultado){
-			//alert(resultado)
-			//alert("cargo los empleados");
-			$("#div-informacion").html(resultado);
-		},
-		error: function(e){
-			alert ("Error: " + e);
-		}
-	});
-}
-
-// Funcion que Elimina un Empleado usando el idEmpleado
-function eliminarEmpleado(idEmpleado){
+	//alert("Entra en la funcion ajax");
 	
-	//alert("Entra en la funcion");
-	$.ajax({
-		url: "../ajax/gestion-info-empleado.php?accion=eliminar-empleado",
-		data: "idPersona="+idEmpleado,
-		method: "POST",
-		success: function(resultado){
-			//$("#div-resultado-insert").html(respuesta);
-			//alert(resultado);
-			cargarListaEmpleados();
-		},
-		error: function(err){
-			alert("Error: " + err);
-		}
-	});
+	
 }
-
-
-/*function eliminarEmpleado(idEmpleado){
-	alert("Entra en la funcion");
-	$.ajax({
-		url: "../ajax/get-info.php?accion=eliminar-empleado",
-		data: "codigo-aplicacion=" + idEmpleado,
-		method: "POST",
-		success: function(respuesta){
-			//$("#div-resultado-insert").html(respuesta);
-			cargarListaPersonas();
-		},
-		error: function(err){
-			alert("Error: " + err);
-		}
-	});
-}*/
 
 
 $("#btn-guardar").click(function(){
@@ -148,6 +114,22 @@ $("#btn-guardar").click(function(){
 		}
 	});
 });
+
+
+function eliminarAplicacion(codigoAplicacion){
+	$.ajax({
+		url:"ajax/gestion-aplicaciones.php?accion=eliminar",
+		data:"codigo-aplicacion="+codigoAplicacion,
+		method:"POST",
+		success:function(respuesta){
+			//$("#div-resultado-insert").html(respuesta);
+			cargarListaAplicaciones();
+		},
+		error:function(err){
+			alert("Error: " + err);
+		}
+	});
+}
 
 
 function seleccionarAplicacion(codigoAplicacion){

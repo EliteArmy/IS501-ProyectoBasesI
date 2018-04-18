@@ -8,7 +8,7 @@
 		case "obtener-clientes":
 			//echo "Entra en el case Cliente";
 	 		include ("../05. class/class-cliente.php");
-			Cliente::obtenerListaClientes($conexion);
+			Cliente::obternerListaClientes($conexion);
 
 	 	break;
 	 	
@@ -36,8 +36,6 @@
 	 		include("../05. class/class-habitacion.php"); 
 	 		Habitacion::obtenerListaHabitaciones($conexion);
 	 	break;
-
-	 	
 
 		/*
 	 	case "obtener-aplicacion":
