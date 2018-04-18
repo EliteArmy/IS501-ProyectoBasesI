@@ -31,7 +31,6 @@
 				$fechaIngreso,
 				$fechaSalida,
 				$estado,
-				$idPersona,
 				$idSucursal,
 				$idEmpleadoSuperior) {
 			parent::__construct(
@@ -52,7 +51,6 @@
 			$this->fechaIngreso = $fechaIngreso;
 			$this->fechaSalida = $fechaSalida;
 			$this->estado = $estado;
-			$this->idPersona = $idPersona;
 			$this->idSucursal = $idSucursal;
 			$this->idEmpleadoSuperior = $idEmpleadoSuperior;
 		}
@@ -91,13 +89,6 @@
 		}
 		public function setEstado($estado){
 			$this->estado = $estado;
-		}
-
-		public function getIdPersona(){
-			return $this->idPersona;
-		}
-		public function setIdPersona($idPersona){
-			$this->idPersona = $idPersona;
 		}
 
 		public function getIdSucursal(){
