@@ -257,7 +257,7 @@
                       <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
                     </div>
 
-                    <button type="reset" value="Reset" class="btn btn-default">Limpiar Formulario</button>
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
 
                   </form>
                 </div>
@@ -265,7 +265,7 @@
                 <!-- Modal Footer -->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">Guardar</button>
+                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente()">Actualizar</button>
 
                 </div>
 

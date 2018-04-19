@@ -7,7 +7,8 @@
 		protected $idCliente;
 		protected $fechaRegistro;
 		protected $estado;
-		protected $idPersona;
+
+		protected $telefono;
 
 		public function __construct(
 				$idPersona,
@@ -24,7 +25,9 @@
 
 				$idCliente,
 				$fechaRegistro,
-				$estado) {
+				$estado
+
+				$telefono) {
 			parent::__construct(
 					$idPersona,
 					$primerNombre,
@@ -41,6 +44,8 @@
 			$this->idCliente = $idCliente;
 			$this->fechaRegistro = $fechaRegistro;
 			$this->estado = $estado;
+
+			$this->telefono = $telefono;
 		}
 
 
@@ -65,11 +70,18 @@
 			$this->estado = $estado;
 		}
 
+		public function getTelefono(){
+			return $this->telefono;
+		}
+		public function setTelefono($telefono){
+			$this->telefono = $telefono;
+		}
+
 		public function __toString(){
 			return parent::__toString() . "IdCliente: " . $this->idCliente . 
 				" FechaRegistro: " . $this->fechaRegistro . 
 				" Estado: " . $this->estado . 
-				" IdPersona: " . $this->idPersona;
+				" Telefono: " . $this->telefono;
 		}
 
 		// --- Función para obtener la Lista de Clientes ---
@@ -97,9 +109,7 @@
 				echo 		'<td id="">' . $fila["estado"] . '</td>';
 				echo 		'<td id="">' . $fila["direccion"] . '</td>';
 				echo '<td><button type="button" onclick="seleccionarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button>
-
 							<button type="button" onclick="eliminarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
-				
 				echo '</tr>';
 			}
 		} 
@@ -123,37 +133,21 @@
 		}
 
 		// --- Función que Guardará la nueva información ---
-		public static function ActualizarCliente ($conexion, $idPersona){
-			$sql = sprintf(
-					"UPDATE persona
-					SET primerNombre = '%s',
-						primerApellido = '%s',
-						email = '%s',
-						fechaNacimiento = '%s',
-						direccion = '%s',
-					WHERE idPersona='%s'",
-					$conexion->getLink()->real_escape_string(stripslashes( $this->primerNombre)),
-					$conexion->getLink()->real_escape_string(stripslashes( $this->primerApellido)),
-					$conexion->getLink()->real_escape_string(stripslashes( $this->email)),
-					$conexion->getLink()->real_escape_string(stripslashes( $this->fechaNacimiento)),
-					$conexion->getLink()->real_escape_string(stripslashes( $this->fechaRegistro)),
-					$conexion->getLink()->real_escape_string(stripslashes( $this->estado)),
-					$conexion->getLink()->real_escape_string(stripslashes( $this->direccion))
-			);
+		public static function actualizarCliente($conexion, $idPersona){
 			
-			$resultadoUpdate = $conexion->ejecutarInstruccion($sql);
-			$resultado=array();
-			
-			if ($resultadoUpdate === TRUE) {
-				$resultado["codigo"]=1;
-				$resultado["mensaje"]="Exito, el  cliente fue actualizado";
-			} else {
-				$resultado["codigo"]=0;
-				$resultado["mensaje"]="Error: " . $sql . "<br>" . $conexion->getEnlace()->error;
-			}
-			echo json_encode($resultado);
+			$resultado = $conexion->ejecutarConsulta(
+				"UPDATE persona per
+				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
+				SET per.primerNombre = $this->
+				per.segundoNombre = $this->
+				per.primerApellido = $this->
+				per.segundoApellido = $this->
+				per.email = $this->
+				per.fechaNacimiento = $this-> 
+				per.direccion = $this->
+				WHERE per.idPersona = '$idPersona'
+				");
 		}
-
 
 		// --- Función para Eliminar Clientes de la Base de Datos ---
 		public static function eliminarCliente ($conexion, $idCliente){
@@ -168,12 +162,12 @@
 		}
 
 		// --- Función Futura ---
-		public static function nombreFuncion ($conexion){
+		public static function insertarRegistro($conexion){
 
 		}
 
 		// --- Función Futura ---
-		public static function nombreFuncion2 ($conexion){
+		public static function nombreFuncion2($conexion){
 
 		}
 
