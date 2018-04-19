@@ -25,13 +25,9 @@
 			Cliente::eliminarCliente($conexion, $_POST["idPersona"]);
 			//echo "Registro de Cliente Eliminado";
 	 	break;
-	 	
-	 	default:
-	 		echo "Accion Invalida";
-	 	break;
-
+	 	/*
 	 	case "editar-cliente":
-				include_once("../05. class/class-cliente.php");
+			include_once("../05. class/class-cliente.php");
 				$sql = sprintf(
 					"SELECT p.primerNombre,
 							p.primerApellido,
@@ -49,7 +45,12 @@
 			$fila = $conexion->obtenerRegistro($resultadoAplicacion);
 			
 			echo json_encode($fila);
-			break;
+		break;
+		*/
+		default:
+	 		echo "Accion Invalida";
+	 	break;
+
 	 }
 
 	 $conexion->cerrarConexion();

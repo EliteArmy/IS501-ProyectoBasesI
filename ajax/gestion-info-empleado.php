@@ -29,6 +29,7 @@
 	 	default:
 	 		echo "Accion Invalida";
 	 	break;
+	 	
 	 }
 
 	 $conexion->cerrarConexion();

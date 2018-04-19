@@ -96,10 +96,42 @@ function eliminarCliente(idCliente){
 	});
 }
 
+function seleccionarCliente(idCliente){
+	//alert("Selecciono la cliente " + idCliente + ", hay que obtener la informacion del servidor");
+	$.ajax({
+		url: "../ajax/get-info.php?accion=obtener-cliente",
+		data: "idPersona="+idCliente,
+		method: "POST",
+		dataType: "json",
+		success: function(respuesta){
+
+			console.log(respuesta);
+			$("#txt-idcliente").val(respuesta.idCliente);
+			$("#txt-primer-nombre").val(respuesta.primerNombre);
+			$("#txt-segundo-nombre").val(respuesta.segundoNombre);
+			$("#txt-primer-apellido").val(respuesta.primerApellido);
+			$("#txt-segundo-apellido").val(respuesta.segundoApellido);
+			$("#txt-email").val(respuesta.email);
+			$("#txt-telefono").val(respuesta.numeroTelefono);
+			$("#txt-fecha-nacimiento").val(respuesta.fechaNacimiento);
+			$("#slc-estado").val(respuesta.estado);
+			$("#txt-direccion").val(respuesta.direccion);
+			
+			// Falta Implementar
+			//$("#btn-guardar").hide();
+			//$("#btn-actualizar").show();
+		},
+		error: function(err){
+			alert("Error: " + err);
+		}
+	});
+}
+
+
 function editarCliente(idCliente){
 	var parametros = "idPersona="+idCliente;
 	$.ajax({
-		url:"ajax/gestion-info-cliente.php?accion=editar-cliente",
+		url:"../ajax/gestion-info-cliente.php?accion=editar-cliente",
 		method: "POST",
 		data:parametros,
 		dataType:"json",
@@ -111,7 +143,6 @@ function editarCliente(idCliente){
 		}
 	});
 }
-
 
 
 $("#btn-guardar").click(function(){
@@ -157,55 +188,6 @@ function eliminarAplicacion(codigoAplicacion){
 		success:function(respuesta){
 			//$("#div-resultado-insert").html(respuesta);
 			cargarListaAplicaciones();
-		},
-		error:function(err){
-			alert("Error: " + err);
-		}
-	});
-}
-
-
-function seleccionarAplicacion(codigoAplicacion){
-	//alert("Selecciono la aplicacion " + codigoAplicacion + ", hay que obtener la informacion del servidor");
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener-aplicacion",
-		data:"codigo-aplicacion="+codigoAplicacion,
-		method:"POST",
-		dataType:"json",
-		success:function(respuesta){
-			console.log(respuesta);
-			$("#txt-codigo-aplicacion").val(respuesta.codigo_aplicacion);
-			$("#txt-nombre-aplicacion").val(respuesta.nombre_aplicacion);
-			$("#txt-descripcion").val(respuesta.descripcion);
-			$("#txt-fecha-publicacion").val(respuesta.fecha_publicacion);
-			$("#txt-version").val(respuesta.version);
-			$("#txt-calificacion").val(respuesta.calificacion);
-			$("#slc-empresa").val(respuesta.codigo_empresa);
-			$("#slc-tipos-contenidos").val(respuesta.codigo_tipo_contenido);
-			$("#slc-tipos-calificaciones").val(respuesta.codigo_tipo_calificacion);
-			$("#slc-url-icono").val(respuesta.url_icono);
-			
-
-			//Almacenar en un arreglo temporal los valores de la categoria, no
-			//se puede utilizar el arreglo directo del JSON porque cada elemento es un objeto.
-			var categorias=[];
-			for (var i =0;i<respuesta.categorias.length;i++){
-				categorias[i]=respuesta.categorias[i].codigo_categoria;
-			}
-
-
-			//Buscar todos los elementos html en el cual el nombre sea categorias[] y para cada 
-			//elemento verificar si el valor esta dentro de la lista retornada por el json
-			//en caso de si estar agregar el atributo checked="checked"
-			$("input[name='categorias[]']").map(function(){
-				var indice = categorias.indexOf($(this).val());
-				if (indice>=0){
-					$(this).attr("checked","checked");
-
-				}
-			});
-			$("#btn-guardar").hide();
-			$("#btn-actualizar").show();
 		},
 		error:function(err){
 			alert("Error: " + err);

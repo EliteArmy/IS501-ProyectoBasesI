@@ -180,33 +180,6 @@
                     <td>Lorem</td>
                     <td>ipsum</td>
                   </tr>
-                  <tr>
-                    <td>1,003</td>
-                    <td>libero</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>Sed</td>
-                    <td>cursus</td>
-                    <td>ante</td>
-                  </tr>
-                  <tr>
-                    <td>1,004</td>
-                    <td>dapibus</td>
-                    <td>diam</td>
-                    <td>Sed</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>nisi</td>
-                  </tr>
-                  <tr>
-                    <td>1,005</td>
-                    <td>Nulla</td>
-                    <td>quis</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>sem</td>
-                    <td>at</td>
-                  </tr>
                   -->
                 </tbody>
 
@@ -214,6 +187,92 @@
             </table>
 
           </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="modalForm" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre el Cliente</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+                    
+                    <div style="display: none;" class="form-group">
+                      <label for="txt-idcliente">Id</label>
+                      <input class="form-control" id="txt-idcliente">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-primer-nombre">Primer Nombre</label>
+                      <input type="text" class="form-control" id="txt-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-segundo-nombre">Segundo Nombre</label>
+                      <input type="text" class="form-control" id="txt-segundo-nombre" placeholder="Ingrese el Segundo Nombre">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txt-primer-apellido">Primer Apellido</label>
+                      <input type="text" class="form-control" id="txt-primer-apellido" placeholder="Ingrese el Primer Apellido">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-segundo-apellido">Segundo Apellido</label>
+                      <input type="text" class="form-control" id="txt-segundo-apellido" placeholder="Ingrese el Segundo Apellido">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txt-email">Email</label>
+                      <input type="email" class="form-control" id="txt-email" placeholder="Ingrese el correo electrónico">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-telefono">Telefono</label>
+                      <input type="text" class="form-control" id="txt-telefono" placeholder="Ingrese el Telefono">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txt-fecha-nacimiento">Fecha Nacimiento</label>
+                      <input type="date" class="form-control" id="txt-fecha-nacimiento">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-estado">Estado</label>
+                        <select id="slc-estado" class="form-control">
+                        <option>Seleccione un Estado</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-direccion">Dirección</label>
+                      <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
+                    </div>
+
+                    <button type="reset" value="Reset" class="btn btn-default">Limpiar Formulario</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">Guardar</button>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </main>
       </div>
     </div>

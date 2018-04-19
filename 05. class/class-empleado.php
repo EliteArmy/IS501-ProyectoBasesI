@@ -51,7 +51,6 @@
 			$this->fechaIngreso = $fechaIngreso;
 			$this->fechaSalida = $fechaSalida;
 			$this->estado = $estado;
-			$this->idPersona = $idPersona;
 			$this->idSucursal = $idSucursal;
 			$this->idEmpleadoSuperior = $idEmpleadoSuperior;
 		}
@@ -92,13 +91,6 @@
 			$this->estado = $estado;
 		}
 
-		public function getIdPersona(){
-			return $this->idPersona;
-		}
-		public function setIdPersona($idPersona){
-			$this->idPersona = $idPersona;
-		}
-
 		public function getIdSucursal(){
 			return $this->idSucursal;
 		}
@@ -126,93 +118,53 @@
 
 		// --- Función para obtener la Lista de Empleados ---
 		public static function obtenerListaEmpleados ($conexion) {
-			/*
-			// Ahora se maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerEmpleados
+			
 			$resultado = $conexion->ejecutarConsulta(
 				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
 				emp.fechaIngreso, emp.estado, per.direccion
 				FROM Persona per 
 				INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)'
 			);
-			*/
-
-			$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerEmpleados");
+			
+			// Esto maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerEmpleados
+			//$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerEmpleados");
 
 			while($fila = $conexion->obtenerFila($resultado)){
 
-						echo '<tr>';
-						echo 		'<td>' . $fila["idPersona"] . '</td>';
-						echo 		'<td>' . $fila["primerNombre"] . '</td>';
-						echo 		'<td>' . $fila["primerApellido"] . '</td>';
-						echo 		'<td>' . $fila["email"] . '</td>';
-						echo 		'<td>' . $fila["fechaNacimiento"] . '</td>';
-						echo 		'<td>' . $fila["fechaIngreso"] . '</td>';
-						echo 		'<td>' . $fila["estado"] . '</td>';
-						echo 		'<td>' . $fila["direccion"] . '</td>';
-						echo '<td><button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm">
-   					<span class="fas fa-edit"></span>
-					</button>
+				echo '<tr>';
+				echo 		'<td id="">' . $fila["idPersona"] . '</td>';
+				echo 		'<td id="">' . $fila["primerNombre"] . '</td>';
+				echo 		'<td id="">' . $fila["primerApellido"] . '</td>';
+				echo 		'<td id="">' . $fila["email"] . '</td>';
+				echo 		'<td id="">' . $fila["fechaNacimiento"] . '</td>';
+				echo 		'<td id="">' . $fila["fechaIngreso"] . '</td>';
+				echo 		'<td id="">' . $fila["estado"] . '</td>';
+				echo 		'<td id="">' . $fila["direccion"] . '</td>';
+				echo '<td><button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button> 
 
-					<!-- Modal -->
-					<div class="modal fade" id="modalForm" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<!-- Modal Header -->
-								<div class="modal-header">
-									<h5 class="modal-title" id="myModalLabel">
-									Información sobre el Empleado</h5>
-								</div>
-							<!-- Modal Body -->
-							<div class="modal-body">
-								<p class="statusMsg"></p>
-								<form role="form">
-									<div class="form-group">
-										<label for="inputName">Nombre</label>
-										<input type="text" class="form-control" id="inputName" placeholder="Ingrese el nombre"</input>
-									</div>
-									<div class="form-group">
-									    <label for="inputEmail">Apellido</label>
-									   	<input type="email" class="form-control" id="inputEmail" placeholder="Ingrese el apellido"</input>
-									</div>
-									<div class="form-group">
-									    <label for="inputMessage">Email</label>
-									    <input class="form-control" id="inputMessage" placeholder="Ingrese el correo electrónico"></input>
-									</div>
-									<div class="form-group">
-										<label for="inputName">Fecha Nacimiento</label>
-										<input type="date" class="form-control" id="inputName"</input>
-									</div>
-									<div class="form-group">
-										<label for="inputName">Fecha Ingreso</label>
-										<input type="date" class="form-control" id="inputName"</input>
-									</div>
-									<div class="form-group">
-									Estado
-									    <select name="slc-pais" id="slc-pais" class="form-control">
-											<option>---Seleccione un estado---</option>
-											<option value="1">Activo</option>
-											<option value="2">Inactivo</option>
-										</select>
-									</div>
-									<div class="form-group">
-				                        <label for="inputMessage">Dirección</label>
-				                        <textarea class="form-control" id="inputMessage" placeholder="Ingrese la dirección"></textarea>
-				                    </div>
-								</form>
-							</div>
-							<!-- Modal Footer -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-								<button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">Guardar</button>
-							</div>
-						 </div>
-					</div>
-				</div>  
-				<button type="button" onclick="eliminarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+						<button type="button" onclick="eliminarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 				echo '</tr>';
 			}
 		}
 
+		// --- Función que Prepopula la informacion en el Modal ---
+		public static function obtenerDetalleEmpleados ($conexion, $idEmpleado){
+			
+			$resultado = $conexion->ejecutarConsulta(
+				"SELECT per 
+					FROM persona per
+					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona) 
+					WHERE per.idPersona = '$idEmpleado'
+				");
+
+			$fila = $conexion->obtenerFila($resultado);
+		}
+
+
+		// --- Función que Guardará la nueva información ---
+		public static function ActualizarEmpleado ($conexion, $idPersona){
+
+		}
 
 		// --- Función para Eliminar Empleados de la Base de Datos ---
 		public static function eliminarEmpleado ($conexion, $idEmpleado) {
@@ -227,14 +179,15 @@
 		}
 
 		// --- Función Futura ---
-		public static function editarEmpleado ($conexion){
+		public static function nombreFuncion ($conexion){
 
 		}
 
 		// --- Función Futura ---
-		public static function nombreFuncion3 ($conexion){
+		public static function nombreFuncion2 ($conexion){
 
 		}
+
 
 	}
 ?>
