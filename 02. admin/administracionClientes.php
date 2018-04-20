@@ -131,7 +131,8 @@
           </div>
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
-
+          <div id="errores"></div>
+          
           <h2>Lista de Clientes</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -203,9 +204,9 @@
                 <div class="modal-body">
                   <form role="form">
                     
-                    <div style="display: none;" class="form-group">
+                    <div style="display: none" class="form-group">
                       <label for="txt-idcliente">Id</label>
-                      <input class="form-control" id="txt-idcliente">
+                      <input type="text" class="form-control" id="txt-idcliente">
                     </div>
 
                     <div class="form-group">
@@ -265,7 +266,7 @@
                 <!-- Modal Footer -->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente()">Actualizar</button>
+                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idcliente').value)">Actualizar</button>
 
                 </div>
 

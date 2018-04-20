@@ -25,7 +25,7 @@
 
 				$idCliente,
 				$fechaRegistro,
-				$estado
+				$estado,
 
 				$telefono) {
 			parent::__construct(
@@ -133,20 +133,34 @@
 		}
 
 		// --- Función que Guardará la nueva información ---
-		public static function actualizarCliente($conexion, $idPersona){
+		public function actualizarCliente($conexion){
 			
 			$resultado = $conexion->ejecutarConsulta(
 				"UPDATE persona per
 				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
-				SET per.primerNombre = $this->
-				per.segundoNombre = $this->
-				per.primerApellido = $this->
-				per.segundoApellido = $this->
-				per.email = $this->
-				per.fechaNacimiento = $this-> 
-				per.direccion = $this->
-				WHERE per.idPersona = '$idPersona'
+				SET per.primerNombre = '$this->primerNombre',
+				per.segundoNombre = '$this->segundoNombre',
+				per.primerApellido = '$this->primerApellido',
+				per.segundoApellido = '$this->segundoApellido',
+				per.email = '$this->email',
+				per.direccion = '$this->direccion',
+				per.fechaNacimiento = '$this->fechaNacimiento'
+				WHERE per.idPersona = '$this->idCliente'
 				");
+
+			echo "<b>Registro actualizado con exito</b>";
+
+			/*UPDATE persona per
+				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
+				SET per.primerNombre = 'dfdfg',
+				per.segundoNombre = 'dfgdfgd',
+				per.primerApellido = 'dfgdfg',
+				per.segundoApellido = 'dfgdf' ,
+				per.email = 'asd65156@gmail.com',
+				per.direccion = 'esta es una direccion',
+				per.fechaNacimiento = '1995-12-12'
+				WHERE per.idPersona = '100';*/
+
 		}
 
 		// --- Función para Eliminar Clientes de la Base de Datos ---

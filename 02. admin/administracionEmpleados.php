@@ -229,7 +229,7 @@
 
                     <div class="form-group">
                       <label for="txt-idcliente">Id</label>
-                      <input type="hidden" class="form-control" id="txt-idempleado">
+                      <input  class="form-control" id="txt-idempleado">
                     </div>
 
                     <div class="form-group">

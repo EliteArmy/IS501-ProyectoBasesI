@@ -4,13 +4,17 @@
 
 		private $idTelefono;
 		private $numeroTelefono;
+		private $idPersona;
 
 		public function __construct(
-					$idTelefono,
-					$numeroTelefono){
+				$idTelefono,
+					$numeroTelefono,
+					$idPersona){
 			$this->idTelefono = $idTelefono;
 			$this->numeroTelefono = $numeroTelefono;
+			$this->idPersona = $idPersona;
 		}
+
 		public function getIdTelefono(){
 			return $this->idTelefono;
 		}
@@ -25,10 +29,18 @@
 			$this->numeroTelefono = $numeroTelefono;
 		}
 
+		public function getIdPersona(){
+			return $this->idPersona;
+		}
+		public function setIdPersona($idPersona){
+			$this->idPersona = $idPersona;
+		}
+
 		public function __toString(){
 			return "IdTelefono: " . $this->idTelefono . 
-				" NumeroTelefono: " . $this->numeroTelefono;
+				" NumeroTelefono: " . $this->numeroTelefono . 
+				" IdPersona: " . $this->idPersona;
 		}
-		
+
 	}
 ?>

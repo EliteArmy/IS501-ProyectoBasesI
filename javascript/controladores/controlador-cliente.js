@@ -88,7 +88,8 @@ function seleccionarCliente(idCliente){
 		success: function(respuesta){
 
 			console.log(respuesta);
-			$("#txt-idcliente").val(respuesta.idCliente);
+
+			$("#txt-idcliente").val(respuesta.idPersona);
 			$("#txt-primer-nombre").val(respuesta.primerNombre);
 			$("#txt-segundo-nombre").val(respuesta.segundoNombre);
 			$("#txt-primer-apellido").val(respuesta.primerApellido);
@@ -124,13 +125,15 @@ function actualizarCliente(idCliente){
 			"slc-estado="+$("#slc-estado").val()+"&"+
 			"txt-direccion="+$("#txt-direccion").val();
 
-	alert(parametros);
+	//alert(parametros);
 	
 	$.ajax({
 		url:"../ajax/gestion-info-cliente.php?accion=actualizar-cliente",
 		method: "POST",
 		data: parametros,
-		success:function(resultado){		 
+		success:function(resultado){
+			//alert(resultado);
+			$("#errores").html(resultado);
 			cargarListaClientes();
 		},
 		error:function(){
