@@ -9,22 +9,19 @@
 			//echo "Entra en el case Cliente";
 	 		include ("../05. class/class-cliente.php");
 			Cliente::obtenerListaClientes($conexion);
-
 	 	break;
 	 	
-	 	case "obtener-cliente":
+	 	case "obtener-detalle-cliente":
 	 	//echo "Entra en el case Obtener Cliente";
 	 		include ("../05. class/class-cliente.php"); 
 	 		Cliente::obtenerDetalleCliente($conexion, $_POST["idPersona"]);	 		
 	 	break;
 
 
-
 	 	case "obtener-empleados":
 	 		//echo "Entra en el case Empleado";
 	 		include ("../05. class/class-empleado.php");
 			Empleado::obtenerListaEmpleados($conexion);
-
 	 	break;
 	 	
 	 	case "obtener-facturas":

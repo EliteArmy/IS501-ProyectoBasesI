@@ -62,13 +62,14 @@ $(document).ready(function(){
 // -- Funcion que Obtiene la lista de Clientes -- 
 function cargarListaClientes(){
 	
-	//alert("Entra en la funcion Ajax");
+	//alert("Entra en la funcion");
+
 	$.ajax({
 		url: "../ajax/get-info.php?accion=obtener-clientes",
 		data: "",
 		method: "POST",
 		success: function(resultado){
-			//alert(resultado)
+			//console.log(respuesta);
 			$("#div-informacion").html(resultado);
 		},
 		error: function(e){
@@ -78,18 +79,19 @@ function cargarListaClientes(){
 }
 
 // -- Función que Selecciona la Informacion de un cliente
-function seleccionarCliente(idCliente){
-	//alert("Selecciono la cliente " + idCliente + ", hay que obtener la informacion del servidor");
+function obtenerDetalleCliente(idPersona){
+
 	$.ajax({
-		url: "../ajax/get-info.php?accion=obtener-cliente",
-		data: "idPersona="+idCliente,
+		url: "../ajax/get-info.php?accion=obtener-detalle-cliente",
+		data: "idPersona=" + idPersona,
 		method: "POST",
 		dataType: "json",
 		success: function(respuesta){
 
-			console.log(respuesta);
+			//console.log(respuesta);
+			//alert(respuesta);
 
-			$("#txt-idcliente").val(respuesta.idPersona);
+			$("#txt-idpersona").val(respuesta.idPersona);
 			$("#txt-primer-nombre").val(respuesta.primerNombre);
 			$("#txt-segundo-nombre").val(respuesta.segundoNombre);
 			$("#txt-primer-apellido").val(respuesta.primerApellido);
@@ -110,30 +112,39 @@ function seleccionarCliente(idCliente){
 	});
 }
 
-// -- Función que Actualiza la informacion de un cliente usando el idCliente
-function actualizarCliente(idCliente){
+// -- Función que Actualiza la informacion de un cliente usando el idPersona
+function actualizarCliente(idPersona){
 	
-	var parametros = "idCliente="+idCliente+"&"+
-			"txt-idcliente="+$("#txt-idcliente").val()+"&"+
+	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
+	// following characters: , / ? : @ & = + $ #
+	// Es decir, si el Numero de Telefono inicia con un signo "+" este se reemplaza con "%2B"
+	// para que pueda ser enviado
+	var uri = $("#txt-telefono").val();
+	var resultado = encodeURIComponent(uri);
+
+	var parametros = "idPersona=" + idPersona +"&"+
+			"txt-idpersona="+$("#txt-idpersona").val()+"&"+
 			"txt-primer-nombre="+$("#txt-primer-nombre").val()+"&"+
 			"txt-segundo-nombre="+$("#txt-segundo-nombre").val()+"&"+
 			"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
 			"txt-segundo-apellido="+$("#txt-segundo-apellido").val()+"&"+
 			"txt-email="+$("#txt-email").val()+"&"+
-			"txt-telefono="+$("#txt-telefono").val()+"&"+
+			//"txt-telefono="+$("#txt-telefono").val()+"&"+
+			"txt-telefono="+ resultado +"&"+
 			"txt-fecha-nacimiento="+$("#txt-fecha-nacimiento").val()+"&"+
 			"slc-estado="+$("#slc-estado").val()+"&"+
 			"txt-direccion="+$("#txt-direccion").val();
-
+	
+	//console.log(parametros);
 	//alert(parametros);
 	
 	$.ajax({
-		url:"../ajax/gestion-info-cliente.php?accion=actualizar-cliente",
+		url: "../ajax/gestion-info-cliente.php?accion=actualizar-cliente",
 		method: "POST",
 		data: parametros,
 		success:function(resultado){
 			//alert(resultado);
-			$("#errores").html(resultado);
+			$("#txt-resultado").html(resultado);
 			cargarListaClientes();
 		},
 		error:function(){
@@ -143,12 +154,12 @@ function actualizarCliente(idCliente){
 }
 
 // -- Función que Elimina un Cliente usando el idCliente
-function eliminarCliente(idCliente){
+function eliminarCliente(idPersona){
 	
 	//alert("Entra en la funcion");
 	$.ajax({
 		url: "../ajax/gestion-info-cliente.php?accion=eliminar-cliente",
-		data: "idPersona="+idCliente,
+		data: "idPersona="+idPersona,
 		method: "POST",
 		success: function(resultado){
 			//$("#div-resultado-insert").html(respuesta);
@@ -160,6 +171,7 @@ function eliminarCliente(idCliente){
 		}
 	});
 }
+
 
 // --- --- --- ---
 $("#btn-actualizar").click(function(){

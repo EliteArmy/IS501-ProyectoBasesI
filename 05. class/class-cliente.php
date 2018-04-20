@@ -108,7 +108,7 @@
 				echo 		'<td id="">' . $fila["fechaRegistro"] . '</td>';
 				echo 		'<td id="">' . $fila["estado"] . '</td>';
 				echo 		'<td id="">' . $fila["direccion"] . '</td>';
-				echo '<td><button type="button" onclick="seleccionarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button>
+				echo '<td><button type="button" onclick="obtenerDetalleCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button>
 							<button type="button" onclick="eliminarCliente('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 				echo '</tr>';
 			}
@@ -135,43 +135,63 @@
 		// --- Función que Guardará la nueva información ---
 		public function actualizarCliente($conexion){
 			
+			$telefono = $this->telefono->getNumeroTelefono();
+			//echo $telefono;
+			//$telefono = '+' . $telefono;
+
 			$resultado = $conexion->ejecutarConsulta(
 				"UPDATE persona per
-				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
+				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona)
+				INNER JOIN telefono tel ON (per.idPersona = tel.idPersona)
 				SET per.primerNombre = '$this->primerNombre',
 				per.segundoNombre = '$this->segundoNombre',
 				per.primerApellido = '$this->primerApellido',
 				per.segundoApellido = '$this->segundoApellido',
 				per.email = '$this->email',
 				per.direccion = '$this->direccion',
-				per.fechaNacimiento = '$this->fechaNacimiento'
-				WHERE per.idPersona = '$this->idCliente'
+				per.fechaNacimiento = '$this->fechaNacimiento',
+				tel.numeroTelefono = '$telefono',
+				cli.estado = '$this->estado'
+				WHERE per.idPersona = '$this->idPersona'
 				");
-
-			echo "<b>Registro actualizado con exito</b>";
-
-			/*UPDATE persona per
-				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
-				SET per.primerNombre = 'dfdfg',
-				per.segundoNombre = 'dfgdfgd',
-				per.primerApellido = 'dfgdfg',
+			/*
+			echo $this->telefono->getNumeroTelefono();
+			echo '<br>';
+			echo $this->estado;
+			echo '<br>';
+			echo '<br>';
+			*/
+			echo "<b>Registro actualizado con Exito</b>";
+			
+			/*
+			Actualizar Clientes en varias tablas:
+			UPDATE persona per
+				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona)
+			  INNER JOIN telefono tel ON (per.idPersona = tel.idPersona)
+			SET per.primerNombre = 'prueba',
+				per.segundoNombre = 'prueba2',
+				per.primerApellido = 'Prueba3',
 				per.segundoApellido = 'dfgdf' ,
-				per.email = 'asd65156@gmail.com',
+				per.email = 'asdf156@gmail.com',
 				per.direccion = 'esta es una direccion',
-				per.fechaNacimiento = '1995-12-12'
-				WHERE per.idPersona = '100';*/
+				per.fechaNacimiento = '1995-12-12',
+			  tel.numeroTelefono = '+50822548698',
+			  cli.estado = 'Inactivo'
+			WHERE per.idPersona = '105';
+
+			*/
 
 		}
 
 		// --- Función para Eliminar Clientes de la Base de Datos ---
-		public static function eliminarCliente ($conexion, $idCliente){
+		public static function eliminarCliente ($conexion, $idPersona){
 
 			//echo "Entra en la función";
 			$resultado = $conexion->ejecutarConsulta(
 				"DELETE per 
 					FROM persona per
 					INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
-					WHERE per.idPersona = '$idCliente'
+					WHERE per.idPersona = '$idPersona'
 				");
 		}
 

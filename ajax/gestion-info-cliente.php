@@ -26,8 +26,10 @@
 	 		include("../05. class/class-cliente.php");
 	 		include("../05. class/class-telefono.php");
 
+	 		//echo $_POST["txt-telefono"];
+
 			$cliente = new Cliente(
-				$_POST["txt-idcliente"],
+				$_POST["txt-idpersona"],
 				$_POST["txt-primer-nombre"],
 				$_POST["txt-segundo-nombre"],
 				$_POST["txt-primer-apellido"],
@@ -39,7 +41,7 @@
 				$_POST["txt-fecha-nacimiento"],
 				null, // imagenIdentificacion
 
-				$_POST["idCliente"],
+				$_POST["idPersona"],
 				null, //fechaRegistro
 				$_POST["slc-estado"],
 
@@ -47,8 +49,8 @@
 			);
 
 			$cliente->actualizarCliente($conexion);
-			//$cliente->actualizarCliente($conexion, $_POST["idCliente"]);
-			//Cliente::actualizarCliente($conexion, $_POST["idpersona"]);
+			//$cliente->actualizarCliente($conexion, $_POST["idPersona"]);
+			//Cliente::actualizarCliente($conexion, $_POST["idPersona"]);
 		break;	 	
 
 		case "eliminar-cliente":

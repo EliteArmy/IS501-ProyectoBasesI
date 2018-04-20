@@ -131,7 +131,7 @@
           </div>
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
-          <div id="errores"></div>
+          <div id="txt-resultado"></div>
           
           <h2>Lista de Clientes</h2>
           <div class="table-responsive">
@@ -205,8 +205,8 @@
                   <form role="form">
                     
                     <div style="display: none" class="form-group">
-                      <label for="txt-idcliente">Id</label>
-                      <input type="text" class="form-control" id="txt-idcliente">
+                      <label for="txt-idpersona">Id</label>
+                      <input type="text" class="form-control" id="txt-idpersona">
                     </div>
 
                     <div class="form-group">
@@ -248,8 +248,8 @@
                       <label for="slc-estado">Estado</label>
                         <select id="slc-estado" class="form-control">
                         <option>Seleccione un Estado</option>
-                        <option value="1">Activo</option>
-                        <option value="2">Inactivo</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
                       </select>
                     </div>
 
@@ -266,7 +266,7 @@
                 <!-- Modal Footer -->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idcliente').value)">Actualizar</button>
+                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idpersona').value)">Actualizar</button>
 
                 </div>
 
