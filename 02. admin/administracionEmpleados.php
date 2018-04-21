@@ -131,8 +131,12 @@
           </div>
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
-          <div id="div-resultado-insert">
-            
+          <div id="div-resultado" style="display: none;" class="alert alert-success fade show alert-dismissible " role="alert">
+            <div id="div-resultado-mensaje">
+            </div>
+            <button type="button" class="btn btn-default btn-sm close" aria-label="Close">
+              <span id="btn-cerrar-mensaje" class="fas fa-times" aria-hidden="true"></span>
+            </button>
           </div>
 
           <h2>Lista de Empleados</h2>
@@ -258,7 +262,7 @@
                       <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
                     </div>
                     
-                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idempleado').value)">Actualizar</button>
+                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarEmpleado(document.getElementById('txt-idempleado').value)">Actualizar</button>
                     
                     <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
                     

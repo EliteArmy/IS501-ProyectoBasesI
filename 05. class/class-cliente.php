@@ -89,10 +89,10 @@
 			
 			$resultado = $conexion->ejecutarConsulta (
 				'SELECT cli.idCliente, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
-						cli.fechaRegistro, cli.estado, per.direccion,  TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
+						cli.fechaRegistro, cli.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS Edad
 				FROM Persona per
 				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)
-				WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18"'
+				WHERE TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) >= "216"'
 			);
 			
 			// Esto maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerClientes
@@ -138,30 +138,23 @@
 			
 			$telefono = $this->telefono->getNumeroTelefono();
 			//echo $telefono;
-			//$telefono = '+' . $telefono;
 
 			$resultado = $conexion->ejecutarConsulta(
 				"UPDATE persona per
 				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona)
 				INNER JOIN telefono tel ON (per.idPersona = tel.idPersona)
 				SET per.primerNombre = '$this->primerNombre',
-				per.segundoNombre = '$this->segundoNombre',
-				per.primerApellido = '$this->primerApellido',
-				per.segundoApellido = '$this->segundoApellido',
-				per.email = '$this->email',
-				per.direccion = '$this->direccion',
-				per.fechaNacimiento = '$this->fechaNacimiento',
-				tel.numeroTelefono = '$telefono',
-				cli.estado = '$this->estado'
+					per.segundoNombre = '$this->segundoNombre',
+					per.primerApellido = '$this->primerApellido',
+					per.segundoApellido = '$this->segundoApellido',
+					per.email = '$this->email',
+					per.direccion = '$this->direccion',
+					per.fechaNacimiento = '$this->fechaNacimiento',
+					tel.numeroTelefono = '$telefono',
+					cli.estado = '$this->estado'
 				WHERE cli.idCliente = '$this->idCliente'
 				");
-			/*
-			echo $this->telefono->getNumeroTelefono();
-			echo '<br>';
-			echo $this->estado;
-			echo '<br>';
-			echo '<br>';
-			*/
+
 			echo "<b>Registro actualizado con Exito</b>";
 			
 			/*
@@ -179,9 +172,7 @@
 			  tel.numeroTelefono = '+50822548698',
 			  cli.estado = 'Inactivo'
 			WHERE per.idPersona = '105';
-
 			*/
-
 		}
 
 		// --- Función para Eliminar Clientes de la Base de Datos ---
@@ -196,7 +187,6 @@
 				");
 
 			echo "<b>Registro Elimimnado con Exito</b>";
-
 		}
 
 		// --- Función Futura ---

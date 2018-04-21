@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Template Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h2>Procedure Generator (Oracle)</h2>
+    <table>
+      <tr>
+        <td><label for="Nombre">Nombre Procedure: </label></td>
+        <td><input type="text" maxlength='100' name="nombre" id="nombre"></td>
+      </tr>
+      <tr>
+        <td><label for="params">Parámetros: </label></td>
+        <td>
+          <textarea name="params" id="params" cols="20" rows="10" placeholder="param (IN|OUT) TIPO"></textarea></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td><button id="btn-clean">Limpiar</button></td>
+        <td><button id="btn-generate">Generar</button></td>
+      </tr>
+    </table>  
+
+    <textarea name="salida" id="salida" cols="100" rows="20"></textarea>
+  <script src="./jquery.min.js"></script>
+  
+  <script>
+    setInterval(
+      function() {
+        // location.reload();
+      },1000
+    );
+  </script>
+
+  <script>
+    $("#btn-generate").click(function() {
+      $("#salida").val('');
+      // SMALLINT como BOOLEAN
+      var types = ['VARCHAR', 'INT', 'DOUBLE', 'DATETIME', 'SMALLINT'];
+      var tab = '  ';
+      var header = 'CREATE OR REPLACE PROCEDURE ' + 'PL_' + $("#nombre").val() + '(\n';
+      var middlehead = ')\nIS\n--DECLARE\nBEGIN';
+      var init =
+        tab + "mensaje:='';" + '\n' +
+        tab + "resultado:=0;";
+      var end = 'END;';
+      var tokens = [];
+      var lines = $("#params").val().split("\n");
+      for (let i = 0; i < lines.length; i++) {
+        const element = lines[i];
+        tokens.push(element.split(/\s+(IN|OUT)\s+/));
+      }
+      var buffer = '';
+      buffer+=header;
+      buffer+=tab+tokens[0][0]+" "+ tokens[0][1]+ " "+tokens[0][2];
+      for (let i = 1; i < tokens.length; i++) {
+        const token = tokens[i];
+        buffer += '\n'+tab+',' + token[0] + " " + token[1] + " " + token[2];
+      }
+      buffer+='\n';
+      buffer +=tab+',mensaje OUT VARCHAR'+'\n';
+      buffer +=tab+',resultado OUT SMALLINT'+'\n';
+      buffer+=middlehead;
+      buffer+='\n'+init+'\n';
+      buffer += "\/*----------------VALIDACION DE CAMPOS----------------*\/";
+      
+      tokens.forEach(function(i) {
+        var n = i[0];
+        var m = 
+        '\n'+tab+"IF "+n+" = '' OR "+n+" IS NULL THEN"+
+        '\n'+tab+tab+"mensaje:= mensaje || '"+n+", ';"+
+        '\n'+tab+"END IF;";
+        buffer+=m;
+      });
+
+      var t =
+      	'\n'+tab+"IF mensaje<>'' OR mensaje IS NOT NULL THEN"+
+			  '\n'+tab+tab+"mensaje:='Campos requeridos: '||mensaje;"+
+			  '\n'+tab+tab+"RETURN;"+
+		    '\n'+tab+"END IF;"
+      ;
+      buffer+=t+'\n';
+      buffer+="\/*---------------- CUERPO DEL PL----------------*\/"+"\n";
+      buffer+='\n'+end;
+      $("#salida").val(buffer);
+    });
+
+    $('#btn-clean').click(function() {
+      $('#nombre').val('');
+      $('#params').val('');
+      $('#salida').val('');
+    });
+  </script>
+</body>
+</html>

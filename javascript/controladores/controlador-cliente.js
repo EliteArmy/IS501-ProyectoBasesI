@@ -144,7 +144,8 @@ function actualizarCliente(idCliente){
 		data: parametros,
 		success:function(resultado){
 			//alert(resultado);
-			$("#txt-resultado").html(resultado);
+			$("#div-resultado-mensaje").html(resultado);
+			$("#div-resultado").show();
 			cargarListaClientes();
 		},
 		error:function(){
@@ -163,8 +164,10 @@ function eliminarCliente(idCliente){
 		method: "POST",
 		success: function(resultado){
 			//alert(resultado);
-			$("#div-resultado-insert").html(resultado);
+			$("#ddiv-resultado-mensaje").html(resultado);
+			$("#div-resultado").show();
 			cargarListaClientes();
+
 		},
 		error: function(err){
 			alert("Error: " + err);
@@ -172,6 +175,10 @@ function eliminarCliente(idCliente){
 	});
 }
 
+
+$("#btn-cerrar-mensaje").click(function(){
+	$("#div-resultado").hide();
+});
 
 // --- --- --- ---
 $("#btn-actualizar").click(function(){
@@ -193,7 +200,9 @@ $("#btn-actualizar").click(function(){
 					"slc-empresa="+$("#slc-empresa").val()+"&"+
 					"slc-tipos-calificaciones="+$("#slc-tipos-calificaciones").val()+"&"+
 					"slc-tipos-contenidos="+$("#slc-tipos-contenidos").val();
+	
 	alert(parametros);
+
 	$.ajax({
 		url:"ajax/gestion-aplicaciones.php?accion=actualizar",
 		data:parametros,
@@ -206,6 +215,7 @@ $("#btn-actualizar").click(function(){
 			alert("Error: " + err);
 		}
 	});
+
 });
 
 

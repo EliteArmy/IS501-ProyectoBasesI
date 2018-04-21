@@ -32,7 +32,9 @@
 				$fechaSalida,
 				$estado,
 				$idSucursal,
-				$idEmpleadoSuperior) {
+				$idEmpleadoSuperior,
+
+				$telefono) {
 			parent::__construct(
 					$idPersona,
 					$primerNombre,
@@ -53,6 +55,8 @@
 			$this->estado = $estado;
 			$this->idSucursal = $idSucursal;
 			$this->idEmpleadoSuperior = $idEmpleadoSuperior;
+
+			$this->telefono = $telefono;
 		}
 
 
@@ -105,6 +109,13 @@
 			$this->idEmpleadoSuperior = $idEmpleadoSuperior;
 		}
 
+		public function getTelefono(){
+			return $this->telefono;
+		}
+		public function setTelefono($telefono){
+			$this->telefono = $telefono;
+		}
+
 		public function __toString(){
 			return parent::__toString() . "IdEmpleado: " . $this->idEmpleado . 
 				" CodigoEmpleado: " . $this->codigoEmpleado . 
@@ -113,15 +124,16 @@
 				" Estado: " . $this->estado . 
 				" IdPersona: " . $this->idPersona . 
 				" IdSucursal: " . $this->idSucursal . 
-				" IdEmpleadoSuperior: " . $this->idEmpleadoSuperior;
+				" IdEmpleadoSuperior: " . $this->idEmpleadoSuperior . 
+				" Telefono: " . $this->telefono;
 		}
 
 		// --- Función para obtener la Lista de Empleados ---
 		public static function obtenerListaEmpleados ($conexion) {
 			
 			$resultado = $conexion->ejecutarConsulta(
-				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
-				emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
+				'SELECT emp.idEmpleado, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
+				emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS Edad
 				FROM Persona per 
 				INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)
 				WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18"'
@@ -166,7 +178,28 @@
 
 
 		// --- Función que Guardará la nueva información ---
-		public function ActualizarEmpleado ($conexion, $idPersona){
+		public function actualizarEmpleado ($conexion){
+
+			$telefono = $this->telefono->getNumeroTelefono();
+			//echo $telefono;
+
+			$resultado = $conexion->ejecutarConsulta(
+				"UPDATE persona per
+				INNER JOIN empleado emp ON (per.idPersona = emp.idPersona)
+				INNER JOIN telefono tel ON (per.idPersona = tel.idPersona)
+				SET per.primerNombre = '$this->primerNombre',
+					per.segundoNombre = '$this->segundoNombre',
+					per.primerApellido = '$this->primerApellido',
+					per.segundoApellido = '$this->segundoApellido',
+					per.email = '$this->email',
+					per.direccion = '$this->direccion',
+					per.fechaNacimiento = '$this->fechaNacimiento',
+					tel.numeroTelefono = '$telefono',
+					emp.estado = '$this->estado'
+				WHERE emp.idEmpleado = '$this->idEmpleado'
+				");
+
+			echo "<b>Registro actualizado con Exito</b>";
 
 		}
 

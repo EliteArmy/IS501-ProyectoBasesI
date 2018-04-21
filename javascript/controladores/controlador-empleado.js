@@ -123,7 +123,36 @@ function actualizarEmpleado(idEmpleado){
 	var uri = $("#txt-telefono").val();
 	var resultado = encodeURIComponent(uri);
 
-
+	var parametros = "idEmpleado=" + idEmpleado +"&"+
+			"txt-idempleado="+$("#txt-idempleado").val()+"&"+
+			"txt-primer-nombre="+$("#txt-primer-nombre").val()+"&"+
+			"txt-segundo-nombre="+$("#txt-segundo-nombre").val()+"&"+
+			"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
+			"txt-segundo-apellido="+$("#txt-segundo-apellido").val()+"&"+
+			"txt-email="+$("#txt-email").val()+"&"+
+			//"txt-telefono="+$("#txt-telefono").val()+"&"+
+			"txt-telefono="+ resultado +"&"+
+			"txt-fecha-nacimiento="+$("#txt-fecha-nacimiento").val()+"&"+
+			"slc-estado="+$("#slc-estado").val()+"&"+
+			"txt-direccion="+$("#txt-direccion").val();
+	
+	//console.log(parametros);
+	//alert(parametros);
+	
+	$.ajax({
+		url: "../ajax/gestion-info-empleado.php?accion=actualizar-empleado",
+		method: "POST",
+		data: parametros,
+		success:function(resultado){
+			//alert(resultado);
+			$("#div-resultado-mensaje").html(resultado);
+			$("#div-resultado").show();
+			cargarListaEmpleados();
+		},
+		error:function(){
+			alert("error");
+		}
+	});
 }
 
 
@@ -137,7 +166,8 @@ function eliminarEmpleado(idEmpleado){
 		method: "POST",
 		success: function(resultado){
 			//alert(resultado);
-			$("#div-resultado-insert").html(resultado);
+			$("#div-resultado-mensaje").html(resultado);
+			$("#div-resultado").show();
 			cargarListaEmpleados();
 		},
 		error: function(err){
@@ -147,7 +177,13 @@ function eliminarEmpleado(idEmpleado){
 }
 
 
+$("#btn-cerrar-mensaje").click(function(){
+	$("#div-resultado").hide();
+});
 
+
+
+// --- --- --- ---
 $("#btn-guardar").click(function(){
 	var categorias = "";
 	//categorias[]=1&lista[]=2&lista[]=3&
@@ -180,6 +216,7 @@ $("#btn-guardar").click(function(){
 			alert("Error: " + err);
 		}
 	});
+
 });
 
 

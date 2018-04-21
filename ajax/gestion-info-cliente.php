@@ -26,8 +26,6 @@
 	 		include("../05. class/class-cliente.php");
 	 		include("../05. class/class-telefono.php");
 
-	 		//echo $_POST["txt-telefono"];
-
 			$cliente = new Cliente(
 				$_POST["txt-idcliente"],
 				$_POST["txt-primer-nombre"],
