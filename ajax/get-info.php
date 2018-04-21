@@ -14,7 +14,7 @@
 	 	case "obtener-detalle-cliente":
 	 	//echo "Entra en el case Obtener Cliente";
 	 		include ("../05. class/class-cliente.php"); 
-	 		Cliente::obtenerDetalleCliente($conexion, $_POST["idPersona"]);	 		
+	 		Cliente::obtenerDetalleCliente($conexion, $_POST["idCliente"]);	 		
 	 	break;
 
 

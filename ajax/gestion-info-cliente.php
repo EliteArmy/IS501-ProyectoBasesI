@@ -29,7 +29,7 @@
 	 		//echo $_POST["txt-telefono"];
 
 			$cliente = new Cliente(
-				$_POST["txt-idpersona"],
+				$_POST["txt-idcliente"],
 				$_POST["txt-primer-nombre"],
 				$_POST["txt-segundo-nombre"],
 				$_POST["txt-primer-apellido"],
@@ -41,7 +41,7 @@
 				$_POST["txt-fecha-nacimiento"],
 				null, // imagenIdentificacion
 
-				$_POST["idPersona"],
+				$_POST["idCliente"],
 				null, //fechaRegistro
 				$_POST["slc-estado"],
 
@@ -56,7 +56,7 @@
 		case "eliminar-cliente":
 	 		//echo "Entra en el case Eliminar Cliente";
 	 		include ("../05. class/class-cliente.php");
-			Cliente::eliminarCliente($conexion, $_POST["idPersona"]);
+			Cliente::eliminarCliente($conexion, $_POST["idCliente"]);
 			//echo "Registro de Cliente Eliminado";
 	 	break;
 		

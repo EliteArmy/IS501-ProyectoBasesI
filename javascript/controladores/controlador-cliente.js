@@ -79,11 +79,11 @@ function cargarListaClientes(){
 }
 
 // -- Función que Selecciona la Informacion de un cliente
-function obtenerDetalleCliente(idPersona){
+function obtenerDetalleCliente(idCliente){
 
 	$.ajax({
 		url: "../ajax/get-info.php?accion=obtener-detalle-cliente",
-		data: "idPersona=" + idPersona,
+		data: "idCliente=" + idCliente,
 		method: "POST",
 		dataType: "json",
 		success: function(respuesta){
@@ -91,7 +91,7 @@ function obtenerDetalleCliente(idPersona){
 			//console.log(respuesta);
 			//alert(respuesta);
 
-			$("#txt-idpersona").val(respuesta.idPersona);
+			$("#txt-idcliente").val(respuesta.idCliente);
 			$("#txt-primer-nombre").val(respuesta.primerNombre);
 			$("#txt-segundo-nombre").val(respuesta.segundoNombre);
 			$("#txt-primer-apellido").val(respuesta.primerApellido);
@@ -113,7 +113,7 @@ function obtenerDetalleCliente(idPersona){
 }
 
 // -- Función que Actualiza la informacion de un cliente usando el idPersona
-function actualizarCliente(idPersona){
+function actualizarCliente(idCliente){
 	
 	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
 	// following characters: , / ? : @ & = + $ #
@@ -122,8 +122,8 @@ function actualizarCliente(idPersona){
 	var uri = $("#txt-telefono").val();
 	var resultado = encodeURIComponent(uri);
 
-	var parametros = "idPersona=" + idPersona +"&"+
-			"txt-idpersona="+$("#txt-idpersona").val()+"&"+
+	var parametros = "idCliente=" + idCliente +"&"+
+			"txt-idcliente="+$("#txt-idcliente").val()+"&"+
 			"txt-primer-nombre="+$("#txt-primer-nombre").val()+"&"+
 			"txt-segundo-nombre="+$("#txt-segundo-nombre").val()+"&"+
 			"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
@@ -154,12 +154,12 @@ function actualizarCliente(idPersona){
 }
 
 // -- Función que Elimina un Cliente usando el idCliente
-function eliminarCliente(idPersona){
+function eliminarCliente(idCliente){
 	
 	//alert("Entra en la funcion");
 	$.ajax({
 		url: "../ajax/gestion-info-cliente.php?accion=eliminar-cliente",
-		data: "idPersona="+idPersona,
+		data: "idCliente=" + idCliente,
 		method: "POST",
 		success: function(resultado){
 			//$("#div-resultado-insert").html(respuesta);

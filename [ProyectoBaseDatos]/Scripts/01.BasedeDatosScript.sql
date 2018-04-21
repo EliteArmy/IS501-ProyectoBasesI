@@ -5,10 +5,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema basedatoshotel
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema basedatoshotel
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS basedatoshotel DEFAULT CHARACTER SET utf8 ;
 USE basedatoshotel ;
 
@@ -350,7 +346,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Habitacion_Reservacion
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Habitacion_Reservacion (
-  idHabitacion INT NOT NULL COMMENT 'Una Habitacion se puede Reservar muchas veces',
+  idHabitacion INT NOT NULL AUTO_INCREMENT COMMENT 'Una Habitacion se puede Reservar muchas veces',
   idReservacion INT NOT NULL COMMENT 'Una Reservacion se puede hacer para muchas habitaciones',
   INDEX fk_Habitacion_has_Reservacion_Reservacion1_idx (idReservacion ASC),
   INDEX fk_Habitacion_has_Reservacion_Habitacion1_idx (idHabitacion ASC),
@@ -436,7 +432,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Proveedor
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Proveedor (
-  idProveedor INT NOT NULL,
+  idProveedor INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(30) NOT NULL,
   telefono VARCHAR(15) NOT NULL,
   direccion VARCHAR(100) NOT NULL,
@@ -450,7 +446,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Sucursal_Servicio
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Sucursal_Servicio (
-  idSucursal INT NOT NULL,
+  idSucursal INT NOT NULL AUTO_INCREMENT,
   idServicio INT NOT NULL,
   PRIMARY KEY (idSucursal, idServicio),
   INDEX fk_Hotel_has_Servicio_Servicio1_idx (idServicio ASC),
@@ -472,7 +468,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Impuesto
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Impuesto (
-  idImpuesto INT NOT NULL,
+  idImpuesto INT NOT NULL AUTO_INCREMENT,
   porcentaje DOUBLE NOT NULL,
   estado VARCHAR(15) NOT NULL,
   fechaInicio DATETIME NOT NULL,
@@ -486,7 +482,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Cargo
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Cargo (
-  idCargo INT NOT NULL,
+  idCargo INT NOT NULL AUTO_INCREMENT,
   nombreCargo VARCHAR(30) NOT NULL,
   salarioMinimo DOUBLE NOT NULL,
   salarioMaximo DOUBLE NOT NULL,
@@ -500,7 +496,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Cargo_Empleado
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Cargo_Empleado (
-  idCargo INT NOT NULL,
+  idCargo INT NOT NULL AUTO_INCREMENT,
   idEmpleado INT NOT NULL,
   PRIMARY KEY (idCargo, idEmpleado),
   INDEX fk_Cargo_has_Empleado_Empleado1_idx (idEmpleado ASC),
@@ -522,7 +518,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Factura_Impuesto
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Factura_Impuesto (
-  idFactura INT NOT NULL,
+  idFactura INT NOT NULL AUTO_INCREMENT,
   idImpuesto INT NOT NULL,
   PRIMARY KEY (idFactura, idImpuesto),
   INDEX fk_Factura_has_Impuesto_Impuesto1_idx (idImpuesto ASC),
@@ -544,7 +540,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Factura_Descuento
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Factura_Descuento (
-  idFactura INT NOT NULL,
+  idFactura INT NOT NULL AUTO_INCREMENT,
   idDescuento INT NOT NULL,
   PRIMARY KEY (idFactura, idDescuento),
   INDEX fk_Factura_has_Descuento_Descuento1_idx (idDescuento ASC),
@@ -566,7 +562,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.EncabezadoPlanilla
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.EncabezadoPlanilla (
-  idEncabezadoPlanilla INT NOT NULL,
+  idEncabezadoPlanilla INT NOT NULL AUTO_INCREMENT,
   fechaInicio DATE NOT NULL,
   fechaFin DATE NOT NULL,
   observacion VARCHAR(100) NULL,
@@ -585,7 +581,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.PagoPlanilla
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.PagoPlanilla (
-  idPagoPlanilla INT NOT NULL,
+  idPagoPlanilla INT NOT NULL AUTO_INCREMENT,
   montoPagado DOUBLE NOT NULL,
   valorBonificacion DOUBLE NOT NULL,
   valorImpuesto DOUBLE NOT NULL,
@@ -613,7 +609,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Banco
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Banco (
-  idBanco INT NOT NULL,
+  idBanco INT NOT NULL AUTO_INCREMENT,
   nombreBanco VARCHAR(45) NOT NULL,
   PRIMARY KEY (idBanco),
   UNIQUE INDEX nombreBanco_UNIQUE (nombreBanco ASC))
@@ -624,7 +620,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.TipoCuenta
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.TipoCuenta (
-  idTipoCuenta INT NOT NULL,
+  idTipoCuenta INT NOT NULL AUTO_INCREMENT,
   tipoCuenta VARCHAR(30) NOT NULL,
   descripcion VARCHAR(100) NULL,
   PRIMARY KEY (idTipoCuenta))
@@ -635,7 +631,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.CuentaBancaria
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.CuentaBancaria (
-  idCuentaBancaria INT NOT NULL,
+  idCuentaBancaria INT NOT NULL AUTO_INCREMENT,
   numeroCuenta VARCHAR(20) NOT NULL,
   idBanco INT NOT NULL,
   idTipoCuenta INT NOT NULL,
@@ -667,7 +663,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.ExperienciaLaboral
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.ExperienciaLaboral (
-  idExperienciaLaboral INT NOT NULL,
+  idExperienciaLaboral INT NOT NULL AUTO_INCREMENT,
   titulo VARCHAR(20) NOT NULL COMMENT 'Titulo de Universidad/Colegio',
   fechaIncio DATE NOT NULL,
   fechaFin DATE NOT NULL,
@@ -687,7 +683,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Mesa
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Mesa (
-  idMesa INT NOT NULL,
+  idMesa INT NOT NULL AUTO_INCREMENT,
   capacidad INT NOT NULL,
   numeroMesa INT NOT NULL,
   PRIMARY KEY (idMesa))
@@ -698,7 +694,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Pedido
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Pedido (
-  idPedido INT NOT NULL,
+  idPedido INT NOT NULL AUTO_INCREMENT,
   fechaPedido DATETIME NOT NULL,
   idMesa INT NOT NULL,
   PRIMARY KEY (idPedido),
@@ -715,7 +711,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.DetalleFactura
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.DetalleFactura (
-  idDetalleFactura INT NOT NULL,
+  idDetalleFactura INT NOT NULL AUTO_INCREMENT,
   cantidad DOUBLE NOT NULL,
   descripcionReser VARCHAR(100) NULL,
   idFactura INT NOT NULL,
@@ -754,7 +750,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Plato
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Plato (
-  idPlato INT NOT NULL,
+  idPlato INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(50) NOT NULL,
   precio DOUBLE NOT NULL,
   bebida VARCHAR(40) NULL,
@@ -777,7 +773,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.TipoRecargo
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.TipoRecargo (
-  idTipoRecargo INT NOT NULL,
+  idTipoRecargo INT NOT NULL AUTO_INCREMENT,
   porcentaje DOUBLE NOT NULL,
   descripcion VARCHAR(100) NULL,
   idFactura INT NOT NULL,
@@ -795,7 +791,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Producto_Proveedor
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Producto_Proveedor (
-  idProducto INT NOT NULL,
+  idProducto INT NOT NULL AUTO_INCREMENT,
   idProveedor INT NOT NULL,
   PRIMARY KEY (idProducto, idProveedor),
   INDEX fk_Producto_has_Proveedor_Proveedor1_idx (idProveedor ASC),
@@ -817,7 +813,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Plato_Pedido
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Plato_Pedido (
-  idPlato INT NOT NULL,
+  idPlato INT NOT NULL AUTO_INCREMENT,
   idPedido INT NOT NULL,
   cantidadPedido INT NOT NULL,
   PRIMARY KEY (idPlato, idPedido),
@@ -840,7 +836,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Plato_Producto
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Plato_Producto (
-  idPlato INT NOT NULL,
+  idPlato INT NOT NULL AUTO_INCREMENT,
   idProducto INT NOT NULL,
   cantidadUsada DOUBLE NOT NULL,
   PRIMARY KEY (idPlato, idProducto),
@@ -863,7 +859,7 @@ ENGINE = InnoDB;
 -- Table basedatoshotel.Precio
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Precio (
-  idPrecio INT NOT NULL,
+  idPrecio INT NOT NULL AUTO_INCREMENT, 
   precio DOUBLE NOT NULL,
   fechaInicio DATE NOT NULL,
   fechaFin DATE NULL,

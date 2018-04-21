@@ -205,8 +205,8 @@
                   <form role="form">
                     
                     <div style="display: none" class="form-group">
-                      <label for="txt-idpersona">Id</label>
-                      <input type="text" class="form-control" id="txt-idpersona">
+                      <label for="txt-idcliente">Id</label>
+                      <input type="text" class="form-control" id="txt-idcliente">
                     </div>
 
                     <div class="form-group">
@@ -266,7 +266,7 @@
                 <!-- Modal Footer -->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idpersona').value)">Actualizar</button>
+                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idcliente').value)">Actualizar</button>
 
                 </div>
 
