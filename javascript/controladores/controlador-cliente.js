@@ -112,7 +112,7 @@ function obtenerDetalleCliente(idCliente){
 	});
 }
 
-// -- Función que Actualiza la informacion de un Cliente
+// -- Función que Actualiza la informacion de un cliente usando el idPersona
 function actualizarCliente(idCliente){
 	
 	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
@@ -162,8 +162,8 @@ function eliminarCliente(idCliente){
 		data: "idCliente=" + idCliente,
 		method: "POST",
 		success: function(resultado){
+			//$("#div-resultado-insert").html(respuesta);
 			//alert(resultado);
-			$("#div-resultado-insert").html(resultado);
 			cargarListaClientes();
 		},
 		error: function(err){

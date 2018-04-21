@@ -28,6 +28,10 @@
           <h4 class="mb-3">Configuración de información</h4>
           <form class="needs-validation" novalidate>
             <div class="row">
+              <div style="display: none" class="form-group">
+                <label for="idcliente">Id</label>
+                <input type="text" class="form-control" id="idcliente">
+              </div>
               <div class="col-md-6 mb-3">
                 <label for="primerNombre">Primer Nombre</label>
                 <input type="text" class="form-control" id="primerNombre" placeholder="Ingrese su primer nombre" value=""  required>
@@ -36,8 +40,22 @@
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="primerApellido">Segundo Nombre</label>
-                <input type="text" class="form-control" id="primerApellido" placeholder="Ingrese su primer apellido" value="" required>
+                <label for="segundoNombre">Segundo Nombre</label>
+                <input type="text" class="form-control" id="segundoNombre" placeholder="Ingrese su segundo nombre" value="" required>
+                <div class="invalid-feedback">
+                  Se requiere un dato válido.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="primerApellido">Primer Apellido</label>
+                <input type="text" class="form-control" id="primerApellido" placeholder="Ingrese su primer apellido" value=""  required>
+                <div class="invalid-feedback">
+                  Se requiere un dato válido.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="segundoApellido">Segundo Apellido</label>
+                <input type="text" class="form-control" id="segundoApellido" placeholder="Ingrese su segundo apellido" value="" required>
                 <div class="invalid-feedback">
                   Se requiere un dato válido.
                 </div>
@@ -87,7 +105,7 @@
 
             
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Guardar</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit"onclick="actualizarCliente(document.getElementById('idcliente').value)">Guardar</button>
           </form>
         </div>
       </div>
@@ -107,9 +125,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-    <script src="../../../../assets/js/vendor/holder.min.js"></script>
+
+     <script src="../javascript/controladores/controlador-cliente.js"></script>
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function() {

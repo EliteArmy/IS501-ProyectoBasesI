@@ -22,8 +22,8 @@
 	 	case "eliminar-empleado":
 	 		//echo "Entra en el case Eliminar Empleado";
 	 		include ("../05. class/class-empleado.php");
-			Empleado::eliminarEmpleado($conexion, $_POST["idEmpleado"]);
-			//echo "Registro de Empleado Eliminado";
+			Empleado::eliminarEmpleado($conexion, $_POST["idPersona"]);
+			echo "Registro de Empleado Eliminado";
 	 	break;
 	 	
 	 	default:

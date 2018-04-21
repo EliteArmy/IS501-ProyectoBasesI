@@ -23,13 +23,6 @@
 	 		include ("../05. class/class-empleado.php");
 			Empleado::obtenerListaEmpleados($conexion);
 	 	break;
-
-	 	case "obtener-detalle-empleado":
-	 		//echo "Entra en el case Obtener Empleado";
-	 		include ("../05. class/class-empleado.php");
-	 		Empleado::obtenerDetalleEmpleado($conexion, $_POST["idEmpleado"]);
-		break;
-
 	 	
 	 	case "obtener-facturas":
 	 		//echo "Entra en el case Factura";

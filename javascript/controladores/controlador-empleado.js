@@ -78,66 +78,17 @@ function cargarListaEmpleados(){
 	});
 }
 
-// -- Función que Selecciona la Informacion de un Empleado
-function obtenerDetalleEmpleado(idEmpleado){
-	//alert("Entra en la funcion");
-
-	$.ajax({
-		url: "../ajax/get-info.php?accion=obtener-detalle-empleado",
-		data: "idEmpleado=" + idEmpleado,
-		method: "POST",
-		dataType: "json",
-		success: function(respuesta){
-
-			console.log(respuesta);
-			//alert(respuesta);
-
-			$("#txt-idempleado").val(respuesta.idEmpleado);
-			$("#txt-primer-nombre").val(respuesta.primerNombre);
-			$("#txt-segundo-nombre").val(respuesta.segundoNombre);
-			$("#txt-primer-apellido").val(respuesta.primerApellido);
-			$("#txt-segundo-apellido").val(respuesta.segundoApellido);
-			$("#txt-email").val(respuesta.email);
-			$("#txt-telefono").val(respuesta.numeroTelefono);
-			$("#txt-fecha-nacimiento").val(respuesta.fechaNacimiento);
-			$("#slc-estado").val(respuesta.estado);
-			$("#txt-direccion").val(respuesta.direccion);
-			
-			// Falta Implementar:
-			//$("#btn-guardar").hide();
-			//$("#btn-actualizar").show();
-		},
-		error: function(err){
-			alert("Error: " + err);
-		}
-	});
-}
-
-// -- Función que Actualiza la informacion de un Empleado
-function actualizarEmpleado(idEmpleado){
-	
-	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
-	// following characters: , / ? : @ & = + $ #
-	// Es decir, si el Numero de Telefono inicia con un signo "+" este se reemplaza con "%2B"
-	// para que pueda ser enviado
-	var uri = $("#txt-telefono").val();
-	var resultado = encodeURIComponent(uri);
-
-
-}
-
-
 // Funcion que Elimina un Empleado usando el idEmpleado
 function eliminarEmpleado(idEmpleado){
 	
 	//alert("Entra en la funcion");
 	$.ajax({
 		url: "../ajax/gestion-info-empleado.php?accion=eliminar-empleado",
-		data: "idEmpleado=" + idEmpleado,
+		data: "idPersona="+idEmpleado,
 		method: "POST",
 		success: function(resultado){
+			//$("#div-resultado-insert").html(respuesta);
 			//alert(resultado);
-			$("#div-resultado-insert").html(resultado);
 			cargarListaEmpleados();
 		},
 		error: function(err){
@@ -146,6 +97,22 @@ function eliminarEmpleado(idEmpleado){
 	});
 }
 
+
+/*function eliminarEmpleado(idEmpleado){
+	alert("Entra en la funcion");
+	$.ajax({
+		url: "../ajax/get-info.php?accion=eliminar-empleado",
+		data: "codigo-aplicacion=" + idEmpleado,
+		method: "POST",
+		success: function(respuesta){
+			//$("#div-resultado-insert").html(respuesta);
+			cargarListaPersonas();
+		},
+		error: function(err){
+			alert("Error: " + err);
+		}
+	});
+}*/
 
 
 $("#btn-guardar").click(function(){
