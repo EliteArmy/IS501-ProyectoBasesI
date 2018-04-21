@@ -30,9 +30,10 @@ CREATE PROCEDURE SP_ObtenerClientes()
 BEGIN
 
 		SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
-				cli.fechaRegistro, cli.estado, per.direccion
+				cli.fechaRegistro, cli.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
 			FROM Persona per
-			INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona);
+			INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)
+			WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= '18';
 
 END $$
 DELIMITER ;
