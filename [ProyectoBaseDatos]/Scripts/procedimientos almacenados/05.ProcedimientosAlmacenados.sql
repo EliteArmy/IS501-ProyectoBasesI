@@ -50,7 +50,7 @@ CREATE PROCEDURE SP_GananciaAnual()
 
 BEGIN
 
-	SELECT YEAR(fac.fechaEmision) Año, fac.fechaEmision, SUM(fac.costeTotal) AS Ganancias 
+	SELECT YEAR(fac.fechaEmision) Año, SUM(fac.costeTotal) AS Ganancias 
 	FROM factura fac
 	GROUP BY Año;
 
