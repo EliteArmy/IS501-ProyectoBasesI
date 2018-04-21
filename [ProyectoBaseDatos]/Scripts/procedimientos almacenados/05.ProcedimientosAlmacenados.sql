@@ -50,7 +50,7 @@ CREATE PROCEDURE SP_GananciaAnual()
 
 BEGIN
 
-	SELECT YEAR(fac.fechaEmision) Año, fac.fechaEmision, SUM(fac.costeTotal) AS Ganancias 
+	SELECT YEAR(fac.fechaEmision) Año, SUM(fac.costeTotal) AS Ganancias 
 	FROM factura fac
 	GROUP BY Año;
 
@@ -75,18 +75,28 @@ CREATE PROCEDURE SP_RegistrarCliente(
 						IN direccion VARCHAR(100),
 						IN fechaNacimiento DATE,
 						IN telefono VARCHAR(15),
+						IN pnEdad INT;
 						OUT mensaje VARCHAR(200),
 						OUT ocurrioError BOOLEAN)
 
 SP:BEGIN
 
 	DECLARE tempMensaje VARCHAR(200);
-
+	DECLARE vnEdad VARCHAR(50);
+	DECLARE vbVerificar BOOLEAN; 
 	START TRANSACTION;
 
 	SET tempMensaje = '';
 	SET mensaje = '';
 	SET ocurrioError = TRUE;
+
+	IF pnEdad >= 18 THEN
+		SELECT edad INTO pnEdad FROM vw_edad
+		WHERE edad >= 18;
+	ELSE
+		SET mensaje='No se permite registrarse si es menor de edad';
+		LEAVE SP;
+	END IF;
 
 		IF primerNombre = '' THEN
 			SET mensaje='Nombre de usuario es un campo requerido';
