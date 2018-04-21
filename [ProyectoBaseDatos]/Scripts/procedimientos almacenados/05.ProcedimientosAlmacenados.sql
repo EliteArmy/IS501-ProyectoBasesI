@@ -8,9 +8,10 @@ CREATE PROCEDURE SP_ObtenerEmpleados()
 BEGIN
 
   SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
-          emp.fechaIngreso, emp.estado, per.direccion
-    FROM Persona per 
-    INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona);
+		emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
+	FROM Persona per 
+	INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)
+	WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18";
 
 END $$
 DELIMITER ;
@@ -178,4 +179,7 @@ DELIMITER ;
 -- -------------------------------
 -- Procedimiento 06:
 
+DROP PROCEDURE IF EXISTS SP_SucursalReservacion;
 
+DELIMITER $$
+CREATE PROCEDURE SP_SucursalReservacion()
