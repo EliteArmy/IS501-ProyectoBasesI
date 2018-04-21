@@ -121,9 +121,12 @@
 			
 			$resultado = $conexion->ejecutarConsulta(
 <<<<<<< HEAD
+<<<<<<< HEAD
 				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
 				emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
 =======
+=======
+>>>>>>> 859a7ed82b4dc8192e0a180c14a8d09994a8eb95
 				'SELECT emp.idEmpleado, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
 				emp.fechaIngreso, emp.estado, per.direccion
 >>>>>>> 859a7ed82b4dc8192e0a180c14a8d09994a8eb95
