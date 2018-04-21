@@ -89,10 +89,9 @@
 			
 			$resultado = $conexion->ejecutarConsulta (
 				'SELECT cli.idCliente, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
-						cli.fechaRegistro, cli.estado, per.direccion,  TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
+						cli.fechaRegistro, cli.estado, per.direccion
 				FROM Persona per
-				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)
-				WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18"'
+				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)'
 			);
 			
 			// Esto maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerClientes
@@ -194,6 +193,9 @@
 					INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
 					WHERE cli.idCliente = '$idCliente'
 				");
+
+			echo "<b>Registro Elimimnado con Exito</b>";
+
 		}
 
 		// --- Función Futura ---

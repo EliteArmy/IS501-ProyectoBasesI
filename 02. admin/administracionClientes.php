@@ -131,7 +131,9 @@
           </div>
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
-          <div id="txt-resultado"></div>
+          <div id="div-resultado-insert">
+            
+          </div>
           
           <h2>Lista de Clientes</h2>
           <div class="table-responsive">
@@ -258,16 +260,18 @@
                       <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
                     </div>
 
+                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idcliente').value)">Actualizar</button>
+
                     <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 
                   </form>
                 </div>
                 
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idcliente').value)">Actualizar</button>
-
+                  
                 </div>
 
               </div>

@@ -131,6 +131,10 @@
           </div>
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
+          <div id="div-resultado-insert">
+            
+          </div>
+
           <h2>Lista de Empleados</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -178,33 +182,6 @@
                   <td>Lorem</td>
                   <td>ipsum</td>
                 </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
                 -->
               </tbody>
 
@@ -227,9 +204,9 @@
                 <div class="modal-body">
                   <form role="form">
 
-                    <div class="form-group">
-                      <label for="txt-idcliente">Id</label>
-                      <input  class="form-control" id="txt-idempleado">
+                    <div style="display: none" class="form-group">
+                      <label for="txt-idempleado">Id</label>
+                      <input type="text" class="form-control" id="txt-idempleado">
                     </div>
 
                     <div class="form-group">
@@ -270,9 +247,9 @@
                     <div class="form-group">
                       <label for="slc-estado">Estado</label>
                         <select name="slc-estado" id="slc-estado" class="form-control">
-                        <option>---Seleccione un Estado---</option>
-                        <option value="1">Activo</option>
-                        <option value="2">Inactivo</option>
+                        <option>Seleccione un Estado</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
                       </select>
                     </div>
 
@@ -280,14 +257,19 @@
                       <label for="txt-direccion">Dirección</label>
                       <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
                     </div>
+                    
+                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idempleado').value)">Actualizar</button>
+                    
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 
                   </form>
                 </div>
               
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">Guardar</button>
+
                 </div>
 
               </div>

@@ -120,11 +120,10 @@
 		public static function obtenerListaEmpleados ($conexion) {
 			
 			$resultado = $conexion->ejecutarConsulta(
-				'SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
-				emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
+				'SELECT emp.idEmpleado, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
+				emp.fechaIngreso, emp.estado, per.direccion
 				FROM Persona per 
-				INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)
-				WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18"'
+				INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)'
 			);
 			
 			// Esto maneja esta consulta con el procedimiento almacenado: CALL SP_ObtenerEmpleados
@@ -133,7 +132,7 @@
 			while($fila = $conexion->obtenerFila($resultado)){
 
 				echo '<tr>';
-				echo 		'<td id="">' . $fila["idPersona"] . '</td>';
+				echo 		'<td id="">' . $fila["idEmpleado"] . '</td>';
 				echo 		'<td id="">' . $fila["primerNombre"] . '</td>';
 				echo 		'<td id="">' . $fila["primerApellido"] . '</td>';
 				echo 		'<td id="">' . $fila["email"] . '</td>';
@@ -141,29 +140,32 @@
 				echo 		'<td id="">' . $fila["fechaIngreso"] . '</td>';
 				echo 		'<td id="">' . $fila["estado"] . '</td>';
 				echo 		'<td id="">' . $fila["direccion"] . '</td>';
-				echo '<td><button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button> 
-
-						<button type="button" onclick="eliminarEmpleado('.$fila["idPersona"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+				echo '<td><button type="button" onclick="obtenerDetalleEmpleado('.$fila["idEmpleado"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button> 
+						<button type="button" onclick="eliminarEmpleado('.$fila["idEmpleado"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 				echo '</tr>';
 			}
 		}
 
 		// --- Función que Prepopula la informacion en el Modal ---
-		public static function obtenerDetalleEmpleados ($conexion, $idEmpleado){
-			
+		public static function obtenerDetalleEmpleado ($conexion, $idEmpleado){
+			//echo "Entra en la funcion";
 			$resultado = $conexion->ejecutarConsulta(
-				"SELECT per 
+				"SELECT emp.idEmpleado, per.primerNombre, per.segundoNombre, per.primerApellido, per.segundoApellido, 
+				per.email, tel.numeroTelefono, per.fechaNacimiento, emp.estado, per.direccion 
 					FROM persona per
-					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona) 
-					WHERE per.idPersona = '$idEmpleado'
+					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona)
+					INNER JOIN telefono tel ON (per.idPersona = tel.idPersona) 
+					WHERE emp.idEmpleado = '$idEmpleado'
 				");
 
 			$fila = $conexion->obtenerFila($resultado);
+
+			echo json_encode($fila);
 		}
 
 
 		// --- Función que Guardará la nueva información ---
-		public static function ActualizarEmpleado ($conexion, $idPersona){
+		public function ActualizarEmpleado ($conexion, $idPersona){
 
 		}
 
@@ -175,8 +177,11 @@
 				"DELETE per 
 					FROM persona per
 					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona) 
-					WHERE per.idPersona = '$idEmpleado'
+					WHERE emp.idEmpleado = '$idEmpleado'
 				");
+
+			echo "<b>Registro Elimimnado con Exito</b>";
+
 		}
 
 		// --- Función Futura ---
