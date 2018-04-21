@@ -194,6 +194,9 @@
 					INNER JOIN cliente cli ON (per.idPersona = cli.idPersona) 
 					WHERE cli.idCliente = '$idCliente'
 				");
+
+			echo "<b>Registro Elimimnado con Exito</b>";
+
 		}
 
 		// --- Función Futura ---
