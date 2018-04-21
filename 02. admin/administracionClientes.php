@@ -129,12 +129,17 @@
               </button>
             </div>
           </div>
-
-          <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
-          <div id="div-resultado-insert">
             
-          </div>
+          <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
           
+          <div id="div-resultado" style="display: none;" class="alert alert-success fade show alert-dismissible " role="alert">
+            <div id="div-resultado-mensaje">
+            </div>
+            <button type="button" class="btn btn-default btn-sm close" aria-label="Close">
+              <span id="btn-cerrar-mensaje" class="fas fa-times" aria-hidden="true"></span>
+            </button>
+          </div>
+         
           <h2>Lista de Clientes</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
