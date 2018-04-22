@@ -217,7 +217,7 @@ CREATE PROCEDURE SP_RegistrarPersona(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
-    					IN pcImagenIdentificacion VARCHAR(200),
+    				IN pcImagenIdentificacion VARCHAR(200),
 						IN pcTelefono VARCHAR(15),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
@@ -225,9 +225,9 @@ CREATE PROCEDURE SP_RegistrarPersona(
 SP:BEGIN
 
 	DECLARE temMensaje VARCHAR(200);
-	DECLARE vnConteo,
-			vnIdPersona INT;
+	DECLARE vnConteo, vnIdPersona INT;
 	DECLARE vcValidarCorreo VARCHAR(50);
+	
 	SET autocommit=0;
 	START TRANSACTION;
 
@@ -242,7 +242,6 @@ SP:BEGIN
 		IF pcPrimerApellido='' or pcPrimerApellido IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'primer Apellido, ');
 		END IF;
-
 
 		IF pcEmail='' or pcEmail IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'Correo, ');
@@ -261,10 +260,12 @@ SP:BEGIN
 		END IF;
 
 
-		SELECT COUNT(*) INTO vnConteo FROM persona
-		WHERE idPersona=pnIdPersona;
-		IF vnConteo>0 THEN
-			SET pcMensaje=CONCAT('Esta persona ya esta registrada, ');
+		SELECT COUNT(*) INTO vnConteo 
+		FROM persona
+		WHERE idPersona = pnIdPersona;
+		
+		IF vnConteo > 0 THEN
+			SET pcMensaje = CONCAT('Esta persona ya esta registrada, ');
 			LEAVE SP;
 		END IF;
 
@@ -276,29 +277,29 @@ SP:BEGIN
 		END IF;*/
 
 		IF temMensaje<>'' THEN
-			SET pcMensaje=CONCAT('Campos requeridos para poder registrar la Persona: ',temMensaje);
-			SET pbOcurrioError= TRUE;
+			SET pcMensaje = CONCAT('Campos requeridos para poder registrar la Persona: ', temMensaje);
+			SET pbOcurrioError = TRUE;
 			LEAVE SP;
 		END IF;
+		
+		IF vnConteo = 0 THEN
+			INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
+				email, password, genero, direccion, fechaNacimiento, imagenIdentificacion)
+			VALUES (vnIdPersona,
+					pcPrimerNombre,
+					pcSegundoNombre,
+					pcPrimerApellido,
+					pcSegundoApellido,
+					pcEmail,
+					pcPassword,
+					pcGenero,
+					pcDireccion,
+					pfFechaNacimiento,
+	        pcImagenIdentificacion);
 
-		SELECT COUNT(*) INTO vnIdPersona FROM persona 
-		WHERE idPersona=vnIdPersona;
-		IF vnIdPersona=0 THEN
-		INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password, genero, direccion, fechaNacimiento, 								imagenIdentificacion)
-		VALUES (vnIdPersona,
-				pcPrimerNombre,
-				pcSegundoNombre,
-				pcPrimerApellido,
-				pcSegundoApellido,
-				pcEmail,
-				pcPassword,
-				pcGenero,
-				pcDireccion,
-				pfFechaNacimiento,
-               	pcImagenIdentificacion);
-		SET pcMensaje='Persona registrada correctamente';
+			SET pcMensaje = 'Persona registrada correctamente';
 			COMMIT;
-			SET pbOcurrioError=FALSE;
+			SET pbOcurrioError = FALSE;
 		END IF;
 
 END $$
@@ -404,15 +405,112 @@ DROP PROCEDURE IF EXISTS SP_RegistrarReservaciones;
 
 DELIMITER $$
 CREATE PROCEDURE SP_RegistrarReservaciones(
+							IN pnIdReservacion INT,
+							IN pfFechaReservacicon DATE,
 							IN pfFechaEntrada DATE,
 							IN pfFechaSalida DATE,
-							IN pcTipoHabitacion VARCHAR(100),
-							IN pcTipoCategoria VARCHAR(100),
+							IN pnCamaSupletoria INT,
+							IN pcEstado VARCHAR(50),
+							IN pcObservacion VARCHAR(1000),
+							IN pnTipoHabitacion INT,
+							IN pnTipoCategoria INT,
 							IN pnNoAdultos INT,
 							IN pnNoNinos INT,
-							IN pcPrimerNombre VARCHAR(50),
-							IN pcSegundoNombre VARCHAR(50),
+							IN pnIdCliente INT,
 							OUT pcMensaje VARCHAR(200),
 							OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+	DECLARE temMensaje VARCHAR(2000);
+	DECLARE vcAccion VARCHAR(30);
+	DECLARE vnConteo, 
+			vnIdReservacion INT;
+	SET autocommit=0;
+	START TRANSACTION;		
+	SET temMensaje='';
+
+	SET pbOcurrioError=TRUE;
+
+	IF pfFechaReservacicon='' or pfFechaReservacicon IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Fecha de reservación,  ');
+	END IF;
+
+	IF pfFechaEntrada='' or pfFechaEntrada IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Fecha de entrada,  ');
+	END IF;
+
+	IF pfFechaSalida='' or pfFechaSalida IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Fecha de salida,  ');
+	END IF;
+
+	IF pcEstado='' or pcEstado IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Estado,  ');
+	END IF;
+
+	IF pnTipoHabitacion='' or pnTipoHabitacion IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'tipo habitación,  ');
+	END IF;
+
+	IF pnTipoCategoria='' or pnTipoCategoria IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'tipo categoría,  ');
+	END IF;
+
+	IF pnNoAdultos='' or pnNoAdultos IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Número de adultos,  ');
+	END IF;
+
+	IF pnIdCliente='' or pnIdCliente IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'id del Cliente,  ');
+	END IF;
+
+
+		SELECT COUNT(*) INTO vnConteo 
+		FROM reservacion
+		WHERE idReservacion = pnIdReservacion;
+		IF vnConteo > 0 THEN
+			SET pcMensaje = CONCAT('Esta reservación ya esta registrada.');
+			LEAVE SP;
+		END IF;
+
+		SELECT idTipoHabitacion INTO pnTipoHabitacion FROM tipoHabitacion
+		WHERE idTipoHabitacion = pnTipoHabitacion;
+		IF pnTipoHabitacion>4 THEN 
+			SET pcMensaje = CONCAT('Este tipo de habitación: ',pnTipoHabitacion,' no existe.');
+			LEAVE SP;
+		END IF;
+
+		SELECT idTipoCategoria INTO pnTipoCategoria FROM TipoCategoria
+		WHERE idTipoCategoria = pnTipoCategoria;
+		IF pnTipoCategoria>5 THEN 
+			SET pcMensaje = CONCAT('Este tipo de categoría: ',pnTipoCategoria,' no existe.');
+			LEAVE SP;
+		END IF;
+
+		IF temMensaje<>'' THEN
+			SET pcMensaje = CONCAT('Campos requeridos para poder registrar la reservación: ', temMensaje);
+			SET pbOcurrioError = TRUE;
+			LEAVE SP;
+		END IF;
+
+		IF vnConteo = 0 THEN
+			INSERT INTO reservacion
+			VALUES(
+					pnIdReservacion,
+					pfFechaReservacicon,
+					pfFechaEntrada,
+					pfFechaSalida,
+					pnCamaSupletoria,
+					pcEstado,
+					pcObservacion,
+					pnNoAdultos,
+					pnNoNinos,
+					pnIdCliente);
+
+		SET pcMensaje = 'Reservación registrada correctamente';
+			COMMIT;
+			SET pbOcurrioError = FALSE;
+		END IF;
+
+
 END$$
 DELIMITER ;
