@@ -219,6 +219,7 @@ CREATE PROCEDURE SP_RegistrarPersona(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
+    					IN pcImagenIdentificacion VARCHAR(200),
 						IN pcTelefono VARCHAR(15),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
@@ -227,7 +228,7 @@ SP:BEGIN
 
 	DECLARE temMensaje VARCHAR(200);
 	DECLARE vnConteo,
-			vnpersonaMax INT;
+			vnIdPersona INT;
 	SET autocommit=0;
 	START TRANSACTION;
 
@@ -238,33 +239,33 @@ SP:BEGIN
 
 	SET pbOcurrioError = TRUE;
 
-		IF pcPrimerNombre IS NULL THEN
+		IF pcPrimerNombre='' or pcPrimerNombre IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'primer Nombre');
 			LEAVE SP;
 		END IF;
 
-		IF pcPrimerApellido IS NULL THEN
+		IF pcPrimerApellido='' or pcPrimerApellido IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'primer Apellido');
 			LEAVE SP;
 		END IF;
 
 
-		IF pcEmail IS NULL THEN
+		IF pcEmail='' or pcEmail IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'Correo');
 			LEAVE SP;
 		END IF;
 
-		IF pcPassword IS NULL THEN
+		IF pcPassword='' or pcPassword IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'Contraseña');
 			LEAVE SP;
 		END IF;
 
-		IF pcDireccion IS NULL THEN
+		IF pcDireccion='' or pcDireccion IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'Dirección');
 			LEAVE SP;
 		END IF;
 
-		IF pfFechaNacimiento IS NULL THEN
+		IF pfFechaNacimiento='' or pfFechaNacimiento IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'Fecha de nacimiento');
 			LEAVE SP;
 		END IF;
@@ -275,13 +276,38 @@ SP:BEGIN
 		END IF;
 
 
-		SELECT COUNT(*) INTO vnConteo FROM 
-		persona WHERE idPersona=pnIdPersona;
+		SELECT COUNT(*) INTO vnConteo FROM persona
+		WHERE idPersona=pnIdPersona;
 		IF vnConteo>0 THEN
 			SET pcMensaje=CONCAT('Esta persona ya esta registrada');
 			LEAVE SP;
 		END IF;
 
+		SELECT COUNT(*) INTO vnConteo FROM persona
+		 WHERE email = pcEmail;
+		IF vnConteo>0 THEN
+			SET pcMensaje=CONCAT('El correo ',pcEmail,' ya esta registrado');
+			LEAVE SP;
+		END IF;
 
+		SELECT COUNT(*) INTO vnIdPersona FROM persona 
+		WHERE idPersona=vnIdPersona;
+		IF vnIdPersona=0 THEN
+		INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password, genero, direccion, fechaNacimiento, 								imagenIdentificacion)
+		VALUES (vnIdPersona,
+				pcPrimerNombre,
+				pcSegundoNombre,
+				pcPrimerApellido,
+				pcSegundoApellido,
+				pcEmail,
+				pcPassword,
+				pcGenero,
+				pcDireccion,
+				pfFechaNacimiento,
+               	pcImagenIdentificacion);
+		SET pcMensaje='Persona registrada correctamente';
+			COMMIT;
+			SET pbOcurrioError=FALSE;
+		END IF;
 END $$
 DELIMITER ;
