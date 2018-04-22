@@ -406,7 +406,7 @@ DROP PROCEDURE IF EXISTS SP_RegistrarReservaciones;
 DELIMITER $$
 CREATE PROCEDURE SP_RegistrarReservaciones(
 							IN pnIdReservacion INT,
-							IN pfFechaReservacicon DATE,
+							IN pfFechaReservacion DATE,
 							IN pfFechaEntrada DATE,
 							IN pfFechaSalida DATE,
 							IN pnCamaSupletoria INT,
@@ -431,7 +431,7 @@ SP:BEGIN
 
 	SET pbOcurrioError=TRUE;
 
-	IF pfFechaReservacicon='' or pfFechaReservacicon IS NULL THEN
+	IF pfFechaReservacion='' or pfFechaReservacion IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Fecha de reservación,  ');
 	END IF;
 
@@ -486,6 +486,28 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
+		SELECT fechaReservacion INTO pfFechaReservacion FROM reservacion
+		WHERE fechaReservacion = pfFechaReservacion;
+		IF pfFechaReservacion < CURDATE() THEN 
+			SET pcMensaje = CONCAT('Esta fecha de reservación: ',pfFechaReservacion,' no es válida.');
+			LEAVE SP;
+		END IF;
+
+		SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
+		WHERE fechaEntrada = pfFechaEntrada;
+		IF pfFechaEntrada < CURDATE() THEN
+			SET pcMensaje = CONCAT('Esta fecha de entrada: ',pfFechaEntrada,' no es válida.');
+			LEAVE SP;
+		END IF;
+
+		SELECT fechaSalida INTO pfFechaSalida FROM reservacion
+		WHERE fechaSalida = pfFechaSalida;
+		IF pfFechaSalida <= pfFechaEntrada THEN
+			SET pcMensaje = CONCAT('Esta fecha de salida: ',pfFechaSalida,' no es válida.');
+			LEAVE SP;
+		END IF;
+
+
 		IF temMensaje<>'' THEN
 			SET pcMensaje = CONCAT('Campos requeridos para poder registrar la reservación: ', temMensaje);
 			SET pbOcurrioError = TRUE;
@@ -496,7 +518,7 @@ SP:BEGIN
 			INSERT INTO reservacion
 			VALUES(
 					pnIdReservacion,
-					pfFechaReservacicon,
+					pfFechaReservacion,
 					pfFechaEntrada,
 					pfFechaSalida,
 					pnCamaSupletoria,
