@@ -63,7 +63,8 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 04:
-DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
+
+/*DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
 CREATE PROCEDURE SP_RegistrarCliente(
@@ -130,10 +131,7 @@ SP:BEGIN
 		COMMIT;
 
 END $$ 
-DELIMITER ;
-
--- CALL SP_RegistrarCliente('Claudy', 'Emily', 'Klulisekes', 'Bartlomie', 'ebartlomfhfieczak5j@ask.com', '03c345ae8bd4c13f4eb2eb6dde0a92e0', 'F', '6 Westridge Drive', '1966-07-13', '50495203354', @mensaje, @ocurrioError);
--- SELECT @mensaje;
+DELIMITER ;*/
 
 -- -------------------------------
 -- Procedimiento 05:
@@ -204,7 +202,7 @@ DELIMITER ;
 
 
 -- -------------------------------
--- Procedimiento 07:
+-- Procedimiento 07: Registrar personas
 DROP PROCEDURE IF EXISTS SP_RegistrarPersona;
 
 DELIMITER $$
@@ -309,4 +307,101 @@ SP:BEGIN
 			
 		END IF;
 END $$
+DELIMITER ;
+
+-- -------------------------------
+-- Procedimiento 07: Registrar clientes
+
+DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarCliente(
+						IN pnIdCliente INT,
+						IN pcPrimerNombre VARCHAR(20),
+						IN pcSegundoNombre VARCHAR(20),
+						IN pcPrimerApellido VARCHAR(20),
+						IN pcSegundoApellido VARCHAR(20),
+						IN pcEmail VARCHAR(50),
+						IN pcPassword VARCHAR(45),
+						IN pcGenero VARCHAR(1),
+						IN pcDireccion VARCHAR(100),
+						IN pfFechaNacimiento DATE,
+    					IN pcImagenIdentificacion VARCHAR(200),
+						IN pcTelefono VARCHAR(15),
+						IN pfFechaRegistro DATE,
+						IN pcEstado VARCHAR(15),
+						IN pnIdPersona INT,
+						OUT pcMensaje VARCHAR(200),
+						OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+	DECLARE temMensaje VARCHAR(2000);
+	DECLARE vcAccion VARCHAR(30);
+	DECLARE vnIdPriCliente INT;
+	DECLARE vnConteo, vnIdPersona INT;
+	SET autocommit=0;
+	START TRANSACTION;		
+	SET temMensaje='';
+	SET pbOcurrioError=TRUE;
+
+		IF pnIdCliente='' or pnIdCliente IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'Id cliente, ');
+		END IF;
+
+		IF pfFechaRegistro='' or pfFechaRegistro IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'Fecha Registro ');
+		END IF;
+
+	SET vnIdPriCliente=1;
+		IF pcImagenIdentificacion>0 THEN
+			SET vcAccion='Editar';
+			SELECT idPersona INTO vnIdPersona FROM cliente
+			WHERE idCliente=pnIdCliente;
+		ELSE
+			SET vcAccion='Agregar';
+      	SELECT count(*) into vnConteo FROM cliente
+      	WHERE idCliente=pnIdCliente;
+     		IF vnConteo>0 THEN
+            	SET pcMensaje='Cliente ya registrado ';
+           	 	LEAVE SP;
+     		END IF;
+		END IF;
+	CALL SP_RegistrarPersona(
+					vnIdPersona,
+					pcPrimerNombre,
+					pcSegundoNombre,
+					pcPrimerApellido,
+					pcSegundoApellido,
+					pcEmail,
+					pcPassword,
+					pcGenero,
+					pcDireccion,
+					pfFechaNacimiento,
+	               	pcImagenIdentificacion,
+	               	pcTelefono,
+	               	pcMensaje,
+					pbOcurrioError);
+	IF pbOcurrioError=TRUE THEN
+		LEAVE SP;
+	END IF;
+	IF vcAccion='Agregar' THEN
+			INSERT INTO cliente (idCliente, fechaRegistro, estado, idPersona)
+			 VALUES (pnIdCliente, pfFechaRegistro, pcEstado, vnIdPersona);
+			IF pbOcurrioError THEN
+				SET pcMensaje=CONCAT('Error al registrar cliente ',pcMensaje);
+			ELSE
+				SET pcMensaje='Datos del cliente registrado satisfactorimente.';
+			END IF;	
+		ELSE
+			IF pbOcurrioError THEN
+				SET pcMensaje=CONCAT('Error al editar cliente ',pcMensaje);
+			ELSE
+         UPDATE mat_est_estudiante SET   est_no_cuenta= pcNoCuenta, est_codcarr= pnCodigoCarrera  
+         WHERE est_codigo=  pnCodigoEstudiante;
+				SET pcMensaje='Datos del cliente actualizados satisfactorimente.';
+			END IF;
+		END IF;
+		COMMIT;
+
+END$$
 DELIMITER ;
