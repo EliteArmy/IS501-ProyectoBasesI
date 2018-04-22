@@ -64,7 +64,7 @@ DELIMITER ;
 -- -------------------------------
 -- Procedimiento 04:
 
-/*DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
+DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
 CREATE PROCEDURE SP_RegistrarCliente(
@@ -131,7 +131,7 @@ SP:BEGIN
 		COMMIT;
 
 END $$ 
-DELIMITER ;*/
+DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 05:
@@ -282,6 +282,12 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;*/
 
+		IF temMensaje<>'' THEN
+			SET pcMensaje=CONCAT('Campos requeridos para poder registrar la Persona: ',temMensaje);
+			SET pbOcurrioError= TRUE;
+			LEAVE SP;
+		END IF;
+
 		SELECT COUNT(*) INTO vnIdPersona FROM persona 
 		WHERE idPersona=vnIdPersona;
 		IF vnIdPersona=0 THEN
@@ -302,10 +308,6 @@ SP:BEGIN
 			SET pbOcurrioError=FALSE;
 		END IF;
 
-		IF temMensaje<>'' THEN
-			SET pcMensaje=CONCAT('Campos requeridos para poder registrar la Persona: ',temMensaje);
-			
-		END IF;
 END $$
 DELIMITER ;
 
@@ -343,15 +345,6 @@ SP:BEGIN
 	START TRANSACTION;		
 	SET temMensaje='';
 	SET pbOcurrioError=TRUE;
-
-		IF pnIdCliente='' or pnIdCliente IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'Id cliente, ');
-		END IF;
-
-		IF pfFechaRegistro='' or pfFechaRegistro IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'Fecha Registro ');
-		END IF;
-
 	SET vnIdPriCliente=1;
 		IF pcImagenIdentificacion>0 THEN
 			SET vcAccion='Editar';
@@ -394,11 +387,11 @@ SP:BEGIN
 			END IF;	
 		ELSE
 			IF pbOcurrioError THEN
-				SET pcMensaje=CONCAT('Error al editar cliente ',pcMensaje);
+				SET pcMensaje=CONCAT('Error al editar estudinate ',pcMensaje);
 			ELSE
          UPDATE mat_est_estudiante SET   est_no_cuenta= pcNoCuenta, est_codcarr= pnCodigoCarrera  
          WHERE est_codigo=  pnCodigoEstudiante;
-				SET pcMensaje='Datos del cliente actualizados satisfactorimente.';
+				SET pcMensaje='Datos del Estudiante actualizados satisfactorimente, cierre esta ventana y luego clic en refrescar para continuar con el proceso de matricula';
 			END IF;
 		END IF;
 		COMMIT;
