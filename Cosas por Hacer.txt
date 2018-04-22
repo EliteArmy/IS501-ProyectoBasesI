@@ -1,9 +1,9 @@
-Actualizar Clientes
-
 Actualizar Empleados
 
 Terminar el Procedimiento Almacenado de Empleado
 
 Terminar el Procedimiento Almacenado de Clientes
+
+Terminar el procedimiento Almacenado de Persona
 
 

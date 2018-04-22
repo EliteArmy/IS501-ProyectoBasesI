@@ -38,10 +38,10 @@
             <ul class="nav flex-column">
               
               <li class="nav-item">
-                <a class="nav-link active" href="administracionTablero.php">
+                <a class="nav-link" href="administracionTablero.php">
                   <!--<span data-feather="home"></span>-->
                   <i class="far fa-clipboard"></i>
-                  Tablero <span class="sr-only">(current)</span>
+                  Tablero 
                 </a>
               </li>
               
@@ -68,10 +68,10 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="administracionFacturas.php">
+                <a class="nav-link active" href="administracionFacturas.php">
                   <!--<span data-feather="bar-chart-2"></span>-->
                   <i class="far fa-money-bill-alt"></i>
-                  Facturas
+                  Facturas <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -177,60 +177,6 @@
                   <td>Lorem</td>
                   <td>ipsum</td>
                 </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
                 -->
               </tbody>
 
@@ -243,8 +189,6 @@
 
     <!-- ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    
     <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     
     <script src="../assets/js/vendor/popper.min.js"></script>
@@ -257,13 +201,6 @@
 
     <!-- Custom Javascript -->
     <script src="../javascript/controladores/controlador-factura.js"></script>
-
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    
-    <script>
-      feather.replace()
-    </script>
 
   </body>
 </html>
