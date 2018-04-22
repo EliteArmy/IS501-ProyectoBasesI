@@ -268,13 +268,6 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		SELECT COUNT(*) INTO vnConteo FROM persona
-		 WHERE email = pcEmail;
-		IF vnConteo>0 THEN
-			SET pcMensaje=CONCAT('El correo ',pcEmail,' ya esta registrado');
-			LEAVE SP;
-		END IF;
-
 		/*SELECT email INTO vcValidarCorreo FROM persona
 		WHERE email REGEXP '(.*)@(.*)\.(.*)'
 		IF pbOcurrioError THEN
@@ -339,14 +332,15 @@ CREATE PROCEDURE SP_RegistrarCliente(
 SP:BEGIN
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vcAccion VARCHAR(30);
-	DECLARE vnIdPriCliente INT;
-	DECLARE vnConteo, vnIdPersona INT;
+	DECLARE vnIdPriCliente,
+			vnConteo, 
+			vnIdPersona INT;
 	SET autocommit=0;
 	START TRANSACTION;		
 	SET temMensaje='';
 	SET pbOcurrioError=TRUE;
 	SET vnIdPriCliente=1;
-		IF pcImagenIdentificacion>0 THEN
+		IF pnIdCliente>0 THEN
 			SET vcAccion='Editar';
 			SELECT idPersona INTO vnIdPersona FROM cliente
 			WHERE idCliente=pnIdCliente;
@@ -359,6 +353,7 @@ SP:BEGIN
            	 	LEAVE SP;
      		END IF;
 		END IF;
+
 	CALL SP_RegistrarPersona(
 					vnIdPersona,
 					pcPrimerNombre,
@@ -379,7 +374,7 @@ SP:BEGIN
 	END IF;
 	IF vcAccion='Agregar' THEN
 			INSERT INTO cliente (idCliente, fechaRegistro, estado, idPersona)
-			 VALUES (pnIdCliente, pfFechaRegistro, pcEstado, vnIdPersona);
+			 VALUES (pnIdCliente, pfFechaRegistro, pcEstado, pnIdPersona);
 			IF pbOcurrioError THEN
 				SET pcMensaje=CONCAT('Error al registrar cliente ',pcMensaje);
 			ELSE
@@ -387,14 +382,36 @@ SP:BEGIN
 			END IF;	
 		ELSE
 			IF pbOcurrioError THEN
-				SET pcMensaje=CONCAT('Error al editar estudinate ',pcMensaje);
+				SET pcMensaje=CONCAT('Error al editar el cliente ',pcMensaje);
 			ELSE
-         UPDATE mat_est_estudiante SET   est_no_cuenta= pcNoCuenta, est_codcarr= pnCodigoCarrera  
-         WHERE est_codigo=  pnCodigoEstudiante;
-				SET pcMensaje='Datos del Estudiante actualizados satisfactorimente, cierre esta ventana y luego clic en refrescar para continuar con el proceso de matricula';
+         UPDATE cliente SET  idCliente= pnIdCliente
+         WHERE idCliente= pnIdCliente;
+				SET pcMensaje='Datos del cliente actualizados satisfactorimente.';
 			END IF;
 		END IF;
 		COMMIT;
 
+END$$
+DELIMITER ;
+
+-- -------------------------------
+-- Procedimiento 08: Registrar empleados
+
+
+-- -------------------------------
+-- Procedimiento 09: Registrar reservaciones
+DROP PROCEDURE IF EXISTS SP_RegistrarReservaciones;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarReservaciones(
+							IN pfFechaEntrada DATE,
+							IN pfFechaSalida DATE,
+							IN pcTipoHabitacion VARCHAR(100),
+							IN pcTipoCategoria VARCHAR(100),
+							IN pnNoAdultos INT,
+							IN pnNoNinos INT,
+							IN pcPrimerNombre VARCHAR(50),
+							IN pcSegundoNombre VARCHAR(50),
+							OUT )
 END$$
 DELIMITER ;
