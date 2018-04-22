@@ -108,7 +108,8 @@
 								  	<h2 class="titulo-caja-registro">
 							  			Inicia sesión con tu e-mail
 							  		</h2>
-								  	<form method="POST" action="" onsubmit="return guardarNuevoRegistroUsuario()">
+							  		<!--<form method="POST" action="" onsubmit="return guardarNuevoRegistroUsuario()">-->
+								  	<form method="POST" action="">
 								  		<table class="table table-hover tamanio">
 
 												<tr>
@@ -121,7 +122,8 @@
 								  				<td colspan="2">
 								  					
 								  					<!-- Email -->
-								  					<input id="txt-correo" name="txt-correo" class="form-control" type="email" name="txt-correo" placeholder="Ingrese su correo electronico" required><label class="letras-rojas" id="txt-correo-error"></label>
+								  					<input id="txt-correo" name="txt-correo" class="form-control" type="email" name="txt-correo" placeholder="Ingrese su correo electronico" required>
+								  					<label class="letras-rojas" id="txt-correo-error"></label>
 								  				</td>
 								  			</tr>
 
@@ -138,7 +140,8 @@
 						      				<td colspan="2">
 
 						      					<!-- Password -->
-						      					<input id="txt-contrasena" name="txt-contrasena" class="form-control" type="password" placeholder="Ingrese su contraseña" required><label class="letras-rojas" id="txt-contrasena-error"></label>
+						      					<input id="txt-contrasena" name="txt-contrasena" class="form-control" type="password" placeholder="Ingrese su contraseña" required>
+						      					<label class="letras-rojas" id="txt-contrasena-error"></label>
 						      				</td>
 						      			</tr>
 
@@ -147,13 +150,20 @@
 							      				<input type="checkbox" name="" onchange="document.getElementById('txt-contrasena').type = this.checked ? 'text' : 'password'"> Mostrar Contraseña
 							      			</td>
 							      			<td class="text-right">
-							      				
+							      			
+								      			<div class="alert alert-danger" style="display: none;" id="div-error-login" role="alert">
+								  						<span class="fas fa-exclamation" aria-hidden="true"></span>
+								  						<span class="sr-only">Error:</span>
+								  							Introduzca un Correo y Contraseña validos 
+														</div>
+
 							      				<!-- Iniciar Sesion -->
-								      			<button class="btn boton-color-azul" id="btn-iniciar" type="button" value=""  href="../06. cliente/index.html">
+								      			<button class="btn boton-color-azul" id="btn-iniciar" type="button" value="">
 								      				<span class="boton-letras-interior-dos">
 																Inciar Sesión
 															</span>
 								      			</button>
+
 								      		</td>
 								      	</tr>
 									      	
@@ -193,22 +203,18 @@
 		</div>
 
 		<!-- ========================================== -->
-
-	  <!-- jQuery Primero -->
-	  <script src="../javascript/jquery-3.3.1.min.js"></script>
-
-	  <!-- Bootstrap Core JavaScript -->
-	  <script src="../javascript/bootstrap.min.js"></script>
-
-	  <!-- Custom JavaScript -->
-	  <!--<script src="../javascript/controlador-login.js"></script>-->
-	  <!--<script src="../javascript/funcionalidades.js"></script>-->
-
-    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
+    <script src="../assets/js/vendor/popper.min.js"></script>
+    
+    <!-- JQuery core Javascript -->
+    <script src="../javascript/jquery-3.3.1.min.js"></script>
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="../javascript/bootstrap.min.js"></script>
+
+    <!-- Custom Javascript -->
     <script src="../javascript/controladores/controlador-login.js"></script>
 
   </body>

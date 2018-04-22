@@ -8,7 +8,7 @@
 	switch ($_GET["accion"]) {
 		
 		case 'login':
-	 		include ("../05. class/class-cliente.php");
+	 		include ("../05. class/class-usuario.php");
 			Usuario::verificarUsuario($conexion, $_POST["email"], $_POST["password"]);
 		break;
 	
