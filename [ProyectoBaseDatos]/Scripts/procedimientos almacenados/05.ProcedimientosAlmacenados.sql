@@ -412,6 +412,7 @@ CREATE PROCEDURE SP_RegistrarReservaciones(
 							IN pnNoNinos INT,
 							IN pcPrimerNombre VARCHAR(50),
 							IN pcSegundoNombre VARCHAR(50),
-							OUT )
+							OUT pcMensaje VARCHAR(200),
+							OUT pbOcurrioError BOOLEAN)
 END$$
 DELIMITER ;
