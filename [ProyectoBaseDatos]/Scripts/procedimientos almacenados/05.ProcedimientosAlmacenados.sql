@@ -229,57 +229,44 @@ SP:BEGIN
 	DECLARE temMensaje VARCHAR(200);
 	DECLARE vnConteo,
 			vnIdPersona INT;
+	DECLARE vcValidarCorreo VARCHAR(50);
 	SET autocommit=0;
 	START TRANSACTION;
 
 	SET temMensaje = '';
 	SET pcMensaje = '';
-
-	
-
 	SET pbOcurrioError = TRUE;
 
 		IF pcPrimerNombre='' or pcPrimerNombre IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'primer Nombre');
-			LEAVE SP;
+			SET temMensaje=CONCAT(temMensaje,'primer Nombre, ');
 		END IF;
 
 		IF pcPrimerApellido='' or pcPrimerApellido IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'primer Apellido');
-			LEAVE SP;
+			SET temMensaje=CONCAT(temMensaje,'primer Apellido, ');
 		END IF;
 
 
 		IF pcEmail='' or pcEmail IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'Correo');
-			LEAVE SP;
+			SET temMensaje=CONCAT(temMensaje,'Correo, ');
 		END IF;
 
 		IF pcPassword='' or pcPassword IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'Contraseña');
-			LEAVE SP;
+			SET temMensaje=CONCAT(temMensaje,'Contraseña, ');
 		END IF;
 
 		IF pcDireccion='' or pcDireccion IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'Dirección');
-			LEAVE SP;
+			SET temMensaje=CONCAT(temMensaje,'Dirección, ');
 		END IF;
 
 		IF pfFechaNacimiento='' or pfFechaNacimiento IS NULL THEN
-			SET temMensaje=CONCAT(temMensaje,'Fecha de nacimiento');
-			LEAVE SP;
-		END IF;
-
-		IF temMensaje<>'' THEN
-			SET pcMensaje=CONCAT('Campos requeridos para poder registrar la persona:',temMensaje);
-			LEAVE SP;
+			SET temMensaje=CONCAT(temMensaje,'Fecha de nacimiento, ');
 		END IF;
 
 
 		SELECT COUNT(*) INTO vnConteo FROM persona
 		WHERE idPersona=pnIdPersona;
 		IF vnConteo>0 THEN
-			SET pcMensaje=CONCAT('Esta persona ya esta registrada');
+			SET pcMensaje=CONCAT('Esta persona ya esta registrada, ');
 			LEAVE SP;
 		END IF;
 
@@ -289,6 +276,13 @@ SP:BEGIN
 			SET pcMensaje=CONCAT('El correo ',pcEmail,' ya esta registrado');
 			LEAVE SP;
 		END IF;
+
+		/*SELECT email INTO vcValidarCorreo FROM persona
+		WHERE email REGEXP '(.*)@(.*)\.(.*)'
+		IF pbOcurrioError THEN
+			SET pcMensaje = CONCAT ('El correo', vcValidarCorreo, 'no es válido');
+			LEAVE SP;
+		END IF;*/
 
 		SELECT COUNT(*) INTO vnIdPersona FROM persona 
 		WHERE idPersona=vnIdPersona;
@@ -308,6 +302,11 @@ SP:BEGIN
 		SET pcMensaje='Persona registrada correctamente';
 			COMMIT;
 			SET pbOcurrioError=FALSE;
+		END IF;
+
+		IF temMensaje<>'' THEN
+			SET pcMensaje=CONCAT('Campos requeridos para poder registrar la Persona: ',temMensaje);
+			
 		END IF;
 END $$
 DELIMITER ;
