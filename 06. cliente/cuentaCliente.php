@@ -33,7 +33,7 @@
             <a class="nav-link" href="#">Notificaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="perfil-cliente/index.html">Perfil</a>
+            <a class="nav-link" href="perfil-cliente/perfilCliente.php">Perfil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Cambiar de Cuenta</a>
