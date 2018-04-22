@@ -119,5 +119,5 @@ SELECT * FROM vw_ultimaFactura;
 --11. Obtiene la edad de las personas
 
 CREATE VIEW vw_edad AS(
-SELECT p.primerNombre, p.primerApellido, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) edad FROM persona p);
+SELECT p.idPersona, p.primerNombre, p.primerApellido, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) edad FROM persona p);
 SELECT * FROM vw_edad;

@@ -84,21 +84,13 @@ CREATE PROCEDURE SP_RegistrarCliente(
 SP:BEGIN
 
 	DECLARE tempMensaje VARCHAR(200);
-	DECLARE vnEdad VARCHAR(50);
-	DECLARE vbVerificar BOOLEAN; 
+
 	START TRANSACTION;
 
 	SET tempMensaje = '';
 	SET mensaje = '';
 	SET ocurrioError = TRUE;
 
-	IF pnEdad >= 18 THEN
-		SELECT edad INTO pnEdad FROM vw_edad
-		WHERE edad >= 18;
-	ELSE
-		SET mensaje='No se permite registrarse si es menor de edad';
-		LEAVE SP;
-	END IF;
 
 		IF primerNombre = '' THEN
 			SET mensaje='Nombre de usuario es un campo requerido';
@@ -182,4 +174,139 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS SP_SucursalReservacion;
 
 DELIMITER $$
-CREATE PROCEDURE SP_SucursalReservacion()
+CREATE PROCEDURE SP_SucursalReservacion(
+						IN pcSucursal VARCHAR(100),
+						OUT pcMensaje VARCHAR(200),
+						OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+
+		DECLARE temMensaje VARCHAR(2000);
+		DECLARE vnConteo INT;
+
+		START TRANSACTION;
+		SET temMensaje='';
+		SET pbOcurrioError=TRUE;
+			SELECT COUNT(*) AS 'cantidad reservaciones' INTO vnConteo, s.nombre INTO pcSucursal FROM reservacion r
+			INNER JOIN habitacion_reservacion hr ON (r.idReservacion = hr.idReservacion)
+			INNER JOIN habitacion h ON (h.idHabitacion = hr.idHabitacion)
+			INNER JOIN sucursal s ON (s.idSucursal = h.idSucursal)
+            GROUP BY s.nombre
+		IF vnConteo=0 THEN
+			SET pcMensaje=CONCAT('La sucursal',pcSucursal,' no tiene reservaciones confirmadas');
+			LEAVE SP;
+		END IF;
+		
+
+
+END $$
+DELIMITER ;
+
+
+-- -------------------------------
+-- Procedimiento 07:
+DROP PROCEDURE IF EXISTS SP_RegistrarPersona;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarPersona(
+						IN pnIdPersona INT,
+						IN pcPrimerNombre VARCHAR(20),
+						IN pcSegundoNombre VARCHAR(20),
+						IN pcPrimerApellido VARCHAR(20),
+						IN pcSegundoApellido VARCHAR(20),
+						IN pcEmail VARCHAR(50),
+						IN pcPassword VARCHAR(45),
+						IN pcGenero VARCHAR(1),
+						IN pcDireccion VARCHAR(100),
+						IN pfFechaNacimiento DATE,
+    					IN pcImagenIdentificacion VARCHAR(200),
+						IN pcTelefono VARCHAR(15),
+						OUT pcMensaje VARCHAR(200),
+						OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+
+	DECLARE temMensaje VARCHAR(200);
+	DECLARE vnConteo,
+			vnIdPersona INT;
+	DECLARE vcValidarCorreo VARCHAR(50);
+	SET autocommit=0;
+	START TRANSACTION;
+
+	SET temMensaje = '';
+	SET pcMensaje = '';
+	SET pbOcurrioError = TRUE;
+
+		IF pcPrimerNombre='' or pcPrimerNombre IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'primer Nombre, ');
+		END IF;
+
+		IF pcPrimerApellido='' or pcPrimerApellido IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'primer Apellido, ');
+		END IF;
+
+
+		IF pcEmail='' or pcEmail IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'Correo, ');
+		END IF;
+
+		IF pcPassword='' or pcPassword IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'Contraseña, ');
+		END IF;
+
+		IF pcDireccion='' or pcDireccion IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'Dirección, ');
+		END IF;
+
+		IF pfFechaNacimiento='' or pfFechaNacimiento IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'Fecha de nacimiento, ');
+		END IF;
+
+
+		SELECT COUNT(*) INTO vnConteo FROM persona
+		WHERE idPersona=pnIdPersona;
+		IF vnConteo>0 THEN
+			SET pcMensaje=CONCAT('Esta persona ya esta registrada, ');
+			LEAVE SP;
+		END IF;
+
+		SELECT COUNT(*) INTO vnConteo FROM persona
+		 WHERE email = pcEmail;
+		IF vnConteo>0 THEN
+			SET pcMensaje=CONCAT('El correo ',pcEmail,' ya esta registrado');
+			LEAVE SP;
+		END IF;
+
+		/*SELECT email INTO vcValidarCorreo FROM persona
+		WHERE email REGEXP '(.*)@(.*)\.(.*)'
+		IF pbOcurrioError THEN
+			SET pcMensaje = CONCAT ('El correo', vcValidarCorreo, 'no es válido');
+			LEAVE SP;
+		END IF;*/
+
+		SELECT COUNT(*) INTO vnIdPersona FROM persona 
+		WHERE idPersona=vnIdPersona;
+		IF vnIdPersona=0 THEN
+		INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password, genero, direccion, fechaNacimiento, 								imagenIdentificacion)
+		VALUES (vnIdPersona,
+				pcPrimerNombre,
+				pcSegundoNombre,
+				pcPrimerApellido,
+				pcSegundoApellido,
+				pcEmail,
+				pcPassword,
+				pcGenero,
+				pcDireccion,
+				pfFechaNacimiento,
+               	pcImagenIdentificacion);
+		SET pcMensaje='Persona registrada correctamente';
+			COMMIT;
+			SET pbOcurrioError=FALSE;
+		END IF;
+
+		IF temMensaje<>'' THEN
+			SET pcMensaje=CONCAT('Campos requeridos para poder registrar la Persona: ',temMensaje);
+			
+		END IF;
+END $$
+DELIMITER ;
