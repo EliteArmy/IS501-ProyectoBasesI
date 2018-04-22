@@ -51,6 +51,10 @@
 		public function ultimoId(){
 			return mysqli_insert_id ($this->link);
 		}
+
+		public function cantidadRegistros($resultado){
+			return mysqli_num_rows($resultado);
+		}
 	}
 
 ?>

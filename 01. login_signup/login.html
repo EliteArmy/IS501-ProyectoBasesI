@@ -119,6 +119,8 @@
 
 								  			<tr>
 								  				<td colspan="2">
+								  					
+								  					<!-- Email -->
 								  					<input id="txt-correo" name="txt-correo" class="form-control" type="email" name="txt-correo" placeholder="Ingrese su correo electronico" required><label class="letras-rojas" id="txt-correo-error"></label>
 								  				</td>
 								  			</tr>
@@ -134,6 +136,8 @@
 
 						      			<tr>
 						      				<td colspan="2">
+
+						      					<!-- Password -->
 						      					<input id="txt-contrasena" name="txt-contrasena" class="form-control" type="password" placeholder="Ingrese su contraseña" required><label class="letras-rojas" id="txt-contrasena-error"></label>
 						      				</td>
 						      			</tr>
@@ -143,11 +147,13 @@
 							      				<input type="checkbox" name="" onchange="document.getElementById('txt-contrasena').type = this.checked ? 'text' : 'password'"> Mostrar Contraseña
 							      			</td>
 							      			<td class="text-right">
-								      			<a class="btn boton-color-azul" id="btn-iniciar" type="button" value="" href="../06. cliente/index.html">
+							      				
+							      				<!-- Iniciar Sesion -->
+								      			<button class="btn boton-color-azul" id="btn-iniciar" type="button" value=""  href="../06. cliente/index.html">
 								      				<span class="boton-letras-interior-dos">
 																Inciar Sesión
 															</span>
-								      			</a>
+								      			</button>
 								      		</td>
 								      	</tr>
 									      	
@@ -202,6 +208,8 @@
     
     <script src="../../../../assets/js/vendor/popper.min.js"></script>
     <script src="../../../../dist/js/bootstrap.min.js"></script>
+
+    <script src="../javascript/controladores/controlador-login.js"></script>
 
   </body>
 
