@@ -412,8 +412,8 @@ CREATE PROCEDURE SP_RegistrarReservaciones(
 							IN pnCamaSupletoria INT,
 							IN pcEstado VARCHAR(50),
 							IN pcObservacion VARCHAR(1000),
-							IN pcTipoHabitacion VARCHAR(100),
-							IN pcTipoCategoria VARCHAR(100),
+							IN pnTipoHabitacion INT,
+							IN pnTipoCategoria INT,
 							IN pnNoAdultos INT,
 							IN pnNoNinos INT,
 							IN pnIdCliente INT,
@@ -447,11 +447,11 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'Estado,  ');
 	END IF;
 
-	IF pcTipoHabitacion='' or pcTipoHabitacion IS NULL THEN
+	IF pnTipoHabitacion='' or pnTipoHabitacion IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'tipo habitación,  ');
 	END IF;
 
-	IF pcTipoCategoria='' or pcTipoCategoria IS NULL THEN
+	IF pnTipoCategoria='' or pnTipoCategoria IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'tipo categoría,  ');
 	END IF;
 
@@ -472,6 +472,19 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
+		SELECT idTipoHabitacion INTO pnTipoHabitacion FROM tipoHabitacion
+		WHERE idTipoHabitacion = pnTipoHabitacion;
+		IF pnTipoHabitacion>4 THEN 
+			SET pcMensaje = CONCAT('Este tipo de habitación: ',pnTipoHabitacion,' no existe.');
+			LEAVE SP;
+		END IF;
+
+		SELECT idTipoCategoria INTO pnTipoCategoria FROM TipoCategoria
+		WHERE idTipoCategoria = pnTipoCategoria;
+		IF pnTipoCategoria>5 THEN 
+			SET pcMensaje = CONCAT('Este tipo de categoría: ',pnTipoCategoria,' no existe.');
+			LEAVE SP;
+		END IF;
 
 		IF temMensaje<>'' THEN
 			SET pcMensaje = CONCAT('Campos requeridos para poder registrar la reservación: ', temMensaje);
