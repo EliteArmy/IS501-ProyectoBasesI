@@ -64,7 +64,7 @@ DELIMITER ;
 -- -------------------------------
 -- Procedimiento 04:
 
-DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
+/*DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
 CREATE PROCEDURE SP_RegistrarCliente(
@@ -163,13 +163,13 @@ SP:BEGIN
 	SET ocurrioError = TRUE;
 
 END $$
-DELIMITER ;
+DELIMITER ;*/
 
 
 -- -------------------------------
 -- Procedimiento 06:
 
-DROP PROCEDURE IF EXISTS SP_SucursalReservacion;
+/*DROP PROCEDURE IF EXISTS SP_SucursalReservacion;
 
 DELIMITER $$
 CREATE PROCEDURE SP_SucursalReservacion(
@@ -198,11 +198,11 @@ SP:BEGIN
 
 
 END $$
-DELIMITER ;
+DELIMITER ;*/
 
 
 -- -------------------------------
--- Procedimiento 07: Registrar personas
+-- Procedimiento 03: Registrar personas
 DROP PROCEDURE IF EXISTS SP_RegistrarPersona;
 
 DELIMITER $$
@@ -306,7 +306,7 @@ END $$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 07: Registrar clientes
+-- Procedimiento 04: Registrar clientes
 
 DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
@@ -340,6 +340,32 @@ SP:BEGIN
 	START TRANSACTION;		
 	SET temMensaje='';
 	SET pbOcurrioError=TRUE;
+
+	IF pnIdCliente='' or pnIdCliente IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Id del cliente, ');
+	END IF;
+
+	IF pfFechaRegistro='' or pfFechaRegistro IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Fecha de registro, ');
+	END IF;
+
+	IF pnIdPersona='' or pnIdPersona IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Id de la persona, ');
+	END IF;
+
+	SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
+		WHERE fechaRegistro = pfFechaRegistro;
+		IF pfFechaRegistro != CURDATE() THEN 
+			SET pcMensaje = CONCAT('Esta fecha de registro: ',pfFechaRegistro,' no es válida.');
+			LEAVE SP;
+		END IF;
+
+	IF temMensaje<>'' THEN
+		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Cliente: ', temMensaje);
+		SET pbOcurrioError = TRUE;
+		LEAVE SP;
+	END IF;
+
 	SET vnIdPriCliente=1;
 		IF pnIdCliente>0 THEN
 			SET vcAccion='Editar';
@@ -354,6 +380,7 @@ SP:BEGIN
            	 	LEAVE SP;
      		END IF;
 		END IF;
+
 
 	CALL SP_RegistrarPersona(
 					vnIdPersona,
@@ -396,11 +423,155 @@ END$$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 08: Registrar empleados
+-- Procedimiento 05: Registrar empleados
+DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
 
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarEmpleado(
+						IN pnIdEmpleado INT,
+						IN pnCodigoEmpleado INT, 
+						IN pcPrimerNombre VARCHAR(20),
+						IN pcSegundoNombre VARCHAR(20),
+						IN pcPrimerApellido VARCHAR(20),
+						IN pcSegundoApellido VARCHAR(20),
+						IN pcEmail VARCHAR(50),
+						IN pcPassword VARCHAR(45),
+						IN pcGenero VARCHAR(1),
+						IN pcDireccion VARCHAR(100),
+						IN pfFechaNacimiento DATE,
+    					IN pcImagenIdentificacion VARCHAR(200),
+						IN pcTelefono VARCHAR(15),
+						IN pfFechaIngreso DATE,
+						IN pfFechaSalida DATE,
+						IN pcEstado VARCHAR(15),
+						IN pnIdPersona INT,
+						IN pnIdSucursal INT,
+						IN pnIdEmpleadoSuperior INT,
+						OUT pcMensaje VARCHAR(200),
+						OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+	DECLARE temMensaje VARCHAR(2000);
+	DECLARE vcAccion VARCHAR(30);
+	DECLARE vnIdPriEmpleado,
+			vnConteo, 
+			vnIdPersona INT;
+	SET autocommit=0;
+	START TRANSACTION;		
+	SET temMensaje='';
+	SET pbOcurrioError=TRUE;
+
+	IF pnIdEmpleado='' or pnIdEmpleado IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Id del empleado, ');
+	END IF;
+
+	IF pnCodigoEmpleado='' or pnCodigoEmpleado IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Código de empleado, ');
+	END IF;
+
+	IF pfFechaIngreso='' or pfFechaIngreso IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Fecha de ingreso, ');
+	END IF;
+
+	IF pfFechaIngreso='' or pfFechaIngreso IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Fecha de ingreso, ');
+	END IF;
+
+	IF pcEstado='' or pcEstado IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'estado, ');
+	END IF;
+
+	IF pnIdPersona='' or pnIdPersona IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Id de persona, ');
+	END IF;
+
+	IF pnIdSucursal='' or pnIdSucursal IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Id de sucursal, ');
+	END IF;
+
+	IF pnIdEmpleadoSuperior='' or pnIdEmpleadoSuperior IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Id del empleado superior, ');
+	END IF;
+
+
+	SELECT fechaIngreso INTO pfFechaIngreso FROM empleado
+		WHERE fechaIngreso = pfFechaIngreso;
+		IF pfFechaIngreso != CURDATE() THEN 
+			SET pcMensaje = CONCAT('Esta fecha de ingreso: ',pfFechaIngreso,' no es válida.');
+			LEAVE SP;
+		END IF;
+
+
+	IF temMensaje<>'' THEN
+		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Empleado: ', temMensaje);
+		SET pbOcurrioError = TRUE;
+		LEAVE SP;
+	END IF;
+
+	SET vnIdPriEmpleado=1;
+		IF pnIdEmpleado>0 THEN
+			SET vcAccion='Editar';
+			SELECT idPersona INTO vnIdPersona FROM empleado
+			WHERE idEmpleado=pnIdEmpleado;
+		ELSE
+			SET vcAccion='Agregar';
+      	SELECT count(*) into vnConteo FROM empleado
+      	WHERE codigoEmpleado=pnCodigoEmpleado;
+     		IF vnConteo>0 THEN
+            	SET pcMensaje='Empleado ya registrado ';
+           	 	LEAVE SP;
+     		END IF;
+		END IF;
+
+	CALL SP_RegistrarPersona(
+					vnIdPersona,
+					pcPrimerNombre,
+					pcSegundoNombre,
+					pcPrimerApellido,
+					pcSegundoApellido,
+					pcEmail,
+					pcPassword,
+					pcGenero,
+					pcDireccion,
+					pfFechaNacimiento,
+	               	pcImagenIdentificacion,
+	               	pcTelefono,
+	               	pcMensaje,
+					pbOcurrioError);
+	IF pbOcurrioError=TRUE THEN
+		LEAVE SP;
+	END IF;
+	IF vcAccion='Agregar' THEN
+			INSERT INTO empleado
+			 VALUES (pnIdEmpleado,
+			 		 pnCodigoEmpleado,
+			 		 pfFechaIngreso,
+			 		 pfFechaSalida,
+			 		 pcEstado,
+			 		 pnIdPersona,
+			 		 pnIdSucursal,
+			 		 pnIdEmpleadoSuperior);
+			IF pbOcurrioError THEN
+				SET pcMensaje=CONCAT('Error al registrar empleado ',pcMensaje);
+			ELSE
+				SET pcMensaje='Datos del empleado registrado satisfactorimente.';
+			END IF;	
+		ELSE
+			IF pbOcurrioError THEN
+				SET pcMensaje=CONCAT('Error al editar el empleado ',pcMensaje);
+			ELSE
+         UPDATE empleado SET  codigoEmpleado = pnCodigoEmpleado, idSucursal = pnIdSucursal
+         WHERE idEmpleado= pnIdEmpleado;
+				SET pcMensaje='Datos del empleado actualizados satisfactorimente.';
+			END IF;
+		END IF;
+		COMMIT;
+
+END$$
+DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 09: Registrar reservaciones
+-- Procedimiento 06: Registrar reservaciones
 DROP PROCEDURE IF EXISTS SP_RegistrarReservaciones;
 
 DELIMITER $$
