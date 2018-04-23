@@ -333,8 +333,8 @@ CREATE PROCEDURE SP_RegistrarCliente(
 SP:BEGIN
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vcAccion VARCHAR(30);
-	DECLARE vnIdPriCliente,
-			vnConteo, 
+	DECLARE vnConteo, 
+			vnEdad,
 			vnIdPersona INT;
 	SET autocommit=0;
 	START TRANSACTION;		
@@ -360,26 +360,28 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
+	SELECT edad INTO vnEdad FROM vw_edad
+		WHERE idPersona = pnIdPersona;
+		IF vnEdad < 18 THEN
+			SET pcMensaje = CONCAT('No pueden existir clientes menores de edad.');
+			LEAVE SP;
+		END IF;
+
 	IF temMensaje<>'' THEN
 		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Cliente: ', temMensaje);
 		SET pbOcurrioError = TRUE;
 		LEAVE SP;
 	END IF;
 
-	SET vnIdPriCliente=1;
-		IF pnIdCliente>0 THEN
-			SET vcAccion='Editar';
-			SELECT idPersona INTO vnIdPersona FROM cliente
-			WHERE idCliente=pnIdCliente;
-		ELSE
-			SET vcAccion='Agregar';
-      	SELECT count(*) into vnConteo FROM cliente
-      	WHERE idCliente=pnIdCliente;
-     		IF vnConteo>0 THEN
-            	SET pcMensaje='Cliente ya registrado ';
-           	 	LEAVE SP;
-     		END IF;
-		END IF;
+		SELECT COUNT(*) INTO vnConteo FROM cliente
+		WHERE idCliente = pnIdCliente;
+		IF vnConteo > 0 THEN 
+			SET pcMensaje='Cliente ya registrado ';
+            LEAVE SP;
+        ELSE
+        	SET vcAccion = 'Agregar';
+      	END IF;
+		
 
 
 	CALL SP_RegistrarPersona(
@@ -411,13 +413,9 @@ SP:BEGIN
 		ELSE
 			IF pbOcurrioError THEN
 				SET pcMensaje=CONCAT('Error al editar el cliente ',pcMensaje);
-			ELSE
-         UPDATE cliente SET  idCliente= pnIdCliente
-         WHERE idCliente= pnIdCliente;
-				SET pcMensaje='Datos del cliente actualizados satisfactorimente.';
 			END IF;
-		END IF;
-		COMMIT;
+	END IF;
+	COMMIT;
 
 END$$
 DELIMITER ;
@@ -634,7 +632,6 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'id del Cliente,  ');
 	END IF;
 
-
 		SELECT COUNT(*) INTO vnConteo 
 		FROM reservacion
 		WHERE idReservacion = pnIdReservacion;
@@ -700,6 +697,52 @@ SP:BEGIN
 					pnIdCliente);
 
 		SET pcMensaje = 'Reservación registrada correctamente';
+			COMMIT;
+			SET pbOcurrioError = FALSE;
+		END IF;
+
+
+END$$
+DELIMITER ;
+
+
+-- -------------------------------
+-- Procedimiento 07: Eliminar reservaciones
+DROP PROCEDURE IF EXISTS SP_EliminarReservaciones;
+
+DELIMITER $$
+CREATE PROCEDURE SP_EliminarReservaciones(
+							IN pnIdReservacion INT,
+							IN pfFechaEntrada DATE,
+							OUT pcMensaje VARCHAR(200),
+							OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+	DECLARE vcAccion VARCHAR(30);
+	DECLARE vnConteo INT;
+	SET autocommit=0;
+	START TRANSACTION;		
+
+	SET pbOcurrioError=TRUE;
+
+		SELECT COUNT(*) INTO vnConteo FROM reservacion
+		WHERE idReservacion = pnIdReservacion;
+		IF vnConteo = 0 THEN
+			SET pcMensaje = CONCAT('No existe la reservación.');
+			LEAVE SP;
+		END IF;
+
+		SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
+		WHERE fechaEntrada = pfFechaEntrada;
+		IF pfFechaEntrada < CURDATE() THEN
+			SET pcMensaje = CONCAT('La reservación con fecha: ',pfFechaEntrada,' ya no se puede cancelar.');
+			LEAVE SP;
+		END IF;
+
+		IF pfFechaEntrada > CURDATE() THEN
+			DELETE FROM reservacion
+			WHERE idReservacion= pnIdReservacion;
+		SET pcMensaje = 'Reservación eliminada correctamente';
 			COMMIT;
 			SET pbOcurrioError = FALSE;
 		END IF;
