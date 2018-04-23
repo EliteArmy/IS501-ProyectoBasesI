@@ -594,6 +594,7 @@ SP:BEGIN
 	DECLARE vcAccion VARCHAR(30);
 	DECLARE vnConteo, 
 			vnIdReservacion INT;
+	DECLARE vnEstadoHab VARCHAR(100);
 	SET autocommit=0;
 	START TRANSACTION;		
 	SET temMensaje='';
@@ -672,6 +673,14 @@ SP:BEGIN
 		WHERE fechaSalida = pfFechaSalida;
 		IF pfFechaSalida <= pfFechaEntrada THEN
 			SET pcMensaje = CONCAT('Esta fecha de salida: ',pfFechaSalida,' no es válida.');
+			LEAVE SP;
+		END IF;
+
+		SELECT estado INTO vnEstadoHab FROM habitacion h
+		INNER JOIN tipoHabitacion th ON (th.idTipoHabitacion = h.idTipoHabitacion)
+		WHERE estado = vnEstadoHab
+		IF vnEstadoHab = 'oocupada' THEN
+			SET pcMensaje = 'Esta habitación está oocupada.';
 			LEAVE SP;
 		END IF;
 
