@@ -6,9 +6,7 @@ Terminar el Procedimiento Almacenado de Clientes
 
 Terminar el procedimiento Almacenado de Persona
 
-Que un Usuario pueda subir su foto
 
-Obtener un Empleado a travez de una busqueda
-Obtener un Cliente a travez de una busqueda
-
+Login podria no funcionar cuando se trata de cliente o empleado
+Denegar Login cuando el empleado ya no esta activo
 

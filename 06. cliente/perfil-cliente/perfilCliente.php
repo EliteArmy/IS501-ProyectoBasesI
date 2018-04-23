@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  // Si no se ha declarado esta variable es porque no se ha iniciado sesion.
+  if (!isset($_SESSION["permiso"])){ 
+    header("Location: ../../01. login_signup/login.html");
+    // Si se inicio pero el permiso no es correcto. 
+  } else if (!($_SESSION["permiso"] == "cliente"))
+    header("Location: ../../01. login_signup/login.html");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Checkout example for Bootstrap</title>
+    <title>Perfil Cliente</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +31,12 @@
     <div class="container">
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="../../img/perfil.jpg" alt="" width="72" height="72">
-        <h2>Perfil Cliente</h2>
+        <h2>Perfil de 
+          <?php
+            echo $_SESSION["primerNombre"] . " ";
+            echo $_SESSION["primerApellido"];
+            ?>
+        </h2>
       </div>
 
         <div class="order-md-1">
@@ -89,10 +104,10 @@
             <div class="mb-3">
               <label for="address2">Estado</label>
               <select id="slc-estado" class="form-control">
-                        <option>--Seleccione un Estado--</option>
-                        <option value="1">Activo</option>
-                        <option value="2">Inactivo</option>
-                      </select>
+                <option>--Seleccione un Estado--</option>
+                <option value="1">Activo</option>
+                <option value="2">Inactivo</option>
+              </select>
             </div>
 
               <div class="mb-3">

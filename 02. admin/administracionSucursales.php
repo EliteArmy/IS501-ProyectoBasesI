@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  // Si no se ha declarado esta variable es porque no se ha iniciado sesion.
+  if (!isset($_SESSION["permiso"])){ 
+    header("Location: ../01. login_signup/login.html");
+    // Si se inicio pero el permiso no es correcto. 
+  } else if (!($_SESSION["permiso"] == "trabajador"))
+    header("Location: ../01. login_signup/login.html");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -23,6 +33,24 @@
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">[Nombre del Hotel]</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Bienvenido
+            <?php
+            echo $_SESSION["primerNombre"] . " ";
+            echo $_SESSION["primerApellido"] . ".";
+            ?>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="../01. login_signup/login.html">Bienvenido!<span id='lbl-usuario'></span></a>
+        </li>
+      </ul>
+
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="../01. login_signup/login.html">Sign out</a>
@@ -119,10 +147,12 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Tablero</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
+
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Compartir</button>
                 <button class="btn btn-sm btn-outline-secondary">Exportar</button>
               </div>
+
               <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>
                 Esta Semana
