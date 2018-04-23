@@ -88,10 +88,13 @@
 				$fila = $conexion->obtenerFila($resultado);
 				if($usuario == 'empleado'){
 					$_SESSION["idEmpleado"] = $fila["idEmpleado"];
+					$_SESSION["permiso"] = "trabajador";
 					$respuesta["status"] = 1;
 				} else {
 					$_SESSION["idCliente"] = $fila["idCliente"];
+					$_SESSION["permiso"] = "cliente";
 					$respuesta["status"] = 2;
+
 				}
 
 				$_SESSION["primerNombre"] = $fila["primerNombre"];

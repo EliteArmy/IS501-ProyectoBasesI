@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  // Si no se ha declarado esta variable es porque no se ha iniciado sesion.
+  if (!isset($_SESSION["permiso"])){ 
+    header("Location: ../01. login_signup/login.html");
+    // Si se inicio pero el permiso no es correcto. 
+  } else if (!($_SESSION["permiso"] == "trabajador"))
+    header("Location: ../01. login_signup/login.html");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,10 +32,23 @@
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">[Nombre del Hotel]</a>
+      
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="../01. login_signup/login.html">Sign out</a>
+          <a class="nav-link" href="#">Bienvenido
+            <?php
+            echo $_SESSION["primerNombre"] . " ";
+            echo $_SESSION["primerApellido"] . ".";
+            ?>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="cerrar_sesion.php">Sign out</a>
         </li>
       </ul>
     </nav>

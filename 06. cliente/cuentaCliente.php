@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  // Si no se ha declarado esta variable es porque no se ha iniciado sesion.
+  if (!isset($_SESSION["permiso"])){ 
+    header("Location: ../01. login_signup/login.html");
+    // Si se inicio pero el permiso no es correcto. 
+  } else if (!($_SESSION["permiso"] == "cliente"))
+    header("Location: ../01. login_signup/login.html");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Offcanvas template for Bootstrap</title>
+    <title>Cuenta Cliente</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -29,24 +39,35 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="#">Notificaciones</a>
           </li>
+         
           <li class="nav-item">
-            <a class="nav-link" href="perfil-cliente/perfilCliente.php">Perfil</a>
+            <a class="nav-link" href="perfil-cliente/perfilCliente.php">Editar mi Perfil</a>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="#">Cambiar de Cuenta</a>
           </li>
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configuración</a>
-            
           </li>
         </ul>
+
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="cerrar_sesion.php">Sign out</a>
+          </li>
+        </ul>
+
       </div>
     </nav>
 
@@ -57,10 +78,6 @@
         <a class="nav-link" href="#">Precios</a>
         <a class="nav-link" href="#">Destinos</a>
         <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
       </nav>
     </div>
 
@@ -68,7 +85,12 @@
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
         <div class="lh-100">
           <h6 class="mb-0 text-white lh-100">Bienvenido/a</h6>
-          <small>a [PLACE HOLDER]</small>
+          <small>            
+            <?php
+            echo $_SESSION["primerNombre"] . " ";
+            echo $_SESSION["primerApellido"];
+            ?>
+            </small>
         </div>
       </div>
 
@@ -109,5 +131,6 @@
     <script src="../../../../dist/js/bootstrap.min.js"></script>
     <script src="../../../../assets/js/vendor/holder.min.js"></script>
     <script src="offcanvas.js"></script>
+    
   </body>
 </html>

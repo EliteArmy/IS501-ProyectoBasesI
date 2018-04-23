@@ -4,7 +4,7 @@ $(document).ready(function () {
 		
 		var parametros = "email=" + $("#txt-correo").val() + 
 						"&password=" + $("#txt-contrasena").val();
-		 alert(parametros);
+		 //alert(parametros);
 		
 		$.ajax({
 				url:"../ajax/gestion-login.php?accion=login",
