@@ -6,4 +6,9 @@ Terminar el Procedimiento Almacenado de Clientes
 
 Terminar el procedimiento Almacenado de Persona
 
+Que un Usuario pueda subir su foto
+
+Obtener un Empleado a travez de una busqueda
+Obtener un Cliente a travez de una busqueda
+
 

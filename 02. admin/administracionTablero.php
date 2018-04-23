@@ -113,6 +113,10 @@
           </div>
         </nav>
 
+        <div id="reporte-error">
+          
+        </div>
+
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Tablero</h1>
@@ -131,7 +135,8 @@
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
 
           <h2>Lista de Información</h2>
-          <div class="table-responsive">
+          
+          <!-- <div class="table-responsive">
             <table class="table table-striped table-sm">
               
               <thead>
@@ -147,7 +152,7 @@
               </thead>
 
               <tbody id="div-informacion">
-                <!--
+                <!- -
                 <tr>
                   <td>1,001</td>
                   <td>Lorem</td>
@@ -175,13 +180,195 @@
                   <td>Lorem</td>
                   <td>ipsum</td>
                 </tr>
-                -->
+                - ->
               </tbody>
 
-            </table>
+            </table> 
 
+          </div> -->
+          
+          <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCliente">Registrar Un cliente  
+            </button>
           </div>
+
+          <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEmpleado">Registrar Un Empleado  
+            </button>
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReservacion">Registrar Una Reservacion  
+            </button>
+          </div>
+
+          <!-- Modal de Cliente -->
+          <div class="modal fade" id="modalCliente" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre el Cliente</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+                    
+                    <div style="display: none" class="form-group">
+                      <label for="txt-idcliente">Id</label>
+                      <input type="text" class="form-control" id="txt-idcliente">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-primer-nombre">Primer Nombre</label>
+                      <input type="text" class="form-control" id="txt-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-segundo-nombre">Segundo Nombre</label>
+                      <input type="text" class="form-control" id="txt-segundo-nombre" placeholder="Ingrese el Segundo Nombre">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txt-primer-apellido">Primer Apellido</label>
+                      <input type="text" class="form-control" id="txt-primer-apellido" placeholder="Ingrese el Primer Apellido">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-segundo-apellido">Segundo Apellido</label>
+                      <input type="text" class="form-control" id="txt-segundo-apellido" placeholder="Ingrese el Segundo Apellido">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txt-email">Email</label>
+                      <input type="email" class="form-control" id="txt-email" placeholder="Ingrese el correo electrónico">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-telefono">Telefono</label>
+                      <input type="text" class="form-control" id="txt-telefono" placeholder="Ingrese el Telefono">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txt-fecha-nacimiento">Fecha Nacimiento</label>
+                      <input type="date" class="form-control" id="txt-fecha-nacimiento">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-estado">Estado</label>
+                        <select id="slc-estado" class="form-control">
+                        <option>Seleccione un Estado</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-direccion">Dirección</label>
+                      <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarCliente(document.getElementById('txt-idcliente').value)">Actualizar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal de Reservación -->
+          <div class="modal fade" id="modalReservacion" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre Reservación
+                  </h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+                    
+                    <div style="display: none" class="form-group">
+                      <label for="txt-idReservacion">Id</label>
+                      <input type="text" class="form-control" id="txt-idReservacion">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-primer-nombre">Primer Nombre</label>
+                      <input type="text" class="form-control" id="txt-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-fecha-reservacion">Fecha Reservacion</label>
+                      <input type="date" class="form-control" id="txt-fecha-reservacion">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-fecha-entrada">Fecha Entrada</label>
+                      <input type="date" class="form-control" id="txt-fecha-entrada">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-fecha-salida">Fecha Salida</label>
+                      <input type="date" class="form-control" id="txt-fecha-salida">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-categoria">Tipo Categoria</label>
+                        <select id="slc-categoria" class="form-control">
+                        
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-tipo">Tipo Habitación</label>
+                        <select id="slc-tipo" class="form-control">
+
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-observacion">Observación</label>
+                      <textarea class="form-control" id="txt-observacion" placeholder="Ingrese alguna Observación"></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarDato(document.getElementById('txt-id').value)">Reservar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </main>
+
       </div>
     </div>
 
@@ -198,7 +385,7 @@
     <script src="../javascript/bootstrap.min.js"></script>
 
     <!-- Custom Javascript -->
-    <script src="../javascript/controlador.js"></script>
+    <script src="../javascript/controladores/controlador-tablero.js"></script>
 
   </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-	class Reservacio {
+	class Reservacion {
 
 		private $idReservacion;
 		private $fechaReservacion;
@@ -95,12 +95,39 @@
 				" IdCliente: " . $this->idCliente;
 		}
 
-		// --- Función Futura ---
-		public static function nombreFuncion ($conexion) {
+		// --- Función que obtiene la Lista de Categorias ---
+		public static function obtenerListaCategorias ($conexion) {
 			
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT idTipoCategoria, tipoCategoria, descripcion
+				FROM TipoCategoria
+			');
+
+			while (($fila=$conexion->obtenerFila($resultado))){
+				echo '<option value="'.$fila["idTipoCategoria"].'">'.$fila["tipoCategoria"].'</option>';
+			}
 		}
 
-		// --- Función Futura  ---
+		// --- Función que Obtiene los Tipos de Habitacion  ---
+		public static function obtenerListaTipos ($conexion){
+			
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT idTipoHabitacion, tipoHabitacion, descripcion
+				FROM TipoHabitacion
+			');
+
+			while (($fila=$conexion->obtenerFila($resultado))){
+				echo '<option value="'.$fila["idTipoHabitacion"].'">'.$fila["tipoHabitacion"].'</option>';
+			}
+
+		}
+
+		// --- Función Futura ---
+		public static function nombreFuncion1 ($conexion){
+
+		}
+
+		// --- Función Futura ---
 		public static function nombreFuncion2 ($conexion){
 
 		}
