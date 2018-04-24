@@ -343,13 +343,6 @@ SP:BEGIN
 	SET pbOcurrioError=TRUE;
 
 	/*verifica que los campos no sea  nulos.*/
-	IF pnIdCliente='' or pnIdCliente IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Id del cliente, ');
-	END IF;
-
-	IF pfFechaRegistro='' or pfFechaRegistro IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Fecha de registro, ');
-	END IF;
 
 	IF pnIdPersona='' or pnIdPersona IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Id de la persona, ');
@@ -370,7 +363,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;*/
 
-	/*se supone que no deja que se registren menores pero no sirve alv.*/
+	/*busca si el cliente es mayor de edad para poder registrarlo.*/
 	SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
 	WHERE idPersona = pnIdPersona;
 	IF vnEdad<216 THEN
@@ -469,6 +462,7 @@ CREATE PROCEDURE SP_RegistrarEmpleado(
 SP:BEGIN
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vnConteo,
+			vnEdad,
 			vnIdEmpleado INT;
 	SET autocommit=0;
 	START TRANSACTION;		
@@ -479,14 +473,6 @@ SP:BEGIN
 
 	IF pnCodigoEmpleado='' or pnCodigoEmpleado IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Código de empleado, ');
-	END IF;
-
-	IF pfFechaIngreso='' or pfFechaIngreso IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Fecha de ingreso, ');
-	END IF;
-
-	IF pfFechaIngreso='' or pfFechaIngreso IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Fecha de ingreso, ');
 	END IF;
 
 	IF pcEstado='' or pcEstado IS NULL THEN
@@ -549,6 +535,14 @@ SP:BEGIN
 	WHERE codigoEmpleado = pnCodigoEmpleado;
 	IF vnConteo>0 THEN
 		SET pcMensaje=('Ya existe un empleado con ese código.');
+		LEAVE SP;
+	END IF;
+
+	/*busca si el empleado es mayor de edad para poder registrarlo.*/
+	SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
+	WHERE idPersona = pnIdPersona;
+	IF vnEdad<216 THEN
+		SET pcMensaje =('No pueden existir empleados menores de edad.');
 		LEAVE SP;
 	END IF;
 
