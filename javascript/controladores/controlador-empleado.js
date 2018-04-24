@@ -3,19 +3,21 @@ $(document).ready(function(){
 	
 	//alert("Se cargo el documento");
 		
-	/*
 	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_categorias",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#div-categorias").html(resultado);
+		url: "../ajax/get-info.php?accion=obtener-sucursales-empleado",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado);
+			$("#slcreg-sucursal").html(resultado);
 		},
-		error:function(){
-
+		error: function(e){
+			//$("#reporte-error").html(e);
+			alert ("Error: " + e);
 		}
 	});	
 
+	/*
 	$.ajax({
 		url:"ajax/get-info.php?accion=obtener_empresas",
 		data:"",
@@ -76,6 +78,52 @@ function cargarListaEmpleados(){
 			alert ("Error: " + e);
 		}
 	});
+}
+
+function registrarEmpleado(){
+	//alert("Entra en la funcion");
+
+	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
+	// following characters: , / ? : @ & = + $ #
+	// Es decir, si el Numero de Telefono inicia con un signo "+" este se reemplaza con "%2B"
+	// para que pueda ser enviado
+	var uri = $("#txtreg-telefono").val();
+	var resultado = encodeURIComponent(uri);
+
+	var parametros = 
+			"txtreg-primer-nombre="+$("#txtreg-primer-nombre").val()+"&"+
+			"txtreg-segundo-nombre="+$("#txtreg-segundo-nombre").val()+"&"+
+			"txtreg-primer-apellido="+$("#txtreg-primer-apellido").val()+"&"+
+			"txtreg-segundo-apellido="+$("#txtreg-segundo-apellido").val()+"&"+
+			"txtreg-email="+$("#txtreg-email").val()+"&"+
+			"txtreg-password="+$("#txtreg-password").val()+"&"+
+			"slcreg-genero="+$("#slcreg-genero").val()+"&"+
+			"txtreg-direccion="+$("#txtreg-direccion").val()+"&"+
+			"txtreg-fecha-nacimiento="+$("#txtreg-fecha-nacimiento").val()+"&"+
+			"txtreg-telefono="+ resultado +"&"+
+			"txtreg-cod-empleado="+$("#txtreg-cod-empleado").val()+"&"+
+			"slcreg-estado="+$("#slcreg-estado").val()+"&"+
+			"slcreg-sucursal="+$("#slcreg-sucursal").val()+"&"+
+			"txtreg-id-empleado="+$("#txtreg-id-empleado").val();
+	
+	//console.log(parametros);
+	//alert(parametros);
+	
+	$.ajax({
+		url: "../ajax/gestion-info-empleado.php?accion=registrar-empleado",
+		method: "POST",
+		data: parametros,
+		success: function(resultado){
+			//alert(resultado);
+			$("#div-resultado-mensaje").html(resultado);
+			$("#div-resultado").show();
+			cargarListaEmpleados();
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+
 }
 
 // -- Función que Selecciona la Informacion de un Empleado

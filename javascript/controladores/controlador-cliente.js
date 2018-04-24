@@ -180,6 +180,8 @@ $("#btn-cerrar-mensaje").click(function(){
 	$("#div-resultado").hide();
 });
 
+
+
 // --- --- --- ---
 $("#btn-actualizar").click(function(){
 	var categorias = "";

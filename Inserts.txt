@@ -1,0 +1,57 @@
+Insertar Empleado:
+
+// Tabla Persona
+idPersona
+primerNombre
+segundoNombre
+primerApellido
+segundoApellido
+email
+password
+genero
+direccion
+fechaNacimiento
+imagenIdentificacion
+
+// Tabla Telefono
+idTelefono	(NULL)
+numeroTelefono	(+504)
+idPersona	(22)
+
+// Tabla Empleado:
+idEmpleado -	(NULL)
+codigoEmpleado 	(5165165)
+fechaIngreso - 	(curdate())
+fechaSalida - 	(NULL)
+estado - 	(Activo
+idPersona - 	(?)
+idSucursal - 	(Dropbox)
+idEmpleadoSuperior (?)
+
+// Tabla Cargo_Empleado:
+idCargo		(?)
+idEmpleado	(?)
+
+// Tabla Cargo
+idCargo  	()
+nombreCargo  	()
+salarioMinimo  	()
+salarioMaximo	()
+estado  	(Activo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,14 +4,39 @@
 	$conexion = new Conexion();
 	
 	switch ($_GET["accion"]) {
-		/*
-		case "nombre-empleado":
-			echo "Entra en el case";
+		
+	 	case "registrar-empleado":
+	 		//echo "Entra en el case ";
 	 		include ("../05. class/class-empleado.php");
-			Class::nombreFuncion($conexion);
-			echo "Mensaje";
+	 		include("../05. class/class-telefono.php");
+
+	 		$empleado = new Empleado(
+	 			null, //idPersona
+	 			$_POST["txtreg-primer-nombre"],
+	 			$_POST["txtreg-segundo-nombre"],
+	 			$_POST["txtreg-primer-apellido"],
+	 			$_POST["txtreg-segundo-apellido"],
+	 			$_POST["txtreg-email"],
+	 			$_POST["txtreg-password"],
+	 			$_POST["slcreg-genero"],
+	 			$_POST["txtreg-direccion"],
+	 			$_POST["txtreg-fecha-nacimiento"],
+	 			null, //imagenIdentificacion
+
+	 			null, //idEmpleado
+	 			$_POST["txtreg-cod-empleado"],
+	 			null, //fechaIngreso
+	 			null, //fechaSalida
+	 			$_POST["slcreg-estado"], 
+	 			$_POST["slcreg-sucursal"], 
+	 			$_POST["txtreg-id-empleado"], 
+
+	 		new Telefono(null, $_POST["txtreg-telefono"], null));
+
+	 		$empleado->registrarEmpleado($conexion);
+
 	 	break;
-	 	*/
+	 	
 	 	case "actualizar-empleado":
 
 	 		include("../05. class/class-empleado.php");

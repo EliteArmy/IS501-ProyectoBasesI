@@ -138,13 +138,14 @@
           </div>
         </nav>
 
+        <div id="reporte-error">
+          
+        </div>
+
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Tablero</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
-              <div id="">
-                Bienvenido!
-              </div>
               
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Compartir</button>
@@ -167,7 +168,13 @@
             </button>
           </div>
 
+          <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistroEmpleado">Registrar Un Empleado  
+            </button>
+          </div>
+
           <h2>Lista de Empleados</h2>
+          
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               
@@ -219,6 +226,120 @@
 
             </table>
 
+          </div>
+
+            <!-- Modal Para Registrar Empleados -->
+          <div class="modal fade" id="modalRegistroEmpleado" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre Empleado</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+
+                    <div class="form-group">
+                      <label for="txtreg-primer-nombre">Primer Nombre</label>
+                      <input type="text" class="form-control" id="txtreg-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-segundo-nombre">Segundo Nombre</label>
+                      <input type="text" class="form-control" id="txtreg-segundo-nombre" placeholder="Ingrese el Segundo Nombre">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txtreg-primer-apellido">Primer Apellido</label>
+                      <input type="text" class="form-control" id="txtreg-primer-apellido" placeholder="Ingrese el Primer Apellido">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-segundo-apellido">Segundo Apellido</label>
+                      <input type="text" class="form-control" id="txtreg-segundo-apellido" placeholder="Ingrese el Segundo Apellido">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="txtreg-email">Email</label>
+                      <input type="email" class="form-control" id="txtreg-email" placeholder="Ingrese el correo electrónico">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-password">Contraseña</label>
+                      <input type="password" class="form-control" id="txtreg-password" placeholder="Ingrese la Contraseña">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-genero">Genero</label>
+                        <select id="slcreg-genero" class="form-control">
+                        <option>Seleccione una Opción</option>
+                        <option value="F">Femenino</option>
+                        <option value="M">Masculino</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-direccion">Dirección</label>
+                      <textarea class="form-control" id="txtreg-direccion" placeholder="Ingrese la dirección"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-fecha-nacimiento">Fecha de Nacimiento</label>
+                      <input type="date" class="form-control" id="txtreg-fecha-nacimiento">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-telefono">Telefono</label>
+                      <input type="text" class="form-control" id="txtreg-telefono" placeholder="Ingrese el Telefono">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-cod-empleado">Codigo de Empleado</label>
+                      <input type="text" class="form-control" id="txtreg-cod-empleado" placeholder="Ingrese el codigo Empleado">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-estado">Estado</label>
+                        <select id="slcreg-estado" class="form-control">
+                          
+                        <option>Seleccione una Opción</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-sucursal">Sucursal</label>
+                        <select id="slcreg-sucursal" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-id-empleado">Id de Empleado</label>
+                      <input type="text" class="form-control" id="txtreg-id-empleado" placeholder="Ingrese el Id Empleado Superior">
+                    </div>
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="registrarEmpleado()">Guardar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  
+                </div>
+
+              </div>
+            </div>
           </div>
 
           <!-- Modal -->

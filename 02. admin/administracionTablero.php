@@ -216,12 +216,7 @@
           </div> -->
           
           <div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCliente">Registrar Un cliente  
-            </button>
-          </div>
-
-          <div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEmpleado">Registrar Un Empleado  
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistroCliente">Registrar Un cliente  
             </button>
           </div>
 
@@ -231,7 +226,7 @@
           </div>
 
           <!-- Modal de Cliente -->
-          <div class="modal fade" id="modalCliente" role="dialog">
+          <div class="modal fade" id="modalRegistroCliente" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                   
@@ -361,14 +356,14 @@
                     <div class="form-group">
                       <label for="slc-categoria">Tipo Categoria</label>
                         <select id="slc-categoria" class="form-control">
-                        
+                          <!--Informacion generada por la Base -->
                       </select>
                     </div>
 
                     <div class="form-group">
                       <label for="slc-tipo">Tipo Habitación</label>
                         <select id="slc-tipo" class="form-control">
-
+                          <!--Informacion generada por la Base -->
                       </select>
                     </div>
 
