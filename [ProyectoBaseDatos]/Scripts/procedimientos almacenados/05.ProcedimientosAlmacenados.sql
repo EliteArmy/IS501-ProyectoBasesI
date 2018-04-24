@@ -364,10 +364,10 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 
-	SELECT edad INTO vnEdad FROM vw_edad
-	WHERE idPersona = pnIdPersona;
-	IF vnEdad < 18 THEN
-		SET pcMensaje = CONCAT('No pueden existir clientes menores de edad.');
+	SELECT TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) edad INTO vnEdad FROM persona
+	WHERE idPersona = pnIdPersona,;
+	IF vnEdad<18 THEN
+		SET pcMensaje =('No pueden existir clientes menores de edad.');
 		LEAVE SP;
 	END IF;
 
