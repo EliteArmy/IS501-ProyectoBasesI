@@ -1,12 +1,44 @@
-Actualizar Empleados
+• CRUD
+Create, Read, Update, Delete
 
-Terminar el Procedimiento Almacenado de Empleado
+-----------------------------
+Cosas que hace el Proyecto:
+-----------------------------
+• 
+• Mostrar todos los clientes
+• Actualizar un Cliente
+• Eliminar un Cliente
 
-Terminar el Procedimiento Almacenado de Clientes
+• 
+• Mostrar todas los Empleados
+• 
+• Eliminar un Empleado
 
-Terminar el procedimiento Almacenado de Persona
+• Mostrar todas las Sucursales
 
+• Mostrar todoas las Facturas
 
-Login podria no funcionar cuando se trata de cliente o empleado
-Denegar Login cuando el empleado ya no esta activo
+• Mostrar todas las Habitaciones
+
+• Iniciar y Cerrar Sesion como Administrador y como Cliente
+
+-----------------------------
+Cosas por Hacer: 
+-----------------------------
+• Insertar un Empleado
+• Actualizar Empleados
+
+• Insertar una Reservacion
+
+• Insertar una Factura
+
+• Insertar una Sucursal
+• Eliminar una sucursal
+
+• Terminar el Procedimiento Almacenado de Empleado
+• Terminar el Procedimiento Almacenado de Clientes
+• Terminar el procedimiento Almacenado de Persona
+
+• Login podria no funcionar cuando se trata de cliente o empleado
+• Denegar Login cuando el empleado ya no esta activo
 

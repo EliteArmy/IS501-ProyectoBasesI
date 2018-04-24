@@ -9,9 +9,10 @@
 		protected $fechaIngreso;
 		protected $fechaSalida;
 		protected $estado;
-		protected $idPersona;
 		protected $idSucursal;
 		protected $idEmpleadoSuperior;
+
+		protected $telefono;
 
 		public function __construct(
 				$idPersona,
@@ -176,8 +177,39 @@
 			echo json_encode($fila);
 		}
 
+		// --- Función que Guardara un nuevo Registro ---
+		public function registrarEmpleado ($conexion){
+			
+			$resultado = $conexion->ejecutarConsulta (
+				"INSERT INTO persona 
+				(idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
+				email, password, genero, direccion, fechaNacimiento, imagenIdentificacion) 
+				VALUES (null, '$this->primerNombre', '$this->segundoNombre', '$this->primerApellido', '$this->segundoApellido', 
+				'$this->email', '$this->password', '$this->genero', '$this->direccion', '$this->fechaNacimiento', null)"
+			);
 
-		// --- Función que Guardará la nueva información ---
+			$idTemporal = $conexion->ultimoId(); // Obtener el ultimo Id de la persona que se inserto
+
+			$resultado = $conexion->ejecutarConsulta (
+				"INSERT INTO empleado 
+				(idEmpleado, codigoEmpleado, fechaIngreso, fechaSalida, estado, idPersona, 
+				idSucursal, idEmpleadoSuperior) 
+				VALUES (null, '$this->codigoEmpleado', CURDATE(), null, '$this->estado', '$idTemporal', 
+				'$this->idSucursal', '$this->idEmpleadoSuperior')
+			");
+
+			$telefono = $this->telefono->getNumeroTelefono();
+
+			$resultado = $conexion->ejecutarConsulta (
+				"INSERT INTO telefono
+				(idTelefono, numeroTelefono, idPersona) 
+				VALUES (null, '$telefono', '$idTemporal')
+			");
+
+			echo "<b>Registro Insertado con Exito</b>";
+		}
+
+		// --- Función que Actualizara la información ---
 		public function actualizarEmpleado ($conexion){
 
 			$telefono = $this->telefono->getNumeroTelefono();
@@ -218,16 +250,19 @@
 
 		}
 
-		// --- Función Futura ---
-		public static function nombreFuncion ($conexion){
+		// --- Función que obtiene la Lista de Sucursales ---
+		public static function obtenerSucursalesEmpleado ($conexion){
+			//echo "Entra en la funcion";
 
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT idSucursal, nombre 
+				FROM sucursal'
+			);
+
+			while (($fila = $conexion->obtenerFila($resultado))) {
+				echo '<option value="'.$fila["idSucursal"].'">'.$fila["nombre"].'</option>';
+			}
 		}
-
-		// --- Función Futura ---
-		public static function nombreFuncion2 ($conexion){
-
-		}
-
 
 	}
 ?>

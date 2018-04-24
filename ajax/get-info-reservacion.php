@@ -7,13 +7,13 @@
 
 		case "obtener-categorias":
 			//echo "Entra en el case ";
-	 		include ("../05. class/class-reservacion.php");
+	 		include ("../05. class/Habitacion/class-reservacion.php");
 			Reservacion::obtenerListaCategorias($conexion);
 	 	break;
 	 	
 	 	case "obtener-tipos":
 	 		//echo "Entra en el case ";
-	 		include ("../05. class/class-reservacion.php");
+	 		include ("../05. class/Habitacion/class-reservacion.php");
 			Reservacion::obtenerListaTipos($conexion);
 	 	break;
 	 	
