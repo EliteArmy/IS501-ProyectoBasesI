@@ -284,9 +284,8 @@ SP:BEGIN
 		
 		/*si no hay ninguna persona con ese id, se inserta en la tabla persona.*/
 		IF vnConteo = 0 THEN
-			INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
-				email, password, genero, direccion, fechaNacimiento, imagenIdentificacion)
-			VALUES (pnIdPersona,
+			INSERT INTO persona 
+			VALUES (null,
 					pcPrimerNombre,
 					pcSegundoNombre,
 					pcPrimerApellido,
@@ -296,11 +295,13 @@ SP:BEGIN
 					pcGenero,
 					pcDireccion,
 					pfFechaNacimiento,
-	        pcImagenIdentificacion);
+	        		pcImagenIdentificacion);
 
 			SET pcMensaje = 'Persona registrada correctamente';
 			COMMIT;
 			SET pbOcurrioError = FALSE;
+		ELSE 
+			SET pcMensaje = 'Error al registrar persona.';
 		END IF;
 
 END $$
@@ -362,12 +363,12 @@ SP:BEGIN
 	END IF;
 
 	/*si la fecha de registro es distinta a la fecha actual, no se podrá registrar.*/
-	SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
+	/*SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
 	WHERE fechaRegistro = pfFechaRegistro;
 	IF pfFechaRegistro != CURDATE() THEN 
 		SET pcMensaje = CONCAT('Esta fecha de registro: ',pfFechaRegistro,' no es válida.');
 		LEAVE SP;
-	END IF;
+	END IF;*/
 
 	/*se supone que no deja que se registren menores pero no sirve alv.*/
 	SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
@@ -395,7 +396,7 @@ SP:BEGIN
 
 	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
 	CALL SP_RegistrarPersona(
-					pnIdPersona,
+					null,
 					pcPrimerNombre,
 					pcSegundoNombre,
 					pcPrimerApellido,
@@ -418,8 +419,8 @@ SP:BEGIN
 	WHERE idCliente = pnIdCliente;
 	IF pcEstado = 'Activo' THEN
 	INSERT INTO cliente
-			VALUES (pnIdCliente,
-					pfFechaRegistro,
+			VALUES (null,
+					CURDATE(),
 					pcEstado,
 					pnIdPersona);
 
@@ -475,9 +476,6 @@ SP:BEGIN
 	SET pbOcurrioError=TRUE;
 
 	/*verifica que los campos no sean nulos.*/
-	IF pnIdEmpleado='' or pnIdEmpleado IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Id del empleado, ');
-	END IF;
 
 	IF pnCodigoEmpleado='' or pnCodigoEmpleado IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Código de empleado, ');
@@ -515,12 +513,12 @@ SP:BEGIN
 	END IF;
 
 	/*si la fecha de ingreso es distinta a la fecha actual, no se podrá registrar.*/
-	SELECT fechaIngreso INTO pfFechaIngreso FROM empleado
+	/*SELECT fechaIngreso INTO pfFechaIngreso FROM empleado
 	WHERE fechaIngreso = pfFechaIngreso;
 	IF pfFechaIngreso != CURDATE() THEN 
 		SET pcMensaje = CONCAT('Esta fecha de ingreso: ',pfFechaIngreso,' no es válida.');
 		LEAVE SP;
-	END IF;
+	END IF;*/
 
 	/*busca si existe una persona con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado 
@@ -556,7 +554,7 @@ SP:BEGIN
 
 	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
 	CALL SP_RegistrarPersona(
-					pnIdPersona,
+					null,
 					pcPrimerNombre,
 					pcSegundoNombre,
 					pcPrimerApellido,
@@ -579,10 +577,10 @@ SP:BEGIN
 	WHERE idEmpleado = pnIdEmpleado;
 	IF pcEstado = 'Activo' THEN
 	INSERT INTO empleado
-			VALUES (pnIdEmpleado,
-			 		pnCodigoEmpleado,
-			 		pfFechaIngreso,
-			 		pfFechaSalida,
+			VALUES (null,
+					pnCodigoEmpleado,
+			 		CURDATE(),
+			 		null,
 			 		pcEstado,
 			 		pnIdPersona,
 			 		pnIdSucursal,
