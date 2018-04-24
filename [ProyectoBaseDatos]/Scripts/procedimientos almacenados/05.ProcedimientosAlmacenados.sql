@@ -235,7 +235,7 @@ SP:BEGIN
 	SET pcMensaje = '';
 	SET pbOcurrioError = TRUE;
 
-		--verifica que no existan campos nulos.
+		/*verifica que no existan campos nulos.*/
 		IF pcPrimerNombre='' or pcPrimerNombre IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'primer Nombre, ');
 		END IF;
@@ -260,7 +260,7 @@ SP:BEGIN
 			SET temMensaje=CONCAT(temMensaje,'Fecha de nacimiento, ');
 		END IF;
 
-		--verifica que no exista ninguna persona con ese Id.
+		/*verifica que no exista ninguna persona con ese Id.*/
 		SELECT COUNT(*) INTO vnConteo FROM persona
 		WHERE idPersona = pnIdPersona;
 		IF vnConteo > 0 THEN
@@ -275,14 +275,14 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;*/
 
-		--compara si temMensaje es diferente de vacio.
+		/*compara si temMensaje es diferente de vacio.*/
 		IF temMensaje<>'' THEN
 			SET pcMensaje = CONCAT('Campos requeridos para poder registrar la Persona: ', temMensaje);
 			SET pbOcurrioError = TRUE;
 			LEAVE SP;
 		END IF;
 		
-		--si no hay ninguna persona con ese id, se inserta en la tabla persona.
+		/*si no hay ninguna persona con ese id, se inserta en la tabla persona.*/
 		IF vnConteo = 0 THEN
 			INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
 				email, password, genero, direccion, fechaNacimiento, imagenIdentificacion)
@@ -341,7 +341,7 @@ SP:BEGIN
 	SET temMensaje='';
 	SET pbOcurrioError=TRUE;
 
-	--verifica que los campos no sea  nulos.
+	/*verifica que los campos no sea  nulos.*/
 	IF pnIdCliente='' or pnIdCliente IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Id del cliente, ');
 	END IF;
@@ -354,14 +354,14 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'Id de la persona, ');
 	END IF;
 
-	--compara si temMensaje es diferente de vacío.
+	/*compara si temMensaje es diferente de vacío.*/
 	IF temMensaje<>'' THEN
 		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Cliente: ', temMensaje);
 		SET pbOcurrioError = TRUE;
 		LEAVE SP;
 	END IF;
 
-	--si la fecha de registro es distinta a la fecha actual, no se podrá registrar.
+	/*si la fecha de registro es distinta a la fecha actual, no se podrá registrar.*/
 	SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
 	WHERE fechaRegistro = pfFechaRegistro;
 	IF pfFechaRegistro != CURDATE() THEN 
@@ -369,15 +369,15 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 
-	--se supone que no deja que se registren menores pero no sirve alv.
-	SELECT TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) edad INTO vnEdad FROM persona
-	WHERE idPersona = pnIdPersona,;
-	IF vnEdad<18 THEN
+	/*se supone que no deja que se registren menores pero no sirve alv.*/
+	SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
+	WHERE idPersona = pnIdPersona;
+	IF vnEdad<216 THEN
 		SET pcMensaje =('No pueden existir clientes menores de edad.');
 		LEAVE SP;
 	END IF;
 
-	--busca si existe una persona con ese id.
+	/*busca si existe una persona con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente 
 	WHERE idPersona = pnIdPersona;
 	IF vnConteo>0 THEN
@@ -385,7 +385,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 	
-	--busca si existe un cliente con ese id.
+	/*busca si existe un cliente con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente 
 	WHERE idCliente = pnIdCliente;
 	IF vnConteo>0 THEN
@@ -393,7 +393,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;	
 
-	--manda a llamar al procedimiento SP_RegistrarPersona.
+	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
 	CALL SP_RegistrarPersona(
 					pnIdPersona,
 					pcPrimerNombre,
@@ -413,7 +413,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 	
-	--si el estado del cliente es activo, registra el cliente.
+	/*si el estado del cliente es activo, registra el cliente.*/
 	SELECT idCliente INTO vnIdCliente FROM cliente 
 	WHERE idCliente = pnIdCliente;
 	IF pcEstado = 'Activo' THEN
@@ -427,7 +427,7 @@ SP:BEGIN
 
 		COMMIT;
 		SET pbOcurrioError=FALSE;
-	--si el estado no es activo, no puede registrar el cliente.
+	/*si el estado no es activo, no puede registrar el cliente.*/
 	ELSE 
 		SET pcMensaje='El cliente no puede ser registrado.';
 		SET pbOcurrioError=TRUE;
@@ -474,7 +474,7 @@ SP:BEGIN
 	SET temMensaje='';
 	SET pbOcurrioError=TRUE;
 
-	--verifica que los campos no sean nulos.
+	/*verifica que los campos no sean nulos.*/
 	IF pnIdEmpleado='' or pnIdEmpleado IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Id del empleado, ');
 	END IF;
@@ -507,14 +507,14 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'Id del empleado superior, ');
 	END IF;
 
-	--compara si temMensaje es diferente de vacío.
+	/*compara si temMensaje es diferente de vacío.*/
 	IF temMensaje<>'' THEN
 		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Empleado: ', temMensaje);
 		SET pbOcurrioError = TRUE;
 		LEAVE SP;
 	END IF;
 
-	--si la fecha de ingreso es distinta a la fecha actual, no se podrá registrar.
+	/*si la fecha de ingreso es distinta a la fecha actual, no se podrá registrar.*/
 	SELECT fechaIngreso INTO pfFechaIngreso FROM empleado
 	WHERE fechaIngreso = pfFechaIngreso;
 	IF pfFechaIngreso != CURDATE() THEN 
@@ -522,7 +522,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 
-	--busca si existe una persona con ese id.
+	/*busca si existe una persona con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado 
 	WHERE idPersona = pnIdPersona;
 	IF vnConteo>0 THEN
@@ -530,7 +530,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 
-	--busca si existe un empleado con ese id.
+	/*busca si existe un empleado con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado 
 	WHERE idEmpleado = pnIdEmpleado;
 	IF vnConteo>0 THEN
@@ -538,7 +538,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;	
 
-	--busca si esa sucursal existe.
+	/*busca si esa sucursal existe.*/
 	SELECT COUNT(*) INTO vnConteo FROM sucursal
 	WHERE idSucursal = pnIdSucursal;
 	IF vnConteo=0 THEN
@@ -546,7 +546,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 
-	--busca si ya existe un empleado con ese codigo de empleado.
+	/*busca si ya existe un empleado con ese codigo de empleado.*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado
 	WHERE codigoEmpleado = pnCodigoEmpleado;
 	IF vnConteo>0 THEN
@@ -554,7 +554,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 
-	--manda a llamar al procedimiento SP_RegistrarPersona.
+	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
 	CALL SP_RegistrarPersona(
 					pnIdPersona,
 					pcPrimerNombre,
@@ -574,7 +574,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 	
-	--si el estado del empleado es activo, registra el empleado.
+	/*si el estado del empleado es activo, registra el empleado.*/
 	SELECT idEmpleado into vnIdEmpleado FROM empleado 
 	WHERE idEmpleado = pnIdEmpleado;
 	IF pcEstado = 'Activo' THEN
@@ -592,7 +592,7 @@ SP:BEGIN
 
 		COMMIT;
 		SET pbOcurrioError=FALSE;
-	--si el estado no es activo, no puede registrar el empleado.
+	/*si el estado no es activo, no puede registrar el empleado.*/
 	ELSE
 		SET pcMensaje='El empleado no puede ser registrado.';
 		SET pbOcurrioError=TRUE;
@@ -635,7 +635,7 @@ SP:BEGIN
 
 	SET pbOcurrioError=TRUE;
 
-	--verifica que los campos no sean nulos.
+	/*verifica que los campos no sean nulos.*/
 	IF pfFechaReservacion='' or pfFechaReservacion IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Fecha de reservación,  ');
 	END IF;
@@ -668,7 +668,7 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'id del Cliente,  ');
 	END IF;
 
-		--busca si ya existe una reservación con ese id.
+		/*busca si ya existe una reservación con ese id.*/
 		SELECT COUNT(*) INTO vnConteo 
 		FROM reservacion
 		WHERE idReservacion = pnIdReservacion;
@@ -677,7 +677,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--busca si existe ese tipo de habitación
+		/*busca si existe ese tipo de habitación.*/
 		SELECT idTipoHabitacion INTO pnTipoHabitacion FROM tipoHabitacion
 		WHERE idTipoHabitacion = pnTipoHabitacion;
 		IF pnTipoHabitacion>4 THEN 
@@ -685,7 +685,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--busca si existe ese tipo de categoría.
+		/*busca si existe ese tipo de categoría.*/
 		SELECT idTipoCategoria INTO pnTipoCategoria FROM TipoCategoria
 		WHERE idTipoCategoria = pnTipoCategoria;
 		IF pnTipoCategoria>5 THEN 
@@ -693,7 +693,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--verifica que la fecha de reservación sea válida.
+		/*verifica que la fecha de reservación sea válida.*/
 		SELECT fechaReservacion INTO pfFechaReservacion FROM reservacion
 		WHERE fechaReservacion = pfFechaReservacion;
 		IF pfFechaReservacion < CURDATE() THEN 
@@ -701,7 +701,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--verifica que la fecha de entrada sea válida.
+		/*verifica que la fecha de entrada sea válida.*/
 		SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
 		WHERE fechaEntrada = pfFechaEntrada;
 		IF pfFechaEntrada < CURDATE() THEN
@@ -709,7 +709,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--verifica que la fecha de salida sea después de la fecha de entrada.
+		/*verifica que la fecha de salida sea después de la fecha de entrada.*/
 		SELECT fechaSalida INTO pfFechaSalida FROM reservacion
 		WHERE fechaSalida = pfFechaSalida;
 		IF pfFechaSalida <= pfFechaEntrada THEN
@@ -717,7 +717,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--verifica que la habitación no esté ocupada.
+		/*verifica que la habitación no esté ocupada.*/
 		SELECT estado INTO vnEstadoHab FROM habitacion h
 		INNER JOIN tipoHabitacion th ON (th.idTipoHabitacion = h.idTipoHabitacion)
 		WHERE estado = vnEstadoHab
@@ -726,14 +726,14 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--compara si el temMensaje es diferente a vacío.
+		/*compara si el temMensaje es diferente a vacío.*/
 		IF temMensaje<>'' THEN
 			SET pcMensaje = CONCAT('Campos requeridos para poder registrar la reservación: ', temMensaje);
 			SET pbOcurrioError = TRUE;
 			LEAVE SP;
 		END IF;
 
-		--si no existe ninguna reservación con ese id, la registra.
+		/*si no existe ninguna reservación con ese id, la registra.*/
 		IF vnConteo = 0 THEN
 			INSERT INTO reservacion
 			VALUES(
@@ -777,7 +777,7 @@ SP:BEGIN
 
 	SET pbOcurrioError=TRUE;
 
-		--busca si existe la reservación.
+		/*busca si existe la reservación.*/
 		SELECT COUNT(*) INTO vnConteo FROM reservacion
 		WHERE idReservacion = pnIdReservacion;
 		IF vnConteo = 0 THEN
@@ -785,7 +785,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--verifica que la fecha de entrada no haya pasado.
+		/*verifica que la fecha de entrada no haya pasado.*/
 		SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
 		WHERE fechaEntrada = pfFechaEntrada;
 		IF pfFechaEntrada < CURDATE() THEN
@@ -793,7 +793,7 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
-		--si la fecha de entrada no ha pasado, elimina la reservación
+		/*si la fecha de entrada no ha pasado, elimina la reservación*/
 		IF pfFechaEntrada > CURDATE() THEN
 			DELETE FROM reservacion
 			WHERE idReservacion= pnIdReservacion;
