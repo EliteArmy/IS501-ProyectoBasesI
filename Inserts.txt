@@ -2,15 +2,15 @@ Insertar Empleado:
 
 // Tabla Persona
 idPersona
-primerNombre
-segundoNombre
-primerApellido
-segundoApellido
-email
-password
-genero
-direccion
-fechaNacimiento
+xx primerNombre
+xx segundoNombre
+xx primerApellido
+xx segundoApellido
+xx email
+xx password
+xx genero
+xx direccion
+xx fechaNacimiento
 imagenIdentificacion
 
 // Tabla Telefono
@@ -39,7 +39,40 @@ salarioMinimo  	()
 salarioMaximo	()
 estado  	(Activo)
 
+----------------------
+// Reservacion
+idReservacion	(null)
+fechaReservacion(curdate())
+fechaEntrada	(2012-02-03)
+fechaSalida	(2012-02-03)
+camaSupletoria	(11)
+estado		(xxxx)
+observacion	(xxxx)
+idCliente	(01)
 
+// Factura
+idFactura	(null)
+numFactura	(615611651)
+fechaEmision	(curdate())
+costeReservacion(calculado)
+costePedido	(caldulado)
+costeProducto	(calculado)
+costeTotal	(calculado)
+cambio		(cambio)
+observacion	(xxxx)
+idCliente	(201)
+idEmpleado	(202)
+idTipoFactura	(2011)
+idModoPago	(315)
+
+// Precio
+idPrecio	(5151)
+precio		(15615)
+fechaInicio	(66151)
+fechaFin	(null)
+descripcion	(dfsdfs)
+idTipoHabitacion(10)
+idTipoCategoria	(10)
 
 
 

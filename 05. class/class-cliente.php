@@ -189,9 +189,34 @@
 			echo "<b>Registro Elimimnado con Exito</b>";
 		}
 
-		// --- Función Futura ---
-		public static function insertarRegistro($conexion){
+		// --- Función que Guardara un nuevo Registro ---
+		public  function registrarCliente($conexion){
 
+			$resultado = $conexion->ejecutarConsulta (
+				"INSERT INTO persona 
+				(idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
+				email, password, genero, direccion, fechaNacimiento, imagenIdentificacion) 
+				VALUES (null, '$this->primerNombre', '$this->segundoNombre', '$this->primerApellido', '$this->segundoApellido', 
+				'$this->email', '$this->password', '$this->genero', '$this->direccion', '$this->fechaNacimiento', null)"
+			);
+
+			$idTemporal = $conexion->ultimoId(); // Obtener el ultimo Id de la persona que se inserto
+
+			$resultado = $conexion->ejecutarConsulta (
+				"INSERT INTO cliente
+				(idCliente, fechaRegistro, estado, idPersona) 
+				VALUES (null,  CURDATE(), '$this->estado', '$idTemporal')
+			");
+
+			$telefono = $this->telefono->getNumeroTelefono();
+
+			$resultado = $conexion->ejecutarConsulta (
+				"INSERT INTO telefono
+				(idTelefono, numeroTelefono, idPersona) 
+				VALUES (null, '$telefono', '$idTemporal')
+			");
+
+			echo "<b>Registro Insertado con Exito</b>";
 		}
 
 		// --- Función Futura ---

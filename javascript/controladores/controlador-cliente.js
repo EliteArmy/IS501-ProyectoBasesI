@@ -78,6 +78,49 @@ function cargarListaClientes(){
 	});
 }
 
+function registrarCliente(){
+	//alert("Entra en la funcion");
+
+	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
+	// following characters: , / ? : @ & = + $ #
+	// Es decir, si el Numero de Telefono inicia con un signo "+" este se reemplaza con "%2B"
+	// para que pueda ser enviado
+	var uri = $("#txtreg-telefono").val();
+	var resultado = encodeURIComponent(uri);
+
+	var parametros = 
+			"txtreg-primer-nombre="+$("#txtreg-primer-nombre").val()+"&"+
+			"txtreg-segundo-nombre="+$("#txtreg-segundo-nombre").val()+"&"+
+			"txtreg-primer-apellido="+$("#txtreg-primer-apellido").val()+"&"+
+			"txtreg-segundo-apellido="+$("#txtreg-segundo-apellido").val()+"&"+
+			"txtreg-email="+$("#txtreg-email").val()+"&"+
+			"txtreg-password="+$("#txtreg-password").val()+"&"+
+			"slcreg-genero="+$("#slcreg-genero").val()+"&"+
+			"txtreg-direccion="+$("#txtreg-direccion").val()+"&"+
+			"txtreg-fecha-nacimiento="+$("#txtreg-fecha-nacimiento").val()+"&"+
+			"txtreg-telefono="+ resultado +"&"+
+			"slcreg-estado="+$("#slcreg-estado").val();
+	
+	//console.log(parametros);
+	//alert(parametros);
+	
+	$.ajax({
+		url: "../ajax/gestion-info-cliente.php?accion=registrar-cliente",
+		method: "POST",
+		data: parametros,
+		success: function(resultado){
+			//alert(resultado);
+			$("#div-resultado-mensaje").html(resultado);
+			$("#div-resultado").show();
+			cargarListaClientes();
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+
+}
+
 // -- Función que Selecciona la Informacion de un cliente
 function obtenerDetalleCliente(idCliente){
 
@@ -177,6 +220,7 @@ function eliminarCliente(idCliente){
 
 
 $("#btn-cerrar-mensaje").click(function(){
+	$("#div-resultado").empty();
 	$("#div-resultado").hide();
 });
 

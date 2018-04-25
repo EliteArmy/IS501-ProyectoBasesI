@@ -1,4 +1,5 @@
 Variables de Tablas:
+-----------------------
 // Persona - Ya hay clase
 idPersona
 primerNombre
@@ -12,6 +13,10 @@ direccion
 fechaNacimiento
 imagenIdentificacion
 
+// Telefono - Ya hay clase
+idTelefono
+numeroTelefono
+idPersona
 
 // Cliente - Ya hay clase
 idCliente
@@ -19,18 +24,53 @@ fechaRegistro
 estado
 idPersona
 
-
-// Empleado - Ya hay clase
-idEmpleado
-codigoEmpleado
-fechaIngreso
-fechaSalida
+-----------------------
+ ----- HABITACION -----
+// Habitacion - Ya hay clase
+idHabitacion
+numeroHabitacion
+numeroPiso
 estado
-idPersona
+descripcion
+idTipoCategoria
+idTipoHabitacion
 idSucursal
-idEmpleadoSuperior
+
+// Precio - Ya hay clase
+idPrecio
+precio
+fechaInicio
+fechaFin
+descripcion
+idTipoHabitacion
+idTipoCategoria
+
+// TipoCategoria - Ya hay clase
+idTipoCategoria
+tipoCategoria
+descripcion
+
+//TipoHabitacion
+idTipoHabitacion
+tipoHabitacion
+descripcion
+
+// Reservacion - Ya hay clase
+idReservacion
+fechaReservacion
+fechaEntrada
+fechaSalida
+camaSupletoria
+estado
+observacion
+idCliente
+
+// Habitacion_Reservacion
+idHabitacion
+idReservacion
 
 
+----- Contabilidad -----
 // Factura - Ya hay clase
 idFactura
 numFactura
@@ -47,47 +87,8 @@ idTipoFactura
 idModoPago
 
 
-// Reservacion - Ya hay clase
-idReservacion
-fechaReservacion
-fechaEntrada
-fechaSalida
-camaSupletoria
-estado
-observacion
-idCliente
-
-
-// Sucursal - Ya hay clase
-idSucursal
-nombre
-cantidadHabitaciones
-telefono
-email
-direccion
-descripcion
-idRestaurante
-idHotel
-
-
-// Habitacion - Ya hay clase
-idHabitacion
-numeroHabitacion
-numeroPiso
-estado
-descripcion
-idTipoCategoria
-idTipoHabitacion
-idSucursal
-
-
-// Servicio
-idServicio
-tipoServicio
-descripcion
-
-
-// Producto
+----- Inventario -----
+// Producto - Ya Hay Clase
 idProducto
 nombre
 codigoBarra
@@ -100,4 +101,84 @@ marca
 descripcion
 idCategoriaProducto
 idBodega
+
+
+----- Recursos Humanos -----
+// Empleado - Ya hay clase
+idEmpleado
+codigoEmpleado
+fechaIngreso
+fechaSalida
+estado
+idPersona
+idSucursal
+idEmpleadoSuperior
+
+// Cargo_Empleado - Ya Hay Clase
+idCargo
+idEmpleado
+
+// CuentaBancaria - Ya Hay Clase
+idCuentaBancaria
+numeroCuenta
+idBanco
+idTipoCuenta
+idEmpleado
+
+// Cargo - Ya Hay Clase
+idCargo
+nombreCargo
+salarioMinimo
+salarioMaximo
+estado
+
+--- Inventario ---
+// Producto - Ya Hay Clase
+idProducto
+nombre
+codigoBarra
+precioCompra
+precioVenta
+fechaIngreso
+fechaVencimiento
+existencia
+marca
+descripcion
+idCategoriaProducto
+idBodega
+
+
+----- Hotel -----
+// Sucursal - Ya hay clase
+idSucursal
+nombre
+cantidadHabitaciones
+telefono
+email
+direccion
+descripcion
+idRestaurante
+idHotel
+
+// Servicio - Ya Hay Clase
+idServicio
+tipoServicio
+descripcion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

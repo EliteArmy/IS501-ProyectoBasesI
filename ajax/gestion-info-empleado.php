@@ -31,7 +31,7 @@
 	 			$_POST["slcreg-sucursal"], 
 	 			$_POST["txtreg-id-empleado"], 
 
-	 		new Telefono(null, $_POST["txtreg-telefono"], null));
+	 			new Telefono(null, $_POST["txtreg-telefono"], null));  //idTelefono, numeroTelefono, idPersona
 
 	 		$empleado->registrarEmpleado($conexion);
 

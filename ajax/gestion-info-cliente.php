@@ -11,22 +11,43 @@
 			Cliente::nombreFuncion($conexion);
 			echo "Mensaje";
 	 	break;
-	 	
-	 	case "":
+	 	*/
+	 	case "registrar-cliente":
+
 	 		//echo "Entra en el case ";
 	 		include ("../05. class/class-cliente.php");
-			Cliente::nombreFuncion($conexion);
-			echo "Mensaje";
+	 		include ("../05. class/class-telefono.php");
+
+	 		$cliente = new Cliente(
+	 			null, //idPersona
+	 			$_POST["txtreg-primer-nombre"],
+	 			$_POST["txtreg-segundo-nombre"],
+	 			$_POST["txtreg-primer-apellido"],
+	 			$_POST["txtreg-segundo-apellido"],
+	 			$_POST["txtreg-email"],
+	 			$_POST["txtreg-password"],
+	 			$_POST["slcreg-genero"],
+	 			$_POST["txtreg-direccion"],
+	 			$_POST["txtreg-fecha-nacimiento"],
+	 			null, //imagenIdentificacion
+
+	 			null, //idCliente
+	 			null, //fechaRegistro
+	 			$_POST["slcreg-estado"], 
+
+	 			new Telefono(null, $_POST["txtreg-telefono"], null)); //idTelefono, numeroTelefono, idPersona
+
+	 		$cliente->registrarCliente($conexion);
+
 	 	break;
-		*/
-	 	
+		
 	 	case "actualizar-cliente":
 
 	 		//include("../05. class/abstract-class-persona.php");
 	 		include("../05. class/class-cliente.php");
 	 		include("../05. class/class-telefono.php");
 
-			$cliente = new Cliente(
+	 		$cliente = new Cliente(
 				$_POST["txt-idcliente"],
 				$_POST["txt-primer-nombre"],
 				$_POST["txt-segundo-nombre"],

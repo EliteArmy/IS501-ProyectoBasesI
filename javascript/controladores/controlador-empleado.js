@@ -226,6 +226,7 @@ function eliminarEmpleado(idEmpleado){
 
 
 $("#btn-cerrar-mensaje").click(function(){
+	$("#div-resultado").empty();
 	$("#div-resultado").hide();
 });
 
