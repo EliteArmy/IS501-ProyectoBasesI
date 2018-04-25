@@ -994,10 +994,6 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'Fecha de emisión, ');
 	END IF;
 
-	IF pdCosteTotal='' or pdCosteTotal IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Coste total');
-	END IF;
-
 	IF pdCambio='' or pdCambio IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Cambio, ');
 	END IF;
@@ -1029,11 +1025,8 @@ SP:BEGIN
 
 	/*Verifica que el coste total sea el correcto*/
 	SELECT costeTotal INTO pdCosteTotal FROM factura
-	WHERE costeTotal = pdCosteTotal 
-			AND costeReservacion = pdCosteReservacion
-			AND costePedido = pdCostePedido 
-			AND costeProducto = pdCosteProducto;
-	IF pdCosteTotal != (pdCosteReservacion + pdCostePedido + pdCosteProducto) THEN
+	WHERE costeTotal = pdCosteTotal;
+	IF pdCosteTotal<0 THEN
 		SET pcMensaje=CONCAT('El coste total: ',pdCosteTotal,' no es correcto.');
 		LEAVE SP;
 	END IF;
@@ -1085,7 +1078,7 @@ SP:BEGIN
 					   pdCosteReservacion,
 					   pdCostePedido,
 					   pdCosteProducto,
-					   pdCosteTotal,
+					   (pdCosteReservacion + pdCostePedido + pdCosteProducto),
 					   pdCambio,
 					   pcObservacion,
 					   pnIdCliente,
