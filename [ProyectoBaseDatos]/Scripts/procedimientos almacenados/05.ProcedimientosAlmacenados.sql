@@ -346,11 +346,11 @@ SP:BEGIN
 
 	/*IF pnIdPersona='' or pnIdPersona IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Id de la persona, ');
-	END IF;*/
+	END IF;
 
 	IF pcEstado='' or pcEstado IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'estado del cliente, ');
-	END IF;
+	END IF;*/
 
 	/*compara si temMensaje es diferente de vacío.*/
 	IF temMensaje<>'' THEN
@@ -368,12 +368,12 @@ SP:BEGIN
 	END IF;*/
 
 	/*busca si el cliente es mayor de edad para poder registrarlo.*/
-	SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
+	/*SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
 	WHERE idPersona = pnIdPersona;
 	IF vnEdad<216 THEN
 		SET pcMensaje =('No pueden existir clientes menores de edad.');
 		LEAVE SP;
-	END IF;
+	END IF;*/
 
 	/*busca si existe una persona con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente 
@@ -412,13 +412,13 @@ SP:BEGIN
 	END IF;
 	
 	/*si el estado del cliente es activo, registra el cliente.*/
-	SELECT idCliente INTO vnIdCliente FROM cliente 
+	SELECT COUNT(*) INTO vnConteo FROM cliente 
 	WHERE idCliente = pnIdCliente;
-	IF pcEstado = 'Activo' THEN
+	IF vnConteo=0 THEN
 	INSERT INTO cliente
 			VALUES (null,
 					CURDATE(),
-					pcEstado,
+					'Activo',
 					LAST_INSERT_ID());
 
 		SET pcMensaje=CONCAT('Cliente registrado correctamente.');
@@ -466,8 +466,7 @@ CREATE PROCEDURE SP_RegistrarEmpleado(
 SP:BEGIN
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vnConteo,
-			vnEdad,
-			vnIdEmpleado INT;
+			vnEdad INT;
 	SET autocommit=0;
 	START TRANSACTION;		
 	SET temMensaje='';
@@ -478,11 +477,6 @@ SP:BEGIN
 	IF pnCodigoEmpleado='' or pnCodigoEmpleado IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Código de empleado, ');
 	END IF;
-
-	IF pcEstado='' or pcEstado IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'estado, ');
-	END IF;
-
 
 	IF pnIdSucursal='' or pnIdSucursal IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Id de sucursal, ');
@@ -540,12 +534,14 @@ SP:BEGIN
 	END IF;
 
 	/*busca si el empleado es mayor de edad para poder registrarlo.*/
-	SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
+	SELECT (TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE())) INTO vnEdad FROM persona
 	WHERE idPersona = pnIdPersona;
 	IF vnEdad<216 THEN
 		SET pcMensaje =('No pueden existir empleados menores de edad.');
 		LEAVE SP;
 	END IF;
+
+	/*poner estado=activo por default*/
 
 	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
 	CALL SP_RegistrarPersona(
@@ -568,15 +564,15 @@ SP:BEGIN
 	END IF;
 	
 	/*si el estado del empleado es activo, registra el empleado.*/
-	SELECT idEmpleado into vnIdEmpleado FROM empleado 
+	SELECT COUNT(*) into vnConteo FROM empleado 
 	WHERE idEmpleado = pnIdEmpleado;
-	IF pcEstado = 'Activo' THEN
+	IF vnConteo=0 THEN
 	INSERT INTO empleado
 			VALUES (null,
 					pnCodigoEmpleado,
 			 		CURDATE(),
 			 		null,
-			 		pcEstado,
+			 		'Activo',
 			 		LAST_INSERT_ID(),
 			 		pnIdSucursal,
 			 		pnIdEmpleadoSuperior);
@@ -951,7 +947,7 @@ END$$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 06: Registrar facturas
+-- Procedimiento 07: Registrar facturas
 
 
 DROP PROCEDURE IF EXISTS SP_RegistrarFacturas;
@@ -1078,6 +1074,8 @@ SP:BEGIN
 		SET pcMensaje = ('El coste de pedido y coste de producto no pueden ir nulos y el coste de reservación debe de ir nulo');
 		LEAVE SP;
 	END IF;
+
+	/*Verifica */
 
 
 	/*Busca si existe una factura con ese id*/
