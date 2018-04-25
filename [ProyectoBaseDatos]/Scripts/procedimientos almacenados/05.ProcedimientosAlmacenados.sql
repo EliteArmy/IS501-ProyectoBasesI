@@ -1,4 +1,4 @@
--- Procedimiento 01:
+/*-- Procedimiento 01:
 -- Obtiene la Lista de Empleados de la Base
 DROP PROCEDURE IF EXISTS SP_ObtenerEmpleados;
  
@@ -59,7 +59,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- CALL SP_GananciaAnual;
+-- CALL SP_GananciaAnual;*/
 
 -- -------------------------------
 -- Procedimiento 04:
@@ -202,7 +202,7 @@ DELIMITER ;*/
 
 
 -- -------------------------------
--- Procedimiento 03: Registrar personas
+-- Procedimiento 01: Registrar personas
 DROP PROCEDURE IF EXISTS SP_RegistrarPersona;
 
 DELIMITER $$
@@ -217,7 +217,7 @@ CREATE PROCEDURE SP_RegistrarPersona(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
-    				IN pcImagenIdentificacion VARCHAR(200),
+    					IN pcImagenIdentificacion VARCHAR(200),
 						IN pcTelefono VARCHAR(15),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
@@ -308,7 +308,7 @@ END $$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 04: Registrar clientes
+-- Procedimiento 02: Registrar clientes
 
 DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
@@ -344,8 +344,12 @@ SP:BEGIN
 
 	/*verifica que los campos no sea  nulos.*/
 
-	IF pnIdPersona='' or pnIdPersona IS NULL THEN
+	/*IF pnIdPersona='' or pnIdPersona IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Id de la persona, ');
+	END IF;*/
+
+	IF pcEstado='' or pcEstado IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'estado del cliente, ');
 	END IF;
 
 	/*compara si temMensaje es diferente de vacío.*/
@@ -415,7 +419,7 @@ SP:BEGIN
 			VALUES (null,
 					CURDATE(),
 					pcEstado,
-					pnIdPersona);
+					LAST_INSERT_ID());
 
 		SET pcMensaje=CONCAT('Cliente registrado correctamente.');
 
@@ -432,7 +436,7 @@ END$$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 05: Registrar empleados
+-- Procedimiento 03: Registrar empleados
 DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
 
 DELIMITER $$
@@ -479,9 +483,6 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'estado, ');
 	END IF;
 
-	IF pnIdPersona='' or pnIdPersona IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Id de persona, ');
-	END IF;
 
 	IF pnIdSucursal='' or pnIdSucursal IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Id de sucursal, ');
@@ -576,7 +577,7 @@ SP:BEGIN
 			 		CURDATE(),
 			 		null,
 			 		pcEstado,
-			 		pnIdPersona,
+			 		LAST_INSERT_ID(),
 			 		pnIdSucursal,
 			 		pnIdEmpleadoSuperior);
 
@@ -595,7 +596,7 @@ END$$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 06: Registrar reservaciones
+-- Procedimiento 04: Registrar reservaciones
 DROP PROCEDURE IF EXISTS SP_RegistrarReservaciones;
 
 DELIMITER $$
@@ -670,17 +671,17 @@ SP:BEGIN
 		END IF;
 
 		/*busca si existe ese tipo de habitación.*/
-		SELECT idTipoHabitacion INTO pnTipoHabitacion FROM tipoHabitacion
+		SELECT COUNT(*) INTO vnConteo FROM tipoHabitacion
 		WHERE idTipoHabitacion = pnTipoHabitacion;
-		IF pnTipoHabitacion>4 THEN 
+		IF pnTipoHabitacion>vnConteo THEN 
 			SET pcMensaje = CONCAT('Este tipo de habitación: ',pnTipoHabitacion,' no existe.');
 			LEAVE SP;
 		END IF;
 
 		/*busca si existe ese tipo de categoría.*/
-		SELECT idTipoCategoria INTO pnTipoCategoria FROM TipoCategoria
+		SELECT COUNT(*) INTO vnConteo FROM TipoCategoria
 		WHERE idTipoCategoria = pnTipoCategoria;
-		IF pnTipoCategoria>5 THEN 
+		IF pnTipoCategoria>vnConteo THEN 
 			SET pcMensaje = CONCAT('Este tipo de categoría: ',pnTipoCategoria,' no existe.');
 			LEAVE SP;
 		END IF;
@@ -712,8 +713,8 @@ SP:BEGIN
 		/*verifica que la habitación no esté ocupada.*/
 		SELECT estado INTO vnEstadoHab FROM habitacion h
 		INNER JOIN tipoHabitacion th ON (th.idTipoHabitacion = h.idTipoHabitacion)
-		WHERE estado = vnEstadoHab
-		IF vnEstadoHab = 'oocupada' THEN
+		WHERE estado = vnEstadoHab;
+		IF vnEstadoHab = 'ocupada' THEN
 			SET pcMensaje = 'Esta habitación está ocupada.';
 			LEAVE SP;
 		END IF;
@@ -793,6 +794,157 @@ SP:BEGIN
 			COMMIT;
 			SET pbOcurrioError = FALSE;
 		END IF;
+
+
+END$$
+
+DELIMITER ;
+
+-- -------------------------------
+-- Procedimiento 05: Registrar hoteles
+
+DROP PROCEDURE IF EXISTS SP_RegistrarHoteles;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarHoteles(
+						IN pnIdHotel INT,
+						IN pcDescripcionHotel VARCHAR(100),
+						OUT pcMensaje VARCHAR(1000),
+						OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+	DECLARE vnConteo INT;
+	SET autocommit=0;
+	START TRANSACTION;		
+
+	SET pbOcurrioError=TRUE;
+
+	/*Busca si existe ya un hotel*/
+	SELECT COUNT(*) INTO vnConteo FROM hotel
+	WHERE idHotel = pnIdHotel;
+	IF vnConteo>0 THEN
+		SET pcMensaje=CONCAT('Ya existe hotel con id: ', pnIdHotel);
+		LEAVE SP;
+	/*Registra el hotel*/
+	ELSE
+		INSERT INTO hotel
+				VALUES(null,
+					   pcDescripcionHotel);
+		SET pcMensaje = 'Hotel registrado correctamente';
+		COMMIT;
+		SET pbOcurrioError = FALSE;
+	END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -------------------------------
+-- Procedimiento 06: Registrar sucursales
+
+DROP PROCEDURE IF EXISTS SP_RegistrarSucursales;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarSucursales(
+						IN pnIdSucursal INT,
+						IN pcNombre VARCHAR(100),
+						IN pnCantidadHabitaciones INT,
+						IN pcTelefono VARCHAR(20),
+						IN pcEmail VARCHAR(50),
+						IN pcDireccion VARCHAR(100),
+						IN pcDescripcion VARCHAR(100),
+						IN pnIdRestaurante INT,
+						IN pnIdHotel INT,
+						IN pcDescripcionHotel VARCHAR(100),
+						OUT pcMensaje VARCHAR(1000),
+						OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+	DECLARE temMensaje VARCHAR(2000);
+	DECLARE vnConteo,
+			vnIdSucursal INT;
+	SET autocommit=0;
+	START TRANSACTION;		
+
+	SET pbOcurrioError=TRUE;
+
+	/*Valida que los campos no sean nulos*/
+	IF pcNombre='' or pcNombre IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Nombre de la sucursal, ');
+	END IF;
+
+	IF pnCantidadHabitaciones='' or pnCantidadHabitaciones IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Cantidad de habitaciones, ');
+	END IF;
+
+	IF pcTelefono='' or pcTelefono IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Teléfono, ');
+	END IF;
+
+	IF pcDireccion='' or pcDireccion IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Dirección de la sucursal, ');
+	END IF;
+
+	IF pnIdRestaurante='' or pnIdRestaurante IS NULL THEN
+		SET temMensaje=CONCAT(temMensaje,'Id del restaurante, ');
+	END IF;
+
+
+	/*compara si el temMensaje es diferente a vacío.*/
+	IF temMensaje<>'' THEN
+		SET pcMensaje=CONCAT('Campos requeridos para poder registrar la Sucursal:',temMensaje);
+		LEAVE SP;
+	END IF;
+
+	/*Busca si existe el restaurante*/
+	SELECT COUNT(*) INTO vnConteo FROM restaurante
+	WHERE idRestaurante = pnIdRestaurante;
+	IF vnConteo=0 THEN
+		SET pcMensaje = ('El restaurante no existe.');
+		LEAVE SP;
+	END IF;
+
+	/*Busca si ya existe una sucursal con ese id*/
+	SELECT COUNT(*) INTO vnConteo FROM sucursal
+	WHERE idSucursal = pnIdSucursal;
+	IF vnConteo>0 THEN
+		SET pcMensaje = ('Ya existe una sucursal con este id.');
+		LEAVE SP;
+	END IF;
+
+	/*manda a llamar al procedimiento SP_RegistrarHoteles*/
+	CALL SP_RegistrarHoteles(
+							 null,
+							 pcDescripcionHotel,
+	               			 pcMensaje,
+							 pbOcurrioError);
+	IF pbOcurrioError=TRUE THEN
+		LEAVE SP;
+	END IF;
+
+
+	/*Agrega la nueva sucursal*/
+	SELECT idSucursal INTO vnIdSucursal FROM sucursal
+	WHERE idSucursal = pnIdSucursal;
+	IF pcNombre!='' THEN
+		INSERT INTO sucursal
+				VALUES(null,
+					   pcNombre,
+					   pnCantidadHabitaciones,
+					   pcTelefono,
+					   pcEmail,
+					   pcDireccion,
+					   pcDescripcion,
+					   pnIdRestaurante,
+					   LAST_INSERT_ID());
+
+		SET pcMensaje = 'Sucursal registrada correctamente';
+		COMMIT;
+		SET pbOcurrioError = FALSE;
+	ELSE
+		SET pcMensaje='El empleado no puede ser registrado ';
+		SET pbOcurrioError=TRUE;
+	END IF;
 
 
 END$$
