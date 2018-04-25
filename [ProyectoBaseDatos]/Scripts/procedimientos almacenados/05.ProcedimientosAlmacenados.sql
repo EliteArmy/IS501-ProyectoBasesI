@@ -1072,9 +1072,9 @@ SP:BEGIN
 	END IF;
 
 	IF pnIdTipoFactura=2
-	 		AND pdCostePedido='' or pdCosteReservacion IS NULL 
-	 		AND pdCosteProducto='' or pdCosteProducto IS NULL
-	 		AND pdCosteReservacion!='' or pdCosteReservacion IS NOT NULL THEN
+	 		AND (pdCostePedido='' or pdCostePedido IS NULL) 
+	 		AND (pdCosteProducto='' or pdCosteProducto IS NULL)
+	 		AND (pdCosteReservacion!='' or pdCosteReservacion IS NOT NULL) THEN
 		SET pcMensaje = ('El coste de pedido y coste de producto no pueden ir nulos y el coste de reservación debe de ir nulo');
 		LEAVE SP;
 	END IF;
