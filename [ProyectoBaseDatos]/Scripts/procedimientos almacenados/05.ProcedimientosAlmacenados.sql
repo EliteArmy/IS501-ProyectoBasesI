@@ -299,7 +299,7 @@ SP:BEGIN
 							pfFechaNacimiento,
 			        		pcImagenIdentificacion);
 					IF pbOcurrioError THEN
-						SET pcMensaje = 'Error al registrar persona.';
+						SET pcMensaje = CONCAT('Error al registrar persona.', pcMensaje);
 						SET pbOcurrioError = TRUE;
 					ELSE 
 						SET pcMensaje = 'Persona registrada correctamente';
@@ -309,7 +309,7 @@ SP:BEGIN
 
 			WHEN pcAccion = 'Editar' THEN
 					UPDATE persona SET
-							idPersona = pnIdPersona,
+							NULL,
 							primerNombre = pcPrimerNombre,
 							segundoNombre = pcSegundoNombre,
 							primerApellido = pcPrimerApellido,
@@ -322,7 +322,7 @@ SP:BEGIN
 							imagenIdentificacion = pcImagenIdentificacion
 					WHERE idPersona = pnIdPersona;
 					IF pbOcurrioError THEN
-						SET pcMensaje = 'Error al actualizar persona.';
+						SET pcMensaje = CONCAT('Error al actualizar persona.', pcMensaje);
 						SET pbOcurrioError = TRUE;
 					ELSE 
 						SET pcMensaje = 'Persona actualizada correctamente';
