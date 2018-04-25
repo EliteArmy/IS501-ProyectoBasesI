@@ -353,11 +353,11 @@ SP:BEGIN
 	END IF;*/
 
 	/*compara si temMensaje es diferente de vacío.*/
-	IF temMensaje<>'' THEN
+	/*IF temMensaje<>'' THEN
 		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Cliente: ', temMensaje);
 		SET pbOcurrioError = TRUE;
 		LEAVE SP;
-	END IF;
+	END IF;*/
 
 	/*si la fecha de registro es distinta a la fecha actual, no se podrá registrar.*/
 	/*SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
@@ -540,8 +540,6 @@ SP:BEGIN
 		SET pcMensaje =('No pueden existir empleados menores de edad.');
 		LEAVE SP;
 	END IF;
-
-	/*poner estado=activo por default*/
 
 	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
 	CALL SP_RegistrarPersona(
