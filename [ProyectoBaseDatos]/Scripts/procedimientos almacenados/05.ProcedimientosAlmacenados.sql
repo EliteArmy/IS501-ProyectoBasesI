@@ -1063,6 +1063,23 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;
 
+	/*Verifica que los costes sean válidos de acuerdo al tipo de factura*/
+	SELECT idTipoFactura INTO pnIdTipoFactura FROM tipoFactura
+	WHERE idTipoFactura = pnIdTipoFactura;
+	IF pnIdTipoFactura=1 AND pdCosteReservacion='' or pdCosteReservacion IS NULL THEN
+		SET pcMensaje = ('El coste de reservación no puede ir nulo');
+		LEAVE SP;
+	END IF;
+
+	IF pnIdTipoFactura=2
+	 		AND pdCostePedido='' or pdCosteReservacion IS NULL 
+	 		AND pdCosteProducto='' or pdCosteProducto IS NULL
+	 		AND pdCosteReservacion!='' or pdCosteReservacion IS NOT NULL THEN
+		SET pcMensaje = ('El coste de pedido y coste de producto no pueden ir nulos y el coste de reservación debe de ir nulo');
+		LEAVE SP;
+	END IF;
+
+
 	/*Busca si existe una factura con ese id*/
 	SELECT COUNT(*) INTO vnConteo FROM factura 
 	WHERE idFactura = pnIdFactura;
