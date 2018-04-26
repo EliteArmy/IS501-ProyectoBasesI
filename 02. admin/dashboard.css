@@ -92,15 +92,17 @@ body {
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 
+
+
+/*--- DATA TABLES --- */
 .page-link{
-padding-bottom: 4px;
-padding-left: 8px;
-padding-right: 8px;
-padding-top: 4px;
+padding-bottom: 6px;
+padding-left: 12px;
+padding-right: 12px;
+padding-top: 6px;
 
 }
 
-/*--- DATA TABLES --- */
 .dataTables_wrapper {
   position: relative;
   clear: both;
@@ -130,6 +132,7 @@ padding-top: 4px;
   float: right;
   text-align: right;
   padding-top: 0.25em;
+  margin-bottom: 15px !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -140,7 +143,7 @@ padding-top: 4px;
   text-decoration: none !important;
   cursor: pointer;
   *cursor: hand;
-  color: #333 !important;
+  /*color: #333 !important;*/
   border: 1px solid transparent;
   border-radius: 2px;
 }
