@@ -26,7 +26,10 @@
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
-
+    
+    <!-- DataTables custom CSS -->
+    <link href="../css/datatables.min.css" rel="stylesheet">
+  
   </head>
 
   <body>
@@ -425,7 +428,10 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="../javascript/bootstrap.min.js"></script>
-
+    
+    <!-- DataTables core Javascript -->
+    <script src="../javascript/datatables.min.js"></script>
+    
     <!-- Custom Javascript -->
     <script src="../javascript/controladores/controlador-cliente.js"></script>
 

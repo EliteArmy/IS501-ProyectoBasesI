@@ -17,49 +17,44 @@ $(document).ready(function(){
 		}
 	});	
 
-	/*
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_empresas",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#slc-empresa").html(resultado);
-		},
-		error:function(e){
-			alert("Error: " + e);
-		}
-	});	
-
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_tipos_calificaciones",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#slc-tipos-calificaciones").html(resultado);
-		},
-		error:function(e){
-			alert("Error: " + e);
-		}
-	});	
-
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_tipos_contenidos",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#slc-tipos-contenidos").html(resultado);
-		},
-		error:function(e){
-			alert("Error: " + e);
-		}
-	});	
-*/
-	cargarListaEmpleados();
-
+	cargarEmpleadosNuevo();
+	
+	//$('#tabla-informacion').DataTable();
 	//alert("Se termino de cargar");
 
 });
 /* --- Fin --- */
+
+function cargarEmpleadosNuevo(){
+
+	$('#tabla-informacion').DataTable({
+      "processing": true,
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": false,
+      "responsive": true,
+      "autoWidth": false,
+      "pageLength": 10,
+      
+      "ajax": {
+        "url": "../ajax/get-info.php?accion=obtener-empleados2",
+        "type": "POST"
+      },
+      "columns": [
+        { "data": "idEmpleado" },
+        { "data": "primerNombre" },
+        { "data": "primerApellido" },
+        { "data": "email" },
+        { "data": "fechaNacimiento" },
+        { "data": "fechaIngreso" },
+        { "data": "estado" },
+        { "data": "direccion" },
+        { "data": "opciones" }
+      ]
+  });
+}
 
 // -- Funcion que obtiene la lista de Empleados -- 
 function cargarListaEmpleados(){
@@ -195,7 +190,7 @@ function actualizarEmpleado(idEmpleado){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			cargarListaEmpleados();
+			cargarEmpleadosNuevo();
 		},
 		error:function(){
 			alert("error");

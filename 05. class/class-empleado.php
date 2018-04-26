@@ -160,6 +160,40 @@
 			}
 		}
 
+
+		// --- Función para obtener la Lista de Empleados ---
+		public static function obtenerListaEmpleados2 ($conexion) {
+			//echo "Entra en la funcion2";
+
+			$resultado = $conexion->ejecutarConsulta(
+				'SELECT emp.idEmpleado, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
+				emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS Edad
+				FROM Persona per 
+				INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)
+				WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18"'
+			);
+			
+			$data = array();
+
+			while ($fila = $conexion->obtenerFila($resultado)){
+				$data[] = $fila;
+			}
+
+			$i = 0;
+
+			foreach ($data as $key) {
+				$data[$i]['opciones'] = '<td><button type="button" onclick="obtenerDetalleEmpleado('.$data[$i]["idEmpleado"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button> 
+						<button type="button" onclick="eliminarEmpleado('.$data[$i]["idEmpleado"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+				$i++;
+			}
+
+			$datax = array('data' => $data);
+
+			echo json_encode($datax);
+
+		}
+
+
 		// --- Función que Prepopula la informacion en el Modal ---
 		public static function obtenerDetalleEmpleado ($conexion, $idEmpleado){
 			//echo "Entra en la funcion";

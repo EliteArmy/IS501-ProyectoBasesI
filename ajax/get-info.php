@@ -26,6 +26,12 @@
 			Empleado::obtenerListaEmpleados($conexion);
 	 	break;
 
+	 	case "obtener-empleados2":
+	 		//echo "Entra en el case Empleado";
+	 		include ("../05. class/class-empleado.php");
+			Empleado::obtenerListaEmpleados2($conexion);
+	 	break;
+
 	 	case "obtener-detalle-empleado":
 	 		//echo "Entra en el case Obtener Empleado";
 	 		include ("../05. class/class-empleado.php");

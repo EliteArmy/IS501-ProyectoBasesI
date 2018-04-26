@@ -23,10 +23,15 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="../fontawesome-5.0.9/web-fonts/css/fontawesome-all.min.css">
-
+    
+    <!-- DataTables custom CSS-->
+    <link href="../css/datatables.css" rel="stylesheet"> 
+    
+    <!-- DataTables custom CSS  -->
+    <link href="../css/dataTables.bootstrap4.css" rel="stylesheet">
+      
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
-
   </head>
 
   <body>
@@ -175,11 +180,11 @@
 
           <h2>Lista de Empleados</h2>
           
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
+          <div  class="table-responsive">
+            <table id="tabla-informacion" class="table table-striped table-sm hover">
               
               <thead>
-                <tr>
+                <tr class="tableheader">
                   <th>Id</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
@@ -444,6 +449,14 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="../javascript/bootstrap.min.js"></script>
+
+
+    <!-- DataTables core Javascript -->
+    <script src="../javascript/datatables.js"></script>
+    
+    <!-- DataTables Style Javascript -->
+    <script src="../javascript/dataTables.bootstrap4.js"></script> 
+    
 
     <!-- Custom Javascript -->
     <script src="../javascript/controladores/controlador-empleado.js"></script>
