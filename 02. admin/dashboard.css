@@ -100,7 +100,7 @@ padding-top: 4px;
 
 }
 
-
+/*--- DATA TABLES --- */
 .dataTables_wrapper {
   position: relative;
   clear: both;
@@ -145,6 +145,18 @@ padding-top: 4px;
   border-radius: 2px;
 }
 
+.dataTables_wrapper {
+    width: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-right: auto;
+    margin-left: auto;
+}
 
+.dataTables_filter{
+  padding: 3px !important;
+}
 
-
+.dataTables_length{
+  padding: 3px !important;
+}
