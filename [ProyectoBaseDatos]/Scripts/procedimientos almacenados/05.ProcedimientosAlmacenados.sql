@@ -234,7 +234,7 @@ SP:BEGIN
 
 	SET temMensaje = '';
 	SET pcMensaje = '';
-	SET pbOcurrioError = TRUE;
+	SET pbOcurrioError = FALSE;
 
 		/*verifica que no existan campos nulos.*/
 		IF pcPrimerNombre='' or pcPrimerNombre IS NULL THEN
@@ -309,7 +309,7 @@ SP:BEGIN
 
 			WHEN pcAccion = 'Editar' THEN
 					UPDATE persona SET
-							NULL,
+							idPersona = pnIdPersona,
 							primerNombre = pcPrimerNombre,
 							segundoNombre = pcSegundoNombre,
 							primerApellido = pcPrimerApellido,
@@ -511,7 +511,7 @@ SP:BEGIN
 	SET autocommit=0;
 	START TRANSACTION;		
 	SET temMensaje='';
-	SET pbOcurrioError=TRUE;
+	SET pbOcurrioError=FALSE;
 
 	/*verifica que los campos no sean nulos.*/
 
