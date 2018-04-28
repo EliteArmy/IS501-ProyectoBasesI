@@ -368,6 +368,7 @@ CREATE PROCEDURE SP_RegistrarCliente(
 						IN pfFechaRegistro DATE,
 						IN pcEstado VARCHAR(15),
 						IN pnIdPersona INT,
+						IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
 
@@ -417,16 +418,16 @@ SP:BEGIN
 	/*busca si existe una persona con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente 
 	WHERE idPersona = pnIdPersona;
-	IF vnConteo>0 THEN
-		SET pcMensaje=CONCAT('Persona con id: ',pnIdPersona,' ya está registrada como empleado.');
+	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
+		SET pcMensaje=CONCAT('Persona con id: ',pnIdPersona,' ya está registrada como cliente.');
 		LEAVE SP;
 	END IF;
 	
 	/*busca si existe un cliente con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente 
 	WHERE idCliente = pnIdCliente;
-	IF vnConteo>0 THEN
-		SET pcMensaje=CONCAT('Cliente con id: ',pnIdEmpleado,' ya existe.');
+	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
+		SET pcMensaje=CONCAT('Cliente con id: ',pnIdCliente,' ya existe.');
 		LEAVE SP;
 	END IF;	
 
@@ -450,27 +451,52 @@ SP:BEGIN
 	IF pbOcurrioError=TRUE THEN
 		LEAVE SP;
 	END IF;
-	
-	/*si el estado del cliente es activo, registra el cliente.*/
-	SELECT COUNT(*) INTO vnConteo FROM cliente 
-	WHERE idCliente = pnIdCliente;
-	IF vnConteo=0 THEN
-	INSERT INTO cliente
-			VALUES (null,
+
+	/*registra el empleado.*/
+	CASE 
+		WHEN pcAccion = 'Agregar' THEN
+				INSERT INTO cliente
+			VALUES (pnIdCliente,
 					CURDATE(),
 					'Activo',
 					LAST_INSERT_ID());
+				IF pbOcurrioError THEN
+					SET pcMensaje=CONCAT('El cliente no se pudo registrar',pcMensaje);
+					SET pbOcurrioError=TRUE;
+				ELSE 
+					SET pcMensaje='Cliente registrado correctamente.';
+					COMMIT;
+					SET pbOcurrioError=FALSE;
+				END IF;
 
-		SET pcMensaje=CONCAT('Cliente registrado correctamente.');
+		WHEN pcAccion = 'Editar' THEN
+				UPDATE cliente SET 
+						idCliente = pnIdCliente,
+						fechaRegistro = pfFechaRegistro,
+						estado = pcEstado,
+						idPersona = pnIdPersona
+				WHERE idCliente = pnIdCliente;
+				IF pbOcurrioError THEN
+					SET pcMensaje=CONCAT('El cliente no se pudo actualizar',pcMensaje);
+					SET pbOcurrioError=TRUE;
+				ELSE
+					SET pcMensaje='Datos del cliente actualizados satisfactorimente.';
+					COMMIT;
+					SET pbOcurrioError=FALSE;
+				END IF;	
 
-		COMMIT;
-		SET pbOcurrioError=FALSE;
-	/*si el estado no es activo, no puede registrar el cliente.*/
-	ELSE 
-		SET pcMensaje='El cliente no puede ser registrado.';
-		SET pbOcurrioError=TRUE;
-	END IF;	
-
+		WHEN pcAccion = 'Eliminar' THEN
+			DELETE FROM cliente
+			WHERE idCliente = pnIdCliente;
+			IF pbOcurrioError THEN
+				SET pcMensaje=CONCAT('El cliente no se pudo eliminar.',pcMensaje);
+				SET pbOcurrioError=TRUE;
+			ELSE
+				SET pcMensaje = 'Cliente eliminado correctamente.';
+				COMMIT;
+				SET pbOcurrioError = FALSE;
+			END IF;
+	END CASE;
 
 END$$
 DELIMITER ;
