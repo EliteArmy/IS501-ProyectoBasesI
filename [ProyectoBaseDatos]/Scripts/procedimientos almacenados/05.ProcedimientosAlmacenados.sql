@@ -184,7 +184,8 @@ SP:BEGIN
 
 		START TRANSACTION;
 		SET temMensaje='';
-		SET pbOcurrioError=TRUE;
+			/*Asignacion de Variables.*//*
+	SET pbOcurrioError=TRUE;
 			SELECT COUNT(*) AS 'cantidad reservaciones' INTO vnConteo, s.nombre INTO pcSucursal FROM reservacion r
 			INNER JOIN habitacion_reservacion hr ON (r.idReservacion = hr.idReservacion)
 			INNER JOIN habitacion h ON (h.idHabitacion = hr.idHabitacion)
@@ -198,8 +199,8 @@ SP:BEGIN
 
 
 END $$
-DELIMITER ;*/
 
+DELIMITER ;*/
 
 -- -------------------------------
 -- Procedimiento 01: Registrar personas
@@ -217,14 +218,15 @@ CREATE PROCEDURE SP_RegistrarPersona(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
-    					IN pcImagenIdentificacion VARCHAR(200),
-						IN pcTelefono VARCHAR(15),
-						IN pcAccion VARCHAR(50),
+    				IN pcImagenIdentificacion VARCHAR(200),
+							IN pcTelefono VARCHAR(15),
+							IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
 
+	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(200);
 	DECLARE vnConteo INT;
 	DECLARE vcValidarCorreo VARCHAR(50);
@@ -232,9 +234,10 @@ SP:BEGIN
 	SET autocommit=0;
 	START TRANSACTION;
 
+	/*Asignacion de Variables*/
 	SET temMensaje = '';
 	SET pcMensaje = '';
-	SET pbOcurrioError = FALSE;
+	SET pbOcurrioError = TRUE;
 
 		/*verifica que no existan campos nulos.*/
 		IF pcPrimerNombre='' or pcPrimerNombre IS NULL THEN
@@ -264,6 +267,7 @@ SP:BEGIN
 		/*verifica que no exista ninguna persona con ese Id.*/
 		SELECT COUNT(*) INTO vnConteo FROM persona
 		WHERE idPersona = pnIdPersona;
+		
 		IF (vnConteo > 0 AND pcAccion = 'Agregar') THEN
 			SET pcMensaje = CONCAT('Esta persona ya esta registrada, ');
 			LEAVE SP;
@@ -336,9 +340,11 @@ SP:BEGIN
 			WHEN pcAccion = 'Eliminar' THEN
 					DELETE FROM persona
 					WHERE idPersona = pnIdPersona;
+					
 					IF pbOcurrioError THEN
 						SET pcMensaje=CONCAT('La persona no se pudo eliminar.',pcMensaje);
-						SET pbOcurrioError=TRUE;
+							/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 					ELSE
 						SET pcMensaje = 'Persona eliminada correctamente.';
 						COMMIT;
@@ -350,8 +356,8 @@ SP:BEGIN
 
 	END CASE;
 
-
 END $$
+
 DELIMITER ;
 
 -- -------------------------------
@@ -360,6 +366,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
 DELIMITER $$
+
 CREATE PROCEDURE SP_RegistrarCliente(
 						IN pnIdCliente INT,
 						IN pcPrimerNombre VARCHAR(20),
@@ -371,22 +378,27 @@ CREATE PROCEDURE SP_RegistrarCliente(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
-    					IN pcImagenIdentificacion VARCHAR(200),
-						IN pcTelefono VARCHAR(15),
-						IN pfFechaRegistro DATE,
-						IN pcEstado VARCHAR(15),
-						IN pnIdPersona INT,
-						IN pcAccion VARCHAR(50),
+    				IN pcImagenIdentificacion VARCHAR(200),
+							IN pcTelefono VARCHAR(15),
+							IN pfFechaRegistro DATE,
+							IN pcEstado VARCHAR(15),
+							IN pnIdPersona INT,
+							IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
+
+	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vnConteo,
 			vnEdad,
 			vnIdCliente INT;
+	
 	SET autocommit=0;
-	START TRANSACTION;		
+	START TRANSACTION;
+	
+	/*Asignacion de Variables.*/
 	SET temMensaje='';
 	SET pbOcurrioError=TRUE;
 
@@ -426,6 +438,7 @@ SP:BEGIN
 	/*busca si existe una persona con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente 
 	WHERE idPersona = pnIdPersona;
+	
 	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
 		SET pcMensaje=CONCAT('Persona con id: ',pnIdPersona,' ya está registrada como cliente.');
 		LEAVE SP;
@@ -434,6 +447,7 @@ SP:BEGIN
 	/*busca si existe un cliente con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente 
 	WHERE idCliente = pnIdCliente;
+	
 	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
 		SET pcMensaje=CONCAT('Cliente con id: ',pnIdCliente,' ya existe.');
 		LEAVE SP;
@@ -451,15 +465,15 @@ SP:BEGIN
 					pcGenero,
 					pcDireccion,
 					pfFechaNacimiento,
-	               	pcImagenIdentificacion,
-	               	pcTelefono,
-	               	pcAccion,
-	               	pcMensaje,
+         	pcImagenIdentificacion,
+	         	pcTelefono,
+	         	pcAccion,
+         	pcMensaje,
 					pbOcurrioError);
+
 	IF pbOcurrioError=TRUE THEN
 		LEAVE SP;
 	END IF;
-
 	
 	CASE 
 		/*registra el cliente.*/
@@ -471,7 +485,8 @@ SP:BEGIN
 					LAST_INSERT_ID());
 				IF pbOcurrioError THEN
 					SET pcMensaje=CONCAT('El cliente no se pudo registrar',pcMensaje);
-					SET pbOcurrioError=TRUE;
+						/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 				ELSE 
 					SET pcMensaje='Cliente registrado correctamente.';
 					COMMIT;
@@ -488,7 +503,8 @@ SP:BEGIN
 				WHERE idCliente = pnIdCliente;
 				IF pbOcurrioError THEN
 					SET pcMensaje=CONCAT('El cliente no se pudo actualizar',pcMensaje);
-					SET pbOcurrioError=TRUE;
+						/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 				ELSE
 					SET pcMensaje='Datos del cliente actualizados satisfactorimente.';
 					COMMIT;
@@ -501,7 +517,8 @@ SP:BEGIN
 			WHERE idCliente = pnIdCliente;
 			IF pbOcurrioError THEN
 				SET pcMensaje=CONCAT('El cliente no se pudo eliminar.',pcMensaje);
-				SET pbOcurrioError=TRUE;
+					/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 			ELSE
 				SET pcMensaje = 'Cliente eliminado correctamente.';
 				COMMIT;
@@ -513,6 +530,7 @@ SP:BEGIN
 	END CASE;
 
 END$$
+
 DELIMITER ;
 
 -- -------------------------------
@@ -532,24 +550,28 @@ CREATE PROCEDURE SP_RegistrarEmpleado(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
-    					IN pcImagenIdentificacion VARCHAR(200),
-						IN pcTelefono VARCHAR(15),
-						IN pfFechaIngreso DATE,
-						IN pfFechaSalida DATE,
-						IN pcEstado VARCHAR(15),
-						IN pnIdPersona INT,
-						IN pnIdSucursal INT,
-						IN pnIdEmpleadoSuperior INT,
-						IN pcAccion VARCHAR(50),
+    				IN pcImagenIdentificacion VARCHAR(200),
+							IN pcTelefono VARCHAR(15),
+								IN pfFechaIngreso DATE,
+								IN pfFechaSalida DATE,
+								IN pcEstado VARCHAR(15),
+								IN pnIdPersona INT,
+								IN pnIdSucursal INT,
+								IN pnIdEmpleadoSuperior INT,
+							IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
+
+	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vnConteo,
 			vnEdad INT;
-	SET autocommit=0;
-	START TRANSACTION;		
+	
+	SET autocommit = 0;
+	START TRANSACTION;
+
 	SET temMensaje='';
 	SET pbOcurrioError=FALSE;
 
@@ -585,6 +607,7 @@ SP:BEGIN
 	/*busca si existe una persona con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado 
 	WHERE idPersona = pnIdPersona;
+	
 	IF (vnConteo > 0 AND pcAccion = 'Agregar') THEN
 		SET pcMensaje=CONCAT('Persona con id: ',pnIdPersona,' ya está registrada como empleado.');
 		LEAVE SP;
@@ -593,6 +616,7 @@ SP:BEGIN
 	/*busca si existe un empleado con ese id.*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado 
 	WHERE idEmpleado = pnIdEmpleado;
+	
 	IF (vnConteo > 0  AND pcAccion = 'Agregar') THEN
 		SET pcMensaje=CONCAT('Empleado con id: ',pnIdEmpleado,' ya existe.');
 		LEAVE SP;
@@ -601,6 +625,7 @@ SP:BEGIN
 	/*busca si esa sucursal existe.*/
 	SELECT COUNT(*) INTO vnConteo FROM sucursal
 	WHERE idSucursal = pnIdSucursal;
+	
 	IF vnConteo = 0 THEN
 		SET pcMensaje=CONCAT('Sucursal con id: ', pnIdSucursal, 'no existe.');
 		LEAVE SP;
@@ -609,6 +634,7 @@ SP:BEGIN
 	/*busca si ya existe un empleado con ese codigo de empleado.*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado
 	WHERE codigoEmpleado = pnCodigoEmpleado;
+	
 	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
 		SET pcMensaje=('Ya existe un empleado con ese código.');
 		LEAVE SP;
@@ -634,15 +660,15 @@ SP:BEGIN
 					pcGenero,
 					pcDireccion,
 					pfFechaNacimiento,
-	               	pcImagenIdentificacion,
-	               	pcTelefono,
-	               	pcAccion,
-	               	pcMensaje,
+         	pcImagenIdentificacion,
+	         	pcTelefono,
+	         	pcAccion,
+         	pcMensaje,
 					pbOcurrioError);
+
 	IF pbOcurrioError=TRUE THEN
 		LEAVE SP;
 	END IF;
-	
 	
 	CASE 
 		/*registra el empleado.*/
@@ -658,7 +684,8 @@ SP:BEGIN
 						 		pnIdEmpleadoSuperior);
 				IF pbOcurrioError THEN
 					SET pcMensaje=CONCAT('El empleado no se pudo registrar',pcMensaje);
-					SET pbOcurrioError=TRUE;
+						/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 				ELSE 
 					SET pcMensaje='Empleado registrado correctamente.';
 					COMMIT;
@@ -679,7 +706,8 @@ SP:BEGIN
 				WHERE idEmpleado = pnIdEmpleado;
 				IF pbOcurrioError THEN
 					SET pcMensaje=CONCAT('El empleado no se pudo actualizar',pcMensaje);
-					SET pbOcurrioError=TRUE;
+						/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 				ELSE
 					SET pcMensaje='Datos del empleado actualizados satisfactorimente.';
 					COMMIT;
@@ -692,7 +720,8 @@ SP:BEGIN
 			WHERE idEmpleado = pnIdEmpleado;
 			IF pbOcurrioError THEN
 				SET pcMensaje=CONCAT('El empleado no se pudo eliminar.',pcMensaje);
-				SET pbOcurrioError=TRUE;
+					/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 			ELSE
 				SET pcMensaje = 'Empleado eliminado correctamente.';
 				COMMIT;
@@ -704,6 +733,7 @@ SP:BEGIN
 	END CASE;
 
 END$$
+
 DELIMITER ;
 
 -- -------------------------------
@@ -719,26 +749,29 @@ CREATE PROCEDURE SP_RegistrarReservaciones(
 							IN pnCamaSupletoria INT,
 							IN pcEstado VARCHAR(50),
 							IN pcObservacion VARCHAR(1000),
-							IN pnTipoHabitacion INT,
-							IN pnTipoCategoria INT,
-							IN pnNoAdultos INT,
-							IN pnNoNinos INT,
 							IN pnIdCliente INT,
-							IN pcAccion VARCHAR(50),
+								IN pnTipoHabitacion INT,
+								IN pnTipoCategoria INT,
+								IN pnNoAdultos INT,
+								IN pnNoNinos INT,
+								IN pcAccion VARCHAR(50),
 							OUT pcMensaje VARCHAR(200),
 							OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
+	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vcAccion VARCHAR(30);
 	DECLARE vnConteo, 
 			vnIdReservacion INT;
 	DECLARE vnEstadoHab VARCHAR(100);
-	SET autocommit=0;
+	
+	SET autocommit = 0;
 	START TRANSACTION;		
-	SET temMensaje='';
-
-	SET pbOcurrioError=FALSE;
+	
+	/*Asignacion de Variables*/
+	SET temMensaje = '';
+	SET pbOcurrioError = TRUE;
 
 	/*verifica que los campos no sean nulos.*/
 	IF pfFechaEntrada='' or pfFechaEntrada IS NULL THEN
@@ -773,6 +806,7 @@ SP:BEGIN
 		SELECT COUNT(*) INTO vnConteo 
 		FROM reservacion
 		WHERE idReservacion = pnIdReservacion;
+		
 		IF (vnConteo > 0 AND pcAccion = 'Agregar') THEN
 			SET pcMensaje = CONCAT('Esta reservación ya esta registrada.');
 			LEAVE SP;
@@ -781,6 +815,7 @@ SP:BEGIN
 		/*busca si existe ese tipo de habitación.*/
 		SELECT COUNT(*) INTO vnConteo FROM tipoHabitacion
 		WHERE idTipoHabitacion = pnTipoHabitacion;
+		
 		IF vnConteo = 0 THEN 
 			SET pcMensaje = CONCAT('Este tipo de habitación: ',pnTipoHabitacion,' no existe.');
 			LEAVE SP;
@@ -789,6 +824,7 @@ SP:BEGIN
 		/*busca si existe ese tipo de categoría.*/
 		SELECT COUNT(*) INTO vnConteo FROM TipoCategoria
 		WHERE idTipoCategoria = pnTipoCategoria;
+		
 		IF vnConteo = 0 THEN 
 			SET pcMensaje = CONCAT('Este tipo de categoría: ',pnTipoCategoria,' no existe.');
 			LEAVE SP;
@@ -805,6 +841,7 @@ SP:BEGIN
 		/*verifica que la fecha de entrada sea válida.*/
 		SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
 		WHERE fechaEntrada = pfFechaEntrada;
+		
 		IF pfFechaEntrada < CURDATE() THEN
 			SET pcMensaje = CONCAT('Esta fecha de entrada: ',pfFechaEntrada,' no es válida.');
 			LEAVE SP;
@@ -813,6 +850,7 @@ SP:BEGIN
 		/*verifica que la fecha de salida sea después de la fecha de entrada.*/
 		SELECT fechaSalida INTO pfFechaSalida FROM reservacion
 		WHERE fechaSalida = pfFechaSalida;
+		
 		IF pfFechaSalida <= pfFechaEntrada THEN
 			SET pcMensaje = CONCAT('Esta fecha de salida: ',pfFechaSalida,' no es válida.');
 			LEAVE SP;
@@ -822,6 +860,7 @@ SP:BEGIN
 		SELECT estado INTO vnEstadoHab FROM habitacion h
 		INNER JOIN tipoHabitacion th ON (th.idTipoHabitacion = h.idTipoHabitacion)
 		WHERE estado = vnEstadoHab;
+		
 		IF vnEstadoHab = 'ocupada' THEN
 			SET pcMensaje = 'Esta habitación está ocupada.';
 			LEAVE SP;
@@ -847,9 +886,9 @@ SP:BEGIN
 								pnCamaSupletoria,
 								pcEstado,
 								pcObservacion,
-								pnNoAdultos,
-								pnNoNinos,
-								pnIdCliente);
+									pnNoAdultos,
+									pnNoNinos,
+									pnIdCliente);
 						IF pbOcurrioError THEN
 							SET pcMensaje = 'Error al agregar reservación.';
 							SET pbOcurrioError = TRUE;
@@ -888,7 +927,8 @@ SP:BEGIN
 			WHERE idEmpleado = pnIdEmpleado;
 			IF pbOcurrioError THEN
 				SET pcMensaje=CONCAT('La reservación no se pudo eliminar.',pcMensaje);
-				SET pbOcurrioError=TRUE;
+					/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 			ELSE
 				SET pcMensaje = 'Reservación eliminada correctamente.';
 				COMMIT;
@@ -899,9 +939,9 @@ SP:BEGIN
     		SET pcMensaje='No se selecciono Agregar, Editar ni Eliminar ';
 	END CASE;
 
-END$$
-DELIMITER ;
+END $$
 
+DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 07: Eliminar reservaciones
@@ -920,11 +960,13 @@ SP:BEGIN
 	SET autocommit=0;
 	START TRANSACTION;		
 
+		/*Asignacion de Variables.*//*
 	SET pbOcurrioError=TRUE;
 
 		--busca si existe la reservación.
 		SELECT COUNT(*) INTO vnConteo FROM reservacion
 		WHERE idReservacion = pnIdReservacion;
+		
 		IF vnConteo = 0 THEN
 			SET pcMensaje = CONCAT('No existe la reservación.');
 			LEAVE SP;
@@ -933,6 +975,7 @@ SP:BEGIN
 		--verifica que la fecha de entrada no haya pasado.
 		SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
 		WHERE fechaEntrada = pfFechaEntrada;
+		
 		IF pfFechaEntrada < CURDATE() THEN
 			SET pcMensaje = CONCAT('La reservación con fecha: ',pfFechaEntrada,' ya no se puede cancelar.');
 			LEAVE SP;
@@ -966,15 +1009,20 @@ CREATE PROCEDURE SP_RegistrarHoteles(
 						OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
+
+	/*Declaracion de Variables.*/
 	DECLARE vnConteo INT;
+	
 	SET autocommit=0;
 	START TRANSACTION;		
 
-	SET pbOcurrioError=FALSE;
+	/*Asignacion de Variables*/
+	SET pbOcurrioError=TRUE;
 
 	/*Busca si existe ya un hotel*/
 	SELECT COUNT(*) INTO vnConteo FROM hotel
 	WHERE idHotel = pnIdHotel;
+	
 	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
 		SET pcMensaje=CONCAT('Ya existe hotel con id: ', pnIdHotel);
 		LEAVE SP;
@@ -983,45 +1031,49 @@ SP:BEGIN
 	/*Registra el hotel*/
 	CASE 
 		WHEN pcAccion = 'Agregar' THEN
-						INSERT INTO hotel
-								VALUES(null,
-									   pcDescripcionHotel);
-						IF pbOcurrioError THEN
-							SET pcMensaje = 'Error al registrar hotel.';
-							SET pbOcurrioError=TRUE;
-						ELSE
-							SET pcMensaje = 'Hotel registrado correctamente';
-							COMMIT;
-							SET pbOcurrioError = FALSE;
-						END IF;
+				INSERT INTO hotel
+						VALUES(null, pcDescripcionHotel);
+				
+				IF pbOcurrioError THEN
+					SET pcMensaje = 'Error al registrar hotel.';
+						/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
+				ELSE
+					SET pcMensaje = 'Hotel registrado correctamente';
+					COMMIT;
+					SET pbOcurrioError = FALSE;
+				END IF;
 
 		/*edita el hotel*/
 		WHEN pcAccion='Editar' THEN 
-						UPDATE hotel SET
-								idHotel = pnIdHotel,
-								descripcion = pcDescripcionHotel
-						WHERE idHotel = pnIdHotel;
-						IF pbOcurrioError THEN
-							SET pcMensaje = 'Error al editar hotel.';
-							SET pbOcurrioError = TRUE;
-						ELSE
-							SET pcMensaje = 'Hotel actualizado correctamente.';
-								COMMIT;
-								SET pbOcurrioError = FALSE;
-						END IF;
+				UPDATE hotel SET
+						idHotel = pnIdHotel,
+						descripcion = pcDescripcionHotel
+				WHERE idHotel = pnIdHotel;
+				
+				IF pbOcurrioError THEN
+					SET pcMensaje = 'Error al editar hotel.';
+					SET pbOcurrioError = TRUE;
+				ELSE
+					SET pcMensaje = 'Hotel actualizado correctamente.';
+						COMMIT;
+						SET pbOcurrioError = FALSE;
+				END IF;
 
-			/*elimina el hotel*/
-			WHEN pcAccion = 'Eliminar' THEN
-			DELETE FROM hotel
-			WHERE idHotel = pnIdHotel;
-			IF pbOcurrioError THEN
-				SET pcMensaje=CONCAT('El hotel no se pudo eliminar.',pcMensaje);
-				SET pbOcurrioError=TRUE;
-			ELSE
-				SET pcMensaje = 'Hotel eliminado correctamente.';
-				COMMIT;
-				SET pbOcurrioError = FALSE;
-			END IF;
+		/*elimina el hotel*/
+		WHEN pcAccion = 'Eliminar' THEN
+				DELETE FROM hotel
+				WHERE idHotel = pnIdHotel;
+				
+				IF pbOcurrioError THEN
+					SET pcMensaje=CONCAT('El hotel no se pudo eliminar.',pcMensaje);
+						/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
+				ELSE
+					SET pcMensaje = 'Hotel eliminado correctamente.';
+					COMMIT;
+					SET pbOcurrioError = FALSE;
+				END IF;
 
 		ELSE 
     		SET pcMensaje='No se selecciono Agregar, Editar ni Eliminar ';
@@ -1037,6 +1089,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS SP_RegistrarSucursales;
 
 DELIMITER $$
+
 CREATE PROCEDURE SP_RegistrarSucursales(
 						IN pnIdSucursal INT,
 						IN pcNombre VARCHAR(100),
@@ -1053,13 +1106,17 @@ CREATE PROCEDURE SP_RegistrarSucursales(
 						OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
+	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vnConteo,
 			vnIdSucursal INT;
+	
 	SET autocommit=0;
 	START TRANSACTION;		
 
-	SET pbOcurrioError=TRUE;
+	/*Asignacion de Variables.*/
+	SET pbOcurrioError = TRUE;
+	SET pcMensaje = '';
 
 	/*Valida que los campos no sean nulos*/
 	IF pcNombre='' or pcNombre IS NULL THEN
@@ -1092,6 +1149,7 @@ SP:BEGIN
 	/*Busca si existe el restaurante*/
 	SELECT COUNT(*) INTO vnConteo FROM restaurante
 	WHERE idRestaurante = pnIdRestaurante;
+	
 	IF vnConteo=0 THEN
 		SET pcMensaje = ('El restaurante no existe.');
 		LEAVE SP;
@@ -1100,6 +1158,7 @@ SP:BEGIN
 	/*Busca si ya existe una sucursal con ese id*/
 	SELECT COUNT(*) INTO vnConteo FROM sucursal
 	WHERE idSucursal = pnIdSucursal;
+	
 	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
 		SET pcMensaje = ('Ya existe una sucursal con este id.');
 		LEAVE SP;
@@ -1107,11 +1166,12 @@ SP:BEGIN
 
 	/*manda a llamar al procedimiento SP_RegistrarHoteles*/
 	CALL SP_RegistrarHoteles(
-							 null,
-							 pcDescripcionHotel,
-							 pcAccion,
-	               			 pcMensaje,
-							 pbOcurrioError);
+							null,
+							pcDescripcionHotel,
+							pcAccion,
+	            pcMensaje,
+							bOcurrioError);
+	
 	IF pbOcurrioError=TRUE THEN
 		LEAVE SP;
 	END IF;
@@ -1130,9 +1190,11 @@ SP:BEGIN
 										   pcDescripcion,
 										   pnIdRestaurante,
 										   LAST_INSERT_ID());
+						
 						IF pbOcurrioError THEN
 							SET pcMensaje = 'Error al registrar sucursal.';
-							SET pbOcurrioError=TRUE;
+								/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 						ELSE
 							SET pcMensaje = 'Sucursal registrada correctamente';
 							COMMIT;
@@ -1152,6 +1214,7 @@ SP:BEGIN
 									idRestaurante = pnIdRestaurante,
 									idHotel = pnIdHotel
 						WHERE idSucursal = pnIdSucursal;
+						
 						IF pbOcurrioError THEN
 							SET pcMensaje = 'Error al editar sucursal.';
 							SET pbOcurrioError = TRUE;
@@ -1165,9 +1228,11 @@ SP:BEGIN
 			WHEN pcAccion = 'Eliminar' THEN
 			DELETE FROM sucursal
 			WHERE idSucursal = pnIdSucursal;
+			
 			IF pbOcurrioError THEN
 				SET pcMensaje=CONCAT('La sucursal no se pudo eliminar.',pcMensaje);
-				SET pbOcurrioError=TRUE;
+					/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
 			ELSE
 				SET pcMensaje = 'Sucursal eliminada correctamente.';
 				COMMIT;
@@ -1179,17 +1244,17 @@ SP:BEGIN
 	END CASE;
 
 
-
 END$$
+
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 07: Registrar facturas
-
+-- Procedimiento 07: Registrar Facturas
 
 DROP PROCEDURE IF EXISTS SP_RegistrarFacturas;
 
 DELIMITER $$
+
 CREATE PROCEDURE SP_RegistrarFacturas(
 						IN pnIdFactura INT,
 						IN pnNumFactura INT,
@@ -1208,15 +1273,21 @@ CREATE PROCEDURE SP_RegistrarFacturas(
 						OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
+
+	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vnConteo,
 			vnIdSucursal INT;
+	
 	SET autocommit=0;
 	START TRANSACTION;		
+	
 	SET temMensaje='';
 	SET pcMensaje='';
-	SET pbOcurrioError=TRUE;
 
+	/*Asignacion de Variables.*/
+	SET pbOcurrioError=TRUE;
+	SET pcMensaje = '';
 
 	/*Valida que los campos no sean nulos*/
 	IF pnNumFactura='' or pnNumFactura IS NULL THEN
@@ -1251,6 +1322,7 @@ SP:BEGIN
 	/*Busca si existe una factura con el numero de factura*/
 	SELECT COUNT(numFactura) INTO vnConteo FROM factura 
 	WHERE numFactura = pnNumFactura;
+	
 	IF vnConteo>0 THEN
 		SET pcMensaje=CONCAT('Factura con el número: ',pnNumFactura,' ya esta registrada.');
 		LEAVE SP;
@@ -1259,6 +1331,7 @@ SP:BEGIN
 	/*Verifica que el coste total sea el correcto*/
 	SELECT costeTotal INTO pdCosteTotal FROM factura
 	WHERE costeTotal = pdCosteTotal;
+	
 	IF pdCosteTotal<0 THEN
 		SET pcMensaje=CONCAT('El coste total: ',pdCosteTotal,' no es correcto.');
 		LEAVE SP;
@@ -1267,6 +1340,7 @@ SP:BEGIN
 	/*Busca si existe el cliente*/
 	SELECT COUNT(*) INTO vnConteo FROM cliente
 	WHERE idCliente = pnIdCliente;
+	
 	IF vnConteo=0 THEN
 		SET pcMensaje = ('El cliente no existe');
 		LEAVE SP;
@@ -1275,6 +1349,7 @@ SP:BEGIN
 	/*Busca si existe el empleado*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado
 	WHERE idEmpleado = pnIdEmpleado;
+	
 	IF vnConteo=0 THEN
 		SET pcMensaje = ('El empleado no existe');
 		LEAVE SP;
@@ -1283,6 +1358,7 @@ SP:BEGIN
 	/*Busca si existe el tipo de factura*/
 	SELECT COUNT(*) INTO vnConteo FROM tipoFactura
 	WHERE idTipoFactura = pnIdTipoFactura;
+	
 	IF vnConteo=0 THEN
 		SET pcMensaje = ('El tipo de factura no existe');
 		LEAVE SP;
@@ -1291,6 +1367,7 @@ SP:BEGIN
 	/*Busca si existe el modo de pago*/
 	SELECT COUNT(*) INTO vnConteo FROM modoPago
 	WHERE idModoPago = pnIdModoPago;
+	
 	IF vnConteo=0 THEN
 		SET pcMensaje = ('El modo de pago no existe');
 		LEAVE SP;
@@ -1299,6 +1376,7 @@ SP:BEGIN
 	/*Verifica que los costes sean válidos de acuerdo al tipo de factura*/
 	SELECT idTipoFactura INTO pnIdTipoFactura FROM tipoFactura
 	WHERE idTipoFactura = pnIdTipoFactura;
+	
 	IF pnIdTipoFactura=1 AND pdCosteReservacion='' or pdCosteReservacion IS NULL THEN
 		SET pcMensaje = ('El coste de reservación no puede ir nulo');
 		LEAVE SP;
@@ -1314,10 +1392,10 @@ SP:BEGIN
 
 	/*Verifica */
 
-
 	/*Busca si existe una factura con ese id*/
 	SELECT COUNT(*) INTO vnConteo FROM factura 
 	WHERE idFactura = pnIdFactura;
+	
 	IF vnConteo>0 THEN
 		SET pcMensaje=CONCAT('Factura con id: ',pnIdFactura,' ya esta registrada.');
 		LEAVE SP;
@@ -1344,8 +1422,11 @@ SP:BEGIN
 			SET pbOcurrioError=FALSE;
 	END IF;
 
-
-		
-
 END$$
+
 DELIMITER ;
+
+-- -------------------------------
+-- Procedimiento 08:
+
+
