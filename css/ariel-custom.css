@@ -126,7 +126,7 @@ body {
 	padding-right:16px;
 	padding-top:16px;
 
-	text-align:left;
+	text-align:left !important;
 }
 
 .titulo-caja-registro{

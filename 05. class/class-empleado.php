@@ -214,15 +214,20 @@
 		// --- Función que Guardara un nuevo Registro ---
 		public function registrarEmpleado ($conexion){
 			
+			$passwordHash = md5($this->password);
+
 			$resultado = $conexion->ejecutarConsulta (
 				"INSERT INTO persona 
 				(idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
 				email, password, genero, direccion, fechaNacimiento, imagenIdentificacion) 
 				VALUES (null, '$this->primerNombre', '$this->segundoNombre', '$this->primerApellido', '$this->segundoApellido', 
-				'$this->email', '$this->password', '$this->genero', '$this->direccion', '$this->fechaNacimiento', null)"
+				'$this->email', '$passwordHash', '$this->genero', '$this->direccion', '$this->fechaNacimiento', null)"
 			);
 
-			$idTemporal = $conexion->ultimoId(); // Obtener el ultimo Id de la persona que se inserto
+			if(!($idTemporal = $conexion->ultimoId())){  // Obtener el ultimo Id de la persona que se inserto
+				echo "<b>No se pudo Insertar el registro.</b>";
+				return "";
+			}
 
 			$resultado = $conexion->ejecutarConsulta (
 				"INSERT INTO empleado 

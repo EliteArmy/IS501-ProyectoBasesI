@@ -42,3 +42,4 @@ Cosas por Hacer:
 • Login podria no funcionar cuando se trata de cliente o empleado
 • Denegar Login cuando el empleado ya no esta activo
 
+• Poner password visible en los modales

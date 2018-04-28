@@ -112,6 +112,7 @@ function registrarEmpleado(){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
+			$("#div-resultado").fadeOut(4000);
 			cargarListaEmpleados();
 		},
 		error:function(){
@@ -221,7 +222,7 @@ function eliminarEmpleado(idEmpleado){
 
 
 $("#btn-cerrar-mensaje").click(function(){
-	$("#div-resultado").empty();
+	$("#div-resultado-mensaje").empty();
 	$("#div-resultado").hide();
 });
 
