@@ -33,6 +33,22 @@ $(document).ready(function(){
 		}
 	});
 		
+
+	// Carga las opciones de Registro de Reservacion
+	$.ajax({
+		url: "../ajax/get-info-reservacion.php?accion=obtener-sucursal",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado)
+			$("#slc-sucursal").html(resultado);
+		},
+		error: function(e){
+			//alert ("Error: " + e);
+			//$("#reporte-error").html(e);
+		}
+	});
+
 	cargarLista();
 
 	//alert("Se termino de cargar");
@@ -46,12 +62,20 @@ function cargarLista(){
 	
 }
 
+// Cada que este select cambie, ocurrira un update el slc-precio
+$('#slc-categoria').change(function() {
+	cambiosPrecio();
+});
+
+$('#slc-tipo').change(function() {
+	cambiosPrecio();
+});
+
 function cambiosPrecio(){
-	
   var parametros = "slc-categoria=" + $("#slc-categoria").val() +"&"+
   "slc-tipo=" + $("#slc-tipo").val();
 	
-	if( $("#slc-categoria").val() && $("#slc-tipo").val() ){
+	if ($("#slc-categoria").val() && $("#slc-tipo").val()){
 	   //alert("IF");
 	   $.ajax({
   	  url: "../ajax/get-info-reservacion.php?accion=obtener-precio",
@@ -61,7 +85,6 @@ function cambiosPrecio(){
          $("#slc-precio").html(resultado);
          //$("#div-resultado-mensaje").html(resultado);
          //$("#div-resultado").show();
-         //alert("Success");
       },
       error:function(err){
 				alert("Error: " + err);
@@ -70,55 +93,32 @@ function cambiosPrecio(){
 	}    
 }
 
-// Cada que este select cambie, ocurrira un update en el alert
-$('#slc-categoria').change(function() {
-	cambiosPrecio();
+
+
+// Cada que este select cambie, ocurrira un update el slc-habitacion
+$('#slc-sucursal').change(function() {
+	cambiosHabitacion();
 });
 
-$('#slc-tipo').change(function() {
-	cambiosPrecio();
-});
+function cambiosHabitacion(){
+	var parametros = "slc-sucursal=" + $("#slc-sucursal").val();
 
-function registrarCliente(){
-	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
-	// following characters: , / ? : @ & = + $ #
-	// Es decir, si el Numero de Telefono inicia con un signo "+" este se reemplaza con "%2B"
-	// para que pueda ser enviado
-
-	var uri = $("#txt-telefono").val();
-	var resultadoTel = encodeURIComponent(uri);
-
-	var parametros = "idCliente=" + idCliente +"&"+
-			"txt-idcliente="+$("#txt-idcliente").val()+"&"+
-			
-			"txt-primer-nombre="+$("#txt-primer-nombre").val()+"&"+
-			"txt-segundo-nombre="+$("#txt-segundo-nombre").val()+"&"+
-			"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
-			"txt-segundo-apellido="+$("#txt-segundo-apellido").val()+"&"+
-			"txt-email="+$("#txt-email").val()+"&"+
-			//"txt-telefono="+$("#txt-telefono").val()+"&"+
-			"txt-telefono="+ resultadoTel +"&"+
-			"txt-fecha-nacimiento="+$("#txt-fecha-nacimiento").val()+"&"+
-			"slc-estado="+$("#slc-estado").val()+"&"+
-			"txt-direccion="+$("#txt-direccion").val();
-
-	//alert(parametros);
-
-		$.ajax({
-		url: "../ajax/gestion-info-tablero.php?accion=",
-		method: "POST",
-		data: parametros,
-		success:function(resultado){
-			//alert(resultado);
-			$("#div-resultado-mensaje").html(resultado);
-			$("#div-resultado").show();
-		},
-		error:function(){
-			alert("error");
+	$.ajax({
+	  url: "../ajax/get-info-reservacion.php?accion=obtener-habitacion",
+    method: "POST",
+    data: parametros,
+    success: function(resultado){
+       $("#slc-habitacion").html(resultado);
+       //$("#div-resultado-mensaje").html(resultado);
+       //$("#div-resultado").show();
+    },
+    error:function(err){
+			alert("Error: " + err);
 		}
-	});
+  });
 }
 
+// Función para Registrar una Reservación
 function registrarReservacion(){
 	
 	$.ajax({
@@ -136,13 +136,14 @@ function registrarReservacion(){
 	});
 }
 
-
+// Gestiona el div que muestra mensajes o errores
 $("#btn-cerrar-mensaje").click(function(){
 	$("#div-resultado-mensaje").empty();
 	$("#div-resultado").hide();
 });
 
-/*$('#slc-categoria').change(function() {
+/*
+$('#slc-categoria').change(function() {
     var id = $(this).val() +"&"+
     ; //get the current value's option
     
@@ -157,4 +158,5 @@ $("#btn-cerrar-mensaje").click(function(){
 					alert("Error: " + err);
 				}
     });
-});*/
+});
+*/

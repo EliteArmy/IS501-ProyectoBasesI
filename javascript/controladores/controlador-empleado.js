@@ -220,7 +220,7 @@ function eliminarEmpleado(idEmpleado){
 	});
 }
 
-
+// Gestiona el div que muestra mensajes o errores
 $("#btn-cerrar-mensaje").click(function(){
 	$("#div-resultado-mensaje").empty();
 	$("#div-resultado").hide();

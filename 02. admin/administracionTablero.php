@@ -300,6 +300,20 @@
                     </div>
 
                     <div class="form-group">
+                      <label for="slc-sucursal">Sucursal</label>
+                        <select id="slc-sucursal" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-habitacion">Habitacion</label>
+                        <select id="slc-habitacion" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
                       <label for="txt-observacion">Observación</label>
                       <textarea class="form-control" id="txt-observacion" placeholder="Ingrese alguna Observación del cliente"></textarea>
                     </div>

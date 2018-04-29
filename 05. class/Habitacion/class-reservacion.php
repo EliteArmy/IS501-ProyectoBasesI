@@ -135,7 +135,6 @@
 
 			while (($fila = $conexion->obtenerFila($resultado))){
 				echo '<option value="'.$fila["0"].'">'."Precio: ".$fila["1"]." ".$fila["2"].'</option>';
-				//echo "while";
 			}
 
 			//echo "Finalizo en la funcion";
@@ -143,14 +142,40 @@
 		}
 
 		// --- Función Futura ---
-		public static function nombreFuncion2 ($conexion){
+		public static function obtenerListaSucursal ($conexion){
+			$resultado = $conexion->ejecutarConsulta (
+				"SELECT suc.idSucursal, suc.nombre, suc.cantidadHabitaciones, suc.telefono,
+				suc.direccion, suc.descripcion
+				FROM Sucursal suc
+			");
+
+			while (($fila = $conexion->obtenerFila($resultado))){
+				echo '<option value="'.$fila["0"].'">'.$fila["1"].'</option>';
+			}
+		}
+
+		// --- Función Futura ---
+		public static function obtenerHabitacion ($conexion, $sucursal){
+			$resultado = $conexion->ejecutarConsulta (
+				"SELECT hab.idHabitacion, hab.numeroHabitacion, hab.numeroPiso, hab.estado, hab.descripcion, suc.nombre
+				FROM Habitacion hab 
+				INNER JOIN sucursal suc ON (hab.idSucursal = suc.idSucursal)
+				WHERE hab.idSucursal = '$sucursal'
+			");
+
+			while (($fila = $conexion->obtenerFila($resultado))){
+				echo '<option value="'.$fila["0"].'">'."Numero: ".$fila["1"].", Piso: ".$fila["2"].'</option>';
+			}
+		}
+
+		// --- Función Futura ---
+		public static function nombreFuncion1 ($conexion){
 
 		}
 
 		// --- Función Futura ---
-		public static function nombreFuncion3 ($conexion){
+		public static function nombreFuncion2 ($conexion){
 
 		}
-
 	}
 ?>
