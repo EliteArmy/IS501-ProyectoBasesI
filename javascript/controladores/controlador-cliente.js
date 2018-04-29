@@ -179,7 +179,7 @@ function actualizarCliente(idCliente){
 			"txt-direccion="+$("#txt-direccion").val();
 	
 	//console.log(parametros);
-	//alert(parametros);
+	alert(parametros);
 	
 	$.ajax({
 		url: "../ajax/gestion-info-cliente.php?accion=actualizar-cliente",

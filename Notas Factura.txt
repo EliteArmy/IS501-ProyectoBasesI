@@ -42,7 +42,5 @@ Insertar DetalleFactura:
 	idReservacion
 
 
-
-
 Mostrar Habitaciones disponibles en determinada sucursal
 

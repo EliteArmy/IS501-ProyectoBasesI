@@ -24,6 +24,23 @@ fechaRegistro
 estado
 idPersona
 
+Temporada Baja - 60
+Temporada Alta - 100
+Promocion Especial - 30
+
+Tipo Habitacion
+1. Cama Personal - 100
+2. Cama Matrimonial - 150
+3. Cama Doble - 200
+4. Cama Triple - 300
+
+Categoria
+1. Especial - 100
+2. Standard - 150
+3. Premium - 300
+4. Corporativa - 350
+
+
 -----------------------
  ----- HABITACION -----
 // Habitacion - Ya hay clase
