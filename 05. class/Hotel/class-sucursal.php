@@ -124,14 +124,37 @@
 				echo 		'<td>' . $fila["telefono"] . '</td>';
 				echo 		'<td>' . $fila["direccion"] . '</td>';
 				echo 		'<td>' . $fila["descripcion"] . '</td>';
+				echo '<td><button type="button" onclick="obtenerDetalleSucursal('.$fila["idSucursal"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button>
+							<button type="button" onclick="eliminarSucursal('.$fila["idSucursal"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 				echo '</tr>';
 			}
 
 		}
 
-		// --- Función Futura  ---
-		public static function nombreFuncion2 ($conexion){
+		// --- Función que Prepopula la informacion en el Modal ---
+		public static function obtenerDetalleSucursal ($conexion, $idSucursal){
 
+			$resultado = $conexion->ejecutarConsulta(
+				"SELECT *
+				FROM Sucursal suc
+				WHERE suc.idSucursal = '$idSucursal'");
+
+			$fila = $conexion->obtenerFila($resultado);
+
+			echo json_encode($fila);
+		}
+
+		// --- Función para Eliminar Sucursales de la Base de Datos ---
+		public static function eliminarSucursal ($conexion, $idSucursal){
+
+			//echo "Entra en la función";
+			$resultado = $conexion->ejecutarConsulta(
+				"DELETE suc 
+					FROM sucursal suc
+					WHERE suc.idSucursal = '$idSucursal'
+				");
+
+			echo "<b>Registro Elimimnado con Exito</b>";
 		}
 
 		// --- Función Futura ---

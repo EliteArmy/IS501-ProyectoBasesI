@@ -162,6 +162,20 @@
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
 
+          <!--para registrar una sucursal-->
+          <div id="div-resultado" style="display: none;" class="alert alert-success fade show alert-dismissible " role="alert">
+            <div id="div-resultado-mensaje">
+            </div>
+            <button type="button" class="btn btn-default btn-sm close" aria-label="Close">
+              <span id="btn-cerrar-mensaje" class="fas fa-times" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistroSucursal">Registrar sucursal  
+            </button>
+          </div>
+
           <h2>Lista de Sucursales</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -174,6 +188,7 @@
                   <th>Telefono</th>
                   <th>Direccion</th>
                   <th>Descripcion</th>
+                  <th>Opciones</th>
                 </tr>
               </thead>
 
@@ -212,6 +227,154 @@
             </table>
 
           </div>
+
+        <!-- Modal para Registrar Sucursal -->
+          <div class="modal fade" id="modalRegistroSucursal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre la sucursal</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+
+
+                    <div class="form-group">
+                      <label for="txtreg-nombre">Nombre</label>
+                      <input type="text" class="form-control" id="txtreg-nombre" placeholder="Ingrese el Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-cantidad-hab">Cantidad de Habitaciones</label>
+                      <input type="number" class="form-control" id="txtreg-segundo-nombre" placeholder="Ingrese la Cantidad de Habitaciones">
+                    </div>
+                    
+                     <div class="form-group">
+                      <label for="txtreg-telefono">Teléfono</label>
+                      <input type="text" class="form-control" id="txtreg-telefono" placeholder="Ingrese el Telefono">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-email">Email</label>
+                      <input type="email" class="form-control" id="txtreg-email" placeholder="Ingrese el correo electrónico">
+                    </div>                
+                    
+                    <div class="form-group">
+                      <label for="txtreg-direccion">Dirección</label>
+                      <textarea class="form-control" id="txtreg-direccion" placeholder="Ingrese la dirección"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-descripcion">Descripción</label>
+                      <textarea class="form-control" id="txtreg-descripcion" placeholder="Ingrese la descripción"></textarea>
+                    </div>                    
+
+                    <div class="form-group">
+                      <label for="txtreg-id-restaurante">Id del Restaurante</label>
+                      <input type="text" class="form-control" id="txtreg-id-restaurante" placeholder="Ingrese el Id del Restaurante">
+                    </div>
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="registrarSucursal()">Guardar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal para actualizar sucursal -->
+          <div class="modal fade" id="modalForm" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre la Sucursal</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+                    
+                    <div style="display: none" class="form-group">
+                      <label for="txt-idSucursal">Id</label>
+                      <input type="text" class="form-control" id="txt-idSucursal">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-nombre">Nombre</label>
+                      <input type="text" class="form-control" id="txt-nombre" placeholder="Ingrese el Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-cantidad-hab">Cantidad de Habitaciones</label>
+                      <input type="number" class="form-control" id="txt-cantidad-hab" placeholder="Ingrese la Cantidad de Habitaciones">
+                    </div>
+                    
+                     <div class="form-group">
+                      <label for="txt-telefono">Teléfono</label>
+                      <input type="text" class="form-control" id="txt-telefono" placeholder="Ingrese el Telefono">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-email">Email</label>
+                      <input type="email" class="form-control" id="txt-email" placeholder="Ingrese el correo electrónico">
+                    </div>                
+                    
+                    <div class="form-group">
+                      <label for="txt-direccion">Dirección</label>
+                      <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-descripcion">Descripción</label>
+                      <textarea class="form-control" id="txt-descripcion" placeholder="Ingrese la descripción"></textarea>
+                    </div>                    
+
+                    <div class="form-group">
+                      <label for="txt-id-restaurante">Id del Restaurante</label>
+                      <input type="text" class="form-control" id="txt-id-restaurante" placeholder="Ingrese el Id del Restaurante">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-id-hotel">Id del Hotel</label>
+                      <input type="text" class="form-control" id="txt-id-hotel" placeholder="Ingrese el Id del Hotel">
+                    </div>
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarSucursal(document.getElementById('txt-idSucursal').value)">Actualizar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </main>
       </div>
     </div>

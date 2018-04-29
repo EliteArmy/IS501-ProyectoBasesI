@@ -68,6 +68,12 @@
 	 		Habitacion::obtenerListaHabitaciones($conexion);
 	 	break;
 		
+		case "obtener-detalle-sucursal":
+	 	//echo "Entra en el case Obtener Cliente";
+	 		include ("../05. class/Hotel/class-sucursal.php"); 
+	 		Sucursal::obtenerDetalleSucursal($conexion, $_POST["idSucursal"]);	 		
+	 	break;
+
 
 	 	default:
 	 		echo "Accion invalida";
