@@ -1427,6 +1427,157 @@ END$$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 08:
+-- Procedimiento 08: Registrar habitación
+
+DROP PROCEDURE IF EXISTS SP_RegistrarHabitacion;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarHabitacion(
+							IN pnIdHabitacion INT,
+							IN pcNumeroHabitacion VARCHAR(5),
+							IN pnNumeroPiso INT,
+							IN pcEstado VARCHAR(50),
+							IN pcDescripcion VARCHAR(100),
+							IN pnIdTipoCategoria INT,
+							IN pnIdTipoHabitacion INT,
+							IN pnIdSucursal INT,
+								IN pcAccion VARCHAR(50),
+							OUT pcMensaje VARCHAR(1000),
+							OUT pbOcurrioError BOOLEAN)
 
 
+SP:BEGIN
+	/*Declaracion de Variables.*/
+	DECLARE temMensaje VARCHAR(2000);
+	DECLARE vnConteo INT;
+
+	SET autocommit=0;
+	START TRANSACTION;	
+
+	/*Asignacion de Variables*/
+	SET temMensaje ='';
+	SET pcMensaje = '';
+	SET pbOcurrioError = FALSE;
+
+	/*Verifica que los datos no sean nulos*/
+	IF pcNumeroHabitacion = '' or pcNumeroHabitacion IS NULL THEN
+		SET temMensaje = CONCAT(temMensaje, 'Número de habitación, ');
+ 	END IF;	
+
+ 	IF pnNumeroPiso = '' or pnNumeroPiso IS NULL THEN
+ 		SET temMensaje = CONCAT(temMensaje, 'Número de piso, ');
+ 	END IF;	
+
+ 	IF pnIdTipoCategoria = '' or pnIdTipoCategoria IS NULL THEN
+ 		SET temMensaje = CONCAT(temMensaje, 'Id tipo de categoría, ');
+ 	END IF;
+
+ 	IF pnIdTipoHabitacion = '' or pnIdTipoHabitacion IS NULL THEN
+ 		SET temMensaje = CONCAT(temMensaje, 'Id tipo de habitación, ');
+ 	END IF;
+
+ 	IF pnIdSucursal = '' or pnIdSucursal IS NULL THEN
+ 		SET temMensaje = CONCAT(temMensaje, 'Id de la sucursal, ');
+ 	END IF;
+
+ 	/*compara si el temMensaje es diferente a vacío.*/
+	IF temMensaje<>'' THEN
+		SET pcMensaje=CONCAT('Campos requeridos para poder registrar la Sucursal:',temMensaje);
+		LEAVE SP;
+	END IF;
+
+	/*Verifica que no exista la sucursal*/
+	SELECT COUNT(*) INTO vnConteo FROM habitacion
+	WHERE idHabitacion = pnIdHabitacion;
+	IF vnConteo > 0 AND pcAccion = 'Agregar' THEN
+		SET pcMensaje = 'Ya existe una habitación con este id.';
+		LEAVE SP;
+	END IF;
+
+	/*busca si existe ese tipo de habitación.*/
+	SELECT COUNT(*) INTO vnConteo FROM tipoHabitacion
+	WHERE idTipoHabitacion = pnIdTipoHabitacion;
+	IF vnConteo = 0 THEN 
+		SET pcMensaje = CONCAT('Este tipo de habitación: ',pnIdTipoHabitacion,' no existe.');
+		LEAVE SP;
+	END IF;
+
+	/*busca si existe ese tipo de categoría.*/
+	SELECT COUNT(*) INTO vnConteo FROM TipoCategoria
+	WHERE idTipoCategoria = pnIdTipoCategoria;
+	IF vnConteo = 0 THEN 
+		SET pcMensaje = CONCAT('Este tipo de categoría: ',pnIdTipoCategoria,' no existe.');
+		LEAVE SP;
+	END IF;
+
+	/*busca si existe la sucursal*/
+	SELECT COUNT(*) INTO vnConteo FROM sucursal
+	WHERE idSucursal = pnIdSucursal;
+	IF vnConteo = 0 THEN
+		SET pcMensaje = CONCAT('Esta sucursal: ',pnIdSucursal, 'no existe.');
+		LEAVE SP;
+	END IF;
+
+
+	CASE 
+		/*registra la habitación*/
+		WHEN pcAccion = 'Agregar' THEN
+						INSERT INTO habitacion
+									VALUES(null,
+										   pcNumeroHabitacion,
+										   pnNumeroPiso,
+										   'Disponible',
+										   pcDescripcion,
+										   pnIdTipoCategoria,
+										   pnIdTipoHabitacion,
+										   pnIdSucursal);
+						IF pbOcurrioError THEN
+							SET pcMensaje = 'Error al registrar habitación.';
+							SET pbOcurrioError=TRUE;
+						ELSE
+							SET pcMensaje = 'Habitación registrada correctamente';
+							COMMIT;
+							SET pbOcurrioError = FALSE;
+						END IF;
+
+		/*edita la habitación*/
+		WHEN pcAccion='Editar' THEN 
+						UPDATE habitacion SET
+									idHabitacion = pnIdHabitacion,
+									numeroHabitacion = pcNumeroHabitacion,
+									numeroPiso = pnNumeroPiso,
+									estado = pcEstado,
+									descripcion = pcDescripcion,
+									idTipoCategoria = pnIdTipoCategoria,
+									idTipoHabitacion = pnIdTipoHabitacion,
+									idSucursal = pnIdSucursal
+						WHERE idHabitacion = pnIdHabitacion;
+						IF pbOcurrioError THEN
+							SET pcMensaje = 'Error al editar habitación.';
+							SET pbOcurrioError = TRUE;
+						ELSE
+							SET pcMensaje = 'Habitación actualizada correctamente.';
+								COMMIT;
+								SET pbOcurrioError = FALSE;
+						END IF;
+
+			/*elimina la habitación*/
+			WHEN pcAccion = 'Eliminar' THEN
+			DELETE FROM habitacion
+			WHERE idHabitacion = pnIdHabitacion;
+			IF pbOcurrioError THEN
+				SET pcMensaje=CONCAT('La habitación no se pudo eliminar.',pcMensaje);
+				SET pbOcurrioError=TRUE;
+			ELSE
+				SET pcMensaje = 'Habitación eliminada correctamente.';
+				COMMIT;
+				SET pbOcurrioError = FALSE;
+			END IF;
+
+		ELSE 
+    		SET pcMensaje='No se selecciono Agregar, Editar ni Eliminar ';
+	END CASE;
+
+
+END$$
+DELIMITER ;
