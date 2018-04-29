@@ -62,7 +62,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS basedatoshotel.Hotel (
   idHotel INT NOT NULL AUTO_INCREMENT,
-  descripcion VARCHAR(100) NULL,
+  descripcionHotel VARCHAR(100) NULL,
   PRIMARY KEY (idHotel))
 ENGINE = InnoDB;
 
@@ -331,7 +331,7 @@ CREATE TABLE IF NOT EXISTS basedatoshotel.Reservacion (
   camaSupletoria INT NULL,
   estado VARCHAR(15) NOT NULL,
   observacion VARCHAR(100) NULL COMMENT 'Pedidos del Cliente',
-  noAdultos INT NULL, 
+  noAdultos INT NOT NULL, 
   noNinos INT NULL,
   idCliente INT NOT NULL,
   PRIMARY KEY (idReservacion),

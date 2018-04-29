@@ -160,7 +160,7 @@
 				"SELECT hab.idHabitacion, hab.numeroHabitacion, hab.numeroPiso, hab.estado, hab.descripcion, suc.nombre
 				FROM Habitacion hab 
 				INNER JOIN sucursal suc ON (hab.idSucursal = suc.idSucursal)
-				WHERE hab.idSucursal = '$sucursal' AND hab.estado = 'Disponible'
+				WHERE hab.idSucursal = '$sucursal'
 			");
 
 			while (($fila = $conexion->obtenerFila($resultado))){

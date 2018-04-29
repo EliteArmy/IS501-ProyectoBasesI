@@ -8,6 +8,7 @@
 		case "registrar-sucursal":
 			//echo "Entra en el case ";
 	 		include ("../05. class/Hotel/class-sucursal.php");
+	 		include ("../05. class/Hotel/class-hotel.php");
 			
 			$sucursal = new Sucursal(
 	 			null, //idSucursal
@@ -19,7 +20,8 @@
 	 			$_POST["txtreg-direccion"],
 	 			$_POST["txtreg-descripcion"],
 	 			$_POST["txtreg-id-restaurante"],
-	 			null); //idHotel
+	 			null,
+	 			$_POST["txtreg-descripcionHotel"]); //idHotel
 
 			$sucursal->registrarSucursal($conexion);
 	 	break;
@@ -27,6 +29,7 @@
 	 	case "actualizar-sucursal":
 	 		//echo "Entra en el case ";
 	 		include ("../05. class/Hotel/class-sucursal.php");
+	 		include ("../05. class/Hotel/class-hotel.php");
 			
 		 	$sucursal = new Sucursal(
 		 			$_POST["#txt-idSucursal"], 
@@ -38,7 +41,8 @@
 		 			$_POST["txt-direccion"],
 		 			$_POST["txt-descripcion"],
 		 			$_POST["txt-id-restaurante"],
-		 			$_POST["#txt-id-hotel"]); 
+		 			$_POST["#txt-id-hotel"],
+		 			$_POST["txtreg-descripcionHotel"]); 
 
 		 	$sucursal->actualizarSucursal($conexion);
 

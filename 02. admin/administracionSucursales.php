@@ -279,6 +279,11 @@
                       <input type="text" class="form-control" id="txtreg-id-restaurante" placeholder="Ingrese el Id del Restaurante">
                     </div>
 
+                    <div class="form-group">
+                      <label for="txtreg-hotel">Descripción del Hotel</label>
+                      <textarea class="form-control" id="txtreg-hotel" placeholder="Ingrese la descripción del hotel"></textarea>
+                    </div>  
+
                     <button type="button" class="btn btn-primary submitBtn" onclick="registrarSucursal()">Guardar</button>
 
                     <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
@@ -356,6 +361,11 @@
                       <label for="txt-id-hotel">Id del Hotel</label>
                       <input type="text" class="form-control" id="txt-id-hotel" placeholder="Ingrese el Id del Hotel">
                     </div>
+
+                    <div class="form-group">
+                      <label for="txt-hotel">Descripción del Hotel</label>
+                      <textarea class="form-control" id="txt-hotel" placeholder="Ingrese la descripción del hotel"></textarea>
+                    </div>  
 
                     <button type="button" class="btn btn-primary submitBtn" onclick="actualizarSucursal(document.getElementById('txt-idSucursal').value)">Actualizar</button>
 

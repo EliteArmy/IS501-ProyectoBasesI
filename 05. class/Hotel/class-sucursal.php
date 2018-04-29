@@ -135,14 +135,57 @@
 		public static function obtenerDetalleSucursal ($conexion, $idSucursal){
 
 			$resultado = $conexion->ejecutarConsulta(
-				"SELECT *
-				FROM Sucursal suc
+				"SELECT suc.nombre, suc.cantidadHabitaciones, suc.telefono,
+				suc.email, suc.direccion, suc.descripcion, suc.idRestaurante, suc.idHotel, h.descripcionHotel FROM Sucursal suc
+				INNER JOIN hotel h ON (h.idHotel = suc.idHotel)
 				WHERE suc.idSucursal = '$idSucursal'");
 
 			$fila = $conexion->obtenerFila($resultado);
 
 			echo json_encode($fila);
 		}
+
+		/*Función para registrar sucursal*/
+		public static function registrarSucursal($conexion){
+
+			$resultado = $conexion->ejecutarConsulta(
+						"INSERT INTO hotel 
+								VALUES(null,
+										'$this->descripcion')");
+
+			$resultado = $conexion->ejecutarConsulta(
+						"INSERT INTO sucursal
+								VALUES (null,
+										'$this->nombre',
+										'$this->cantidadHabitaciones',
+										'$this->telefono',
+										'$this->email',
+										'$this->direccion',
+										'$this->descripcion',
+										'$this->idRestaurante',
+										null)");
+
+
+			echo "<b>Registro Insertado con Exito</b>";
+		}
+
+		/*Función para actualizar la información */
+		public function actualizarSucursal($conexion){
+			$resultado = $conexion->ejecutarConsulta(
+						"UPDATE sucursal suc
+							SET suc.nombre = '$this->nombre',
+								suc.cantidadHabitaciones = '$this->cantidadHabitaciones',
+								suc.telefono = '$this->telefono',
+								suc.email = '$this->email',
+								suc.direccion = '$this->direccion',
+								suc.descripcion = '$this->descripcion',
+								suc.idRestaurante = '$this->idRestaurante',
+								suc.idHotel = '$this->idHotel'
+							WHERE suc.idSucursal = '$this->idSucursal'");
+
+		echo "<b>Registro actualizado con Exito</b>";
+		}
+
 
 		// --- Función para Eliminar Sucursales de la Base de Datos ---
 		public static function eliminarSucursal ($conexion, $idSucursal){
@@ -154,11 +197,14 @@
 					WHERE suc.idSucursal = '$idSucursal'
 				");
 
-			echo "<b>Registro Elimimnado con Exito</b>";
+			echo "<b>Registro Eliminado con Exito</b>";
 		}
 
+
+
+
 		// --- Función Futura ---
-		public static function nombreFuncion3 ($conexion){
+		public static function nombreFuncion6 ($conexion){
 
 		}
 

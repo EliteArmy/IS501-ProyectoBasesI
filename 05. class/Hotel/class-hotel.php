@@ -3,12 +3,12 @@
 	class Hotel {
 
 		private $idHotel;
-		private $descripcion;
+		private $descripcionHotel;
 
 		public function __construct($idHotel,
 					$descripcion){
 			$this->idHotel = $idHotel;
-			$this->descripcion = $descripcion;
+			$this->descripcionHotel = $descripcionHotel;
 		}
 		public function getIdHotel(){
 			return $this->idHotel;
@@ -16,15 +16,15 @@
 		public function setIdHotel($idHotel){
 			$this->idHotel = $idHotel;
 		}
-		public function getDescripcion(){
-			return $this->descripcion;
+		public function getDescripcionHotel(){
+			return $this->descripcionHotel;
 		}
-		public function setDescripcion($descripcion){
-			$this->descripcion = $descripcion;
+		public function setDescripcionHotel($descripcionHotel){
+			$this->descripcionHotel = $descripcionHotel;
 		}
 		public function __toString(){
 			return "IdHotel: " . $this->idHotel . 
-				" Descripcion: " . $this->descripcion;
+				" Descripcion: " . $this->descripcionHotel;
 		}
 	}
 ?>
