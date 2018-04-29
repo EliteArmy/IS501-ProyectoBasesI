@@ -1857,159 +1857,56 @@ INSERT INTO producto_proveedor (idProducto, idProveedor) VALUES (29, 22);
 
 
 -- -----------------------------------------------------
--- 150 Inserts de tabla precio
+-- 48 Inserts de tabla precio
 -- -----------------------------------------------------
-INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES
-('1', 1000, '2017-02-14', '2016-07-19', 'temporada baja', 4, 3),
-('10', 680, '2015-09-14', '2017-09-08', 'temporada alta', 1, 1),
-('100', 377, '2018-02-09', '2013-03-05', 'temporada alta', 4, 2),
-('101', 617, '2013-10-31', '2014-08-21', 'promociones', 2, 5),
-('102', 666, '2015-05-20', '2014-08-25', 'temporada baja', 2, 1),
-('103', 745, '2015-02-16', '2014-05-03', 'promociones', 4, 2),
-('104', 788, '2015-05-16', '2015-05-09', 'temporada alta', 3, 4),
-('105', 449, '2016-03-06', '2013-08-26', 'temporada alta', 4, 1),
-('106', 587, '2016-05-12', '2014-12-11', 'promociones', 4, 5),
-('107', 100, '2013-05-01', '2014-09-04', 'temporada baja', 2, 5),
-('108', 669, '2012-11-23', '2016-07-09', 'promociones', 1, 2),
-('109', 588, '2012-03-18', '2013-08-28', 'temporada baja', 3, 4),
-('11', 871, '2017-12-11', '2012-08-06', 'temporada baja', 3, 3),
-('110', 273, '2013-10-24', '2017-10-24', 'promociones', 1, 3),
-('111', 276, '2012-04-13', '2012-11-15', 'temporada baja', 3, 2),
-('112', 144, '2014-04-12', '2013-05-18', 'promociones', 2, 2),
-('113', 851, '2013-08-01', '2017-07-08', 'temporada baja', 3, 3),
-('114', 863, '2017-06-03', '2012-02-21', 'temporada baja', 3, 5),
-('115', 815, '2015-12-27', '2014-01-31', 'temporada alta', 2, 2),
-('116', 367, '2015-02-25', '2014-02-26', 'temporada alta', 2, 3),
-('117', 127, '2012-08-23', '2018-04-05', 'temporada baja', 4, 4),
-('118', 852, '2014-02-12', '2013-05-09', 'temporada baja', 3, 3),
-('119', 841, '2014-01-04', '2015-06-15', 'temporada alta', 4, 1),
-('12', 1320, '2014-10-26', '2013-04-10', 'promociones', 3, 1),
-('120', 434, '2015-12-18', '2013-06-17', 'temporada alta', 3, 3),
-('121', 253, '2015-11-29', '2016-03-23', 'promociones', 1, 2),
-('122', 715, '2012-08-20', '2012-02-16', 'promociones', 3, 4),
-('123', 682, '2014-02-13', '2018-02-12', 'promociones', 2, 4),
-('124', 665, '2013-06-24', '2012-11-07', 'temporada alta', 4, 3),
-('125', 18, '2015-01-03', '2018-03-18', 'temporada baja', 3, 4),
-('126', 443, '2013-06-08', '2015-02-13', 'temporada alta', 2, 5),
-('127', 937, '2015-11-12', '2012-04-13', 'promociones', 3, 3),
-('128', 741, '2015-03-21', '2017-08-23', 'promociones', 3, 4),
-('129', 433, '2014-11-29', '2016-11-16', 'promociones', 2, 3),
-('13', 1370, '2016-03-02', '2013-05-08', 'promociones', 4, 1),
-('130', 227, '2014-04-20', '2016-04-13', 'temporada baja', 4, 3),
-('131', 615, '2012-02-17', '2015-02-20', 'temporada baja', 1, 5),
-('132', 477, '2016-04-23', '2012-01-13', 'temporada alta', 2, 4),
-('133', 147, '2014-12-07', '2016-08-15', 'temporada baja', 4, 2),
-('134', 456, '2014-06-29', '2013-08-24', 'temporada alta', 3, 2),
-('135', 281, '2016-07-13', '2012-06-12', 'temporada alta', 2, 3),
-('136', 227, '2012-12-23', '2015-11-07', 'temporada alta', 4, 4),
-('137', 439, '2012-07-07', '2013-12-10', 'temporada alta', 3, 2),
-('138', 595, '2017-11-28', '2013-02-25', 'temporada alta', 3, 3),
-('139', 115, '2015-03-05', '2016-03-17', 'temporada alta', 4, 5),
-('14', 539, '2012-04-19', '2012-01-18', 'promociones', 1, 2),
-('140', 647, '2015-03-31', '2017-12-19', 'temporada baja', 1, 3),
-('141', 443, '2017-12-24', '2016-06-05', 'promociones', 1, 5),
-('142', 815, '2017-12-04', '2012-10-13', 'temporada alta', 3, 2),
-('143', 347, '2013-06-30', '2016-10-26', 'promociones', 3, 5),
-('144', 252, '2014-03-02', '2012-11-17', 'temporada baja', 1, 5),
-('145', 449, '2017-09-21', '2012-07-14', 'temporada alta', 2, 2),
-('146', 719, '2015-06-28', '2017-11-12', 'temporada baja', 4, 2),
-('147', 669, '2013-01-05', '2014-05-29', 'temporada alta', 2, 1),
-('148', 553, '2012-09-11', '2013-11-16', 'promociones', 4, 5),
-('149', 439, '2018-02-26', '2014-04-24', 'temporada alta', 3, 2),
-('15', 784, '2017-05-18', '2017-04-30', 'temporada alta', 3, 5),
-('150', 873, '2013-06-09', '2016-08-05', 'promociones', 2, 4),
-('16', 708, '2016-09-03', '2012-01-24', 'temporada baja', 4, 4),
-('17', 572, '2017-01-16', '2014-11-04', 'promociones', 4, 2),
-('18', 378, '2013-06-19', '2016-06-07', 'promociones', 3, 5),
-('19', 601, '2013-09-08', '2016-07-24', 'temporada baja', 4, 5),
-('2', 688, '2014-05-01', '2018-03-08', 'promociones', 3, 3),
-('20', 845, '2016-09-02', '2016-12-16', 'temporada alta', 3, 2),
-('21', 400, '2012-08-18', '2016-04-05', 'temporada baja', 3, 5),
-('22', 600, '2012-01-17', '2014-10-01', 'temporada alta', 1, 4),
-('23', 555, '2016-07-30', '2017-12-20', 'temporada baja', 4, 5),
-('24', 563, '2017-03-03', '2017-10-14', 'temporada alta', 3, 1),
-('25', 588, '2017-08-01', '2016-05-08', 'temporada baja', 4, 2),
-('26', 572, '2012-10-24', '2017-11-28', 'temporada baja', 4, 3),
-('27', 732, '2014-07-04', '2012-06-22', 'temporada alta', 2, 4),
-('28', 700, '2012-07-19', '2016-03-21', 'temporada alta', 3, 5),
-('29', 237, '2017-12-21', '2017-06-25', 'temporada baja', 4, 3),
-('3', 801, '2014-05-19', '2013-02-08', 'temporada alta', 4, 1),
-('30', 748, '2017-10-08', '2017-04-03', 'temporada alta', 3, 2),
-('31', 360, '2015-12-06', '2015-12-09', 'temporada baja', 3, 5),
-('32', 892, '2015-02-18', '2014-02-19', 'temporada baja', 4, 4),
-('33', 770, '2014-11-20', '2017-04-01', 'promociones', 3, 3),
-('34', 383, '2018-02-27', '2016-02-24', 'temporada alta', 1, 5),
-('35', 729, '2015-12-21', '2017-12-31', 'temporada alta', 2, 4),
-('36', 717, '2016-09-18', '2018-03-16', 'temporada alta', 4, 3),
-('37', 641, '2013-04-22', '2012-05-13', 'temporada baja', 3, 1),
-('38', 714, '2013-02-22', '2012-06-05', 'temporada baja', 3, 1),
-('39', 190, '2015-06-26', '2015-12-28', 'promociones', 4, 4),
-('4', 580, '2017-12-28', '2013-03-14', 'temporada baja', 2, 4),
-('40', 860, '2016-01-12', '2016-08-28', 'temporada baja', 2, 5),
-('41', 382, '2014-09-11', '2018-01-09', 'temporada baja', 3, 4),
-('42', 516, '2017-04-04', '2016-04-08', 'temporada alta', 2, 1),
-('43', 660, '2014-01-17', '2013-05-12', 'temporada baja', 2, 1),
-('44', 1300, '2015-09-30', '2014-08-21', 'promociones', 3, 4),
-('45', 333, '2015-04-29', '2013-05-20', 'temporada alta', 3, 4),
-('46', 323, '2016-11-05', '2017-11-18', 'promociones', 3, 5),
-('47', 384, '2012-03-02', '2015-07-09', 'promociones', 4, 2),
-('48', 820, '2017-04-07', '2012-07-22', 'promociones', 1, 5),
-('49', 376, '2013-09-13', '2014-12-05', 'temporada baja', 3, 1),
-('5', 620, '2015-04-03', '2012-01-10', 'temporada baja', 4, 2),
-('50', 506, '2018-03-01', '2017-06-11', 'promociones', 1, 3),
-('51', 310, '2013-01-17', '2015-01-20', 'temporada alta', 3, 5),
-('52', 930, '2014-05-21', '2015-05-05', 'temporada baja', 3, 1),
-('53', 855, '2017-10-01', '2014-11-13', 'promociones', 4, 3),
-('54', 633, '2012-02-18', '2015-05-14', 'temporada baja', 1, 3),
-('55', 394, '2016-07-21', '2014-10-14', 'temporada alta', 4, 4),
-('56', 436, '2013-12-29', '2014-09-06', 'temporada baja', 2, 5),
-('57', 239, '2017-11-12', '2013-08-11', 'promociones', 4, 3),
-('58', 381, '2014-09-27', '2015-10-14', 'temporada baja', 1, 5),
-('59', 163, '2013-08-29', '2013-08-24', 'temporada alta', 3, 1),
-('6', 189, '2016-02-28', '2016-03-26', 'promociones', 4, 1),
-('60', 303, '2018-04-05', '2013-08-20', 'temporada alta', 2, 4),
-('61', 585, '2014-11-03', '2012-07-17', 'temporada alta', 1, 2),
-('62', 518, '2013-01-04', '2013-10-09', 'temporada alta', 2, 4),
-('63', 395, '2014-04-09', '2015-01-27', 'temporada alta', 2, 2),
-('64', 900, '2017-06-03', '2017-01-05', 'promociones', 4, 1),
-('65', 596, '2013-06-09', '2016-07-05', 'temporada baja', 2, 1),
-('66', 655, '2012-07-23', '2012-08-15', 'promociones', 1, 4),
-('67', 413, '2018-02-14', '2018-01-08', 'promociones', 4, 1),
-('68', 567, '2015-12-28', '2017-04-18', 'temporada baja', 1, 3),
-('69', 769, '2013-10-09', '2017-12-01', 'temporada baja', 3, 3),
-('7', 409, '2018-02-11', '2017-05-07', 'promociones', 3, 4),
-('70', 582, '2012-06-19', '2016-05-18', 'temporada baja', 2, 3),
-('71', 745, '2015-02-23', '2015-12-18', 'temporada alta', 3, 5),
-('72', 836, '2016-06-20', '2014-03-27', 'temporada alta', 4, 1),
-('73', 876, '2012-05-09', '2017-09-16', 'promociones', 4, 1),
-('74', 442, '2017-04-12', '2015-11-12', 'temporada baja', 1, 4),
-('75', 383, '2014-11-28', '2012-11-10', 'promociones', 3, 4),
-('76', 669, '2014-02-15', '2017-12-11', 'promociones', 3, 3),
-('77', 1200, '2012-10-16', '2015-02-17', 'promociones', 3, 4),
-('78', 680, '2012-03-13', '2014-04-01', 'temporada alta', 1, 2),
-('79', 651, '2014-09-11', '2015-03-13', 'temporada baja', 2, 5),
-('8', 625, '2015-09-26', '2016-06-16', 'temporada baja', 4, 2),
-('80', 923, '2016-09-28', '2017-12-02', 'promociones', 2, 1),
-('81', 1140, '2014-03-01', '2015-10-02', 'promociones', 3, 5),
-('82', 870, '2012-01-22', '2013-10-17', 'temporada baja', 2, 3),
-('83', 289, '2017-07-09', '2014-03-15', 'temporada alta', 2, 3),
-('84', 377, '2017-12-16', '2018-01-27', 'temporada baja', 1, 4),
-('85', 490, '2012-05-08', '2014-03-06', 'temporada baja', 2, 1),
-('86', 742, '2015-10-25', '2012-09-13', 'temporada baja', 2, 5),
-('87', 289, '2015-08-04', '2013-04-11', 'promociones', 2, 5),
-('88', 772, '2014-05-05', '2017-06-15', 'promociones', 1, 2),
-('89', 120, '2015-10-12', '2013-06-17', 'temporada alta', 3, 4),
-('9', 316, '2015-01-10', '2017-02-03', 'temporada baja', 2, 5),
-('90', 698, '2014-02-07', '2012-10-19', 'temporada alta', 2, 2),
-('91', 305, '2014-02-03', '2016-11-22', 'promociones', 4, 2),
-('92', 683, '2013-06-19', '2018-02-08', 'promociones', 2, 4),
-('93', 855, '2012-01-01', '2014-12-14', 'temporada alta', 4, 1),
-('94', 796, '2016-12-01', '2014-09-23', 'temporada baja', 1, 5),
-('95', 604, '2013-05-21', '2015-06-12', 'temporada alta', 4, 5),
-('96', 326, '2014-09-11', '2015-11-12', 'promociones', 4, 5),
-('97', 201, '2016-12-19', '2013-09-12', 'temporada alta', 1, 2),
-('98', 811, '2014-05-20', '2017-08-03', 'temporada baja', 2, 5),
-('99', 341, '2017-06-26', '2017-02-22', 'promociones', 3, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (1, 200 '1/13/2014', null, 'Temporada Baja', 1, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (2, 250 '6/30/2013', null, 'Temporada Alta', 1, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (3, 400 '4/16/2015', null, 'Promocion Especial', 1, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (4, 450 '12/2/2016', null, 'Temporada Baja', 1, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (5, 250 '12/6/2016', null, 'Temporada Alta', 2, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (6, 300 '12/10/2012', null, 'Promocion Especial', 2, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (7, 450 '3/25/2013', null, 'Temporada Baja', 2, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (8, 500 '12/3/2017', null, 'Temporada Alta', 2, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (9, 300 '12/10/2012', null, 'Promocion Especial', 3, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (10, 350 '8/13/2016', null, 'Temporada Baja', 3, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (11, 500 '7/9/2012', null, 'Temporada Alta', 3, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (12, 550 '10/5/2017', null, 'Promocion Especial', 3, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (13, 400 '11/7/2013', null, 'Temporada Baja', 4, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (14, 450 '7/31/2016', null, 'Temporada Alta', 4, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (15, 600 '12/20/2017', null, 'Promocion Especial', 4, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (16, 650, '5/22/2015', null, 'Temporada Baja', 4, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (17, 200, '1/25/2014', null, 'Temporada Alta', 1, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (18, 250, '2/25/2014', null, 'Promocion Especial', 1, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (19, 400, '8/7/2013', null, 'Temporada Baja', 1, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (20, 450, '9/5/2016', null, 'Temporada Alta', 1, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (21, 250, '10/30/2017', null, 'Promocion Especial', 2, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (22, 300, '5/3/2014', null, 'Temporada Baja', 2, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (23, 450, '6/6/2013', null, 'Temporada Alta', 2, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (24, 500, '10/17/2016', null, 'Promocion Especial', 2, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (25, 300, '7/24/2012', null, 'Temporada Baja', 3, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (26, 350, '10/9/2013', null, 'Temporada Alta', 3, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (27, 500, '1/30/2012', null, 'Promocion Especial', 3, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (28, 550, '11/2/2013', null, 'Temporada Baja', 3, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (29, 400, '7/22/2013', null, 'Temporada Alta', 4, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (30, 450, '8/15/2014', null, 'Promocion Especial', 4, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (31, 600, '11/14/2014', null, 'Temporada Baja', 4, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (32, 650, '10/4/2014', null, 'Temporada Alta', 4, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (33, 200, '5/30/2016', null, 'Promocion Especial', 1, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (34, 250, '5/10/2012', null, 'Temporada Baja', 1, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (35, 400, '7/16/2015', null, 'Temporada Alta', 1, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (36, 450, '12/18/2012', null, 'Promocion Especial', 1, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (37, 250, '5/29/2016', null, 'Temporada Baja', 2, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (38, 300, '5/26/2014', null, 'Temporada Alta', 2, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (39, 450, '12/8/2015', null, 'Promocion Especial', 2, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (40, 500, '4/12/2016', null, 'Temporada Baja', 2, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (41, 300, '2/10/2014', null, 'Temporada Alta', 3, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (42, 350, '7/29/2016', null, 'Promocion Especial', 3, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (43, 500, '6/1/2012', null, 'Temporada Baja', 3, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (44, 550, '7/25/2012', null, 'Temporada Alta', 3, 4);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (45, 400, '6/4/2016', null, 'Promocion Especial', 4, 1);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (46, 450, '10/24/2013', null, 'Temporada Baja', 4, 2);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (47, 600, '1/28/2015', null, 'Temporada Alta', 4, 3);
+INSERT INTO precio (idPrecio, precio, fechaInicio, fechaFin, descripcion, idTipoHabitacion, idTipoCategoria) VALUES (48, 650, '3/30/2013', null, 'Promocion Especial', 4, 4);
 
 -- -----------------------------------------------------
 -- 15 Inserts de tabla plato
