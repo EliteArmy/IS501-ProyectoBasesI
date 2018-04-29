@@ -20,10 +20,13 @@
 	 			$_POST["txtreg-direccion"],
 	 			$_POST["txtreg-descripcion"],
 	 			$_POST["txtreg-id-restaurante"],
-	 			null,
-	 			$_POST["txtreg-descripcionHotel"]); //idHotel
+	 			null, //idHotel
+
+	 			new Hotel(null, $_POST["txtreg-hotel"])
+	 		); 
 
 			$sucursal->registrarSucursal($conexion);
+
 	 	break;
 	 	
 	 	case "actualizar-sucursal":
@@ -42,7 +45,8 @@
 		 			$_POST["txt-descripcion"],
 		 			$_POST["txt-id-restaurante"],
 		 			$_POST["#txt-id-hotel"],
-		 			$_POST["txtreg-descripcionHotel"]); 
+
+		 	new hotel(null, $_POST["txt-hotel"]));
 
 		 	$sucursal->actualizarSucursal($conexion);
 

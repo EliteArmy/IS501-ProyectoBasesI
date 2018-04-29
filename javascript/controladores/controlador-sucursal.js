@@ -45,18 +45,15 @@ function cargarListaSucursales(){
 
 function registrarSucursal(){
 
-	var uri = $("#txtreg-telefono").val();
-	var resultado = encodeURIComponent(uri);
-
 	var parametros =
 			"txtreg-nombre="+$("#txtreg-nombre").val()+"&"+
 			"txtreg-cantidad-hab="+$("#txtreg-cantidad-hab").val()+"&"+
-			"txt-telefono="+ resultado +"&"+
+			"txtreg-telefono="+$("#txtreg-telefono").val()+"&"+
 			"txtreg-email="+$("#txtreg-email").val()+"&"+
 			"txtreg-direccion="+$("#txtreg-direccion").val()+"&"+
 			"txtreg-descripcion="+$("#txtreg-descripcion").val()+"&"+
 			"txtreg-id-restaurante="+$("#txtreg-id-restaurante").val()+"&"+
-			"txtreg-descripcion-hotel="+$("#txtreg-descripcion-hotel").val();
+			"txtreg-hotel="+$("#txtreg-hotel").val();
 
 	$.ajax({
 		url: "../ajax/gestion-info-sucursal.php?accion=registrar-sucursal",
@@ -112,21 +109,19 @@ function obtenerDetalleSucursal(idSucursal){
 /*función para actualizar la sucursal*/
 function actualizarSucursal(idSucursal){
 	
-	var uri = $("#txt-telefono").val();
-	var resultado = encodeURIComponent(uri);
 
 	var parametros = "idSucursal=" + idSucursal +"&"+
 			"txt-idSucursal="+$("#txt-idSucursal").val()+"&"+
 			"txt-nombre="+$("#txt-nombre").val()+"&"+
 			"txt-cantidad-hab="+$("#txt-cantidad-hab").val()+"&"+
-			"txt-telefono="+ resultado +"&"+
+			"txt-telefono="+$("#txt-telefono").val()+"&"+
 			"txt-email="+$("#txt-email").val()+"&"+
 			"txt-direccion="+$("#txt-direccion").val()+"&"+
 			"txt-fecha-nacimiento="+$("#txt-fecha-nacimiento").val()+"&"+
 			"txt-descripcion="+$("#txt-descripcion").val()+"&"+
 			"txt-id-restaurante="+$("#txt-id-restaurante").val()+"&"+
 			"txt-id-hotel="+$("#txt-id-hotel").val()+"&"*
-			"txt-descripcion-hotel"+$("#txt-descripcion-hotel".val());
+			"txt-hotel"+$("#txt-hotel".val());
 	
 	//console.log(parametros);
 	//alert(parametros);
@@ -172,3 +167,5 @@ $("#btn-cerrar-mensaje").click(function(){
 	$("#div-resultado").empty();
 	$("#div-resultado").hide();
 });
+
+// --- --- --- ---

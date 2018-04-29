@@ -148,10 +148,14 @@
 		/*Función para registrar sucursal*/
 		public static function registrarSucursal($conexion){
 
+			$hotel = $this->hotel->getdescripcionHotel();
+
 			$resultado = $conexion->ejecutarConsulta(
 						"INSERT INTO hotel 
 								VALUES(null,
-										'$this->descripcion')");
+										'$descripcionHotel')");
+
+			$idTemporal = $conexion->ultimoId();
 
 			$resultado = $conexion->ejecutarConsulta(
 						"INSERT INTO sucursal
@@ -163,7 +167,7 @@
 										'$this->direccion',
 										'$this->descripcion',
 										'$this->idRestaurante',
-										null)");
+										'$idTemporal')");
 
 
 			echo "<b>Registro Insertado con Exito</b>";
@@ -173,6 +177,7 @@
 		public function actualizarSucursal($conexion){
 			$resultado = $conexion->ejecutarConsulta(
 						"UPDATE sucursal suc
+							INNER JOIN hotel h ON (h.idHotel = suc.idHotel)
 							SET suc.nombre = '$this->nombre',
 								suc.cantidadHabitaciones = '$this->cantidadHabitaciones',
 								suc.telefono = '$this->telefono',
@@ -180,7 +185,8 @@
 								suc.direccion = '$this->direccion',
 								suc.descripcion = '$this->descripcion',
 								suc.idRestaurante = '$this->idRestaurante',
-								suc.idHotel = '$this->idHotel'
+								suc.idHotel = '$this->idHotel',
+								h.descripcionHotel = '$this->descripcionHotel'
 							WHERE suc.idSucursal = '$this->idSucursal'");
 
 		echo "<b>Registro actualizado con Exito</b>";
@@ -192,8 +198,7 @@
 
 			//echo "Entra en la función";
 			$resultado = $conexion->ejecutarConsulta(
-				"DELETE suc 
-					FROM sucursal suc
+				"DELETE suc FROM sucursal suc
 					WHERE suc.idSucursal = '$idSucursal'
 				");
 
