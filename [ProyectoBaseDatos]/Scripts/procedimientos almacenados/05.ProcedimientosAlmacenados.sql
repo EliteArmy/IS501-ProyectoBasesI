@@ -923,8 +923,8 @@ SP:BEGIN
 
 			/*Elimina la reservación*/
 			WHEN pcAccion = 'Eliminar' THEN
-			DELETE FROM empleado
-			WHERE idEmpleado = pnIdEmpleado;
+			DELETE FROM reservacion
+			WHERE idReservacion = pnIdReservacion;
 			IF pbOcurrioError THEN
 				SET pcMensaje=CONCAT('La reservación no se pudo eliminar.',pcMensaje);
 					/*Asignacion de Variables.*/
@@ -1032,7 +1032,8 @@ SP:BEGIN
 	CASE 
 		WHEN pcAccion = 'Agregar' THEN
 				INSERT INTO hotel
-						VALUES(null, pcDescripcionHotel);
+						VALUES(null, 
+							   pcDescripcionHotel);
 				
 				IF pbOcurrioError THEN
 					SET pcMensaje = 'Error al registrar hotel.';
