@@ -1,8 +1,8 @@
 -- -----------------------------------------------------
--- Inserts de tabla hotel
+-- 18 Inserts de tabla hotel
 -- -----------------------------------------------------
-INSERT INTO hotel VALUES ('1', 'sucursal san pedro sula');
-INSERT INTO hotel VALUES ('2', 'sucursal tegucigalpa');
+INSERT INTO hotel VALUES ('1', 'sucursal San Pedro Sula');
+INSERT INTO hotel VALUES ('2', 'sucursal Tegucigalpa');
 INSERT INTO hotel VALUES ('3', 'sucursal La Ceiba');
 INSERT INTO hotel VALUES ('4', 'sucursal Tela');
 INSERT INTO hotel VALUES ('5', 'sucursal Comayagua');
@@ -11,59 +11,55 @@ INSERT INTO hotel VALUES ('7', 'sucursal Nacaome');
 INSERT INTO hotel VALUES ('8', 'sucursal Gracias');
 INSERT INTO hotel VALUES ('9', 'sucursal Puerto Cortés');
 INSERT INTO hotel VALUES ('10', 'sucursal La Paz');
-INSERT INTO hotel VALUES('11','sucursal La Esperanza');
-INSERT INTO hotel VALUES('12','sucursal Valle de Ángeles');
-INSERT INTO hotel VALUES('13','sucursal Santa Lucía');
-INSERT INTO hotel VALUES('14','sucursal El Paraíso');
-INSERT INTO hotel VALUES('15','sucursal Copán');
-INSERT INTO hotel VALUES('16','sucursal Trujillo');
-INSERT INTO hotel VALUES('17','sucursal Utila');
-INSERT INTO hotel VALUES('18','sucursal Yoro');
+INSERT INTO hotel VALUES ('11', 'sucursal La Esperanza');
+INSERT INTO hotel VALUES ('12', 'sucursal Valle de Ángeles');
+INSERT INTO hotel VALUES ('13', 'sucursal Santa Lucía');
+INSERT INTO hotel VALUES ('14', 'sucursal El Paraíso');
+INSERT INTO hotel VALUES ('15', 'sucursal Copán');
+INSERT INTO hotel VALUES ('16', 'sucursal Trujillo');
+INSERT INTO hotel VALUES ('17', 'sucursal Utila');
+INSERT INTO hotel VALUES ('18', 'sucursal Yoro');
 
 
 -- -----------------------------------------------------
--- Inserts de tabla banco
+-- 7 Inserts de tabla banco
 -- -----------------------------------------------------
-INSERT INTO banco (idBanco, nombreBanco) VALUES ('1', 'atlántida');
-INSERT INTO banco (idBanco, nombreBanco) VALUES('2', 'ficohsa');
+INSERT INTO banco (idBanco, nombreBanco) VALUES ('1', 'Atlántida');
+INSERT INTO banco (idBanco, nombreBanco) VALUES ('2', 'Ficohsa');
 INSERT INTO banco (idBanco, nombreBanco) VALUES ('3', 'BAC');
-INSERT INTO banco (idBanco, nombreBanco) VALUES ('4', 'ficensa');
-INSERT INTO banco (idBanco, nombreBanco) VALUES ('5', 'occidente');
-INSERT INTO banco (idBanco, nombreBanco) VALUES ('6', 'lafise');
-INSERT INTO banco (idBanco, nombreBanco) VALUES ('7', 'davivienda');
+INSERT INTO banco (idBanco, nombreBanco) VALUES ('4', 'Ficensa');
+INSERT INTO banco (idBanco, nombreBanco) VALUES ('5', 'Occidente');
+INSERT INTO banco (idBanco, nombreBanco) VALUES ('6', 'Lafise');
+INSERT INTO banco (idBanco, nombreBanco) VALUES ('7', 'Davivienda');
 
 
 -- -----------------------------------------------------
--- Inserts de tabla menú
+-- 15 Inserts de tabla menú
 -- -----------------------------------------------------
-INSERT INTO menu VALUES ('1', 'este es el menú 1');
-INSERT INTO menu VALUES ('2', 'este es el menú 2');
-INSERT INTO menu VALUES ('3', 'este es el menú 3');
-INSERT INTO menu VALUES ('4', 'este es el menú 4');
-INSERT INTO menu VALUES ('5', 'este es el menú 5');
-INSERT INTO menu VALUES ('6', 'este es el menú');
-INSERT INTO menu VALUES ('7', 'este es el menú 7');
-INSERT INTO menu VALUES ('8', 'este es el menú 8');
-INSERT INTO menu VALUES ('9', 'este es el menú 9');
-INSERT INTO menu VALUES ('10', 'este es el menú 10');
-INSERT INTO menu VALUES ('11', 'este es el menú 11');
-INSERT INTO menu VALUES ('12', 'este es el menú 12');
-INSERT INTO menu VALUES ('13', 'este es el menú 13');
-INSERT INTO menu VALUES ('14', 'este es el menú 14');
-INSERT INTO menu VALUES ('15', 'este es el menú 15');
+INSERT INTO menu VALUES ('1', 'Este es el menú 1');
+INSERT INTO menu VALUES ('2', 'Este es el menú 2');
+INSERT INTO menu VALUES ('3', 'Este es el menú 3');
+INSERT INTO menu VALUES ('4', 'Este es el menú 4');
+INSERT INTO menu VALUES ('5', 'Este es el menú 5');
+INSERT INTO menu VALUES ('6', 'Este es el menú 6');
+INSERT INTO menu VALUES ('7', 'Este es el menú 7');
+INSERT INTO menu VALUES ('8', 'Este es el menú 8');
+INSERT INTO menu VALUES ('9', 'Este es el menú 9');
+INSERT INTO menu VALUES ('10', 'Este es el menú 10');
+INSERT INTO menu VALUES ('11', 'Este es el menú 11');
+INSERT INTO menu VALUES ('12', 'Este es el menú 12');
+INSERT INTO menu VALUES ('13', 'Este es el menú 13');
+INSERT INTO menu VALUES ('14', 'Este es el menú 14');
+INSERT INTO menu VALUES ('15', 'Este es el menú 15');
 
 
 -- -----------------------------------------------------
 -- 4 Inserts de tabla modoPago
 -- -----------------------------------------------------
-INSERT INTO modopago
-VALUES('1', 'Tarjeta de Crédito', 'Solo aceptamos tarjetas Visa y Mastercard');
-INSERT INTO modopago
-VALUES ('2', 'Tarjeta de Débito', 'Solo aceptamos tarjetas Visa y Mastercard');
-INSERT INTO modopago
-VALUES('3', 'cheques', 'No hay una descripción específica');
-INSERT INTO modopago
-VALUES('4', 'efectivo', 'No se aceptan billetes rayados');
+INSERT INTO modopago VALUES ('1', 'Tarjeta de Crédito', 'Solo aceptamos tarjetas Visa y Mastercard');
+INSERT INTO modopago VALUES ('2', 'Tarjeta de Débito', 'Solo aceptamos tarjetas Visa y Mastercard');
+INSERT INTO modopago VALUES ('3', 'cheques', 'No hay una descripción específica');
+INSERT INTO modopago VALUES ('4', 'efectivo', 'No se aceptan billetes rayados');
 
 
 -- -----------------------------------------------------
@@ -76,62 +72,63 @@ INSERT INTO mesa VALUES ('4', '10', '4');
 INSERT INTO mesa VALUES ('5', '2', '5');
 INSERT INTO mesa VALUES ('6', '5', '6');
 INSERT INTO mesa VALUES ('7', '2', '7');
-INSERT INTO mesa VALUES ('8','6','8');
-INSERT INTO mesa VALUES ('9','3','9');
-INSERT INTO mesa VALUES ('10','6','10');
+INSERT INTO mesa VALUES ('8', '6', '8');
+INSERT INTO mesa VALUES ('9', '3', '9');
+INSERT INTO mesa VALUES ('10', '6', '10');
 INSERT INTO mesa VALUES ('11', '2', '11');
 INSERT INTO mesa VALUES ('12', '4', '12');
 INSERT INTO mesa VALUES ('13', '8', '13');
-INSERT INTO mesa VALUES ('14','3','14');
-INSERT INTO mesa VALUES ('15','5','15');
-INSERT INTO mesa VALUES ('16','6','16');
+INSERT INTO mesa VALUES ('14', '3', '14');
+INSERT INTO mesa VALUES ('15', '5', '15');
+INSERT INTO mesa VALUES ('16', '6', '16');
 
 
 -- -----------------------------------------------------
--- 2 Inserts de tabla tipoFactura
+-- 3 Inserts de tabla tipoFactura
 -- -----------------------------------------------------
-INSERT INTO tipofactura VALUES ('1','Factura hotel','son las facturas del hotel'); 
-INSERT INTO tipofactura VALUES ('2','Factura restaurante','son las facturas del restaurante');
+INSERT INTO tipofactura VALUES ('1', 'Factura Hotel', 'Son las Facturas del hotel y sus Reservaciones'); 
+INSERT INTO tipofactura VALUES ('2', 'Factura Restaurante', 'Son las Facturas del Rstaurante');
+INSERT INTO tipofactura VALUES ('3', 'Factura Producto', 'Son las Facturas del Restaurante');
 
 
 -- -----------------------------------------------------
 -- 5 Inserts de tabla tipoCategoría
 -- -----------------------------------------------------
-INSERT INTO tipocategoria VALUES ('1', 'Standard', 'incluye 1 cama personal');
-INSERT INTO tipocategoria VALUES ('2', 'Standard2', 'incluye 1 cama matrimonial');
-INSERT INTO tipocategoria VALUES ('3', 'Premium', 'incluye 1 cama dreamax');
-INSERT INTO tipocategoria VALUES ('4', 'Premium2', 'incluye  2 camas individuales');
-INSERT INTO tipocategoria VALUES ('5', 'Especial','---');
+INSERT INTO tipocategoria VALUES ('1', 'Standard', 'Incluye 1 cama Personal');
+INSERT INTO tipocategoria VALUES ('2', 'Standard 2', 'Incluye 1 cama Matrimonial');
+INSERT INTO tipocategoria VALUES ('3', 'Premium', 'Incluye 1 cama Dreamax');
+INSERT INTO tipocategoria VALUES ('4', 'Premium 2', 'Incluye  2 camas Individuales');
+INSERT INTO tipocategoria VALUES ('5', 'Especial', 'Incluye una cama Especial');
 
 
 -- -----------------------------------------------------
 -- 4 Inserts de tabla tipoHabitacion
 -- -----------------------------------------------------
-INSERT INTO tipohabitacion VALUES ('1','Personal','incluye 1 cama personal');
-INSERT INTO tipohabitacion VALUES ('2','Cama Doble','incluye 2 camas personales');
-INSERT INTO tipohabitacion VALUES ('3','Cama Triple','incluye 3 camas personales');
-INSERT INTO tipohabitacion VALUES ('4','Cama Matrimonial','incluye 1 cama matrimonial');
+INSERT INTO tipohabitacion VALUES ('1', 'Personal', 'Incluye 1 cama personal');
+INSERT INTO tipohabitacion VALUES ('2', 'Cama Doble', 'Incluye 2 camas personales');
+INSERT INTO tipohabitacion VALUES ('3', 'Cama Triple', 'Incluye 3 camas personales');
+INSERT INTO tipohabitacion VALUES ('4', 'Cama Matrimonial', 'Incluye 1 cama matrimonial');
 
 
 -- -----------------------------------------------------
 -- Inserts de tabla cargo
 -- -----------------------------------------------------
-INSERT INTO cargo VALUES ('1','Gerente del Hotel','20,000','35,000','A');
-INSERT INTO cargo VALUES ('2','Mesero','7,000','10,000','A');
-INSERT INTO cargo VALUES ('3','Chef','15,000','30,000','A');
-INSERT INTO cargo VALUES ('4','Administrador','20,000','30,000','A');
-INSERT INTO cargo VALUES ('5','Recepcionista','9,000','12,000','A');
-INSERT INTO cargo VALUES ('6','Gerente Restaurante','15,000','30,000','A');
-INSERT INTO cargo VALUES ('7','Aseador','8,000','9,000','A');
-INSERT INTO cargo VALUES ('8','Guardia','8,000','10,000','A');
-INSERT INTO cargo VALUES ('9','Cocinero','15,000','20,000','A');
-INSERT INTO cargo VALUES ('10','Bartender','10,000','13,000','A');
-INSERT INTO cargo VALUES ('11','mantenimiento','8,000','10,000','A');
-INSERT INTO cargo VALUES ('12','estilista','10,000','20,000','A');
-INSERT INTO cargo VALUES ('13','masajista','10,000','15,000','A');
-INSERT INTO cargo VALUES ('14','jefe de ventas','20,000','30,000','A');
-INSERT INTO cargo VALUES ('15','empleado de pagos planilla','10,000','15,000','A');
-INSERT INTO cargo VALUES ('16','jefe de almacén','10,000','20,000','A');
+INSERT INTO cargo VALUES ('1', 'Gerente del Hotel','20,000','35,000','A');
+INSERT INTO cargo VALUES ('2', 'Gerente de Cuentas','20,000','30,000','A');
+INSERT INTO cargo VALUES ('3', 'Jefe de ventas','15,000','20,000','A');
+INSERT INTO cargo VALUES ('4', 'Administrador','20,000','30,000','A');
+INSERT INTO cargo VALUES ('5', 'Recepcionista','10,000','15,000','A');
+INSERT INTO cargo VALUES ('6', 'Gerente Restaurante','15,000','30,000','A');
+INSERT INTO cargo VALUES ('7', 'Aseador','8,000','12,000','A');
+INSERT INTO cargo VALUES ('8', 'Guardia','10,000','15,000','A');
+INSERT INTO cargo VALUES ('9', 'Cocinero','15,000','20,000','A');
+INSERT INTO cargo VALUES ('10', 'Bartender','10,000','15,000','A');
+INSERT INTO cargo VALUES ('11', 'Mantenimiento','8,000','12,000','A');
+INSERT INTO cargo VALUES ('12', 'Estilista','10,000','15,000','A');
+INSERT INTO cargo VALUES ('13', 'Masajista','10,000','15,000','A');
+INSERT INTO cargo VALUES ('14', 'Chef','20,000','30,000','A');
+INSERT INTO cargo VALUES ('15', 'Mesero','10,000','15,000','A');
+INSERT INTO cargo VALUES ('16', 'Jefe de almacén','10,000','15,000','A');
 
 -- -----------------------------------------------------
 -- 15 Inserts de tabla restaurante
@@ -155,24 +152,24 @@ INSERT INTO restaurante (idRestaurante, horaApertura, horaCierre, telefono, idMe
 -- -----------------------------------------------------
 -- 18 Inserts de tabla sucursal
 -- -----------------------------------------------------
-INSERT INTO sucursal VALUES ('1','sucursal san pedro sula','50','23958678','hotelsucursalsps@gmail.com','san pedro sula','este es el hotel de sps','5','1');
-INSERT INTO sucursal VALUES ('2','sucursal tegucigalpa','100','22348697','hotelsucursaltgu@gmail.com','tegucigalpa','este es el hotel de tgu','9','2');
-INSERT INTO sucursal VALUES ('3','sucursal La Ceiba','80','25938576','hotelsucursallaceiba@gmail.com','La Ceiba','este es el hotel de La Ceiba','4','3');
-INSERT INTO sucursal VALUES ('4','sucursal Tela','120','25968794','hotelsucursaltela@gmail.com','Tela','este es el hotel de tela','15','4');
-INSERT INTO sucursal VALUES ('5','sucursal Comayagua','60','28576436','hotelsucursalcomayagua@gmail.com','Comayagua','este es el hotel de Comayagua','1','5');
-INSERT INTO sucursal VALUES ('6','sucursal Choluteca','40','23254697','hotelsucursalcholu@gmail.com','choluteca','este es el hotel de choluteca','10','6');
-INSERT INTO sucursal VALUES ('7','sucursal Nacaome','50','23953458','hotelsucursalnacaome@gmail.com','nacaome','este es el hotel de nacaome','5','7');
-INSERT INTO sucursal VALUES ('8','sucursal Gracias','150','24823697','hotelsucursalgracias@gmail.com','gracias','este es el hotel de gracias','3','8');
-INSERT INTO sucursal VALUES ('9','sucursal Puerto Cortés','80','29847562','hotelsucursalpc@gmail.com','puerto cortes','este es el hotel de puerto cortes','7','9');
-INSERT INTO sucursal VALUES ('10','sucursal La Paz','30','27465738','hotelsucursallapaz@gmail.com','la paz','este es el hotel de la paz','4','10');
-INSERT INTO sucursal VALUES ('11','sucursal La Esperanza','20','25761091','hotelsucursallaesperanza@gmail.com','la esperanza','este es el hotel de la esperanza','8','11');
-INSERT INTO sucursal VALUES ('12','sucursal Valle de Ángeles','50','22904879','hotelsucursalvalle@gmail.com','valle de angeles','este es el hotel de valle de angeles','1','12');
-INSERT INTO sucursal VALUES ('13','sucursal Santa Lucía','25','22456970','hotelsucursalsantalucia@gmail.com','santa lucia','este es el hotel de santa lucia','5','13');
-INSERT INTO sucursal VALUES ('14','sucursal El paraíso','100','24296870','hotelsucursalelparaiso@gmail.com','el paraiso','este es el hotel de el paraiso','12','14');
-INSERT INTO sucursal VALUES ('15','sucursal Copán','35','253952898','hotelsucursalcopan@gmail.com','copan ruinas','este es el hotel de copan','15','15');
-INSERT INTO sucursal VALUES ('16','sucursal Trujillo','200','22380997','hotelsucursaltrujillo@gmail.com','trujillo','este es el hotel de trjuillo','8','16');
-INSERT INTO sucursal VALUES ('17','sucursal Utila','50','24091034','hotelsucursalutila@gmail.com','utila','este es el hotel de utila','6','17');
-INSERT INTO sucursal VALUES ('18','sucursal Yoro','170','26742897','hotelsucursalyoro@gmail.com','yoro','este es el hotel de yoro','9','18');
+INSERT INTO sucursal VALUES ('1', 'sucursal San Pedro Sula','50','23958678','hotelsucursalsps@gmail.com','san pedro sula','Este es el hotel de sps','5','1');
+INSERT INTO sucursal VALUES ('2', 'sucursal Tegucigalpa','100','22348697','hotelsucursaltgu@gmail.com','tegucigalpa','Este es el hotel de tgu','9','2');
+INSERT INTO sucursal VALUES ('3', 'sucursal La Ceiba','80','25938576','hotelsucursallaceiba@gmail.com','La Ceiba','Este es el hotel de La Ceiba','4','3');
+INSERT INTO sucursal VALUES ('4', 'sucursal Tela','120','25968794','hotelsucursaltela@gmail.com','Tela','Este es el hotel de tela','15','4');
+INSERT INTO sucursal VALUES ('5', 'sucursal Comayagua','60','28576436','hotelsucursalcomayagua@gmail.com','Comayagua','Este es el hotel de Comayagua','1','5');
+INSERT INTO sucursal VALUES ('6', 'sucursal Choluteca','40','23254697','hotelsucursalcholu@gmail.com','choluteca','Este es el hotel de choluteca','10','6');
+INSERT INTO sucursal VALUES ('7', 'sucursal Nacaome','50','23953458','hotelsucursalnacaome@gmail.com','nacaome','Este es el hotel de nacaome','5','7');
+INSERT INTO sucursal VALUES ('8', 'sucursal Gracias','150','24823697','hotelsucursalgracias@gmail.com','gracias','Este es el hotel de gracias','3','8');
+INSERT INTO sucursal VALUES ('9', 'sucursal Puerto Cortés','80','29847562','hotelsucursalpc@gmail.com','puerto cortes','Este es el hotel de puerto cortes','7','9');
+INSERT INTO sucursal VALUES ('10', 'sucursal La Paz','30','27465738','hotelsucursallapaz@gmail.com','la paz','Este es el hotel de la paz','4','10');
+INSERT INTO sucursal VALUES ('11', 'sucursal La Esperanza','20','25761091','hotelsucursallaesperanza@gmail.com','la esperanza','Este es el hotel de la esperanza','8','11');
+INSERT INTO sucursal VALUES ('12', 'sucursal Valle de Ángeles','50','22904879','hotelsucursalvalle@gmail.com','valle de angeles','Este es el hotel de valle de angeles','1','12');
+INSERT INTO sucursal VALUES ('13', 'sucursal Santa Lucía','25','22456970','hotelsucursalsantalucia@gmail.com','santa lucia','Este es el hotel de santa lucia','5','13');
+INSERT INTO sucursal VALUES ('14', 'sucursal El paraíso','100','24296870','hotelsucursalelparaiso@gmail.com','el paraiso','Este es el hotel de el paraiso','12','14');
+INSERT INTO sucursal VALUES ('15', 'sucursal Copán','35','253952898','hotelsucursalcopan@gmail.com','copan ruinas','Este es el hotel de copan','15','15');
+INSERT INTO sucursal VALUES ('16', 'sucursal Trujillo','200','22380997','hotelsucursaltrujillo@gmail.com','trujillo','Este es el hotel de trjuillo','8','16');
+INSERT INTO sucursal VALUES ('17', 'sucursal Utila','50','24091034','hotelsucursalutila@gmail.com','utila','Este es el hotel de utila','6','17');
+INSERT INTO sucursal VALUES ('18', 'sucursal Yoro','170','26742897','hotelsucursalyoro@gmail.com','yoro','Este es el hotel de yoro','9','18');
 
 
 -- -----------------------------------------------------
@@ -288,12 +285,12 @@ INSERT INTO empleado (idEmpleado, codigoEmpleado, fechaIngreso, fechaSalida, est
 -- -----------------------------------------------------
 -- 6 Inserts de tabla servicio
 -- -----------------------------------------------------
-INSERT INTO servicio VALUES('1','wifi','la contraseña del wifi se entrega luego de pagar la habitación');
-INSERT INTO servicio VALUES('2','piscina','la piscina puede ser utilizada únicamente por los huéspedes');
-INSERT INTO servicio VALUES('3','estacionamiento','si el cliente no es huésped, el estacionamiento tiene un precio después de estar 1 hora');
-INSERT INTO servicio VALUES('4','alberca','--');
-INSERT INTO servicio VALUES('5','gimnasio','puede ser utilizado únicamente por huéspedes');
-INSERT INTO servicio VALUES('6','bar','cualquier cliente puede consumir en el bar');
+INSERT INTO servicio VALUES ('1', 'Wifi', 'La contraseña del wifi se entrega luego de pagar la habitación');
+INSERT INTO servicio VALUES ('2', 'Piscina', 'La piscina puede ser utilizada únicamente por los huéspedes');
+INSERT INTO servicio VALUES ('3', 'Estacionamiento', 'Si el cliente no es huésped, el estacionamiento tiene un precio después de estar 1 hora');
+INSERT INTO servicio VALUES ('4', 'Alberca', 'Niños acompañados de un adulto');
+INSERT INTO servicio VALUES ('5', 'Gimnasio', 'Puede ser utilizado únicamente por huéspedes');
+INSERT INTO servicio VALUES ('6', 'Bar', 'Cualquier cliente puede consumir en el bar');
 
 
 -- -----------------------------------------------------
@@ -700,10 +697,10 @@ INSERT INTO categoriaproducto (idCategoriaProducto, nombre, descripcion) VALUES 
 -- -----------------------------------------------------
 -- 4 Inserts de tabla tipoCuenta
 -- -----------------------------------------------------
-INSERT INTO tipocuenta VALUES('1','cuenta corriente','no ofrecen remuneración alguna');
-INSERT INTO tipocuenta VALUES('2','cuenata de ahorro','son destinadas para ahorrar');
-INSERT INTO tipocuenta VALUES('3','cuenta nómina','ofrecen ventajas por la domiciliación de la nómina');
-INSERT INTO tipocuenta VALUES('4','cuenta de valores','ideales para invertir');
+INSERT INTO tipocuenta VALUES ('1','Centa Corriente','no ofrecen remuneración alguna');
+INSERT INTO tipocuenta VALUES ('2','Cuenata de Ahorro','son destinadas para ahorrar');
+INSERT INTO tipocuenta VALUES ('3','Cuenta Nómina','ofrecen ventajas por la domiciliación de la nómina');
+INSERT INTO tipocuenta VALUES ('4','Cuenta de Valores','ideales para invertir');
 
 
 -- -----------------------------------------------------
