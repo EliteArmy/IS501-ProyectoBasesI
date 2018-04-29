@@ -32,7 +32,6 @@ $(document).ready(function(){
 			//$("#reporte-error").html(e);
 		}
 	});
-		
 
 	// Carga las opciones de Registro de Reservacion
 	$.ajax({
@@ -57,9 +56,9 @@ $(document).ready(function(){
 
 /* -- Función Cargar Lista -- */
 function cargarLista(){
-	
 	//alert("Entra en la funcion");
-	
+	//cambiosPrecio();
+	//cambiosHabitacion();
 }
 
 // Cada que este select cambie, ocurrira un update el slc-precio
@@ -72,11 +71,12 @@ $('#slc-tipo').change(function() {
 });
 
 function cambiosPrecio(){
+
   var parametros = "slc-categoria=" + $("#slc-categoria").val() +"&"+
   "slc-tipo=" + $("#slc-tipo").val();
-	
+	//alert(parametros);
+
 	if ($("#slc-categoria").val() && $("#slc-tipo").val()){
-	   //alert("IF");
 	   $.ajax({
   	  url: "../ajax/get-info-reservacion.php?accion=obtener-precio",
       method: "POST",
@@ -94,7 +94,6 @@ function cambiosPrecio(){
 }
 
 
-
 // Cada que este select cambie, ocurrira un update el slc-habitacion
 $('#slc-sucursal').change(function() {
 	cambiosHabitacion();
@@ -102,7 +101,7 @@ $('#slc-sucursal').change(function() {
 
 function cambiosHabitacion(){
 	var parametros = "slc-sucursal=" + $("#slc-sucursal").val();
-
+	//alert(parametros);
 	$.ajax({
 	  url: "../ajax/get-info-reservacion.php?accion=obtener-habitacion",
     method: "POST",

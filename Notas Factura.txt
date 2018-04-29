@@ -4,8 +4,8 @@ Tablas que van a Cambiar:
 Insertar Reservacion:
 	idReservacion 			(NULL)
 	fechaReservacion		(Curdate())
-	fechaEntrada
-	fechaSalida
+	fechaEntrada				(fechaEntrada(Actual) > fechaSalida(Previa)) - validacion
+	fechaSalida					
 	camaSupletoria
 	estado							(Activo)
 	observacion
@@ -42,5 +42,6 @@ Insertar DetalleFactura:
 	idReservacion
 
 
-Mostrar Habitaciones disponibles en determinada sucursal
+Mostrar Habitaciones disponibles en determinada sucursal - Listo
+Cambiar el Estado de la habiatacion ocupada a Ocupada luego de la Reservacion
 
