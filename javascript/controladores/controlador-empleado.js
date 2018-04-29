@@ -193,8 +193,8 @@ function actualizarEmpleado(idEmpleado){
 			$("#div-resultado").show();
 			cargarEmpleadosNuevo();
 		},
-		error:function(){
-			alert("error");
+		error:function(err){
+			alert("Error: " + err);
 		}
 	});
 }

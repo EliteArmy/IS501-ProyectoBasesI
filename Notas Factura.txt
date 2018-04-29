@@ -1,0 +1,48 @@
+Notas:
+Tablas que van a Cambiar:
+
+Insertar Reservacion:
+	idReservacion 			(NULL)
+	fechaReservacion		(Curdate())
+	fechaEntrada
+	fechaSalida
+	camaSupletoria
+	estado							(Activo)
+	observacion
+	idCliente
+		
+		Insertar Cliente si no Existe
+			idCliente
+			fechaRegistro
+			estado
+			idPersona
+
+Insertar Factura:
+	idFactura 					(NULL)
+	numFactura
+	fechaEmision				(Curdate())
+	costeReservacion
+	costePedido
+	costeProducto
+	costeTotal
+	cambio
+	observacion
+	idCliente
+	idEmpleado
+	idTipoFactura
+	idModoPago
+
+Insertar DetalleFactura:
+	idDetalleFactura 		(NULL)
+	cantidad
+	descripcionReser
+	idFactura
+	idProducto
+	idPedido
+	idReservacion
+
+
+
+
+Mostrar Habitaciones disponibles en determinada sucursal
+

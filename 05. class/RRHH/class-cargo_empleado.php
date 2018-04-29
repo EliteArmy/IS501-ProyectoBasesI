@@ -1,6 +1,6 @@
 <?php
 
-	class CargoEmpleado{
+	class Cargo_Empleado{
 
 		private $idCargo;
 		private $idEmpleado;

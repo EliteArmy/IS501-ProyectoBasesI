@@ -69,7 +69,7 @@ idCliente
 idHabitacion
 idReservacion
 
-
+------------------------
 ----- Contabilidad -----
 // Factura - Ya hay clase
 idFactura
@@ -86,7 +86,48 @@ idEmpleado
 idTipoFactura
 idModoPago
 
+// Impuesto - Ya hay clase
+idImpuesto
+porcecntaje
+estado
+fechaInicio
+fechaFin
+descripcion
 
+// Descuento - Ya hay clase
+idDescuento
+porcentaje
+estado
+fechaInicio
+fechaFin
+descripcion
+
+// ModoPago - Ya hay clase
+idModoPago
+modoPago
+descripcion
+
+// TipoFactura - Ya hay clase
+idTipoFactua
+nombre
+descripcion
+
+// DetalleFactura - Ya hay clase
+idDetalleFactura
+cantidad
+descripcionReser
+idFactura
+idProducto
+idPedido
+idReservacion
+
+// TipoRecargo - Ya hay clase
+idTipoRecargo
+porcentaje
+descripcion
+idFactura
+
+----------------------
 ----- Inventario -----
 // Producto - Ya Hay Clase
 idProducto
@@ -102,7 +143,7 @@ descripcion
 idCategoriaProducto
 idBodega
 
-
+----------------------------
 ----- Recursos Humanos -----
 // Empleado - Ya hay clase
 idEmpleado
@@ -132,6 +173,40 @@ salarioMinimo
 salarioMaximo
 estado
 
+// ExperienciaLaboral
+idExperienciaLaboral
+titulo
+fechaNacimiento
+fechaFin
+descripcion
+idEmpleado
+
+// EncabezadoPlanilla
+idEncabezadoPlanilla
+fechaInicio
+fechaFin
+observacion
+idEmpleado
+
+// PagoPlanilla
+idPagoPlanilla
+montoPagado
+valorBonificacion
+valorImpuesto
+valorDeduccion
+observacion
+idEmpleado
+idEncabezadoPlanilla
+
+// Banco
+idBanco
+nombreBanco
+
+//TipoCuenta
+idTipoCuenta
+tipoCuenta
+descripcion
+------------------------
 --- Inventario ---
 // Producto - Ya Hay Clase
 idProducto

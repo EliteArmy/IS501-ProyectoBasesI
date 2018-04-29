@@ -162,6 +162,16 @@
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
 
+          <div id="div-resultado" style="display: none;" class="alert alert-success fade show alert-dismissible " role="alert">
+            <div id="div-resultado-mensaje">
+
+            </div>
+
+            <button type="button" class="btn btn-default btn-sm close" aria-label="Close">
+              <span id="btn-cerrar-mensaje" class="fas fa-times" aria-hidden="true"></span>
+            </button>
+          </div>
+
           <h2>Lista de Información</h2>
           
           <!-- <div class="table-responsive">
@@ -235,15 +245,20 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                   <form role="form">
-                    
-                    <div style="display: none" class="form-group">
-                      <label for="txt-idReservacion">Id</label>
-                      <input type="text" class="form-control" id="txt-idReservacion">
-                    </div>
 
                     <div class="form-group">
                       <label for="txt-primer-nombre">Primer Nombre</label>
                       <input type="text" class="form-control" id="txt-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-primer-nombre">Primer Apellido</label>
+                      <input type="text" class="form-control" id="txt-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-email">Email</label>
+                      <input type="email" class="form-control" id="txt-email" placeholder="Ingrese el correo electrónico">
                     </div>
 
                     <div class="form-group">
@@ -276,8 +291,17 @@
                     </div>
 
                     <div class="form-group">
+                      <label for="slc-tipo">Precios Disponibles</label>
+                      <div id="" class="alert alert-primary" role="alert">
+                        <select id="slc-precio" class="form-control">
+                          <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
                       <label for="txt-observacion">Observación</label>
-                      <textarea class="form-control" id="txt-observacion" placeholder="Ingrese alguna Observación"></textarea>
+                      <textarea class="form-control" id="txt-observacion" placeholder="Ingrese alguna Observación del cliente"></textarea>
                     </div>
 
                     <button type="button" class="btn btn-primary submitBtn" onclick="actualizarDato(document.getElementById('txt-id').value)">Reservar</button>

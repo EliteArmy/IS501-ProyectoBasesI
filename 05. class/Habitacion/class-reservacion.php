@@ -123,7 +123,22 @@
 		}
 
 		// --- Función Futura ---
-		public static function nombreFuncion1 ($conexion){
+		public static function obtenerPrecio ($conexion, $categoria, $tipos){
+
+			$resultado = $conexion->ejecutarConsulta (
+				"SELECT pre.idPrecio, pre.precio, pre.descripcion
+				FROM precio pre
+				INNER JOIN tipocategoria cat ON (pre.idTipoHabitacion = cat.idTipoCategoria)
+				INNER JOIN tipohabitacion hab ON (pre.idTipoHabitacion = hab.idTipoHabitacion)
+				WHERE pre.idTipoHabitacion = '$tipos' AND pre.idtipoCategoria = '$categoria'
+			");
+
+			while (($fila = $conexion->obtenerFila($resultado))){
+				echo '<option value="'.$fila["0"].'">'."Precio: ".$fila["1"]." ".$fila["2"].'</option>';
+				//echo "while";
+			}
+
+			//echo "Finalizo en la funcion";
 
 		}
 

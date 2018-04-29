@@ -36,7 +36,6 @@ $(document).ready(function(){
 	cargarLista();
 
 	//alert("Se termino de cargar");
-
 });
 /* --- Fin --- */
 
@@ -46,6 +45,39 @@ function cargarLista(){
 	//alert("Entra en la funcion");
 	
 }
+
+function cambiosPrecio(){
+	
+  var parametros = "slc-categoria=" + $("#slc-categoria").val() +"&"+
+  "slc-tipo=" + $("#slc-tipo").val();
+	
+	if( $("#slc-categoria").val() && $("#slc-tipo").val() ){
+	   //alert("IF");
+	   $.ajax({
+  	  url: "../ajax/get-info-reservacion.php?accion=obtener-precio",
+      method: "POST",
+      data: parametros,
+      success: function(resultado){
+         $("#slc-precio").html(resultado);
+         //$("#div-resultado-mensaje").html(resultado);
+         //$("#div-resultado").show();
+         //alert("Success");
+      },
+      error:function(err){
+				alert("Error: " + err);
+			}
+    });
+	}    
+}
+
+// Cada que este select cambie, ocurrira un update en el alert
+$('#slc-categoria').change(function() {
+	cambiosPrecio();
+});
+
+$('#slc-tipo').change(function() {
+	cambiosPrecio();
+});
 
 function registrarCliente(){
 	// encodeURIComponent() function encodes special characters. In addition, it encodes the 
@@ -89,7 +121,6 @@ function registrarCliente(){
 
 function registrarReservacion(){
 	
-
 	$.ajax({
 		url: "../ajax/gestion-info-tablero.php?accion=",
 		method: "POST",
@@ -106,3 +137,24 @@ function registrarReservacion(){
 }
 
 
+$("#btn-cerrar-mensaje").click(function(){
+	$("#div-resultado-mensaje").empty();
+	$("#div-resultado").hide();
+});
+
+/*$('#slc-categoria').change(function() {
+    var id = $(this).val() +"&"+
+    ; //get the current value's option
+    
+    $.ajax({
+    	  url: "../ajax/get-info-reservacion.php?accion=obtener-categorias",
+        type: 'POST',
+        data: {'id': id},
+        success: function(data){
+           $("#txt-precio").html(data);
+        },
+        error:function(err){
+					alert("Error: " + err);
+				}
+    });
+});*/
