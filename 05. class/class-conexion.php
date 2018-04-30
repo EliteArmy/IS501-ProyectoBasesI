@@ -55,6 +55,13 @@
 		public function cantidadRegistros($resultado){
 			return mysqli_num_rows($resultado);
 		}
+
+		public function getParametroSP ($parametros) {
+      $res_sp =  mysql_query ("SELECT ". $parametros . ";");
+      $row = mysql_fetch_assoc ($res_sp);
+      return $row;
+    }
+
 	}
 
 ?>

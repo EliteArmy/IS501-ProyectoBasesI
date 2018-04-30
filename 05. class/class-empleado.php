@@ -212,6 +212,63 @@
 		}
 
 		// --- Función que Guardara un nuevo Registro ---
+		public function registrarEmpleadoNuevo ($conexion){
+			
+			$passwordHash = md5($this->password);
+			$telefono = $this->telefono->getNumeroTelefono();
+			$accion = "Agregar";
+
+			$sql_callSP = "CALL SP_RegistrarEmpleado(
+                        '" . null . "',
+                        '" . $this->codigoEmpleado . "',
+
+                        '" . $this->primerNombre . "',
+                        '" . $this->segundoNombre . "', 
+                        '" . $this->primerApellido . "', 
+                        '" . $this->segundoApellido . "', 
+
+                        '" . $this->email . "', 
+                        '" . $passwordHash . "', 
+                        '" . $this->genero . "', 
+                        '" . $this->direccion . "',
+                        '" . $this->fechaNacimiento . "',
+                        '" . null . "',
+
+                        '" . $telefono . "',
+                        '" . null . "',
+                        '" . null . "',
+                        '" . $this->estado . "',
+                        '" . null . "',
+                        '" . $this->idSucursal . "',
+                        '" . $this->idEmpleadoSuperior . "',
+                        '" . $accion . "',
+                        @mensaje,
+                        @ocurre_error)";
+
+			$resultado = $conexion->ejecutarConsulta(); // mysqli_query ($this->link, $sql);
+
+			$return = $conexion->getParametroSP("
+		        @mensaje,
+		        @ocurre_error,
+      ");
+
+      if ($resultado != '1') {
+        echo "Error:" . $resultado . " <br/>";
+      }
+
+      $mensajeSP = $return['@mensaje'];
+      $ocurreError = $return['@ocurre_error'];
+      
+      if ($ocurreError == "1"){
+          echo $mensajeSP . "!@!true";
+      } else {
+      	echo "<b>Registro Insertado con Exito</b>";
+        echo $mensajeSP . "!@!false";
+      }
+
+		}
+
+		// --- Función que Guardara un nuevo Registro ---
 		public function registrarEmpleado ($conexion){
 			
 			$passwordHash = md5($this->password);
@@ -220,8 +277,9 @@
 				"INSERT INTO persona 
 				(idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
 				email, password, genero, direccion, fechaNacimiento, imagenIdentificacion) 
-				VALUES (null, '$this->primerNombre', '$this->segundoNombre', '$this->primerApellido', '$this->segundoApellido', 
-				'$this->email', '$passwordHash', '$this->genero', '$this->direccion', '$this->fechaNacimiento', null)"
+				VALUES (null, '$this->primerNombre', '$this->segundoNombre', '$this->primerApellido', 
+				'$this->segundoApellido', '$this->email', '$passwordHash', '$this->genero', 
+				'$this->direccion', '$this->fechaNacimiento', null)"
 			);
 
 			if(!($idTemporal = $conexion->ultimoId())){  // Obtener el ultimo Id de la persona que se inserto
@@ -298,10 +356,13 @@
 				FROM sucursal'
 			);
 
+			echo '<option>Seleccione una Opción</option>';
 			while (($fila = $conexion->obtenerFila($resultado))) {
 				echo '<option value="'.$fila["idSucursal"].'">'.$fila["nombre"].'</option>';
 			}
 		}
+
+
 
 	}
 ?>

@@ -19,12 +19,12 @@ $(document).ready(function(){
 
 	cargarEmpleadosNuevo();
 	
-	//$('#tabla-informacion').DataTable();
 	//alert("Se termino de cargar");
 
 });
 /* --- Fin --- */
 
+// Nueva Forma de Mostrar la lista de Empleados
 function cargarEmpleadosNuevo(){
 
 	$('#tabla-informacion').DataTable({
@@ -112,8 +112,8 @@ function registrarEmpleado(){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			$("#div-resultado").fadeOut(4000);
-			cargarListaEmpleados();
+			$("#div-resultado").fadeOut(4500);
+			cargarEmpleadosNuevo();
 		},
 		error:function(){
 			alert("error");
@@ -133,7 +133,7 @@ function obtenerDetalleEmpleado(idEmpleado){
 		dataType: "json",
 		success: function(respuesta){
 
-			console.log(respuesta);
+			//console.log(respuesta);
 			//alert(respuesta);
 
 			$("#txt-idempleado").val(respuesta.idEmpleado);
@@ -191,6 +191,7 @@ function actualizarEmpleado(idEmpleado){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
+			$("#div-resultado").fadeOut(4500);
 			cargarEmpleadosNuevo();
 		},
 		error:function(err){
@@ -212,7 +213,7 @@ function eliminarEmpleado(idEmpleado){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			cargarListaEmpleados();
+			cargarEmpleadosNuevo();
 		},
 		error: function(err){
 			alert("Error: " + err);
