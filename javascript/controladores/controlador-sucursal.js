@@ -54,7 +54,6 @@ function registrarSucursal(){
 			"txtreg-descripcion="+$("#txtreg-descripcion").val()+"&"+
 			"txtreg-id-restaurante="+$("#txtreg-id-restaurante").val()+"&"+
 			"txtreg-hotel="+$("#txtreg-hotel").val();
-
 	$.ajax({
 		url: "../ajax/gestion-info-sucursal.php?accion=registrar-sucursal",
 		method: "POST",
@@ -94,7 +93,6 @@ function obtenerDetalleSucursal(idSucursal){
 			$("#txt-descripcion").val(respuesta.descripcion);
 			$("#txt-id-restaurante").val(respuesta.idRestaurante);
 			$("#txt-id-hotel").val(respuesta.idHotel);
-			$("#txt-hotel").val(respuesta.descripcionHotel);
 			
 			// Falta Implementar:
 			//$("#btn-guardar").hide();
@@ -119,12 +117,10 @@ function actualizarSucursal(idSucursal){
 			"txt-direccion="+$("#txt-direccion").val()+"&"+
 			"txt-fecha-nacimiento="+$("#txt-fecha-nacimiento").val()+"&"+
 			"txt-descripcion="+$("#txt-descripcion").val()+"&"+
-			"txt-id-restaurante="+$("#txt-id-restaurante").val()+"&"+
-			"txt-id-hotel="+$("#txt-id-hotel").val()+"&"*
-			"txt-hotel"+$("#txt-hotel".val());
+			"txt-id-restaurante="+$("#txt-id-restaurante").val();
 	
 	//console.log(parametros);
-	//alert(parametros);
+	alert(parametros);
 	
 	$.ajax({
 		url: "../ajax/gestion-info-sucursal.php?accion=actualizar-sucursal",
@@ -142,6 +138,7 @@ function actualizarSucursal(idSucursal){
 	});
 }
 
+
 /*Función para eliminar la sucursal*/
 function eliminarSucursal(idSucursal){
 	
@@ -152,7 +149,7 @@ function eliminarSucursal(idSucursal){
 		method: "POST",
 		success: function(resultado){
 			//alert(resultado);
-			$("#ddiv-resultado-mensaje").html(resultado);
+			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
 			cargarListaSucursales();
 
@@ -167,5 +164,9 @@ $("#btn-cerrar-mensaje").click(function(){
 	$("#div-resultado").empty();
 	$("#div-resultado").hide();
 });
+
+
+
+
 
 // --- --- --- ---

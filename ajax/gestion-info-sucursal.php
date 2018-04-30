@@ -8,7 +8,6 @@
 		case "registrar-sucursal":
 			//echo "Entra en el case ";
 	 		include ("../05. class/Hotel/class-sucursal.php");
-	 		include ("../05. class/Hotel/class-hotel.php");
 			
 			$sucursal = new Sucursal(
 	 			null, //idSucursal
@@ -16,13 +15,11 @@
 	 			$_POST["txtreg-cantidad-hab"],
 	 			$_POST["txtreg-telefono"],
 	 			$_POST["txtreg-email"],
-	 			$_POST["txtreg-email"],
 	 			$_POST["txtreg-direccion"],
 	 			$_POST["txtreg-descripcion"],
 	 			$_POST["txtreg-id-restaurante"],
-	 			null, //idHotel
-
-	 			new Hotel(null, $_POST["txtreg-hotel"])
+	 			null //idHotel
+	 			
 	 		); 
 
 			$sucursal->registrarSucursal($conexion);
@@ -32,27 +29,23 @@
 	 	case "actualizar-sucursal":
 	 		//echo "Entra en el case ";
 	 		include ("../05. class/Hotel/class-sucursal.php");
-	 		include ("../05. class/Hotel/class-hotel.php");
 			
 		 	$sucursal = new Sucursal(
-		 			$_POST["#txt-idSucursal"], 
+		 			$_POST["txt-idSucursal"], 
 		 			$_POST["txt-nombre"],
 		 			$_POST["txt-cantidad-hab"],
 		 			$_POST["txt-telefono"],
 		 			$_POST["txt-email"],
-		 			$_POST["txt-email"],
 		 			$_POST["txt-direccion"],
 		 			$_POST["txt-descripcion"],
 		 			$_POST["txt-id-restaurante"],
-		 			$_POST["#txt-id-hotel"],
-
-		 	new hotel(null, $_POST["txt-hotel"]));
+		 			$_POST["#txt-id-hotel"]);
 
 		 	$sucursal->actualizarSucursal($conexion);
 
 	 	break;
 	 	
-	 	case "eliminar-cliente":
+	 	case "eliminar-sucursal":
 	 		//echo "Entra en el case Eliminar Cliente";
 	 		include ("../05. class/Hotel/class-sucursal.php");
 			Sucursal::eliminarSucursal($conexion, $_POST["idSucursal"]);

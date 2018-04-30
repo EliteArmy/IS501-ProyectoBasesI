@@ -1,5 +1,5 @@
 <?php
-
+	
 	class Sucursal {
 
 		private $idSucursal;
@@ -111,16 +111,17 @@
 		public static function obtenerListaSucursales ($conexion) {
 			
 			$resultado = $conexion->ejecutarConsulta(
-				'SELECT suc.idSucursal, suc.nombre, suc.cantidadHabitaciones, suc.telefono,
-				suc.direccion, suc.descripcion
-				FROM Sucursal suc'
+				'SELECT s.idSucursal ,s.nombre,  COUNT(*) "Habitaciones disponibles", s.telefono, s.direccion, s.descripcion FROM habitacion h
+				INNER JOIN sucursal s ON s.idSucursal = h.idSucursal
+				WHERE h.estado = "disponible"
+				GROUP BY s.idSucursal ASC'
 			);
 			
 			while($fila = $conexion->obtenerFila($resultado)){
 				echo '<tr>';
 				echo 		'<td>' . $fila["idSucursal"] . '</td>';
 				echo 		'<td>' . $fila["nombre"] . '</td>';
-				echo 		'<td>' . $fila["cantidadHabitaciones"] . '</td>';
+				echo 		'<td>' . $fila["Habitaciones disponibles"] . '</td>';
 				echo 		'<td>' . $fila["telefono"] . '</td>';
 				echo 		'<td>' . $fila["direccion"] . '</td>';
 				echo 		'<td>' . $fila["descripcion"] . '</td>';
@@ -136,8 +137,7 @@
 
 			$resultado = $conexion->ejecutarConsulta(
 				"SELECT suc.nombre, suc.cantidadHabitaciones, suc.telefono,
-				suc.email, suc.direccion, suc.descripcion, suc.idRestaurante, suc.idHotel, h.descripcionHotel FROM Sucursal suc
-				INNER JOIN hotel h ON (h.idHotel = suc.idHotel)
+				suc.email, suc.direccion, suc.descripcion, suc.idRestaurante, suc.idHotel FROM Sucursal suc
 				WHERE suc.idSucursal = '$idSucursal'");
 
 			$fila = $conexion->obtenerFila($resultado);
@@ -146,14 +146,13 @@
 		}
 
 		/*Función para registrar sucursal*/
-		public static function registrarSucursal($conexion){
+		public function registrarSucursal($conexion){
 
-			$hotel = $this->hotel->getdescripcionHotel();
 
 			$resultado = $conexion->ejecutarConsulta(
 						"INSERT INTO hotel 
 								VALUES(null,
-										'$descripcionHotel')");
+									   '$this->descripcionHotel')");
 
 			$idTemporal = $conexion->ultimoId();
 
@@ -175,18 +174,18 @@
 
 		/*Función para actualizar la información */
 		public function actualizarSucursal($conexion){
+
 			$resultado = $conexion->ejecutarConsulta(
 						"UPDATE sucursal suc
-							INNER JOIN hotel h ON (h.idHotel = suc.idHotel)
-							SET suc.nombre = '$this->nombre',
+							SET suc.idSucursal = '$this->idSucursal',
+								suc.nombre = '$this->nombre',
 								suc.cantidadHabitaciones = '$this->cantidadHabitaciones',
 								suc.telefono = '$this->telefono',
 								suc.email = '$this->email',
 								suc.direccion = '$this->direccion',
 								suc.descripcion = '$this->descripcion',
 								suc.idRestaurante = '$this->idRestaurante',
-								suc.idHotel = '$this->idHotel',
-								h.descripcionHotel = '$this->descripcionHotel'
+								suc.idHotel = '$this->idHotel'
 							WHERE suc.idSucursal = '$this->idSucursal'");
 
 		echo "<b>Registro actualizado con Exito</b>";

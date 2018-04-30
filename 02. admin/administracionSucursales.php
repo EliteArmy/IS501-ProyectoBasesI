@@ -27,6 +27,9 @@
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
+    <!-- DataTables custom CSS -->
+    <link href="../css/datatables.min.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -184,7 +187,7 @@
                 <tr>
                   <th>IdSucursal</th>
                   <th>Nombre</th>
-                  <th>Cantidad Habitaciones</th>
+                  <th>Habitaciones disponibles</th>
                   <th>Telefono</th>
                   <th>Direccion</th>
                   <th>Descripcion</th>
@@ -251,7 +254,7 @@
 
                     <div class="form-group">
                       <label for="txtreg-cantidad-hab">Cantidad de Habitaciones</label>
-                      <input type="number" class="form-control" id="txtreg-segundo-nombre" placeholder="Ingrese la Cantidad de Habitaciones">
+                      <input type="number" class="form-control" id="txtreg-cantidad-hab" placeholder="Ingrese la Cantidad de Habitaciones">
                     </div>
                     
                      <div class="form-group">
@@ -276,7 +279,7 @@
 
                     <div class="form-group">
                       <label for="txtreg-id-restaurante">Id del Restaurante</label>
-                      <input type="text" class="form-control" id="txtreg-id-restaurante" placeholder="Ingrese el Id del Restaurante">
+                      <input type="number" class="form-control" id="txtreg-id-restaurante" placeholder="Ingrese el Id del Restaurante">
                     </div>
 
                     <div class="form-group">
@@ -361,11 +364,6 @@
                       <label for="txt-id-hotel">Id del Hotel</label>
                       <input type="text" class="form-control" id="txt-id-hotel" placeholder="Ingrese el Id del Hotel">
                     </div>
-
-                    <div class="form-group">
-                      <label for="txt-hotel">Descripción del Hotel</label>
-                      <textarea class="form-control" id="txt-hotel" placeholder="Ingrese la descripción del hotel"></textarea>
-                    </div>  
 
                     <button type="button" class="btn btn-primary submitBtn" onclick="actualizarSucursal(document.getElementById('txt-idSucursal').value)">Actualizar</button>
 
