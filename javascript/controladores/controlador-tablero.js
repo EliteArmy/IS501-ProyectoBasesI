@@ -135,6 +135,51 @@ function registrarReservacion(){
 	});
 }
 
+// -- Función que Selecciona la Informacion de un Cliente
+function obtenerDetalleCliente(correo){
+	//alert("Entra en la funcion " + correo);
+
+	$.ajax({
+		url: "../ajax/get-info-reservacion.php?accion=obtener-detalle-cliente",
+		data: "correoCliente=" + correo,
+		method: "POST",
+		dataType: "json",
+		success: function(respuesta){
+			console.log(respuesta);
+
+			if(respuesta.mensaje == "No Existe Registro"){
+				$("#txt-respuesta").html(respuesta);
+				$("#txt-respuesta").show();
+			} else {
+			//alert(respuesta);
+				$("#txt-idcliente").html(respuesta.cliente);
+				
+				$("#txt-primer-nombre").val(respuesta.primerNombre);
+				$("#box-primer-nombre").show();
+				
+				$("#txt-segundo-nombre").html(respuesta.segundoNombre);
+				
+				$("#txt-primer-apellido").val(respuesta.primerApellido);
+				$("#box-primer-apellido").show();
+				
+				$("#txt-segundo-apellido").html(respuesta.segundoApellido);
+				$("#txt-email").html(respuesta.email);
+				$("#txt-telefono").html(respuesta.numeroTelefono);
+				$("#txt-fecha-nacimiento").html(respuesta.fechaNacimiento);
+			}
+
+			// Falta Implementar:
+			//$("#btn-guardar").hide();
+			//$("#btn-actualizar").show();
+		},
+		error: function(err){
+			alert("Error: " + err);
+			console.log(err);
+		}
+	});
+}
+
+
 // Gestiona el div que muestra mensajes o errores
 $("#btn-cerrar-mensaje").click(function(){
 	$("#div-resultado-mensaje").empty();

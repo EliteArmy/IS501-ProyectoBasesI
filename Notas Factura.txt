@@ -7,7 +7,7 @@ Insertar Reservacion:
 	fechaEntrada				(fechaEntrada(Actual) > fechaSalida(Previa)) - validacion
 	fechaSalida					
 	camaSupletoria
-	estado							(Activo)
+	estado							(Activo/Reservado)
 	observacion
 	idCliente
 		

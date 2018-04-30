@@ -130,7 +130,6 @@
 			$fila = $conexion->obtenerFila($resultado);
 
 			echo json_encode($fila);
-
 		}
 
 		// --- Función que Guardará la nueva información ---

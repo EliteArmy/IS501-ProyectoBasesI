@@ -35,6 +35,12 @@
 			Reservacion::obtenerHabitacion($conexion, $_POST["slc-sucursal"]);
 	 	break;
 
+	 	case "obtener-detalle-cliente":
+	 		//echo "Entra en el case Obtener detalle cliente";
+	 		include ("../05. class/Habitacion/class-reservacion.php");
+	 		Reservacion::obtenerDetalleCliente($conexion, $_POST["correoCliente"]);
+		break;
+
 	 	default:
 	 		echo "Accion Invalida";
 	 	break;

@@ -245,23 +245,43 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                   <form role="form">
-
                     <div class="form-group">
+                      <label for="div-previo-registro"></label>
+                      <div id="div-previo-registro" class="alert alert-primary" role="alert">
+                        El Cliente debde estar Previamente Registrado.
+                      </div>
+                    </div>
+
+                    <div style="display: none;" class="form-group">
+                      <label for="txt-respuesta">Respuesta: </label>
+                      <div class="form-control alert alert-primary" id="txt-respuesta"></div>
+                    </div>
+
+                    <div id="" style="display: none;" class="form-group">
+                      <label for="txt-idcliente">Id Cliente</label>
+                      <input type="text" class="form-control" id="txt-idcliente" placeholder="Ingrese el Primer Nombre">
+                    </div>
+
+                    <div id="box-primer-nombre" style="display: none;" class="form-group">
                       <label for="txt-primer-nombre">Primer Nombre</label>
-                      <input type="text" class="form-control" id="txt-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                      <input type="text" class="form-control" id="txt-primer-nombre" placeholder="" disabled>
+                    </div>
+
+                    <div id="box-primer-apellido" style="display: none;" class="form-group">
+                      <label for="txt-primer-apellido">Primer Apellido</label>
+                      <input type="text" class="form-control" id="txt-primer-apellido" placeholder="" disabled>
                     </div>
 
                     <div class="form-group">
-                      <label for="txt-primer-nombre">Primer Apellido</label>
-                      <input type="text" class="form-control" id="txt-primer-nombre" placeholder="Ingrese el Primer Nombre">
+                      <label for="txt-email">Email del Cliente</label>
+                      <input type="email" class="form-control" id="txt-email" placeholder="">
                     </div>
 
-                    <div class="form-group">
-                      <label for="txt-email">Email</label>
-                      <input type="email" class="form-control" id="txt-email" placeholder="Ingrese el correo electrónico">
-                    </div>
+                    <button type="button" class="btn btn-primary submitBtn" onclick="obtenerDetalleCliente(document.getElementById('txt-email').value)">Buscar Cliente</button>
 
-                    <div class="form-group">
+                    <br>
+
+                    <div style="display: none;" class="form-group">
                       <label for="txt-fecha-reservacion">Fecha Reservacion</label>
                       <input type="date" class="form-control" id="txt-fecha-reservacion">
                     </div>
