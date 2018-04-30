@@ -13,7 +13,8 @@
 		private $noNinos;
 		private $idCliente;
 
-		public function __construct($idReservacion,
+		public function __construct(
+					$idReservacion,
 					$fechaReservacion,
 					$fechaEntrada,
 					$fechaSalida,
@@ -242,8 +243,9 @@
 				"INSERT INTO reservacion(idReservacion, fechaReservacion, fechaEntrada, fechaSalida,
 				 camaSupletoria, estado, observacion, noAdultos, noNinos, idCliente) 
 				VALUES (null, CURDATE(), '$this->fechaEntrada', '$this->fechaSalida', 
-				'$this->camaSupletoria', '$this->estado', '$this->observacion', '$this->noAdultos', '$this->noNinos', '$this->idCliente')
-				");
+				'$this->camaSupletoria', '$this->estado', '$this->observacion', '$this->noAdultos', 
+				'$this->noNinos', '$this->idCliente')
+			");
 
 
 		}

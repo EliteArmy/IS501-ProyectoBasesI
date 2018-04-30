@@ -93,7 +93,6 @@ function cambiosPrecio(){
 	}    
 }
 
-
 // Cada que este select cambie, ocurrira un update el slc-habitacion
 $('#slc-sucursal').change(function() {
 	cambiosHabitacion();
@@ -119,7 +118,18 @@ function cambiosHabitacion(){
 
 // Función para Registrar una Reservación
 function registrarReservacion(){
-	
+		
+	var parametros = "idCliente=" + idCliente +"&"+
+		"txt-idcliente="+$("#txt-idcliente").val()+"&"+
+		"txt-primer-nombre="+$("#txt-primer-nombre").val()+"&"+
+		"txt-fecha-entrada="+$("#txt-fecha-entrada").val()+"&"+
+		"txt-fecha-salid="+$("#txt-fecha-salid").val()+"&"+
+		"txt-observacion="+$("#ttxt-observacion").val()+"&"+
+		"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
+		"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
+
+		"txt-email="+$("#txt-email").val();
+
 	$.ajax({
 		url: "../ajax/gestion-info-tablero.php?accion=",
 		method: "POST",

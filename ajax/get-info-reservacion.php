@@ -41,6 +41,27 @@
 	 		Reservacion::obtenerDetalleCliente($conexion, $_POST["correoCliente"]);
 		break;
 
+	 	case "registrar-reservacion":
+	 		//echo "Entra en el case registrar reservacion";
+	 		include ("../05. class/Habitacion/class-reservacion.php");
+
+	 		$reservacion = new Reservacion(
+	 			null, //idReservacion
+	 			null, //fechaReservacion
+	 			$_POST["txt-fecha-entrada"], //fechaEntrada
+	 			$_POST["txt-fecha-salid"], //fechaSalida
+	 			$_POST["slc-supletoria"], //camaSupletoria
+	 			$_POST["slc-estado"], //estado
+	 			$_POST["txt-observacion"], //observacion
+	 			$_POST["slc-adultos"], //$noAdultos
+	 			$_POST["slc-ninos"], //noNinos
+	 			$_POST["txt-idcliente"]  //idCliente
+	 		);
+
+	 		$reservacion->registrarReservacion($conexion);
+
+		break;
+
 	 	default:
 	 		echo "Accion Invalida";
 	 	break;

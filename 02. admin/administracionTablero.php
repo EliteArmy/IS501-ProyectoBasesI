@@ -232,7 +232,7 @@
 
           <!-- Modal de Reservación -->
           <div class="modal fade" id="modalReservacion" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
               <div class="modal-content">
                   
                 <!-- Modal Header -->
@@ -257,17 +257,17 @@
                       <div class="form-control alert alert-primary" id="txt-respuesta"></div>
                     </div>
 
-                    <div id="" style="display: none;" class="form-group">
+                    <div style="display: none;" id="box-idCliente" class="form-group">
                       <label for="txt-idcliente">Id Cliente</label>
                       <input type="text" class="form-control" id="txt-idcliente" placeholder="Ingrese el Primer Nombre">
                     </div>
 
-                    <div id="box-primer-nombre" style="display: none;" class="form-group">
+                    <div style="display: none;" id="box-primer-nombre" class="form-group">
                       <label for="txt-primer-nombre">Primer Nombre</label>
                       <input type="text" class="form-control" id="txt-primer-nombre" placeholder="" disabled>
                     </div>
 
-                    <div id="box-primer-apellido" style="display: none;" class="form-group">
+                    <div style="display: none;" id="box-primer-apellido" class="form-group">
                       <label for="txt-primer-apellido">Primer Apellido</label>
                       <input type="text" class="form-control" id="txt-primer-apellido" placeholder="" disabled>
                     </div>
@@ -287,27 +287,32 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="txt-fecha-entrada">Fecha Entrada</label>
-                      <input type="date" class="form-control" id="txt-fecha-entrada">
+                      <div style="width: 49%; display: inline-block">
+                        <label for="txt-fecha-entrada">Fecha Entrada</label>
+                        <input type="date" class="form-control" id="txt-fecha-entrada">
+                      </div>
+                      
+                      <div style="width: 49%; display: inline-block">
+                        <label for="txt-fecha-salida">Fecha Salida</label>
+                        <input type="date" class="form-control" id="txt-fecha-salida">
+                      </div>
+                      
                     </div>
 
                     <div class="form-group">
-                      <label for="txt-fecha-salida">Fecha Salida</label>
-                      <input type="date" class="form-control" id="txt-fecha-salida">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="slc-categoria">Tipo Categoria</label>
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-categoria">Tipo Categoria</label>
                         <select id="slc-categoria" class="form-control">
                           <!--Informacion generada por la Base -->
-                      </select>
-                    </div>
+                        </select>
+                      </div>
 
-                    <div class="form-group">
-                      <label for="slc-tipo">Tipo Habitación</label>
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-tipo">Tipo Habitación</label>
                         <select id="slc-tipo" class="form-control">
-                          <!--Informacion generada por la Base -->
-                      </select>
+                        <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
                     </div>
 
                     <div class="form-group">
@@ -320,16 +325,56 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="slc-sucursal">Sucursal</label>
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-sucursal">Sucursal</label>
                         <select id="slc-sucursal" class="form-control">
                           <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
+
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-habitacion">Habitacion</label>
+                        <select id="slc-habitacion" class="form-control">
+                          <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-adultos">Cantidad de Adultos</label>
+                        <select id="slc-adultos" class="form-control">
+                          <option value="1">Un Adulto</option>
+                          <option value="2">Dos Adultos</option>
+                          <option value="3">Tres Adultos</option>
+                          <option value="4">Cuatro Adultos</option>
+                        </select>
+                      </div>
+
+                      <div style="width: 49%; display: inline-block;">
+                        <label for="slc-ninos">Cantidad de Niños</label>
+                        <select id="slc-ninos" class="form-control">
+                          <option value="1">Un Niño(a)</option>
+                          <option value="2">Dos Niño(a)</option>
+                          <option value="3">Tres Niño(a)</option>
+                          <option value="4">Cuatro Niño(a)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-estado">Estado</label>
+                      <select id="slc-estado" class="form-control">
+                        <option value="Activo">Activo</option>
+                        <option value="Resevado">Resevado</option>
                       </select>
                     </div>
 
                     <div class="form-group">
-                      <label for="slc-habitacion">Habitacion</label>
-                        <select id="slc-habitacion" class="form-control">
-                          <!--Informacion generada por la Base -->
+                      <label for="slc-supletoria">Cama Supletoria</label>
+                      <select id="slc-supletoria" class="form-control">
+                        <option value="1">Una Cama Extra</option>
+                        <option value="2">Dos Camas Extra</option>
                       </select>
                     </div>
 
