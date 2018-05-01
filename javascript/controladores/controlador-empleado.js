@@ -26,6 +26,8 @@ $(document).ready(function(){
 
 // Nueva Forma de Mostrar la lista de Empleados
 function cargarEmpleadosNuevo(){
+	
+	$('#tabla-informacion').empty();
 
 	$('#tabla-informacion').DataTable({
       "processing": true,
@@ -112,8 +114,8 @@ function registrarEmpleado(){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			$("#div-resultado").fadeOut(4500);
-			cargarEmpleadosNuevo();
+			//$("#div-resultado").fadeOut(4500);
+			//cargarEmpleadosNuevo();
 		},
 		error:function(){
 			alert("error");

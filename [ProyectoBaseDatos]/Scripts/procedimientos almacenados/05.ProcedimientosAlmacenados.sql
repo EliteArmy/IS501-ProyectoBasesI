@@ -239,23 +239,35 @@ SP:BEGIN
 	SET pcMensaje = '';
 	SET pbOcurrioError = TRUE;
 
-		/*verifica que no existan campos nulos.*/
-		IF pcPrimerNombre ='' or pcPrimerNombre IS NULL THEN
-			SET temMensaje = CONCAT(temMensaje, 'primer Nombre, ');
-		END IF;
+		IF (pcAccion = "Agregar" or pcAccion = 'Editar') THEN
 
-		IF pcPrimerApellido ='' or pcPrimerApellido IS NULL THEN
-			SET temMensaje = CONCAT(temMensaje, 'primer Apellido, ');
-		END IF;
+			/*verifica que no existan campos nulos.*/
+			IF pcPrimerNombre ='' or pcPrimerNombre IS NULL THEN
+				SET temMensaje = CONCAT(temMensaje, 'Primer Nombre, ');
+			END IF;
 
-		IF pcEmail ='' or pcEmail IS NULL THEN
-			SET temMensaje = CONCAT(temMensaje, 'Correo, ');
-		END IF;
+			IF pcPrimerApellido ='' or pcPrimerApellido IS NULL THEN
+				SET temMensaje = CONCAT(temMensaje, 'Primer Apellido, ');
+			END IF;
 
-		IF pcPassword ='' or pcPassword IS NULL THEN
-			SET temMensaje = CONCAT(temMensaje, 'Contraseña, ');
-		END IF;
+			IF pcEmail ='' or pcEmail IS NULL THEN
+				SET temMensaje = CONCAT(temMensaje, 'Correo, ');
+			END IF;
 
+			/*el hash d41d8cd98f00b204e9800998ecf8427e es de null*/
+			IF pcPassword ='d41d8cd98f00b204e9800998ecf8427e' or pcPassword IS NULL THEN
+				SET temMensaje = CONCAT(temMensaje, 'Contraseña, ');
+			END IF;
+			
+			/*Compara si temMensaje es diferente de vacio.*/
+			IF temMensaje<>'' THEN
+				SET pcMensaje = CONCAT('Campos requeridos para poder registrar la Persona: ', temMensaje);
+				SET pbOcurrioError = TRUE;
+				LEAVE SP;
+			END IF;
+
+		END IF;
+		/*
 		IF pcDireccion ='' or pcDireccion IS NULL THEN
 			SET temMensaje = CONCAT(temMensaje, 'Dirección, ');
 		END IF;
@@ -263,35 +275,29 @@ SP:BEGIN
 		IF pfFechaNacimiento ='' or pfFechaNacimiento IS NULL THEN
 			SET temMensaje = CONCAT(temMensaje, 'Fecha de nacimiento, ');
 		END IF;
-
-		/*verifica que no exista ninguna persona con ese Id.*/
-		/*SELECT COUNT(*) INTO vnConteo FROM persona
-		WHERE idPersona = pnIdPersona;
-		
-		IF (vnConteo > 0 AND pcAccion = 'Agregar') THEN
-			SET pcMensaje = CONCAT('Esta persona ya esta registrada, ');
-			LEAVE SP;
-		END IF;
 		*/
-		/*SELECT email INTO vcValidarCorreo FROM persona
-		WHERE email REGEXP '(.*)@(.*)\.(.*)'
-		IF pbOcurrioError THEN
-			SET pcMensaje = CONCAT ('El correo', vcValidarCorreo, 'no es válido');
-			LEAVE SP;
-		END IF;*/
-
-		/*compara si temMensaje es diferente de vacio.*/
-		IF temMensaje<>'' THEN
-			SET pcMensaje = CONCAT('Campos requeridos para poder registrar la Persona: ', temMensaje);
-			SET pbOcurrioError = TRUE;
-			/*LEAVE SP;*/
-		END IF;
-		
-		
 		CASE
 			/*registra la persona*/
 			WHEN pcAccion = 'Agregar' THEN
+
+					/*Verifica que no exista ninguna persona con ese Correo.*/
+					SELECT COUNT(*) INTO vnConteo FROM persona
+					WHERE email = pcEmail;
 					
+					IF vnConteo > 0 THEN
+						SET pcMensaje = CONCAT('Este correo ya esta registrado, ');
+						LEAVE SP;
+					END IF;
+
+					/*Verifica que el correo tenga un formato Valido*/
+					/*SELECT email INTO vcValidarCorreo FROM persona
+					WHERE email REGEXP '(.*)@(.*)\.(.*)';
+					
+					IF pbOcurrioError THEN
+						SET pcMensaje = CONCAT ('El correo', vcValidarCorreo, 'no es válido');
+						LEAVE SP;
+					END IF;
+					*/
 					INSERT INTO persona 
 					VALUES (null,
 							pcPrimerNombre,
@@ -318,8 +324,18 @@ SP:BEGIN
 						SET pbOcurrioError = FALSE;
 					END IF;
 					*/
+			
 			/*Edita la persona*/
 			WHEN pcAccion = 'Editar' THEN
+			
+				SELECT COUNT(*) INTO vnConteo FROM persona
+					WHERE email = pcEmail;
+					
+					IF vnConteo = 0 THEN
+						SET pcMensaje = CONCAT('Este correo No esta registrada, ');
+						LEAVE SP;
+					END IF;
+
 					UPDATE persona SET
 							idPersona = pnIdPersona,
 							primerNombre = pcPrimerNombre,

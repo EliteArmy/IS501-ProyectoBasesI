@@ -249,7 +249,7 @@
 
 			$return = $conexion->getParametroSP("@pcMensaje, @pbOcurrioError");
 
-      if ($resultado != '1') {
+      if ($resultado != '1') { // 
         echo "Error: " . $resultado . " <br>";
       }
 
@@ -257,7 +257,7 @@
       $ocurreError = $return['@pbOcurrioError'];
       
       if ($ocurreError == "1"){
-          echo $mensajeSP . " !@!true" . " <br>";
+          echo '<b>'. $mensajeSP . '</b>'." !@!true" . " <br>";
       } else {
       	echo "<b>Registro Insertado con Exito</b><br>";
         //echo $mensajeSP . " !@!false" . " <br>";

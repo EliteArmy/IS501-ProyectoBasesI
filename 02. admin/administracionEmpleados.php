@@ -276,12 +276,15 @@
                     <div class="form-group">
                       <label for="txtreg-password">Contraseña</label>
                       <input type="password" class="form-control" id="txtreg-password" placeholder="Ingrese la Contraseña">
+                      <div style="padding-left:5px; padding-top: 5px;">                      
+                        <input  type="checkbox" onchange="document.getElementById('txtreg-password').type = this.checked ? 'text' : 'password'"> Mostrar Contraseña
+                      </div>
                     </div>
 
                     <div class="form-group">
                       <label for="slcreg-genero">Genero</label>
                         <select id="slcreg-genero" class="form-control">
-                        <option>Seleccione una Opción</option>
+                        <!--<option>Seleccione una Opción</option>-->
                         <option value="F">Femenino</option>
                         <option value="M">Masculino</option>
                       </select>
