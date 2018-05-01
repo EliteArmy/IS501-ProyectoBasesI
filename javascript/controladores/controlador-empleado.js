@@ -112,8 +112,8 @@ function registrarEmpleado(){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			//$("#div-resultado").fadeOut(4500);
-			//cargarEmpleadosNuevo();
+			$("#div-resultado").fadeOut(4500);
+			cargarEmpleadosNuevo();
 		},
 		error:function(){
 			alert("error");

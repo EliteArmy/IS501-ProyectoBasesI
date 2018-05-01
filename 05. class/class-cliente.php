@@ -191,6 +191,54 @@
 		// --- Función que Guardara un nuevo Registro ---
 		public  function registrarCliente($conexion){
 
+			$passwordHash = md5($this->password);
+			$telefono = $this->telefono->getNumeroTelefono();
+			$accion = "Agregar";
+			$null = "null";
+			
+			$sql_callSP = "CALL SP_RegistrarEmpleado("
+								.$null. ","  
+							  "'".$this->primerNombre. "',".
+							  "'".$this->segundoNombre. "',".
+							  "'".$this->primerApellido. "',".
+							  "'".$this->segundoApellido. "',".
+							  "'".$this->email. "',".
+							  "'".$passwordHash. "',".
+							  "'".$this->genero. "',". 
+							  "'".$this->direccion. "',".
+							  "'".$this->fechaNacimiento. "'," 
+							  .$null. "," 
+							  .$telefono. "," 
+							  .$null. "," 
+							  "'".$this->estado. "',"
+							  .$null. "," 
+							  "'".$accion."',". 
+							  "@pcMensaje, 
+							  @pbOcurrioError)";
+
+			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
+
+			$return = $conexion->getParametroSP("@pcMensaje, @pbOcurrioError");
+
+      if ($resultado != '1') {
+        echo "Error: " . $resultado . " <br>";
+      }
+
+      $mensajeSP = $return['@pcMensaje'];
+      $ocurreError = $return['@pbOcurrioError'];
+      
+      if ($ocurreError == "1"){
+          echo $mensajeSP . " !@!true" . " <br>";
+      } else {
+      	echo "<b>Registro Insertado con Exito</b><br>";
+        //echo $mensajeSP . " !@!false" . " <br>";
+      }
+
+		}
+
+		// --- Función que Guardara un nuevo Registro ---
+		public  function registrarClienteViejo($conexion){
+
 			$resultado = $conexion->ejecutarConsulta (
 				"INSERT INTO persona 
 				(idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, 
