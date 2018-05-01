@@ -152,6 +152,19 @@
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
 
+          <!--para registrar una habitación-->
+          <div id="div-resultado" style="display: none;" class="alert alert-success fade show alert-dismissible " role="alert">
+            <div id="div-resultado-mensaje">
+            </div>
+            <button type="button" class="btn btn-default btn-sm close" aria-label="Close">
+              <span id="btn-cerrar-mensaje" class="fas fa-times" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistroHabitacion">Registrar habitación  
+            </button>
+
           <h2>Lista de Información</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -165,6 +178,7 @@
                   <th>Descripcion</th>
                   <th>Tipo Categoria</th>
                   <th>Tipo Habitación</th>
+                  <th>Opciones</th>
                 </tr>
               </thead>
 
@@ -203,6 +217,160 @@
             </table>
 
           </div>
+
+          <!-- Modal para Registrar Habitación -->
+          <div class="modal fade" id="modalRegistroHabitacion" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre la Habitación</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+
+
+                    <div class="form-group">
+                      <label for="txtreg-numero-hab">Número de habitación</label>
+                      <input type="number" class="form-control" id="txtreg-numero-hab" placeholder="Ingrese el Número de habitación">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-numero-piso">Número de piso</label>
+                      <input type="number" class="form-control" id="txtreg-numero-piso" placeholder="Ingrese el Número de piso">
+                    </div>
+                    
+                     <div class="form-group">
+                      <label for="txtreg-estado">Estado</label>
+                      <input type="text" class="form-control" id="txtreg-estado" placeholder="Ingrese el estado">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-descripcion">Descripción</label>
+                      <textarea class="form-control" id="txtreg-descripcion" placeholder="Ingrese la descripción"></textarea>
+                    </div>                  
+                    
+                    <div class="form-group">
+                      <label for="slcreg-tipoCategoria">Tipo de Categoría</label>
+                      <select id="slcreg-tipoCategoria" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-tipoHabitacion">Tipo de Habitación</label>
+                      <select id="slcreg-tipoHabitacion" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-sucursal">Sucursal</label>
+                      <select id="slcreg-sucursal" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="registrarHabitacion()">Guardar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal para actualizar habitación -->
+          <div class="modal fade" id="modalForm" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre la Habitación</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+                    
+                    <div style="display: none" class="form-group">
+                      <label for="txt-idHabitacion">Id</label>
+                      <input type="text" class="form-control" id="txt-idHabitacion">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-numero-hab">Número de habitación</label>
+                      <input type="number" class="form-control" id="txt-numero-hab" placeholder="Ingrese el Número de habitación">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-numero-piso">Número de piso</label>
+                      <input type="number" class="form-control" id="txt-numero-piso" placeholder="Ingrese el Número de piso">
+                    </div>
+                    
+                     <div class="form-group">
+                      <label for="txt-estado">Estado</label>
+                      <input type="text" class="form-control" id="txt-estado" placeholder="Ingrese el estado">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-descripcion">Descripción</label>
+                      <textarea class="form-control" id="txt-descripcion" placeholder="Ingrese la descripción"></textarea>
+                    </div>                  
+                    
+                    <div class="form-group">
+                      <label for="slc-tipoCategoria">ID del Tipo de Categoría</label>
+                      <input type="number" class="form-control" id="slc-tipoCategoria" placeholder="Ingrese el Id del Tipo de Categoría">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-tipoHabitacion">ID del Tipo de Habitación</label>
+                      <input type="number" class="form-control" id="slc-tipoHabitacion" placeholder="Ingrese el Id del Tipo de Habitación">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slc-sucursal">ID de la Sucursal</label>
+                      <input type="number" class="form-control" id="slc-sucursal" placeholder="Ingrese el Id de la Sucursal">
+                    </div>
+
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarHabitacion(document.getElementById('txt-idHabitacion').value)">Actualizar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </main>
       </div>
     </div>
@@ -218,6 +386,13 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="../javascript/bootstrap.min.js"></script>
+    
+    <!-- DataTables core Javascript -->
+    <script src="../javascript/datatables.js"></script>
+    
+    <!-- DataTables Style Javascript -->
+    <script src="../javascript/dataTables.bootstrap4.js"></script> 
+    
 
     <!-- Custom Javascript -->
     <script src="../javascript/controladores/controlador-habitacion.js"></script>
