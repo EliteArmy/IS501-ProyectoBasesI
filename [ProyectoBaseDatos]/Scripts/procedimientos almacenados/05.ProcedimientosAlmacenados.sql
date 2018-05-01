@@ -239,7 +239,7 @@ SP:BEGIN
 	SET pcMensaje = '';
 	SET pbOcurrioError = TRUE;
 
-		IF (pcAccion = "Agregar" or pcAccion = 'Editar') THEN
+		IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN
 
 			/*verifica que no existan campos nulos.*/
 			IF pcPrimerNombre ='' or pcPrimerNombre IS NULL THEN
@@ -326,7 +326,7 @@ SP:BEGIN
 					*/
 			
 			/*Edita la persona*/
-			WHEN pcAccion = 'Editar' THEN
+			WHEN pcAccion = 'Actualizar' THEN
 			
 				SELECT COUNT(*) INTO vnConteo FROM persona
 					WHERE email = pcEmail;
@@ -423,22 +423,25 @@ SP:BEGIN
 	SET temMensaje='';
 	SET pbOcurrioError=TRUE;
 
-	/*verifica que los campos no sea  nulos.*/
+	IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN
+		/*verifica que los campos no sea  nulos.*/
+		IF pnIdPersona ='' or pnIdPersona IS NULL THEN
+			SET temMensaje = CONCAT(temMensaje,'Id de la persona, ');
+		END IF;
 
-	/*IF pnIdPersona='' or pnIdPersona IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'Id de la persona, ');
+		IF pcEstado='' or pcEstado IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje,'estado del cliente, ');
+		END IF;
+
+		/*compara si temMensaje es diferente de vacío.*/
+		IF temMensaje<>'' THEN
+			SET pcMensaje = CONCAT('Campos requeridos para poder Registrar/Actualizar el Cliente: ', temMensaje);
+			SET pbOcurrioError = TRUE;
+			LEAVE SP;
+		END IF;
 	END IF;
 
-	IF pcEstado='' or pcEstado IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje,'estado del cliente, ');
-	END IF;*/
-
-	/*compara si temMensaje es diferente de vacío.*/
-	/*IF temMensaje<>'' THEN
-		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Cliente: ', temMensaje);
-		SET pbOcurrioError = TRUE;
-		LEAVE SP;
-	END IF;*/
+	
 
 	/*si la fecha de registro es distinta a la fecha actual, no se podrá registrar.*/
 	/*SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
@@ -474,7 +477,7 @@ SP:BEGIN
 		/*LEAVE SP;*/
 	END IF;	
 
-	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
+	/*Manda a llamar al procedimiento SP_RegistrarPersona.*/
 	
 	CALL SP_RegistrarPersona(
 					null,
@@ -519,7 +522,7 @@ SP:BEGIN
 			END IF;
 
 		/*Edita el Cliente.*/
-		WHEN pcAccion = 'Editar' THEN
+		WHEN pcAccion = 'Actualizar' THEN
 				UPDATE cliente SET 
 						idCliente = pnIdCliente,
 						fechaRegistro = pfFechaRegistro,
@@ -600,71 +603,47 @@ SP:BEGIN
 	SET temMensaje = '';
 	SET pbOcurrioError = FALSE;
 
-	/*verifica que los campos no sean nulos.*/
-	IF pnCodigoEmpleado ='' or pnCodigoEmpleado IS NULL THEN
-		SET temMensaje = CONCAT(temMensaje, 'Código de empleado, ');
+	IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN 
+		
+		/*verifica que los campos no sean nulos.*/
+		IF pnIdSucursal ='' or pnIdSucursal IS NULL THEN
+			SET temMensaje=CONCAT(temMensaje, 'Id de sucursal, ');
+		END IF;
+
+		IF pnIdEmpleadoSuperior ='' or pnIdEmpleadoSuperior IS NULL THEN
+			SET temMensaje = CONCAT(temMensaje, 'Id del empleado superior, ');
+		END IF;
+
+		/*compara si temMensaje es diferente de vacío.*/
+		IF temMensaje<>'' THEN
+			SET pcMensaje = CONCAT('Campos requeridos para poder Registrar/Actualizar el Empleado: ', temMensaje);
+			SET pbOcurrioError = TRUE;
+			/*LEAVE SP;*/
+		END IF;
+
+		/*busca si esa sucursal existe.*/
+		SELECT COUNT(*) INTO vnConteo FROM sucursal
+		WHERE idSucursal = pnIdSucursal;
+		
+		IF vnConteo = 0 THEN
+			SET pcMensaje=CONCAT('Sucursal con id: ', pnIdSucursal, 'no existe.');
+			LEAVE SP;
+		END IF;
+
+	END IF;	
+
+	IF(pcAccion = "Actualizar" or pcAccion = 'Eliminar') THEN
+		/*busca si existe una persona con ese id.*/
+		SELECT COUNT(*) INTO vnConteo FROM empleado 
+		WHERE idPersona = pnIdPersona;
+		
+		IF (vnConteo = 0) THEN
+			SET pcMensaje=CONCAT('Persona con id: ',pnIdPersona,' No está registrada como empleado.');
+			LEAVE SP;
+		END IF;
 	END IF;
 
-	IF pnIdSucursal ='' or pnIdSucursal IS NULL THEN
-		SET temMensaje=CONCAT(temMensaje, 'Id de sucursal, ');
-	END IF;
-
-	IF pnIdEmpleadoSuperior ='' or pnIdEmpleadoSuperior IS NULL THEN
-		SET temMensaje = CONCAT(temMensaje, 'Id del empleado superior, ');
-	END IF;
-
-	/*compara si temMensaje es diferente de vacío.*/
-	IF temMensaje<>'' THEN
-		SET pcMensaje = CONCAT('Campos requeridos para poder registrar el Empleado: ', temMensaje);
-		SET pbOcurrioError = TRUE;
-		/*LEAVE SP;*/
-	END IF;
-
-	/*si la fecha de ingreso es distinta a la fecha actual, no se podrá registrar.*/
-	/*SELECT fechaIngreso INTO pfFechaIngreso FROM empleado
-	WHERE fechaIngreso = pfFechaIngreso;
-	IF pfFechaIngreso != CURDATE() THEN 
-		SET pcMensaje = CONCAT('Esta fecha de ingreso: ',pfFechaIngreso,' no es válida.');
-		LEAVE SP;
-	END IF;*/
-
-	/*busca si existe una persona con ese id.*/
-	/*SELECT COUNT(*) INTO vnConteo FROM empleado 
-	WHERE idPersona = pnIdPersona;
-	
-	IF (vnConteo > 0 AND pcAccion = 'Agregar') THEN
-		SET pcMensaje=CONCAT('Persona con id: ',pnIdPersona,' ya está registrada como empleado.');
-		LEAVE SP;
-	END IF;*/
-
-	/*busca si existe un empleado con ese id.*/
-	/*SELECT COUNT(*) INTO vnConteo FROM empleado 
-	WHERE idEmpleado = pnIdEmpleado;
-	
-	IF (vnConteo > 0  AND pcAccion = 'Agregar') THEN
-		SET pcMensaje=CONCAT('Empleado con id: ',pnIdEmpleado,' ya existe.');
-		LEAVE SP;
-	END IF;	*/
-
-	/*busca si esa sucursal existe.*/
-	SELECT COUNT(*) INTO vnConteo FROM sucursal
-	WHERE idSucursal = pnIdSucursal;
-	
-	IF vnConteo = 0 THEN
-		SET pcMensaje=CONCAT('Sucursal con id: ', pnIdSucursal, 'no existe.');
-		LEAVE SP;
-	END IF;
-
-	/*busca si ya existe un empleado con ese codigo de empleado.*/
-	/*SELECT COUNT(*) INTO vnConteo FROM empleado
-	WHERE codigoEmpleado = pnCodigoEmpleado;
-	
-	IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
-		SET pcMensaje=('Ya existe un empleado con ese código.');
-		LEAVE SP;
-	END IF;*/
-
-	/*busca si el empleado es mayor de edad para poder registrarlo.*/
+	/*Verifica si el empleado es mayor de edad para poder registrarlo.*/
 	/*SELECT (TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE())) INTO vnEdad FROM persona
 	WHERE idPersona = pnIdPersona;
 	IF vnEdad<216 THEN
@@ -672,7 +651,7 @@ SP:BEGIN
 		LEAVE SP;
 	END IF;*/
 	
-	/*manda a llamar al procedimiento SP_RegistrarPersona.*/
+	/*Manda a llamar al procedimiento SP_RegistrarPersona.*/
 	CALL SP_RegistrarPersona(
 					null,
 					pcPrimerNombre,
@@ -700,27 +679,50 @@ SP:BEGIN
 
 		/*Registra el Empleado.*/
 		WHEN pcAccion = 'Agregar' THEN
-				INSERT INTO empleado
-						VALUES (null,
-								pnCodigoEmpleado,
-						 		CURDATE(),
-						 		null,
-						 		'Activo',
-						 		LAST_INSERT_ID(),
-						 		pnIdSucursal,
-						 		pnIdEmpleadoSuperior);
+			IF pnCodigoEmpleado ='' or pnCodigoEmpleado IS NULL THEN
+				SET temMensaje = CONCAT(temMensaje, 'Código de empleado, ');
+			END IF;
 
-				IF pbOcurrioError THEN
-					SET pcMensaje = CONCAT('El empleado no se pudo registrar', pcMensaje);
-					SET pbOcurrioError = TRUE;
-				ELSE 
-					SET pcMensaje = 'Empleado registrado correctamente.';
-					COMMIT;
-					SET pbOcurrioError=FALSE;
-				END IF;
+			/*Verfica si existe un empleado con ese correo.*/
+			SELECT COUNT(*) INTO vnConteo FROM persona 
+			WHERE email = pcEmail;
+			
+			IF (vnConteo > 0  AND pcAccion = 'Agregar') THEN
+				SET pcMensaje = CONCAT('Empleado con correo: ',pnIdEmpleado,' ya existe.');
+				LEAVE SP;
+			END IF;
+
+			/*Verifica si ya existe un empleado con ese codigo de empleado.*/
+			SELECT COUNT(*) INTO vnConteo FROM empleado
+			WHERE codigoEmpleado = pnCodigoEmpleado;
+			
+			IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
+				SET pcMensaje=('Ya existe un empleado con ese código.');
+				LEAVE SP;
+			END IF;
+
+			INSERT INTO empleado
+					VALUES (null,
+							pnCodigoEmpleado,
+					 		CURDATE(),
+					 		null,
+					 		'Activo',
+					 		LAST_INSERT_ID(),
+					 		pnIdSucursal,
+					 		pnIdEmpleadoSuperior);
+
+			IF pbOcurrioError THEN
+				SET pcMensaje = CONCAT('El empleado no se pudo registrar', pcMensaje);
+				SET pbOcurrioError = TRUE;
+			ELSE 
+				SET pcMensaje = 'Empleado registrado correctamente.';
+				COMMIT;
+				SET pbOcurrioError=FALSE;
+			END IF;
 
 		/*Edita el Empleado.*/
-		WHEN pcAccion = 'Editar' THEN
+		WHEN pcAccion = 'Actualizar' THEN
+
 			UPDATE empleado SET 
 					idEmpleado = pnIdEmpleado,
 					codigoEmpleado = pnCodigoEmpleado,
@@ -737,22 +739,24 @@ SP:BEGIN
 				SET pbOcurrioError = TRUE;
 			ELSE
 				SET pcMensaje = 'Datos del empleado actualizados satisfactorimente.';
-				COMMIT;
 				SET pbOcurrioError = FALSE;
+				COMMIT;
 			END IF;	
 
 		/*Elimina el Empleado.*/
 		WHEN pcAccion = 'Eliminar' THEN
 			DELETE FROM empleado
 			WHERE idEmpleado = pnIdEmpleado;
+			
 			IF pbOcurrioError THEN
-				SET pcMensaje = CONCAT('El empleado no se pudo eliminar.',pcMensaje);
+				SET pcMensaje = CONCAT('El empleado no se pudo eliminar.', pcMensaje);
 				SET pbOcurrioError = TRUE;
 			ELSE
 				SET pcMensaje = 'Empleado eliminado correctamente.';
-				COMMIT;
 				SET pbOcurrioError = FALSE;
+				COMMIT;
 			END IF;
+
 		ELSE 
     		SET pcMensaje = 'No se selecciono Agregar, Editar ni Eliminar ';
 	END CASE;

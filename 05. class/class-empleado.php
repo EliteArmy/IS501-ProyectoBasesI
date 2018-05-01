@@ -308,6 +308,39 @@
 		public function actualizarEmpleado ($conexion){
 
 			$telefono = $this->telefono->getNumeroTelefono();
+			$accion = "Actualizar";
+			$null = "null";
+			
+			$sql_callSP = "CALL SP_RegistrarEmpleado("
+					.$this->idEmpleado. ",".
+				  .$this->null. ",". 
+				  "'".$this->primerNombre. "',".
+				  "'".$this->segundoNombre. "',".
+				  "'".$this->primerApellido. "',".
+				  "'".$this->segundoApellido. "',".
+				  "'".$this->email. "',".
+				  "'".$null. "',".
+				  "'".$this->genero. "',". 
+				  "'".$this->direccion. "',".
+				  "'".$this->fechaNacimiento. "'," 
+				  .$null. "," 
+				  .$telefono. "," 
+				  .$null. "," 
+				  .$null. ",".
+				  "'".$this->estado. "',"
+				  .$null. "," 
+				  .$this->idSucursal. ","
+				  .$this->idEmpleadoSuperior. "," . 
+				  "'".$accion."',". 
+				  "@pcMensaje, 
+				  @pbOcurrioError)";
+
+		}
+
+		// --- Función que Actualizara la información ---
+		public function actualizarEmpleado ($conexion){
+
+			$telefono = $this->telefono->getNumeroTelefono();
 			//echo $telefono;
 
 			$resultado = $conexion->ejecutarConsulta(
