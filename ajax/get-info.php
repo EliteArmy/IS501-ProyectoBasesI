@@ -67,6 +67,34 @@
 	 		include ("../05. class/Habitacion/class-habitacion.php"); 
 	 		Habitacion::obtenerListaHabitaciones($conexion);
 	 	break;
+
+	 	case "obtener-habitaciones2":
+	 		//echo "Entra en el case Habitacion";
+	 		include ("../05. class/Habitacion/class-habitacion.php"); 
+	 		Habitacion::obtenerListaHabitaciones2($conexion);
+	 	break;
+
+	 	case "obtener-detalle-habitacion":
+	 		echo "Entra en el case Obtener Habitacion";
+	 		include ("../05. class/Habitacion/class-habitacion.php");
+	 		Habitacion::obtenerDetalleHabitacion($conexion, $_POST["idHabitacion"]);
+		break;
+
+	 	case "obtener-sucursales-habitacion":
+	 		//echo "Entra en el case Empleado";
+	 		include ("../05. class/Habitacion/class-habitacion.php");
+	 		Habitacion::obtenerSucursalesHabitacion($conexion);
+		break;
+
+		case "obtener-tipoCategoria-habitacion";
+			include ("../05. class/Habitacion/class-habitacion.php");
+			Habitacion::obtenerTipoCategoriaHabitacion($conexion);
+		break;
+
+		case "obtener-tipoHabitacion-habitacion";
+			include ("../05. class/Habitacion/class-habitacion.php");
+			Habitacion::obtenerTipoHabHabitacion($conexion);
+		break;
 		
 		case "obtener-detalle-sucursal":
 	 	//echo "Entra en el case Obtener Cliente";
