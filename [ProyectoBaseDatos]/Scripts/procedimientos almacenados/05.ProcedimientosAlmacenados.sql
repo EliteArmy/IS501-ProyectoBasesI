@@ -41,28 +41,8 @@ DELIMITER ;
 
 -- CALL SP_ObtenerClientes;
 
-
 -- -------------------------------
 -- Procedimiento 03:
--- Calcula las ganancias por año
-DROP PROCEDURE IF EXISTS SP_GananciaAnual;
-
-DELIMITER $$
-CREATE PROCEDURE SP_GananciaAnual()
-
-BEGIN
-
-	SELECT YEAR(fac.fechaEmision) Año, SUM(fac.costeTotal) AS Ganancias 
-	FROM factura fac
-	GROUP BY Año;
-
-END $$
-DELIMITER ;
-
--- CALL SP_GananciaAnual;*/
-
--- -------------------------------
--- Procedimiento 04:
 
 /*DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
@@ -133,41 +113,9 @@ SP:BEGIN
 END $$ 
 DELIMITER ;
 
--- -------------------------------
--- Procedimiento 05:
-DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
-
-DELIMITER $$
-CREATE PROCEDURE SP_RegistrarEmpleado(
-						IN primerNombre VARCHAR(20),
-						IN segundoNombre VARCHAR(20),
-						IN primerApellido VARCHAR(20),
-						IN segundoApellido VARCHAR(20),
-						IN email VARCHAR(50),
-						IN password VARCHAR(45),
-						IN genero VARCHAR(1),
-						IN direccion VARCHAR(100),
-						IN fechaNacimiento DATE,
-						IN telefono VARCHAR(15),
-						OUT mensaje VARCHAR(200),
-						OUT ocurrioError BOOLEAN)
-
-SP:BEGIN
-
-	DECLARE tempMensaje VARCHAR(200);
-
-	START TRANSACTION;
-
-	SET tempMensaje = '';
-	SET mensaje = '';
-	SET ocurrioError = TRUE;
-
-END $$
-DELIMITER ;*/
-
 
 -- -------------------------------
--- Procedimiento 06:
+-- Procedimiento 04:
 
 /*DROP PROCEDURE IF EXISTS SP_SucursalReservacion;
 
@@ -457,11 +405,6 @@ SP:BEGIN
 
 	END IF;
 
-
-	
-
-	
-
 	/*si la fecha de registro es distinta a la fecha actual, no se podrá registrar.*/
 	/*SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
 	WHERE fechaRegistro = pfFechaRegistro;
@@ -670,7 +613,6 @@ SP:BEGIN
 			SET temMensaje = CONCAT(temMensaje, 'Código de empleado, ');
 		END IF;
 
-		
 		/*Verifica si ya existe un empleado con ese codigo de empleado.*/
 		SELECT COUNT(*) INTO vnConteo FROM empleado
 		WHERE codigoEmpleado = pnCodigoEmpleado;
@@ -686,6 +628,14 @@ SP:BEGIN
 			LEAVE SP;
 		END IF;
 
+		/*Verfica si existe un empleado con ese correo.*/
+			SELECT COUNT(*) INTO vnConteo FROM persona 
+			WHERE email = pcEmail;
+			
+			IF (vnConteo > 0  AND pcAccion = 'Agregar') THEN
+				SET pcMensaje = CONCAT('Empleado con correo: ',pnIdEmpleado,' ya existe.');
+				LEAVE SP;
+			END IF;
 
 	END IF;
 	/*Verifica si el empleado es mayor de edad para poder registrarlo.*/
