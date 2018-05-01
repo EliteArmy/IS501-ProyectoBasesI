@@ -217,15 +217,36 @@
 			$passwordHash = md5($this->password);
 			$telefono = $this->telefono->getNumeroTelefono();
 			$accion = "Agregar";
+			$null = "null";
 			
 			//echo "Entra en la Funcion";
 			//$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerEmpleados");
 
-			$sql_callSP = "CALL SP_RegistrarEmpleado(" .null. "," .$this->codigoEmpleado. "," . $this->primerNombre . ","
-			 .$this->segundoNombre. ", " .$this->primerApellido. "," . $this->segundoApellido . ", " . $this->email . ","
-			  .$passwordHash. "," .$this->genero. ", " .$this->direccion. "," .$this->fechaNacimiento. "," .null. "," 
-			  .$telefono. "," .null. "," .null. "," .$this->estado. "," .null. "," .$this->idSucursal. "," .$this->idEmpleadoSuperior. ","
-			   .$accion. ", @pcMensaje, @pbOcurrioError);";
+			$sql_callSP = "CALL SP_RegistrarEmpleado("
+				.$null. "," 
+			  .$this->codigoEmpleado. "," . 
+			  "'".$this->primerNombre."',".
+			  "'".$this->segundoNombre."',".
+			  "'".$this->primerApellido."',".
+			  "'".$this->segundoApellido."',".
+			  "'".$this->email."',".
+			  "'".$passwordHash."',".
+			  "'".$this->genero."',". 
+			  "'".$this->direccion."',".
+			  "'".$this->fechaNacimiento."'," 
+			  .$null. "," 
+			  .$telefono. "," 
+			  .$null. "," 
+			  .$null. ",".
+			  "'".$this->estado."',"
+			  .$null. "," 
+			  .$this->idSucursal. ","
+			  .$this->idEmpleadoSuperior. "," . 
+			  "'".$accion."',". 
+			  "@pcMensaje, 
+			  @pbOcurrioError)";
+
+			  echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
