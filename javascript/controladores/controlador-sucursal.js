@@ -15,6 +15,48 @@ $(document).ready(function(){
 			alert ("Error: " + e);
 		}
 	});*/
+
+	$.ajax({
+		url: "../ajax/get-info.php?accion=obtener-restaurantes-sucursal",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado);
+			$("#slcreg-restaurante").html(resultado);
+		},
+		error: function(e){
+			//$("#reporte-error").html(e);
+			alert ("Error: " + e);
+		}
+	});	
+
+	$.ajax({
+		url: "../ajax/get-info.php?accion=obtener-restaurantes-sucursal2",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado);
+			$("#slc-restaurante").html(resultado);
+		},
+		error: function(e){
+			//$("#reporte-error").html(e);
+			alert ("Error: " + e);
+		}
+	});	
+
+	$.ajax({
+		url: "../ajax/get-info.php?accion=obtener-hotel-sucursal",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado);
+			$("#slc-hotel").html(resultado);
+		},
+		error: function(e){
+			//$("#reporte-error").html(e);
+			alert ("Error: " + e);
+		}
+	});	
 		
 	cargarListaSucursales();
 
@@ -52,8 +94,8 @@ function registrarSucursal(){
 			"txtreg-email="+$("#txtreg-email").val()+"&"+
 			"txtreg-direccion="+$("#txtreg-direccion").val()+"&"+
 			"txtreg-descripcion="+$("#txtreg-descripcion").val()+"&"+
-			"txtreg-id-restaurante="+$("#txtreg-id-restaurante").val()+"&"+
-			"txtreg-hotel="+$("#txtreg-hotel").val();
+			"slcreg-restaurante="+$("#slcreg-restaurante").val()+"&"+
+			"slcreg-hotel="+$("#slcreg-hotel").val();
 	$.ajax({
 		url: "../ajax/gestion-info-sucursal.php?accion=registrar-sucursal",
 		method: "POST",
@@ -91,8 +133,9 @@ function obtenerDetalleSucursal(idSucursal){
 			$("#txt-email").val(respuesta.email);
 			$("#txt-direccion").val(respuesta.direccion);
 			$("#txt-descripcion").val(respuesta.descripcion);
-			$("#txt-id-restaurante").val(respuesta.idRestaurante);
-			$("#txt-id-hotel").val(respuesta.idHotel);
+			$("#slc-restaurante").val(respuesta.idRestaurante);
+			$("#slc-hotel").val(respuesta.idHotel);
+			$("#txt-hotel").val(respuesta.descripcionHotel);
 			
 			// Falta Implementar:
 			//$("#btn-guardar").hide();
@@ -117,10 +160,11 @@ function actualizarSucursal(idSucursal){
 			"txt-direccion="+$("#txt-direccion").val()+"&"+
 			"txt-fecha-nacimiento="+$("#txt-fecha-nacimiento").val()+"&"+
 			"txt-descripcion="+$("#txt-descripcion").val()+"&"+
-			"txt-id-restaurante="+$("#txt-id-restaurante").val();
+			"slc-restaurante="+$("#slc-restaurante").val()+"&"+
+			"slc-hotel="+$("#slc-hotel").val();
 	
 	//console.log(parametros);
-	alert(parametros);
+	//alert(parametros);
 	
 	$.ajax({
 		url: "../ajax/gestion-info-sucursal.php?accion=actualizar-sucursal",

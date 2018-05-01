@@ -166,7 +166,7 @@
 				"SELECT hab.idHabitacion, hab.numeroHabitacion, hab.numeroPiso, hab.estado, hab.descripcion, 
 					hab.idTipoCategoria, hab.idTipoHabitacion, hab.idSucursal 
 				FROM habitacion hab 
-				WHERE h.idHabitacion = '$idHabitacion' ");
+				WHERE hab.idHabitacion = '$idHabitacion' ");
 
 			$fila = $conexion->obtenerFila($resultado);
 
