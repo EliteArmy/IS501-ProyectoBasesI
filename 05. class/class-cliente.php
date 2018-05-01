@@ -216,7 +216,7 @@
 							  "@pcMensaje, 
 							  @pbOcurrioError)";
 
-			echo "<br>Lammado: " .$sql_callSP ."<br>";
+			//echo "<br>Lammado: " .$sql_callSP ."<br>";
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 

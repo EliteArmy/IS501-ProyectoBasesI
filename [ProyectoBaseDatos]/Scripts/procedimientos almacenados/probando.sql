@@ -289,3 +289,34 @@ SP:BEGIN
 END$$
 
 DELIMITER ;
+
+
+/*SET @p0='10'; SET @p1='10'; SET @p2='asd'; SET @p3='asd'; SET @p4='asd'; 
+SET @p5='asd'; SET @p6='asd'; SET @p7='asd'; SET @p8='M'; SET @p9='asd'; 
+SET @p10='1995-02-02'; SET @p11='asd'; SET @p12='+504'; SET @p13='2014-02-02'; 
+SET @p14='2014-02-02'; SET @p15='Activo'; SET @p16='1'; SET @p17='1'; SET @p18='1'; 
+SET @p19='Agregar'; 
+
+CALL `SP_RegistrarEmpleado`(@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, 
+@p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21); 
+
+SELECT @p20 AS `pcMensaje`, @p21 AS `pbOcurrioError`;*/
+
+
+CALL SP_RegistrarEmpleado(null,12121,"asd",asd2,asd3,asd4,asd2,7815696ecbf1c96e6894b779456d330e,F,asd,1990-02-01,vacio2,+504494911,vacio3,vacio4,Activo5,vacio6,6,1,Agregar, @pcMensaje, @pbOcurrioError);
+
+
+CALL SP_RegistrarEmpleado(null,12121,"asd","asd2","asd3","asd4","asd2",7815696ecbf1c96e6894b779456d330e,F,asd,1990-02-01,null,+504494911,null,null,"Activo",null,6,1,"Agregar", @pcMensaje, @pbOcurrioError);
+
+CALL SP_RegistrarEmpleado(null,12121,"asd","asd2","asd3",
+	"asd4","asd2","7815696ecbf1c96e6894b779456d330e","F","asd",
+	"1990-02-01",null,+504494911,null,null,"Activo",null,6,1,
+	"Agregar", @pcMensaje, @pbOcurrioError);
+
+
+
+
+
+
+
+
