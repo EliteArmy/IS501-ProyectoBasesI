@@ -101,6 +101,25 @@
 	 		Sucursal::obtenerDetalleSucursal($conexion, $_POST["idSucursal"]);	 		
 	 	break;
 
+	 	case "obtener-restaurantes-sucursal":
+	 		
+	 		include ("../05. class/Hotel/class-sucursal.php");
+	 		Sucursal::obtenerRestaurentesSucursal($conexion);
+		break;
+
+		case "obtener-restaurantes-sucursal2":
+	 		
+	 		include ("../05. class/Hotel/class-sucursal.php");
+	 		Sucursal::obtenerRestaurentesSucursal2($conexion);
+		break;
+
+		case "obtener-hotel-sucursal":
+	 		
+	 		include ("../05. class/Hotel/class-sucursal.php");
+	 		Sucursal::obtenerHotelSucursal($conexion);
+		break;
+
+
 
 	 	default:
 	 		echo "Accion invalida";
