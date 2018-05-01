@@ -75,7 +75,6 @@
 	 	break;
 
 	 	case "obtener-detalle-habitacion":
-	 		echo "Entra en el case Obtener Habitacion";
 	 		include ("../05. class/Habitacion/class-habitacion.php");
 	 		Habitacion::obtenerDetalleHabitacion($conexion, $_POST["idHabitacion"]);
 		break;
