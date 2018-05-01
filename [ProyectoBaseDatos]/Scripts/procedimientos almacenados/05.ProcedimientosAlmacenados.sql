@@ -1034,7 +1034,7 @@ DELIMITER $$
 CREATE PROCEDURE SP_RegistrarHoteles(
 						IN pnIdHotel INT,
 						IN pcDescripcionHotel VARCHAR(100),
-						IN pcAccion VARCHAR(50),
+							IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(1000),
 						OUT pbOcurrioError BOOLEAN)
 
@@ -1062,8 +1062,7 @@ SP:BEGIN
 	CASE 
 		WHEN pcAccion = 'Agregar' THEN
 				INSERT INTO hotel
-						VALUES(null, 
-							   pcDescripcionHotel);
+						VALUES(null, pcDescripcionHotel);
 				
 				IF pbOcurrioError THEN
 					SET pcMensaje = 'Error al registrar hotel.';
@@ -1131,8 +1130,8 @@ CREATE PROCEDURE SP_RegistrarSucursales(
 						IN pcDescripcion VARCHAR(100),
 						IN pnIdRestaurante INT,
 						IN pnIdHotel INT,
-						IN pcDescripcionHotel VARCHAR(100),
-						IN pcAccion VARCHAR(50),
+							IN pcDescripcionHotel VARCHAR(100),
+							IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(1000),
 						OUT pbOcurrioError BOOLEAN)
 
@@ -1199,15 +1198,15 @@ SP:BEGIN
 	CALL SP_RegistrarHoteles(
 							null,
 							pcDescripcionHotel,
-							pcAccion,
+								pcAccion,
 	            pcMensaje,
-							bOcurrioError);
+							pbOcurrioError);
 	
-	IF pbOcurrioError=TRUE THEN
+	IF pbOcurrioError = TRUE THEN
 		LEAVE SP;
 	END IF;
 
-
+	/*--- Incio del Case ---*/
 	CASE 
 		/*registra la sucursal*/
 		WHEN pcAccion = 'Agregar' THEN
@@ -1224,8 +1223,7 @@ SP:BEGIN
 						
 						IF pbOcurrioError THEN
 							SET pcMensaje = 'Error al registrar sucursal.';
-								/*Asignacion de Variables.*/
-	SET pbOcurrioError=TRUE;
+							SET pbOcurrioError=TRUE;
 						ELSE
 							SET pcMensaje = 'Sucursal registrada correctamente';
 							COMMIT;

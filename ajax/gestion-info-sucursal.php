@@ -5,7 +5,7 @@
 
 	switch ($_GET["accion"]){
 
-		/*case "registrar-sucursal":
+		case "registrar-sucursal":
 			//echo "Entra en el case ";
 	 		include ("../05. class/Hotel/class-sucursal.php");
 	 		include ("../05. class/Hotel/class-hotel.php");
@@ -18,14 +18,13 @@
 	 			$_POST["txtreg-email"],
 	 			$_POST["txtreg-direccion"],
 	 			$_POST["txtreg-descripcion"],
-	 			$_POST["slcreg-restaurante"],
+	 			$_POST["txtreg-id-restaurante"],
 	 			null //idHotel
-	 		
 	 		); 
 
-			$sucursal->registrarSucursal($conexion, $_POST["descripcionHotel"]);
+			$sucursal->registrarSucursal($conexion, $_POST["txtreg-hotel"]);
 
-	 	break;*/
+	 	break;
 	 	
 	 	case "actualizar-sucursal":
 	 		//echo "Entra en el case ";
@@ -39,8 +38,8 @@
 		 			$_POST["txt-email"],
 		 			$_POST["txt-direccion"],
 		 			$_POST["txt-descripcion"],
-		 			$_POST["slc-restaurante"],
-		 			$_POST["slc-hotel"]);
+		 			$_POST["txt-id-restaurante"],
+		 			$_POST["txt-id-hotel"]);
 
 		 	$sucursal->actualizarSucursal($conexion);
 

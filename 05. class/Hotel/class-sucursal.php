@@ -195,21 +195,21 @@
 			$null = "null";
 
 			$sql_callSP = "CALL SP_RegistrarSucursales("
-					.$null. "," 
-				  .$this->nombre. "," . 
-				  "'".$this->cantidadHabitaciones. "',".
+					.$null. ",". 
+				  "'".$this->nombre. "'," 
+				  .$this->cantidadHabitaciones. ",".
 				  "'".$this->telefono. "',".
 				  "'".$this->email. "',".
 				  "'".$this->direccion. "',".
 				  "'".$this->descripcion. "',".
-				  "'".$this->idRestaurante. "',". 
-				  "'".$this->idHotel. "',".
-				  "'".$this->descripcionHotel. "',".
+				  "'".$this->idRestaurante. "',"
+					.$null. ",".
+				  "'".$descripcionHotel. "',".
 				  "'".$accion."',". 
 				  "@pcMensaje, 
 				  @pbOcurrioError)";
 
-			  echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+			 echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
