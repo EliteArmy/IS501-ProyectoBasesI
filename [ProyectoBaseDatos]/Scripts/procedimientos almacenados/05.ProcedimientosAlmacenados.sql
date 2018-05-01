@@ -1047,7 +1047,7 @@ SP:BEGIN
 	START TRANSACTION;		
 
 	/*Asignacion de Variables*/
-	SET pbOcurrioError=TRUE;
+	SET pbOcurrioError = TRUE;
 
 	/*Busca si existe ya un hotel*/
 	SELECT COUNT(*) INTO vnConteo FROM hotel
@@ -1066,15 +1066,14 @@ SP:BEGIN
 				
 				IF pbOcurrioError THEN
 					SET pcMensaje = 'Error al registrar hotel.';
-						/*Asignacion de Variables.*/
-	SET pbOcurrioError=TRUE;
+					SET pbOcurrioError=TRUE;
 				ELSE
 					SET pcMensaje = 'Hotel registrado correctamente';
-					COMMIT;
 					SET pbOcurrioError = FALSE;
+					COMMIT;
 				END IF;
 
-		/*edita el hotel*/
+		/*Edita el hotel*/
 		WHEN pcAccion='Editar' THEN 
 				UPDATE hotel SET
 						idHotel = pnIdHotel,
@@ -1090,15 +1089,14 @@ SP:BEGIN
 						SET pbOcurrioError = FALSE;
 				END IF;
 
-		/*elimina el hotel*/
+		/*Elimina el hotel*/
 		WHEN pcAccion = 'Eliminar' THEN
 				DELETE FROM hotel
 				WHERE idHotel = pnIdHotel;
 				
 				IF pbOcurrioError THEN
 					SET pcMensaje=CONCAT('El hotel no se pudo eliminar.',pcMensaje);
-						/*Asignacion de Variables.*/
-	SET pbOcurrioError=TRUE;
+					SET pbOcurrioError=TRUE;
 				ELSE
 					SET pcMensaje = 'Hotel eliminado correctamente.';
 					COMMIT;
@@ -1107,6 +1105,7 @@ SP:BEGIN
 
 		ELSE 
     		SET pcMensaje='No se selecciono Agregar, Editar ni Eliminar ';
+
 	END CASE;
 
 END$$
