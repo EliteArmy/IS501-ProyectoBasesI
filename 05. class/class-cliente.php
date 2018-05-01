@@ -196,8 +196,8 @@
 			$accion = "Agregar";
 			$null = "null";
 			
-			$sql_callSP = "CALL SP_RegistrarEmpleado("
-								.$null. ","  
+			$sql_callSP = "CALL SP_RegistrarCliente("
+								.$null. ",".  
 							  "'".$this->primerNombre. "',".
 							  "'".$this->segundoNombre. "',".
 							  "'".$this->primerApellido. "',".
@@ -209,12 +209,14 @@
 							  "'".$this->fechaNacimiento. "'," 
 							  .$null. "," 
 							  .$telefono. "," 
-							  .$null. "," 
+							  .$null. ",".
 							  "'".$this->estado. "',"
-							  .$null. "," 
+							  .$null. ",". 
 							  "'".$accion."',". 
 							  "@pcMensaje, 
 							  @pbOcurrioError)";
+
+			echo "<br>Lammado: " .$sql_callSP ."<br>";
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
