@@ -26,6 +26,7 @@ $(document).ready(function(){
 
 // Nueva Forma de Mostrar la lista de Empleados
 function cargarEmpleadosNuevo(){
+	
 	$('#tabla-informacion').DataTable({
       "processing": true,
       "paging": true,
@@ -52,7 +53,7 @@ function cargarEmpleadosNuevo(){
         { "data": "direccion" },
         { "data": "opciones" }
       ]
-  	})
+  	});
 }
 
 // -- Funcion que obtiene la lista de Empleados -- 
@@ -64,7 +65,6 @@ function cargarListaEmpleados(){
 		data: "",
 		method: "POST",
 		success: function(resultado){
-			//alert(resultado)
 			//alert("cargo los empleados");
 			$("#div-informacion").html(resultado);
 		},
@@ -190,7 +190,7 @@ function actualizarEmpleado(idEmpleado){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			$("#div-resultado").fadeOut(4500);
+			//$("#div-resultado").fadeOut(4500);
 			//cargarEmpleadosNuevo();
 		},
 		error:function(err){

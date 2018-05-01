@@ -313,7 +313,7 @@
 			
 			$sql_callSP = "CALL SP_RegistrarEmpleado("
 					.$this->idEmpleado. ",".
-				  .$this->null. ",". 
+				  $null. ",". 
 				  "'".$this->primerNombre. "',".
 				  "'".$this->segundoNombre. "',".
 				  "'".$this->primerApellido. "',".
@@ -335,10 +335,11 @@
 				  "@pcMensaje, 
 				  @pbOcurrioError)";
 
+				  echo "<br>Lammado: " .$sql_callSP ."<br>";
 		}
 
 		// --- Función que Actualizara la información ---
-		public function actualizarEmpleado ($conexion){
+		public function actualizarEmpleadoViejo ($conexion){
 
 			$telefono = $this->telefono->getNumeroTelefono();
 			//echo $telefono;
