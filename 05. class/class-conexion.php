@@ -57,11 +57,19 @@
 		}
 
 		public function getParametroSP ($parametros) {
-      $res_sp =  mysql_query ("SELECT ". $parametros . ";");
-      $row = mysql_fetch_assoc ($res_sp);
+      $res_sp = mysqli_query ($this->link, "SELECT " . $parametros . ";");
+      $row = mysqli_fetch_assoc ($res_sp);
       return $row;
     }
 
 	}
 
+	/*$sql="SELECT Lastname,Age FROM Persons ORDER BY Lastname";
+	$result=mysqli_query($con,$sql);
+
+	// Associative array
+	$row=mysqli_fetch_assoc($result);
+	printf ("%s (%s)\n",$row["Lastname"],$row["Age"]);*/
+
 ?>
+

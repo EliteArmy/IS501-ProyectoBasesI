@@ -212,64 +212,45 @@
 		}
 
 		// --- Función que Guardara un nuevo Registro ---
-		public function registrarEmpleadoNuevo ($conexion){
+		public function registrarEmpleado ($conexion){
 			
 			$passwordHash = md5($this->password);
 			$telefono = $this->telefono->getNumeroTelefono();
 			$accion = "Agregar";
+			
+			//echo "Entra en la Funcion";
+			//$resultado = $conexion->ejecutarConsulta("CALL SP_ObtenerEmpleados");
 
-			$sql_callSP = "CALL SP_RegistrarEmpleado(
-                        '" . null . "',
-                        '" . $this->codigoEmpleado . "',
+			$sql_callSP = "CALL SP_RegistrarEmpleado(" .null. "," .$this->codigoEmpleado. "," . $this->primerNombre . ","
+			 .$this->segundoNombre. ", " .$this->primerApellido. "," . $this->segundoApellido . ", " . $this->email . ","
+			  .$passwordHash. "," .$this->genero. ", " .$this->direccion. "," .$this->fechaNacimiento. "," .null. "," 
+			  .$telefono. "," .null. "," .null. "," .$this->estado. "," .null. "," .$this->idSucursal. "," .$this->idEmpleadoSuperior. ","
+			   .$accion. ", @pcMensaje, @pbOcurrioError);";
 
-                        '" . $this->primerNombre . "',
-                        '" . $this->segundoNombre . "', 
-                        '" . $this->primerApellido . "', 
-                        '" . $this->segundoApellido . "', 
+			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
-                        '" . $this->email . "', 
-                        '" . $passwordHash . "', 
-                        '" . $this->genero . "', 
-                        '" . $this->direccion . "',
-                        '" . $this->fechaNacimiento . "',
-                        '" . null . "',
-
-                        '" . $telefono . "',
-                        '" . null . "',
-                        '" . null . "',
-                        '" . $this->estado . "',
-                        '" . null . "',
-                        '" . $this->idSucursal . "',
-                        '" . $this->idEmpleadoSuperior . "',
-                        '" . $accion . "',
-                        @mensaje,
-                        @ocurre_error)";
-
-			$resultado = $conexion->ejecutarConsulta(); // mysqli_query ($this->link, $sql);
-
-			$return = $conexion->getParametroSP("
-		        @mensaje,
-		        @ocurre_error,
-      ");
+			$return = $conexion->getParametroSP("@pcMensaje, @pbOcurrioError");
 
       if ($resultado != '1') {
-        echo "Error:" . $resultado . " <br/>";
+        echo "Error: " . $resultado . " <br>";
       }
 
-      $mensajeSP = $return['@mensaje'];
-      $ocurreError = $return['@ocurre_error'];
+      $mensajeSP = $return['@pcMensaje'];
+      $ocurreError = $return['@pbOcurrioError'];
       
       if ($ocurreError == "1"){
-          echo $mensajeSP . "!@!true";
+          echo $mensajeSP . " !@!true" . " <br>";
       } else {
-      	echo "<b>Registro Insertado con Exito</b>";
-        echo $mensajeSP . "!@!false";
+      	echo "<b>Registro Insertado con Exito</b><br>";
+        echo $mensajeSP . " !@!false" . " <br>";
       }
+
+      //echo "Final Funcion";
 
 		}
 
 		// --- Función que Guardara un nuevo Registro ---
-		public function registrarEmpleado ($conexion){
+		public function registrarEmpleadoviejo ($conexion){
 			
 			$passwordHash = md5($this->password);
 
