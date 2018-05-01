@@ -49,8 +49,8 @@
 				$_POST["txt-primer-apellido"],
 				$_POST["txt-segundo-apellido"],
 				$_POST["txt-email"],
-				null, // password
-				null, // genero
+				null,
+				$_POST["slc-genero"],
 				$_POST["txt-direccion"],
 				$_POST["txt-fecha-nacimiento"],
 				null, // imagenIdentificacion
@@ -60,8 +60,8 @@
 				null, // fechaIngreso
 				null, // fechaSalida
 				$_POST["slc-estado"],
-				null, // idSucursal
-				null, // idEmpleadoSuperior
+				$_POST["slc-sucursal"],
+				$_POST["txt-id-empleado"],
 
 				new Telefono(null, $_POST["txt-telefono"], null) //idTelefono, numeroTelefono, idPersona
 			);

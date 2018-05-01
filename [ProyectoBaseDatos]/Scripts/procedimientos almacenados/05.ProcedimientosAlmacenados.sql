@@ -647,7 +647,7 @@ SP:BEGIN
 	END IF;*/
 	
 	/*Manda a llamar al procedimiento SP_RegistrarPersona.*/
-	CALL SP_RegistrarPersona(
+	/*CALL SP_RegistrarPersona(
 					null,
 					pcPrimerNombre,
 					pcSegundoNombre,
@@ -665,9 +665,9 @@ SP:BEGIN
 					pbOcurrioError);
 
 	/*Valida si hubo error en Registrar Persona*/
-	IF pbOcurrioError = TRUE THEN
+	/*IF pbOcurrioError = TRUE THEN
 		LEAVE SP;
-	END IF;
+	END IF;*/
 
 	/* -- Inicio del Case. -- */
 	CASE 

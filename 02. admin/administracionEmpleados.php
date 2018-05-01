@@ -153,8 +153,10 @@
             <div class="btn-toolbar mb-2 mb-md-0">
               
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Compartir</button>
-                <button class="btn btn-sm btn-outline-secondary">Exportar</button>
+                <button class="btn btn-sm btn-outline-secondary">
+                  <a href="../07. archivos/Manual de Usuario.docx">Descargar Manual</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary">Opción</button>
               </div>
               
               <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -396,6 +398,15 @@
                     </div>
 
                     <div class="form-group">
+                      <label for="slc-genero">Genero</label>
+                        <select id="slc-genero" class="form-control">
+                        <!--<option>Seleccione una Opción</option>-->
+                        <option value="F">Femenino</option>
+                        <option value="M">Masculino</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
                       <label for="txt-telefono">Telefono</label>
                       <input type="text" class="form-control" id="txt-telefono" placeholder="Ingrese el Telefono">
                     </div>
@@ -418,7 +429,19 @@
                       <label for="txt-direccion">Dirección</label>
                       <textarea class="form-control" id="txt-direccion" placeholder="Ingrese la dirección"></textarea>
                     </div>
-                    
+
+                    <div class="form-group">
+                      <label for="slc-sucursal">Sucursal</label>
+                        <select id="slc-sucursal" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-id-empleado">Id de Empleado</label>
+                      <input type="text" class="form-control" id="txt-id-empleado" placeholder="Ingrese el Id Empleado Superior">
+                    </div>
+
                     <button type="button" class="btn btn-primary submitBtn" onclick="actualizarEmpleado(document.getElementById('txt-idempleado').value)">Actualizar</button>
                     
                     <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>

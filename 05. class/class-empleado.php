@@ -220,30 +220,30 @@
 			$null = "null";
 			
 			$sql_callSP = "CALL SP_RegistrarEmpleado("
-					.$null. "," 
-				  .$this->codigoEmpleado. "," . 
-				  "'".$this->primerNombre. "',".
-				  "'".$this->segundoNombre. "',".
-				  "'".$this->primerApellido. "',".
-				  "'".$this->segundoApellido. "',".
-				  "'".$this->email. "',".
-				  "'".$passwordHash. "',".
-				  "'".$this->genero. "',". 
-				  "'".$this->direccion. "',".
-				  "'".$this->fechaNacimiento. "'," 
-				  .$null. "," 
-				  .$telefono. "," 
-				  .$null. "," 
-				  .$null. ",".
-				  "'".$this->estado. "',"
-				  .$null. "," 
-				  .$this->idSucursal. ","
-				  .$this->idEmpleadoSuperior. "," . 
-				  "'".$accion."',". 
-				  "@pcMensaje, 
-				  @pbOcurrioError)";
+						.$null. "," 
+					  .$this->codigoEmpleado. "," . 
+					  "'".$this->primerNombre. "',".
+					  "'".$this->segundoNombre. "',".
+					  "'".$this->primerApellido. "',".
+					  "'".$this->segundoApellido. "',".
+					  "'".$this->email. "',".
+					  "'".$passwordHash. "',".
+					  "'".$this->genero. "',". 
+					  "'".$this->direccion. "',".
+					  "'".$this->fechaNacimiento. "'," 
+					  .$null. "," 
+					  .$telefono. "," 
+					  .$null. "," 
+					  .$null. ",".
+					  "'".$this->estado. "',"
+					  .$null. "," 
+					  .$this->idSucursal. ","
+					  .$this->idEmpleadoSuperior. "," . 
+					  "'".$accion."',". 
+					  "@pcMensaje, 
+					  @pbOcurrioError)";
 
-			  echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+			echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
@@ -312,30 +312,48 @@
 			$null = "null";
 			
 			$sql_callSP = "CALL SP_RegistrarEmpleado("
-					.$this->idEmpleado. ",".
-				  $null. ",". 
-				  "'".$this->primerNombre. "',".
-				  "'".$this->segundoNombre. "',".
-				  "'".$this->primerApellido. "',".
-				  "'".$this->segundoApellido. "',".
-				  "'".$this->email. "',".
-				  "'".$null. "',".
-				  "'".$this->genero. "',". 
-				  "'".$this->direccion. "',".
-				  "'".$this->fechaNacimiento. "'," 
-				  .$null. "," 
-				  .$telefono. "," 
-				  .$null. "," 
-				  .$null. ",".
-				  "'".$this->estado. "',"
-				  .$null. "," 
-				  .$this->idSucursal. ","
-				  .$this->idEmpleadoSuperior. "," . 
-				  "'".$accion."',". 
-				  "@pcMensaje, 
-				  @pbOcurrioError)";
+						.$this->idEmpleado. ",".
+					  $null. ",". 
+					  "'".$this->primerNombre. "',".
+					  "'".$this->segundoNombre. "',".
+					  "'".$this->primerApellido. "',".
+					  "'".$this->segundoApellido. "',".
+					  "'".$this->email. "',".
+					  "'".$null. "',".
+					  "'".$this->genero. "',". 
+					  "'".$this->direccion. "',".
+					  "'".$this->fechaNacimiento. "'," 
+					  .$null. "," 
+					  .$telefono. "," 
+					  .$null. "," 
+					  .$null. ",".
+					  "'".$this->estado. "',"
+					  .$null. "," 
+					  .$this->idSucursal. ","
+					  .$this->idEmpleadoSuperior. "," . 
+					  "'".$accion."',". 
+					  "@pcMensaje, 
+					  @pbOcurrioError)";
 
-				  echo "<br>Lammado: " .$sql_callSP ."<br>";
+			echo "<br>Lammado: " .$sql_callSP ."<br>";
+
+			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
+
+			$return = $conexion->getParametroSP("@pcMensaje, @pbOcurrioError");
+
+      if ($resultado != '1') { // 
+        echo "Error: " . $resultado . " <br>";
+      }
+
+      $mensajeSP = $return['@pcMensaje'];
+      $ocurreError = $return['@pbOcurrioError'];
+      
+      if ($ocurreError == "1"){
+          echo '<b>'. $mensajeSP . '</b>'." !@!true" . " <br>";
+      } else {
+      	echo "<b>Registro Insertado con Exito</b><br>";
+        //echo $mensajeSP . " !@!false" . " <br>";
+      }
 		}
 
 		// --- Función que Actualizara la información ---

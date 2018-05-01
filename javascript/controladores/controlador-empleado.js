@@ -10,6 +10,8 @@ $(document).ready(function(){
 		success: function(resultado){
 			//alert(resultado);
 			$("#slcreg-sucursal").html(resultado);
+			$("#slc-sucursal").html(resultado);
+			
 		},
 		error: function(e){
 			//$("#reporte-error").html(e);
@@ -173,10 +175,13 @@ function actualizarEmpleado(idEmpleado){
 			"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
 			"txt-segundo-apellido="+$("#txt-segundo-apellido").val()+"&"+
 			"txt-email="+$("#txt-email").val()+"&"+
+			"slc-genero="+$("#slc-genero").val()+"&"+
 			//"txt-telefono="+$("#txt-telefono").val()+"&"+
 			"txt-telefono="+ resultado +"&"+
 			"txt-fecha-nacimiento="+$("#txt-fecha-nacimiento").val()+"&"+
 			"slc-estado="+$("#slc-estado").val()+"&"+
+			"slc-sucursal="+$("#slc-sucursal").val()+"&"+
+			"txt-id-empleado="+$("#txt-id-empleado").val()+"&"+
 			"txt-direccion="+$("#txt-direccion").val();
 	
 	//console.log(parametros);
