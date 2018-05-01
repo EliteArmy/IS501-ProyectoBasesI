@@ -237,7 +237,7 @@ SP:BEGIN
 	/*Asignacion de Variables*/
 	SET temMensaje = '';
 	SET pcMensaje = '';
-	SET pbOcurrioError = TRUE;
+	SET pbOcurrioError = FALSE;
 
 		IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN
 
@@ -311,9 +311,14 @@ SP:BEGIN
 							pfFechaNacimiento,
 			        pcImagenIdentificacion);
 
-					SET pcMensaje = 'Persona registrada correctamente';
-					SET pbOcurrioError = FALSE;
-					COMMIT;
+					IF pbOcurrioError THEN
+						SET pcMensaje = 'Error al registrar persona.';
+						SET pbOcurrioError = TRUE;
+					ELSE 
+						SET pcMensaje = 'Persona registrada correctamente';
+						COMMIT;
+						SET pbOcurrioError = FALSE;
+					END IF;
 					/*
 					IF pbOcurrioError THEN
 						SET pcMensaje = CONCAT('Error al registrar persona.', pcMensaje);
@@ -420,26 +425,40 @@ SP:BEGIN
 	START TRANSACTION;
 	
 	/*Asignacion de Variables.*/
-	SET temMensaje='';
-	SET pbOcurrioError=TRUE;
+	SET temMensaje ='';
+	SET pbOcurrioError = FALSE;
 
 	IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN
 		/*verifica que los campos no sea  nulos.*/
-		IF pnIdPersona ='' or pnIdPersona IS NULL THEN
-			SET temMensaje = CONCAT(temMensaje,'Id de la persona, ');
-		END IF;
-
 		IF pcEstado='' or pcEstado IS NULL THEN
 			SET temMensaje=CONCAT(temMensaje,'estado del cliente, ');
 		END IF;
-
 		/*compara si temMensaje es diferente de vacío.*/
 		IF temMensaje<>'' THEN
 			SET pcMensaje = CONCAT('Campos requeridos para poder Registrar/Actualizar el Cliente: ', temMensaje);
 			SET pbOcurrioError = TRUE;
 			LEAVE SP;
 		END IF;
+
 	END IF;
+
+	IF (pcAccion = 'Actualizar') THEN
+
+	IF pnIdPersona ='' or pnIdPersona IS NULL THEN
+			SET temMensaje = CONCAT(temMensaje,'Id de la persona, ');
+		END IF;
+
+		/*compara si temMensaje es diferente de vacío.*/
+		IF temMensaje<>'' THEN
+			SET pcMensaje = CONCAT('Campos requeridos para poder Actualizar el Cliente: ', temMensaje);
+			SET pbOcurrioError = TRUE;
+			LEAVE SP;
+		END IF;
+
+	END IF;
+
+
+	
 
 	
 
@@ -579,15 +598,15 @@ CREATE PROCEDURE SP_RegistrarEmpleado(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
-    				IN pcImagenIdentificacion VARCHAR(200),
-							IN pcTelefono VARCHAR(15),
-								IN pfFechaIngreso DATE,
-								IN pfFechaSalida DATE,
-								IN pcEstado VARCHAR(15),
-								IN pnIdPersona INT,
-								IN pnIdSucursal INT,
-								IN pnIdEmpleadoSuperior INT,
-							IN pcAccion VARCHAR(50),
+    					IN pcImagenIdentificacion VARCHAR(200),
+						IN pcTelefono VARCHAR(15),
+						IN pfFechaIngreso DATE,
+						IN pfFechaSalida DATE,
+						IN pcEstado VARCHAR(15),
+						IN pnIdPersona INT,
+						IN pnIdSucursal INT,
+						IN pnIdEmpleadoSuperior INT,
+						IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
 
@@ -595,7 +614,8 @@ SP:BEGIN
 
 	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
-	DECLARE vnConteo, vnEdad INT;
+	DECLARE vnConteo, 
+			vnEdad INT;
 	
 	SET autocommit = 0;
 	START TRANSACTION;
@@ -618,7 +638,7 @@ SP:BEGIN
 		IF temMensaje<>'' THEN
 			SET pcMensaje = CONCAT('Campos requeridos para poder Registrar/Actualizar el Empleado: ', temMensaje);
 			SET pbOcurrioError = TRUE;
-			/*LEAVE SP;*/
+			LEAVE SP;
 		END IF;
 
 		/*busca si esa sucursal existe.*/
@@ -643,6 +663,31 @@ SP:BEGIN
 		END IF;
 	END IF;
 
+
+	IF pcAccion = "Agregar" THEN
+
+		IF pnCodigoEmpleado ='' or pnCodigoEmpleado IS NULL THEN
+			SET temMensaje = CONCAT(temMensaje, 'Código de empleado, ');
+		END IF;
+
+		
+		/*Verifica si ya existe un empleado con ese codigo de empleado.*/
+		SELECT COUNT(*) INTO vnConteo FROM empleado
+		WHERE codigoEmpleado = pnCodigoEmpleado;
+		
+		IF vnConteo>0  THEN
+			SET pcMensaje=('Ya existe un empleado con ese código.');
+			LEAVE SP;
+		END IF;
+
+		IF temMensaje<>'' THEN
+			SET pcMensaje = CONCAT('Campos requeridos para poder Registrar el Empleado: ', temMensaje);
+			SET pbOcurrioError = TRUE;
+			LEAVE SP;
+		END IF;
+
+
+	END IF;
 	/*Verifica si el empleado es mayor de edad para poder registrarlo.*/
 	/*SELECT (TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE())) INTO vnEdad FROM persona
 	WHERE idPersona = pnIdPersona;
@@ -663,10 +708,10 @@ SP:BEGIN
 					pcGenero,
 					pcDireccion,
 					pfFechaNacimiento,
-	       	null,
-	         	pcTelefono,
-	         	pcAccion,
-	       	pcMensaje,
+	       			null,
+	         		pcTelefono,
+	         		pcAccion,
+	       			pcMensaje,
 					pbOcurrioError);
 
 	/*Valida si hubo error en Registrar Persona*/
@@ -679,30 +724,9 @@ SP:BEGIN
 
 		/*Registra el Empleado.*/
 		WHEN pcAccion = 'Agregar' THEN
-			IF pnCodigoEmpleado ='' or pnCodigoEmpleado IS NULL THEN
-				SET temMensaje = CONCAT(temMensaje, 'Código de empleado, ');
-			END IF;
-
-			/*Verfica si existe un empleado con ese correo.*/
-			SELECT COUNT(*) INTO vnConteo FROM persona 
-			WHERE email = pcEmail;
-			
-			IF (vnConteo > 0  AND pcAccion = 'Agregar') THEN
-				SET pcMensaje = CONCAT('Empleado con correo: ',pnIdEmpleado,' ya existe.');
-				LEAVE SP;
-			END IF;
-
-			/*Verifica si ya existe un empleado con ese codigo de empleado.*/
-			SELECT COUNT(*) INTO vnConteo FROM empleado
-			WHERE codigoEmpleado = pnCodigoEmpleado;
-			
-			IF (vnConteo>0 AND pcAccion = 'Agregar') THEN
-				SET pcMensaje=('Ya existe un empleado con ese código.');
-				LEAVE SP;
-			END IF;
 
 			INSERT INTO empleado
-					VALUES (null,
+					VALUES (pnIdEmpleado,
 							pnCodigoEmpleado,
 					 		CURDATE(),
 					 		null,
@@ -801,7 +825,7 @@ SP:BEGIN
 	
 	/*Asignacion de Variables*/
 	SET temMensaje = '';
-	SET pbOcurrioError = TRUE;
+	SET pbOcurrioError = FALSE;
 
 	/*verifica que los campos no sean nulos.*/
 	IF pfFechaEntrada='' or pfFechaEntrada IS NULL THEN
@@ -1047,7 +1071,7 @@ SP:BEGIN
 	START TRANSACTION;		
 
 	/*Asignacion de Variables*/
-	SET pbOcurrioError = TRUE;
+	SET pbOcurrioError = FALSE;
 
 	/*Busca si existe ya un hotel*/
 	SELECT COUNT(*) INTO vnConteo FROM hotel
@@ -1144,7 +1168,7 @@ SP:BEGIN
 	START TRANSACTION;		
 
 	/*Asignacion de Variables.*/
-	SET pbOcurrioError = TRUE;
+	SET pbOcurrioError = FALSE;
 	SET pcMensaje = '';
 
 	/*Valida que los campos no sean nulos*/
