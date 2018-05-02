@@ -132,6 +132,36 @@
 
 		}
 
+		public static function obtenerListaSucursales2 ($conexion) {
+			
+			$resultado = $conexion->ejecutarConsulta(
+				'SELECT s.idSucursal ,s.nombre,  COUNT(*) "Habitaciones disponibles", s.telefono, s.direccion, s.descripcion FROM habitacion h
+				INNER JOIN sucursal s ON s.idSucursal = h.idSucursal
+				WHERE h.estado = "disponible"
+				GROUP BY s.idSucursal ASC'
+			);
+
+			$data = array();
+
+			while ($fila = $conexion->obtenerFila($resultado)){
+				$data[] = $fila;
+			}
+
+			$i = 0;
+
+			foreach ($data as $key) {
+				$data[$i]['opciones'] = '<td><button type="button" onclick="obtenerDetalleSucursal('.$fila["idSucursal"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button>
+							<button type="button" onclick="eliminarSucursal('.$fila["idSucursal"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+
+				$i++;
+			}
+
+			$datax = array('data' => $data);
+
+			echo json_encode($datax);
+
+		}
+
 		// --- Función que Prepopula la informacion en el Modal ---
 		public static function obtenerDetalleSucursal ($conexion, $idSucursal){
 
@@ -217,6 +247,7 @@
 
       if ($resultado != '1') { // 
         echo "Error: " . $resultado . " <br>";
+
       }
 
       $mensajeSP = $return['@pcMensaje'];
@@ -256,9 +287,9 @@
 		}
 
 		/*Función para actualizar la información */
-		public function actualizarSucursal($conexion){
+		public function actualizarSucursal($conexion, $descripcionHotel){
 
-			$resultado = $conexion->ejecutarConsulta(
+			/*$resultado = $conexion->ejecutarConsulta(
 						"UPDATE sucursal suc
 							SET suc.idSucursal = '$this->idSucursal',
 								suc.nombre = '$this->nombre',
@@ -271,8 +302,9 @@
 								suc.idHotel = '$this->idHotel'
 							WHERE suc.idSucursal = '$this->idSucursal'");
 
-		echo "<b>Registro actualizado con Exito</b>";
-		/*$accion = "Editar";
+		echo "<b>Registro actualizado con Exito</b>";*/
+
+		$accion = "editar";
 
 			$sql_callSP = "CALL SP_RegistrarSucursales("
 								.$this->idSucursal.","
@@ -281,13 +313,13 @@
 								"'".$this->telefono. "',".
 								"'".$this->email. "',".
 								"'".$this->direccion. "',".
-							"'".$this->descripcion. "',".
-							"'".$this->idRestaurante. "',". 
-							"'".$this->idHotel. "',".
-							"'".$this->descripcionHotel. "',".
-							"'".$accion."',". 
-							"@pcMensaje, 
-							@pbOcurrioError)";
+								"'".$this->descripcion. "',".
+								"'".$this->idRestaurante. "',". 
+								"'".$this->idHotel. "',".
+					 			 "'".$descripcionHotel. "',".
+								"'".$accion."',". 
+								"@pcMensaje, 
+								@pbOcurrioError)";
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
@@ -295,6 +327,7 @@
 
 		      if ($resultado != '1') {
 		        echo "Error: " . $resultado . " <br>";
+
 		      }
 
 		      $mensajeSP = $return['@pcMensaje'];
@@ -305,7 +338,7 @@
 		      } else {
 		      	echo "<b>Registro Actualizado con Exito</b><br>";
 		        //echo $mensajeSP . " !@!false" . " <br>";
-		      }*/
+		      }
 
 		}
 

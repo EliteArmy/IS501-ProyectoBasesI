@@ -114,6 +114,7 @@ function cargarListaHabitaciones(){
 	});
 }
 
+
 function obtenerDetalleHabitacion(idHabitacion){
 	//alert("Entra en la funcion");
 
@@ -132,9 +133,9 @@ function obtenerDetalleHabitacion(idHabitacion){
 			$("#txt-numero-piso").val(respuesta.numeroPiso);
 			$("#txt-estado").val(respuesta.estado);
 			$("#txt-descripcion").val(respuesta.descripcion);
-			$("#slc-tipoCategoria").val(respuesta.tipoCategoria);;
-			$("#slc-tipoHabitacion").val(respuesta.tipoHabitacion);
-			$("#slc-sucursal").val(respuesta.sucursal);
+			$("#slc-tipoCategoria").val(respuesta.idTipoCategoria);;
+			$("#slc-tipoHabitacion").val(respuesta.idTipoHabitacion);
+			$("#slc-sucursal").val(respuesta.idSucursal);
 			// Falta Implementar:
 			//$("#btn-guardar").hide();
 			//$("#btn-actualizar").show();
@@ -222,6 +223,7 @@ function eliminarHabitacion(idHabitacion){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
+			$("#div-resultado").fadeOut(4500);
 			cargarHabitacionNueva();
 		},
 		error: function(err){

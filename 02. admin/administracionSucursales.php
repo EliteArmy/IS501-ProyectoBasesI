@@ -278,8 +278,10 @@
                     </div>                    
 
                     <div class="form-group">
-                      <label for="txtreg-id-restaurante">Id del Restaurante</label>
-                      <input type="number" class="form-control" id="txtreg-id-restaurante" placeholder="Ingrese el Id del Restaurante">
+                      <label for="slcreg-restaurante">Id del Restaurante</label>
+                       <select id="slcreg-restaurante" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
                     </div>
 
                     <div class="form-group">
@@ -356,14 +358,23 @@
                     </div>                    
 
                     <div class="form-group">
-                      <label for="txt-id-restaurante">Id del Restaurante</label>
-                      <input type="text" class="form-control" id="txt-id-restaurante" placeholder="Ingrese el Id del Restaurante">
+                      <label for="slc-restaurante">Id del Restaurante</label>
+                       <select id="slc-restaurante" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
                     </div>
 
                     <div class="form-group">
-                      <label for="txt-id-hotel">Id del Hotel</label>
-                      <input type="text" class="form-control" id="txt-id-hotel" placeholder="Ingrese el Id del Hotel">
+                      <label for="slc-hotel">Id del Hotel</label>
+                       <select id="slc-hotel" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
                     </div>
+
+                    <div class="form-group">
+                      <label for="txt-hotel">Descripción del Hotel</label>
+                      <textarea class="form-control" id="txt-hotel" placeholder="Ingrese la descripción del hotel"></textarea>
+                    </div> 
 
                     <button type="button" class="btn btn-primary submitBtn" onclick="actualizarSucursal(document.getElementById('txt-idSucursal').value)">Actualizar</button>
 

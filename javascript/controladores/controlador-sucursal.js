@@ -65,6 +65,36 @@ $(document).ready(function(){
 });
 /* --- Fin --- */
 
+
+function cargarSucursalNueva(){
+
+	$('#tabla-informacion').DataTable({
+      "processing": true,
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": false,
+      "responsive": true,
+      "autoWidth": false,
+      "pageLength": 10,
+      
+      "ajax": {
+        "url": "../ajax/get-info.php?accion=obtener-sucursales2",
+        "type": "POST"
+      },
+      "columns": [
+        { "data": "idSucursal" },
+        { "data": "nombre" },
+        { "data": "habitacionesDisponibles" },
+        { "data": "telefono" },
+        { "data": "direccion" },
+        { "data": "descripcion" },
+        { "data": "opciones" }
+      ]
+  });
+}
+
 /* -- Función que obtiene la lista de sucursales -- */
 function cargarListaSucursales(){
 
@@ -85,34 +115,7 @@ function cargarListaSucursales(){
 	
 }
 
-function registrarSucursal(){
 
-	var parametros =
-			"txtreg-nombre="+$("#txtreg-nombre").val()+"&"+
-			"txtreg-cantidad-hab="+$("#txtreg-cantidad-hab").val()+"&"+
-			"txtreg-telefono="+$("#txtreg-telefono").val()+"&"+
-			"txtreg-email="+$("#txtreg-email").val()+"&"+
-			"txtreg-direccion="+$("#txtreg-direccion").val()+"&"+
-			"txtreg-descripcion="+$("#txtreg-descripcion").val()+"&"+
-			"txtreg-id-restaurante="+$("#txtreg-id-restaurante").val()+"&"+
-			"txtreg-hotel="+$("#txtreg-hotel").val();
-	
-	$.ajax({
-		url: "../ajax/gestion-info-sucursal.php?accion=registrar-sucursal",
-		method: "POST",
-		data: parametros,
-		success: function(resultado){
-			//alert(resultado);
-			$("#div-resultado-mensaje").html(resultado);
-			$("#div-resultado").show();
-			cargarListaSucursales();
-		},
-		error:function(){
-			alert("error");
-		}
-	});
-
-}
 
 /* Función que Selecciona la Informacion de una sucursal*/
 function obtenerDetalleSucursal(idSucursal){
@@ -148,6 +151,36 @@ function obtenerDetalleSucursal(idSucursal){
 	});
 }
 
+function registrarSucursal(){
+
+	var parametros =
+			"txtreg-nombre="+$("#txtreg-nombre").val()+"&"+
+			"txtreg-cantidad-hab="+$("#txtreg-cantidad-hab").val()+"&"+
+			"txtreg-telefono="+$("#txtreg-telefono").val()+"&"+
+			"txtreg-email="+$("#txtreg-email").val()+"&"+
+			"txtreg-direccion="+$("#txtreg-direccion").val()+"&"+
+			"txtreg-descripcion="+$("#txtreg-descripcion").val()+"&"+
+			"slcreg-restaurante="+$("#slcreg-restaurante").val()+"&"+
+			"txtreg-hotel="+$("#txtreg-hotel").val();
+	
+	$.ajax({
+		url: "../ajax/gestion-info-sucursal.php?accion=registrar-sucursal",
+		method: "POST",
+		data: parametros,
+		success: function(resultado){
+			//alert(resultado);
+			$("#div-resultado-mensaje").html(resultado);
+			$("#div-resultado").show();
+			$("#div-resultado").fadeOut(4500);
+			cargarSucursalNueva();
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+
+}
+
 /*función para actualizar la sucursal*/
 function actualizarSucursal(idSucursal){
 	
@@ -160,8 +193,9 @@ function actualizarSucursal(idSucursal){
 			"txt-email="+$("#txt-email").val()+"&"+
 			"txt-direccion="+$("#txt-direccion").val()+"&"+
 			"txt-descripcion="+$("#txt-descripcion").val()+"&"+
-			"txt-id-restaurante="+$("#txt-id-restauranten").val()+"&"+
-			"txt-id-hotel="+$("#txt-id-hotel").val();
+			"slc-restaurante="+$("#slc-restauranten").val()+"&"+
+			"slc-hotel="+$("#slc-hotel").val()+"&"+
+			"txt-hotel="+$("#txt-hotel").val();
 	
 	//console.log(parametros);
 	//alert(parametros);
@@ -174,7 +208,8 @@ function actualizarSucursal(idSucursal){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			cargarListaSucursales();
+			$("#div-resultado").fadeOut(4500);
+			cargarSucursalNueva();
 		},
 		error:function(){
 			alert("error");
@@ -195,7 +230,7 @@ function eliminarSucursal(idSucursal){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			cargarListaSucursales();
+			cargarSucursalNueva();
 
 		},
 		error: function(err){
