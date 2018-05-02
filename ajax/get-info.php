@@ -52,6 +52,30 @@
 			Factura::obtenerListaFacturas($conexion);		
 	 	break;
 
+	 	case "obtener-cliente-factura":
+	 		//echo "Entra en el case Factura";
+			include ("../05. class/Contabilidad/class-factura.php"); 
+			Factura::obtenerClienteFactura($conexion);		
+	 	break;
+
+	 	case "obtener-empleado-factura":
+	 		//echo "Entra en el case Factura";
+			include ("../05. class/Contabilidad/class-factura.php"); 
+			Factura::obtenerEmpleadoFactura($conexion);		
+	 	break;
+
+	 	case "obtener-tipoFactura-factura":
+	 		//echo "Entra en el case Factura";
+			include ("../05. class/Contabilidad/class-factura.php"); 
+			Factura::obtenerTipoFacFactura($conexion);		
+	 	break;
+
+	 	case "obtener-modoPago-factura":
+	 		//echo "Entra en el case Factura";
+			include ("../05. class/Contabilidad/class-factura.php"); 
+			Factura::obtenerModoPagoFactura($conexion);		
+	 	break;
+
 
 	 	/* -- Informacion de Sucursales --*/
 	 	case "obtener-sucursales":

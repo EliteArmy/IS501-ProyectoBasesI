@@ -172,10 +172,67 @@
 				echo 		'<td>' . $fila["costeTotal"] . '</td>';
 				echo 		'<td>' . $fila["cambio"] . '</td>';
 				echo 		'<td>' . $fila["observacion"] . '</td>';
+
 				echo '</tr>';
 			}
 
 		}
+
+		public static function obtenerClienteFactura ($conexion){
+			//echo "Entra en la funcion";
+
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT idCliente FROM cliente '
+			);
+
+			echo '<option>Seleccione una Opción</option>';
+			while (($fila = $conexion->obtenerFila($resultado))) {
+				echo '<option value="'.$fila["idCliente"].'">'.$fila["idCliente"].'</option>';
+			}
+		}
+
+		public static function obtenerEmpleadoFactura ($conexion){
+			//echo "Entra en la funcion";
+
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT idEmpleado FROM empleado '
+			);
+
+			echo '<option>Seleccione una Opción</option>';
+			while (($fila = $conexion->obtenerFila($resultado))) {
+				echo '<option value="'.$fila["idEmpleado"].'">'.$fila["idEmpleado"].'</option>';
+			}
+		}
+
+		public static function obtenerTipoFacFactura ($conexion){
+			//echo "Entra en la funcion";
+
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT idTipoFactura, nombre 
+				FROM tipoFactura'
+			);
+
+			echo '<option>Seleccione una Opción</option>';
+			while (($fila = $conexion->obtenerFila($resultado))) {
+				echo '<option value="'.$fila["idTipoFactura"].'">'.$fila["nombre"].'</option>';
+			}
+		}
+
+		public static function obtenerModoPagoFactura ($conexion){
+			//echo "Entra en la funcion";
+
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT idModoPago, modoPago 
+				FROM modoPago'
+			);
+
+			echo '<option>Seleccione una Opción</option>';
+			while (($fila = $conexion->obtenerFila($resultado))) {
+				echo '<option value="'.$fila["idModoPago"].'">'.$fila["modoPago"].'</option>';
+			}
+		}
+
+
 
 		// --- Función Futura  ---
 		public function registrarFactura ($conexion){

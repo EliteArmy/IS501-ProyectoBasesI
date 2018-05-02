@@ -164,11 +164,10 @@
             </button>
           </div>
 
-          <div>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistroHabitacion">Registrar habitación  
             </button>
 
-          <h2>Lista de Información</h2>
+          <h2>Lista de Habitaciones</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               

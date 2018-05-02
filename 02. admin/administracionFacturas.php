@@ -156,7 +156,19 @@
 
           <!--<canvas class="my-4" id="myChart" width="900" height="380"></canvas>-->
 
-          <h2>Lista de Información</h2>
+           <!--para registrar una factura-->
+          <div id="div-resultado" style="display: none;" class="alert alert-success fade show alert-dismissible " role="alert">
+            <div id="div-resultado-mensaje">
+            </div>
+            <button type="button" class="btn btn-default btn-sm close" aria-label="Close">
+              <span id="btn-cerrar-mensaje" class="fas fa-times" aria-hidden="true"></span>
+            </button>
+          </div>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistroFactura">Registrar factura  
+            </button>
+
+          <h2>Lista de Facturas</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               
@@ -209,6 +221,100 @@
             </table>
 
           </div>
+
+          <!-- Modal para Registrar factura -->
+          <div class="modal fade" id="modalRegistroFactura" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">
+                  Información sobre la Factura</h5>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                  <form role="form">
+
+
+                    <div class="form-group">
+                      <label for="txtreg-numero-fac">Número de factura</label>
+                      <input type="number" class="form-control" id="txtreg-numero-fac" placeholder="Ingrese el Número de habitación">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-fecha-emision">Fecha de emisión</label>
+                      <input type="date" class="form-control" id="txtreg-fecha-emision" placeholder="Ingrese la Fecha de emisión">
+                    </div>
+                    
+                     <div class="form-group">
+                      <label for="txtreg-coste-reservacion">Coste Reservación</label>
+                      <input type="text" class="form-control" id="txtreg-coste-reservacion" placeholder="Ingrese el coste de reservacion">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-coste-pedido">Coste de Pedido</label>
+                      <input type="text" class="form-control" id="txtreg-coste-pedido" placeholder="Ingrese el Coste de Pedido">
+                    </div>                  
+                    
+                    <div class="form-group">
+                      <label for="txtreg-coste-producto">Coste de Producto</label>
+                      <input type="text" class="form-control" id="txtreg-coste-producto" placeholder="Ingrese el Coste de Producto">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-coste-total">Coste Total</label>
+                      <input type="text" class="form-control" id="txtreg-coste-total" placeholder="Ingrese el Coste Total">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-cambio">Cambio</label>
+                      <input type="text" class="form-control" id="txtreg-cambio" placeholder="Ingrese el Cambio">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtreg-observacion">Observación</label>
+                      <input type="text" class="form-control" id="txtreg-observacion" placeholder="Ingrese la Observación">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-cliente">Id Cliente</label>
+                      <select id="slcreg-cliente" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-empleado">Id Empleado</label>
+                      <select id="slcreg-empleado" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-tipofactura">Tipo de Factura</label>
+                      <select id="slcreg-tipofactura" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slcreg-modoPago">Modo Pago</label>
+                      <select id="slcreg-modoPago" class="form-control">
+                          <!--Informacion generada por la Base -->
+                      </select>
+                    </div>
+
+                    <button type="button" class="btn btn-primary submitBtn" onclick="registrarFactura()">Guardar</button>
+
+                    <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
+                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+
+                  </form>
+                </div>
+
         </main>
       </div>
     </div>
