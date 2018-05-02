@@ -185,7 +185,7 @@ SP:BEGIN
 
 	/*Asignacion de Variables*/
 	SET temMensaje = '';
-	SET pcMensaje = '';
+	SET pcMensaje = 'MENSAJEEEEEEEEEEEE';
 	SET idPersonaTemp = '';
 	SET pbOcurrioError = FALSE;
 
@@ -292,6 +292,7 @@ SP:BEGIN
 					END IF;
 
 					UPDATE persona SET
+
 							primerNombre = pcPrimerNombre,
 							segundoNombre = pcSegundoNombre,
 							primerApellido = pcPrimerApellido,
@@ -299,7 +300,7 @@ SP:BEGIN
 							email = pcEmail,
 							genero = pcGenero,
 							direccion = pcDireccion,
-							fechaNacimiento = pfFechaNacimiento,
+							fechaNacimiento = pfFechaNacimiento
 					WHERE idPersona = pnIdPersona;
 					
 					IF pbOcurrioError THEN
