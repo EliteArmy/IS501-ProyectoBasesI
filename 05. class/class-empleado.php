@@ -243,7 +243,7 @@
 					  "@pcMensaje, 
 					  @pbOcurrioError)";
 
-			//echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+			echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
@@ -260,7 +260,7 @@
           echo '<b>'. $mensajeSP . '</b>'." !@!true" . " <br>";
       } else {
       	echo "<b>Registro Insertado con Exito</b><br>";
-        //echo $mensajeSP . " !@!false" . " <br>";
+        echo $mensajeSP . " !@!false" . " <br>";
       }
 
       //echo "Final Funcion";

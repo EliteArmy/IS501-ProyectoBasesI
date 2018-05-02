@@ -167,6 +167,8 @@ function obtenerDetalleCliente(correo){
 
 				//console.log(respuesta);
 				$("#txt-idcliente").val(respuesta.idCliente);
+
+				//document.getElementById('txt-idcliente').value=respuesta.idCliente;
 				
 				$("#txt-primer-nombre").val(respuesta.primerNombre);
 				$("#box-primer-nombre").show();
