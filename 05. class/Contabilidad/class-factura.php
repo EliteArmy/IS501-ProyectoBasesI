@@ -185,16 +185,18 @@
 			
 			$sql_callSP = "CALL SP_RegistrarFacturas("
 						.$null. "," 
+					  .$null. ","
 					  .$null. "," . 
-					  "'".$this->fechaEntrada. "',".
-					  "'".$this->fechaSalida. "',"
-					  .$this->camaSupletoria. ",".
-					  "'".$this->estado. "',".
+					  .$this->costeReservacion. ","
+					  .$null. ","
+					  .$null. ",".
+					  .$this->costeReservacion. ","
+					  .$this->cambio. ","
 					  "'".$this->observacion. "',"
 					  .$this->idCliente. ","
-					  .$this->noAdultos. ","
-					  .$this->noNinos. ",".
-					  "'".$accion."',". 
+					  .$this->idEmpleado. ","
+					  .$this->idTipoFactura. ",".
+					  .$this->idModoPago.",". 
 					  "@pcMensaje, 
 					  @pbOcurrioError)";
 
