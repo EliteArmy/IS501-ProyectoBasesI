@@ -26,6 +26,7 @@
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
+    <link href="../css/factura-custom.css" rel="stylesheet">
 
   </head>
 
@@ -234,11 +235,6 @@
             </button>
           </div>
 
-          <div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReservacion">Registrar Una Reservacion  
-            </button>
-          </div>
-
           <!-- Modal de Reservación -->
           <div class="modal fade" id="modalReservacion" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -399,10 +395,24 @@
 
                     <div class="form-group">
                       <div style="width: 49%; display: inline-block">
-                        <label for="slc-modo-pago">Pago</label>
+                        <label for="slc-modo-pago">Modo de Pago</label>
                         <select id="slc-modo-pago" class="form-control">
                           <!--Informacion generada por la Base -->
                         </select>
+                      </div>
+
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-tipo-factura">Tipo de Factura</label>
+                        <select id="slc-tipo-factura" class="form-control">
+                          <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div style="width: 49%; display: inline-block">
+                        <label for="txt-cambio">Pago</label>
+                        <input type="text" class="form-control" id="txt-cambio" placeholder="">
                       </div>
 
                       <div style="width: 49%; display: inline-block">
@@ -432,19 +442,19 @@
           </div>
 
 
-          <div class="container">
+          <div id="factura-cliente" style="display: none;" class="container">
             <div class="row">
-              <div class="col-xs-12">
+              <div class="col-md-12">
                 <div class="text-center">
                   <i class="fa fa-search-plus pull-left icon"></i>
-                  <h2>Invoice for purchase #33221</h2>
+                  <h2>Factura</h2>
                 </div>
                 <hr>
               
                 <div class="row">
                   <div class="col-xs-12 col-md-3 col-lg-3 pull-left">
                     <div class="panel panel-default height">
-                      <div class="panel-heading">Billing Details</div>
+                      <div class="panel-heading">Detalles de Fatura</div>
                       <div class="panel-body">
                         <strong>David Peere:</strong><br>
                         1111 Army Navy Drive<br>

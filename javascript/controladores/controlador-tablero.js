@@ -158,6 +158,8 @@ function registrarReservacion(){
 		"slc-adultos="+$("#slc-adultos").val()+"&"+
 		"slc-ninos="+$("#slc-ninos").val();
 
+		//var parametros2 = 
+
 	$.ajax({
 		url: "../ajax/get-info-reservacion.php?accion=registrar-reservacion",
 		method: "POST",

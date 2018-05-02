@@ -74,30 +74,30 @@
 
 	 		$factua = new Factura (
 	 			null, // idFactura
-				// numFactura
+				null, // numFactura
 				null, // fechaEmision
-				// costeReservacion
+				$_POST["slc-precio"], // costeReservacion
 				null, // costePedido
 				null, // costeProducto
-				// costeTotal
-				// cambio
-				// observacion
-				// idCliente
-				// idEmpleado
-				// idTipoFactura
-				// idModoPago
+				$_POST["slc-precio"], // costeTotal
+				$_POST["txt-cambio"], // cambio
+				$_POST[""], // observacion
+				$_POST[""], // idCliente
+				$_POST[""], // idEmpleado
+				$_POST[""], // idTipoFactura
+				$_POST[""], // idModoPago
 	 		);
 
 	 		$factua->registrarFactura();
 
 	 		$detalleFactura = new DetalleFactura(
 		 		null, // idDetalleFactura
-				// cantidad
-				// descripcionReser
-				// idFactura
+				$_POST[""], // cantidad
+				$_POST[""], // descripcionReser
+				$_POST[""], // idFactura
 				null, // idProducto
 				null, // idPedido
-				// idReservacion
+				$_POST[""], // idReservacion
 	 		);
 
 	 		$detalleFactura->registrarDetalle(
