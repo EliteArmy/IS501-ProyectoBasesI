@@ -181,6 +181,7 @@
 		public function registrarFactura ($conexion){
 			$accion = "Agregar";
 			$null = "null";
+			$costeTotal = $this->costeReservacion + 100;
 			//echo "Id: ". $this->idCliente;
 			
 			$sql_callSP = "CALL SP_RegistrarFacturas("
@@ -190,7 +191,7 @@
 					  .$this->costeReservacion. ","
 					  .$null. ","
 					  .$null. ","
-					  .$this->costeReservacion. ","
+					  .$costeTotal. " ,"
 					  .$this->cambio. ",".
 					  "'".$this->observacion. "',"
 					  .$this->idCliente. ","

@@ -1205,7 +1205,7 @@ SP:BEGIN
 					   pdCosteReservacion,
 					   pdCostePedido,
 					   pdCosteProducto,
-					   (pdCosteReservacion + pdCostePedido + pdCosteProducto),
+					   pdCosteTotal,
 					   pdCambio,
 					   pcObservacion,
 					   pnIdCliente,
