@@ -186,16 +186,16 @@
 			$sql_callSP = "CALL SP_RegistrarFacturas("
 						.$null. "," 
 					  .$null. ","
-					  .$null. "," . 
+					  .$null. ","
 					  .$this->costeReservacion. ","
 					  .$null. ","
-					  .$null. ",".
+					  .$null. ","
 					  .$this->costeReservacion. ","
-					  .$this->cambio. ","
+					  .$this->cambio. ",".
 					  "'".$this->observacion. "',"
 					  .$this->idCliente. ","
 					  .$this->idEmpleado. ","
-					  .$this->idTipoFactura. ",".
+					  .$this->idTipoFactura. ","
 					  .$this->idModoPago.",". 
 					  "'".$accion."',". 
 					  "@pcMensaje, 

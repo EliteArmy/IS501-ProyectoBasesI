@@ -156,9 +156,16 @@ function registrarReservacion(){
 		"slc-estado="+$("#slc-estado").val()+"&"+
 		"txt-observacion="+$("#txt-observacion").val()+"&"+
 		"slc-adultos="+$("#slc-adultos").val()+"&"+
-		"slc-ninos="+$("#slc-ninos").val();
+		"slc-ninos="+$("#slc-ninos").val()+"&"+
+		
+		"slc-precio="+$("#slc-precio").val()+"&"+
+		"txt-cambio="+$("#txt-cambio").val()+"&"+
+		"txt-observacion-factura="+$("#txt-observacion-factura").val()+"&"+
+		"txt-idclientes="+$("#txt-idcliente").val()+"&"+
+		"slc-tipo-factura="+$("#slc-tipo-factura").val()+"&"+
+		"slc-modo-pago="+$("#slc-modo-pago").val();
+		;
 
-		//var parametros2 = 
 
 	$.ajax({
 		url: "../ajax/get-info-reservacion.php?accion=registrar-reservacion",
