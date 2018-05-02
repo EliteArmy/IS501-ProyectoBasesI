@@ -372,25 +372,34 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="slc-estado">Estado</label>
-                      <select id="slc-estado" class="form-control">
-                        <option value="Activo">Activo</option>
-                        <option value="Resevado">Resevado</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="slc-supletoria">Cama Supletoria</label>
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-supletoria">Cama Supletoria</label>
                       <select id="slc-supletoria" class="form-control">
                         <option value="0">Sin Cama Extra</option>
                         <option value="1">Una Cama Extra</option>
                         <option value="2">Dos Camas Extra</option>
                       </select>
+                      </div>
+
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-estado">Estado</label>
+                        <select id="slc-estado" class="form-control">
+                        <option value="Activo">Activo</option>
+                        <option value="Resevado">Resevado</option>
+                      </select>
+                      </div>
                     </div>
 
                     <div class="form-group">
                       <label for="txt-observacion">Observación</label>
                       <textarea class="form-control" id="txt-observacion" placeholder="Ingrese alguna Observación del cliente"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="div-factura"></label>
+                      <div id="div-factura" class="alert alert-primary" role="alert">
+                        Parte de Facturacion.
+                      </div>
                     </div>
 
                     <div class="form-group">
@@ -411,7 +420,7 @@
 
                     <div class="form-group">
                       <div style="width: 49%; display: inline-block">
-                        <label for="txt-cambio">Pago</label>
+                        <label for="txt-cambio">Cantidad Pagada</label>
                         <input type="text" class="form-control" id="txt-cambio" placeholder="">
                       </div>
 
@@ -421,6 +430,11 @@
                           <!--Informacion generada por la Base -->
                         </select>
                       </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txt-observacion-factura">Observación</label>
+                      <textarea class="form-control" id="txt-observacion-factura" placeholder="Ingrese alguna Observación acerca de la Factura"></textarea>
                     </div>
 
                     <button type="button" class="btn btn-primary submitBtn" onclick="registrarReservacion()">Reservar</button>

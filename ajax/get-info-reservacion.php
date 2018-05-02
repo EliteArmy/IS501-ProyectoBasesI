@@ -81,27 +81,27 @@
 				null, // costeProducto
 				$_POST["slc-precio"], // costeTotal
 				$_POST["txt-cambio"], // cambio
-				$_POST[""], // observacion
-				$_POST[""], // idCliente
-				$_POST[""], // idEmpleado
-				$_POST[""], // idTipoFactura
-				$_POST[""], // idModoPago
+				$_POST["txt-observacion-factura"], // observacion
+				$_POST["txt-idcliente"], // idCliente
+				$_SESSION["idEmpleado"], // idEmpleado
+				$_POST["slc-tipo-factura"], // idTipoFactura
+				$_POST["slc-modo-pago"], // idModoPago
 	 		);
 
 	 		$factua->registrarFactura();
 
-	 		$detalleFactura = new DetalleFactura(
+	 		/*$detalleFactura = new DetalleFactura(
 		 		null, // idDetalleFactura
-				$_POST[""], // cantidad
-				$_POST[""], // descripcionReser
+				null, // cantidad
+				null, // descripcionReser
 				$_POST[""], // idFactura
 				null, // idProducto
 				null, // idPedido
 				$_POST[""], // idReservacion
 	 		);
+			*/
+	 		//$detalleFactura->registrarDetalle();
 
-	 		$detalleFactura->registrarDetalle(
-	 		);
 		break;
 
 	 	default:

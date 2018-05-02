@@ -76,5 +76,50 @@
 				" IdPedido: " . $this->idPedido . 
 				" IdReservacion: " . $this->idReservacion;
 		}
+
+		// --- Función Futura ---
+		public function registrarReservacion ($conexion){
+
+			$accion = "Agregar";
+			$null = "null";
+			//echo "Id: ". $this->idCliente;
+			
+			$sql_callSP = "CALL SP_Registrar("
+						.$null. "," 
+					  .$null. "," . 
+					  "'".$this->fechaEntrada. "',".
+					  "'".$this->fechaSalida. "',"
+					  .$this->camaSupletoria. ",".
+					  "'".$this->estado. "',".
+					  "'".$this->observacion. "',"
+					  .$this->idCliente. ","
+					  .$this->noAdultos. ","
+					  .$this->noNinos. ",".
+					  "'".$accion."',". 
+					  "@pcMensaje, 
+					  @pbOcurrioError)";
+
+			//echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+
+			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
+
+			$return = $conexion->getParametroSP("@pcMensaje, @pbOcurrioError");
+
+      if ($resultado != '1') { // 
+        echo "Error: " . $resultado . " <br>";
+      }
+
+      $mensajeSP = $return['@pcMensaje'];
+      $ocurreError = $return['@pbOcurrioError'];
+      
+      if ($ocurreError == "1"){
+          echo '<b>'. $mensajeSP . '</b>'." !@!true" . " <br>";
+      } else {
+      	echo "<b>Registro Insertado con Exito</b><br>";
+        //echo $mensajeSP . " !@!false" . " <br>";
+      }
+      //echo "Final Funcion";
+		}
+
 	}
 ?>
