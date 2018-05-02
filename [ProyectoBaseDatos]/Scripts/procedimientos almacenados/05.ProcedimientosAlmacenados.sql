@@ -178,13 +178,15 @@ SP:BEGIN
 	DECLARE temMensaje VARCHAR(200);
 	DECLARE vnConteo INT;
 	DECLARE vcValidarCorreo VARCHAR(50);
-	
+	DECLARE idPersonaTemp VARCHAR(10);
+
 	SET autocommit = 0;
 	START TRANSACTION;
 
 	/*Asignacion de Variables*/
 	SET temMensaje = '';
 	SET pcMensaje = '';
+	SET idPersonaTemp = '';
 	SET pbOcurrioError = FALSE;
 
 		IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN
@@ -290,17 +292,14 @@ SP:BEGIN
 					END IF;
 
 					UPDATE persona SET
-							idPersona = pnIdPersona,
 							primerNombre = pcPrimerNombre,
 							segundoNombre = pcSegundoNombre,
 							primerApellido = pcPrimerApellido,
 							segundoApellido = pcSegundoApellido,
 							email = pcEmail,
-							password = pcPassword,
 							genero = pcGenero,
 							direccion = pcDireccion,
 							fechaNacimiento = pfFechaNacimiento,
-							imagenIdentificacion = pcImagenIdentificacion
 					WHERE idPersona = pnIdPersona;
 					
 					IF pbOcurrioError THEN
@@ -365,9 +364,7 @@ SP:BEGIN
 
 	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
-	DECLARE vnConteo,
-			vnEdad,
-			vnIdCliente INT;
+	DECLARE vnConteo, vnEdad, vnIdCliente INT;
 	
 	SET autocommit=0;
 	START TRANSACTION;
@@ -392,7 +389,7 @@ SP:BEGIN
 
 	IF (pcAccion = 'Actualizar') THEN
 
-	IF pnIdPersona ='' or pnIdPersona IS NULL THEN
+		IF pnIdPersona ='' or pnIdPersona IS NULL THEN
 			SET temMensaje = CONCAT(temMensaje,'Id de la persona, ');
 		END IF;
 
@@ -587,32 +584,32 @@ CREATE PROCEDURE SP_RegistrarEmpleado(
 						IN pcGenero VARCHAR(1),
 						IN pcDireccion VARCHAR(100),
 						IN pfFechaNacimiento DATE,
-    					IN pcImagenIdentificacion VARCHAR(200),
-						IN pcTelefono VARCHAR(15),
-						IN pfFechaIngreso DATE,
-						IN pfFechaSalida DATE,
-						IN pcEstado VARCHAR(15),
-						IN pnIdPersona INT,
-						IN pnIdSucursal INT,
-						IN pnIdEmpleadoSuperior INT,
-						IN pcAccion VARCHAR(50),
+    				IN pcImagenIdentificacion VARCHAR(200),
+							IN pcTelefono VARCHAR(15),
+								IN pfFechaIngreso DATE,
+								IN pfFechaSalida DATE,
+								IN pcEstado VARCHAR(15),
+								IN pnIdPersona INT,
+								IN pnIdSucursal INT,
+								IN pnIdEmpleadoSuperior INT,
+							IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(200),
 						OUT pbOcurrioError BOOLEAN)
 
 SP:BEGIN
 
 	/*Declaracion de Variables.*/
-	DECLARE temMensaje VARCHAR(2000);
-	DECLARE vnConteo, 
-			vnEdad INT;
-	
+	DECLARE temMensaje, idPersonaTemp VARCHAR(2000);
+	DECLARE vnConteo, vnEdad INT;
+
 	SET autocommit = 0;
 	START TRANSACTION;
 
 	SET temMensaje = '';
 	SET pbOcurrioError = FALSE;
+	SET idPersonaTemp = '';
 
-	IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN 
+	IF (pcAccion = 'Agregar' or pcAccion = 'Actualizar') THEN 
 		
 		/*verifica que los campos no sean nulos.*/
 		IF pnIdSucursal ='' or pnIdSucursal IS NULL THEN
@@ -622,7 +619,6 @@ SP:BEGIN
 		IF pnIdEmpleadoSuperior ='' or pnIdEmpleadoSuperior IS NULL THEN
 			SET temMensaje = CONCAT(temMensaje, 'Id del empleado superior, ');
 		END IF;
-
 
 		/*compara si temMensaje es diferente de vacío.*/
 		IF temMensaje<>'' THEN
@@ -642,7 +638,7 @@ SP:BEGIN
 
 	END IF;	
 
-	IF(pcAccion = "Actualizar" or pcAccion = 'Eliminar') THEN
+	IF(pcAccion = 'Actualizar' or pcAccion = 'Eliminar') THEN
 		/*busca si existe una persona con ese id.*/
 		SELECT COUNT(*) INTO vnConteo FROM empleado 
 		WHERE idPersona = pnIdPersona;
@@ -655,18 +651,18 @@ SP:BEGIN
 
 	IF (pcAccion = 'Actualizar') THEN
 
-	IF pnIdPersona ='' or pnIdPersona IS NULL THEN
-			SET temMensaje = CONCAT(temMensaje,'Id de la persona, ');
-		END IF;
+		IF pnIdPersona ='' or pnIdPersona IS NULL THEN
+				SET temMensaje = CONCAT(temMensaje,'Id de la persona, ');
+			END IF;
 
-		/*compara si temMensaje es diferente de vacío.*/
-		IF temMensaje<>'' THEN
-			SET pcMensaje = CONCAT('Campos requeridos para poder Actualizar el empleado: ', temMensaje);
-			SET pbOcurrioError = TRUE;
-			LEAVE SP;
-		END IF;
+			/*compara si temMensaje es diferente de vacío.*/
+			IF temMensaje<>'' THEN
+				SET pcMensaje = CONCAT('Campos requeridos para poder Actualizar el empleado: ', temMensaje);
+				SET pbOcurrioError = TRUE;
+				LEAVE SP;
+			END IF;
 
-	END IF;
+		END IF;
 
 	IF (pcAccion = 'Agregar') THEN
 
@@ -685,7 +681,6 @@ SP:BEGIN
 
 
 	/*IF pcAccion = "Agregar" THEN
-
 
 		Verifica si ya existe un empleado con ese codigo de empleado.
 		SELECT COUNT(*) INTO vnConteo FROM empleado
@@ -741,19 +736,19 @@ SP:BEGIN
 							pcGenero,
 							pcDireccion,
 							pfFechaNacimiento,
-		         			pcImagenIdentificacion,
-			         		pcTelefono,
-			         		pcAccion,
-		         			pcMensaje,
+		         	pcImagenIdentificacion,
+			         	pcTelefono,
+			        pcAccion,
+		         	pcMensaje,
 							pbOcurrioError);
 
 			/*Valida si hubo error en Registrar Persona*/
 			IF pbOcurrioError = TRUE THEN
 				LEAVE SP;
 			END IF;
-
+			
 			INSERT INTO empleado
-					VALUES (pnIdEmpleado,
+					VALUES (null,
 							pnCodigoEmpleado,
 					 		CURDATE(),
 					 		null,
@@ -768,15 +763,20 @@ SP:BEGIN
 			ELSE 
 				SET pcMensaje = 'Empleado registrado correctamente.';
 				COMMIT;
-				SET pbOcurrioError=FALSE;
+				SET pbOcurrioError = FALSE;
 			END IF;
 
 		/*Edita el Empleado.*/
 		WHEN pcAccion = 'Actualizar' THEN
-
+					
+			SELECT idPersona INTO idPersonaTemp
+				FROM persona per
+				INNER JOIN empleado emp ON (per.idPersona = emp.idPersona) 
+				WHERE emp.idEmpleado = pnIdEmpleado;
+			
 			/*Manda a llamar al procedimiento SP_RegistrarPersona.*/
 			CALL SP_RegistrarPersona(
-							pnIdPersona,
+							idPersonaTemp,
 							pcPrimerNombre,
 							pcSegundoNombre,
 							pcPrimerApellido,
@@ -786,24 +786,24 @@ SP:BEGIN
 							pcGenero,
 							pcDireccion,
 							pfFechaNacimiento,
-		         			pcImagenIdentificacion,
-			         		pcTelefono,
-			         		pcAccion,
-		         			pcMensaje,
+		         	pcImagenIdentificacion,
+			         	pcTelefono,
+			        pcAccion,
+		         	pcMensaje,
 							pbOcurrioError);
 
 			/*Valida si hubo error en Registrar Persona*/
-			IF pbOcurrioError = TRUE THEN
+			/*IF pbOcurrioError = TRUE THEN
 				LEAVE SP;
-			END IF;
+			END IF;*/
 
 			UPDATE empleado SET 
-					idEmpleado = pnIdEmpleado,
-					codigoEmpleado = pnCodigoEmpleado,
-					fechaIngreso = pfFechaIngreso,
-					fechaSalida = pfFechaSalida,
+					/*idEmpleado = pnIdEmpleado,*/
+					/*codigoEmpleado = pnCodigoEmpleado,*/
+					/*fechaIngreso = pfFechaIngreso,*/
+					/*fechaSalida = pfFechaSalida,*/
 					estado = pcEstado,
-					idPersona = pnIdPersona,
+					/*idPersona = pnIdPersona,*/
 					idSucursal = pnIdSucursal,
 					idEmpleadoSuperior = pnIdEmpleadoSuperior
 			WHERE idEmpleado = pnIdEmpleado;
@@ -819,6 +819,7 @@ SP:BEGIN
 
 		/*Elimina el Empleado.*/
 		WHEN pcAccion = 'Eliminar' THEN
+			
 			DELETE FROM empleado
 			WHERE idEmpleado = pnIdEmpleado;
 			

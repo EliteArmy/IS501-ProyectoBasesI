@@ -199,11 +199,10 @@
 			//echo "Entra en la funcion";
 			$resultado = $conexion->ejecutarConsulta(
 				"SELECT emp.idEmpleado, per.primerNombre, per.segundoNombre, per.primerApellido, per.segundoApellido, 
-				per.email, tel.numeroTelefono, per.fechaNacimiento, emp.estado, per.direccion, suc.idSucursal, emp.idEmpleadoSuperior
+				per.email, tel.numeroTelefono, per.fechaNacimiento, emp.estado, per.direccion
 					FROM persona per
 					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona)
 					INNER JOIN telefono tel ON (per.idPersona = tel.idPersona) 
-					INNER JOIN sucursal suc ON (suc.idSucursal = emp.idSucursal)
 					WHERE emp.idEmpleado = '$idEmpleado'
 				");
 
@@ -244,7 +243,7 @@
 					  "@pcMensaje, 
 					  @pbOcurrioError)";
 
-			echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+			//echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
@@ -268,7 +267,7 @@
 		}
 
 		// --- Función que Guardara un nuevo Registro ---
-		/*public function registrarEmpleadoViejo ($conexion){
+		public function registrarEmpleadoViejo ($conexion){
 			
 			$passwordHash = md5($this->password);
 
@@ -303,34 +302,34 @@
 			");
 
 			echo "<b>Registro Insertado con Exito</b>";
-		}*/
+		}
 
 		// --- Función que Actualizara la información ---
 		public function actualizarEmpleado ($conexion){
 
-			$passwordHash = md5($this->password);
+			//$passwordHash = md5($this->password);
 			$telefono = $this->telefono->getNumeroTelefono();
 			$accion = "Actualizar";
 			$null = "null";
 			
 			$sql_callSP = "CALL SP_RegistrarEmpleado("
-						.$this->idEmpleado. ","
-						.$this->codigoEmpleado. ",". 
+						.$this->idEmpleado. ",".
+					  $null. ",". 
 					  "'".$this->primerNombre. "',".
 					  "'".$this->segundoNombre. "',".
 					  "'".$this->primerApellido. "',".
 					  "'".$this->segundoApellido. "',".
 					  "'".$this->email. "',".
-					  "'".$passwordHash. "',".
+					  "'".$null. "',".
 					  "'".$this->genero. "',". 
 					  "'".$this->direccion. "',".
 					  "'".$this->fechaNacimiento. "'," 
-					  .$this->imagenIdentificacion. "," 
+					  .$null. "," 
 					  .$telefono. "," 
-					  .$this->fechaIngreso. "," 
-					  .$this->fechaSalida. ",".
+					  .$null. "," 
+					  .$null. ",".
 					  "'".$this->estado. "',"
-					  .$this->idPersona. "," 
+					  .$null. "," 
 					  .$this->idSucursal. ","
 					  .$this->idEmpleadoSuperior. "," . 
 					  "'".$accion."',". 
