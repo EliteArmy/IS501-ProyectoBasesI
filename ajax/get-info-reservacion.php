@@ -56,7 +56,6 @@
 	 	case "registrar-reservacion":
 	 		//echo "Entra en el case registrar reservacion";
 	 		include ("../05. class/Habitacion/class-reservacion.php");
-	 		include ("../05. class/Contabilidad/class-factura.php");
 
 	 		$reservacion = new Reservacion(
 	 			null, //idReservacion
@@ -71,7 +70,25 @@
 	 			$_POST["txt-idcliente"]  //idCliente
 	 		);
 
-	 		$reservacion->registrarReservacion($conexion);
+			$reservacion->registrarReservacion($conexion);
+
+	 		/*$detalleFactura = new DetalleFactura(
+		 		null, // idDetalleFactura
+				null, // cantidad
+				null, // descripcionReser
+				$_POST[""], // idFactura
+				null, // idProducto
+				null, // idPedido
+				$_POST[""], // idReservacion
+	 		);
+			*/
+	 		//$detalleFactura->registrarDetalle();
+
+		break;
+
+		case 'registrar-factura':
+			
+			include ("../05. class/Contabilidad/class-factura.php");
 
 	 		$factura = new Factura (
 	 			null, // idFactura
@@ -89,20 +106,7 @@
 				$_POST["slc-modo-pago"] // idModoPago
 	 		);
 
-	 		$factura->registrarFactura();
-
-	 		/*$detalleFactura = new DetalleFactura(
-		 		null, // idDetalleFactura
-				null, // cantidad
-				null, // descripcionReser
-				$_POST[""], // idFactura
-				null, // idProducto
-				null, // idPedido
-				$_POST[""], // idReservacion
-	 		);
-			*/
-	 		//$detalleFactura->registrarDetalle();
-
+	 		$factura->registrarFactura($conexion);
 		break;
 
 	 	default:

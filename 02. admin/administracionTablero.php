@@ -177,6 +177,16 @@
             </button>
           </div>
 
+          <div id="div-resultado2" style="display: none;" class="alert alert-success fade show alert-dismissible " role="alert">
+            <div id="div-resultado-mensaje2">
+
+            </div>
+
+            <button type="button" class="btn btn-default btn-sm close" aria-label="Close">
+              <span id="btn-cerrar-mensaje" class="fas fa-times" aria-hidden="true"></span>
+            </button>
+          </div>
+
           <h2>Lista de Información</h2>
           
           <!-- <div class="table-responsive">
@@ -355,8 +365,8 @@
                           <option value="2">Dos Adultos</option>
                           <option value="3">Tres Adultos</option>
                           <option value="4">Cuatro Adultos</option>
-                          <option value="5">Cuatro Adultos</option>
-                          <option value="6">Cuatro Adultos</option>
+                          <option value="5">Cinco Adultos</option>
+                          <option value="6">Seis Adultos</option>
                         </select>
                       </div>
 

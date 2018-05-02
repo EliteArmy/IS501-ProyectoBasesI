@@ -178,7 +178,7 @@
 		}
 
 		// --- Función Futura  ---
-		public static function registrarFactura ($conexion){
+		public function registrarFactura ($conexion){
 			$accion = "Agregar";
 			$null = "null";
 			//echo "Id: ". $this->idCliente;
