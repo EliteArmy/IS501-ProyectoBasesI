@@ -199,10 +199,11 @@
 			//echo "Entra en la funcion";
 			$resultado = $conexion->ejecutarConsulta(
 				"SELECT emp.idEmpleado, per.primerNombre, per.segundoNombre, per.primerApellido, per.segundoApellido, 
-				per.email, tel.numeroTelefono, per.fechaNacimiento, emp.estado, per.direccion 
+				per.email, tel.numeroTelefono, per.fechaNacimiento, emp.estado, per.direccion, suc.idSucursal, emp.idEmpleadoSuperior
 					FROM persona per
 					INNER JOIN empleado emp ON (per.idPersona = emp.idPersona)
 					INNER JOIN telefono tel ON (per.idPersona = tel.idPersona) 
+					INNER JOIN sucursal suc ON (suc.idSucursal = emp.idSucursal)
 					WHERE emp.idEmpleado = '$idEmpleado'
 				");
 
@@ -267,7 +268,7 @@
 		}
 
 		// --- Función que Guardara un nuevo Registro ---
-		public function registrarEmpleadoViejo ($conexion){
+		/*public function registrarEmpleadoViejo ($conexion){
 			
 			$passwordHash = md5($this->password);
 
@@ -302,33 +303,34 @@
 			");
 
 			echo "<b>Registro Insertado con Exito</b>";
-		}
+		}*/
 
 		// --- Función que Actualizara la información ---
 		public function actualizarEmpleado ($conexion){
 
+			$passwordHash = md5($this->password);
 			$telefono = $this->telefono->getNumeroTelefono();
 			$accion = "Actualizar";
 			$null = "null";
 			
 			$sql_callSP = "CALL SP_RegistrarEmpleado("
-						.$this->idEmpleado. ",".
-					  $null. ",". 
+						.$this->idEmpleado. ","
+						.$this->codigoEmpleado. ",". 
 					  "'".$this->primerNombre. "',".
 					  "'".$this->segundoNombre. "',".
 					  "'".$this->primerApellido. "',".
 					  "'".$this->segundoApellido. "',".
 					  "'".$this->email. "',".
-					  "'".$null. "',".
+					  "'".$passwordHash. "',".
 					  "'".$this->genero. "',". 
 					  "'".$this->direccion. "',".
 					  "'".$this->fechaNacimiento. "'," 
-					  .$null. "," 
+					  .$this->imagenIdentificacion. "," 
 					  .$telefono. "," 
-					  .$null. "," 
-					  .$null. ",".
+					  .$this->fechaIngreso. "," 
+					  .$this->fechaSalida. ",".
 					  "'".$this->estado. "',"
-					  .$null. "," 
+					  .$this->idPersona. "," 
 					  .$this->idSucursal. ","
 					  .$this->idEmpleadoSuperior. "," . 
 					  "'".$accion."',". 
@@ -357,7 +359,7 @@
 		}
 
 		// --- Función que Actualizara la información ---
-		public function actualizarEmpleadoViejo ($conexion){
+		/*public function actualizarEmpleadoViejo ($conexion){
 
 			$telefono = $this->telefono->getNumeroTelefono();
 			//echo $telefono;
@@ -380,7 +382,7 @@
 
 			echo "<b>Registro actualizado con Exito</b>";
 
-		}
+		}*/
 
 		// --- Función para Eliminar Empleados de la Base de Datos ---
 		public static function eliminarEmpleado ($conexion, $idEmpleado) {

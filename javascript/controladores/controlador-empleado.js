@@ -113,8 +113,8 @@ function registrarEmpleado(){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			//$("#div-resultado").fadeOut(4500);
-			//cargarEmpleadosNuevo();
+			$("#div-resultado").fadeOut(4500);
+			cargarEmpleadosNuevo();
 		},
 		error:function(){
 			alert("error");
@@ -147,6 +147,8 @@ function obtenerDetalleEmpleado(idEmpleado){
 			$("#txt-fecha-nacimiento").val(respuesta.fechaNacimiento);
 			$("#slc-estado").val(respuesta.estado);
 			$("#txt-direccion").val(respuesta.direccion);
+			$("#slc-sucursal").val(respuesta.idSucursal);
+			$("#txt-id-empleado").val(respuesta.idEmpleadoSuperior);
 			
 			// Falta Implementar:
 			//$("#btn-guardar").hide();
@@ -195,8 +197,8 @@ function actualizarEmpleado(idEmpleado){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			//$("#div-resultado").fadeOut(4500);
-			//cargarEmpleadosNuevo();
+			$("#div-resultado").fadeOut(4500);
+			cargarEmpleadosNuevo();
 		},
 		error:function(err){
 			alert("Error: " + err);
@@ -217,7 +219,7 @@ function eliminarEmpleado(idEmpleado){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			//cargarEmpleadosNuevo();
+			cargarEmpleadosNuevo();
 		},
 		error: function(err){
 			alert("Error: " + err);
