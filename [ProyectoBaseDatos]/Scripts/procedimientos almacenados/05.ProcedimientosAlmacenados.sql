@@ -856,8 +856,6 @@ CREATE PROCEDURE SP_RegistrarReservaciones(
 							IN pcEstado VARCHAR(50),
 							IN pcObservacion VARCHAR(1000),
 							IN pnIdCliente INT,
-								IN pnTipoHabitacion INT,
-								IN pnTipoCategoria INT,
 								IN pnNoAdultos INT,
 								IN pnNoNinos INT,
 								IN pcAccion VARCHAR(50),
@@ -868,8 +866,7 @@ SP:BEGIN
 	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
 	DECLARE vcAccion VARCHAR(30);
-	DECLARE vnConteo, 
-			vnIdReservacion INT;
+	DECLARE vnConteo, vnIdReservacion INT;
 	DECLARE vnEstadoHab VARCHAR(100);
 	
 	SET autocommit = 0;
@@ -891,15 +888,15 @@ SP:BEGIN
 	IF pcEstado='' or pcEstado IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Estado,  ');
 	END IF;
-
+	/*
 	IF pnTipoHabitacion='' or pnTipoHabitacion IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'tipo habitación,  ');
 	END IF;
-
-	IF pnTipoCategoria='' or pnTipoCategoria IS NULL THEN
+	*/
+	/*IF pnTipoCategoria='' or pnTipoCategoria IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'tipo categoría,  ');
 	END IF;
-
+*/
 	IF pnNoAdultos='' or pnNoAdultos IS NULL THEN
 		SET temMensaje=CONCAT(temMensaje,'Número de adultos,  ');
 	END IF;
@@ -919,23 +916,23 @@ SP:BEGIN
 		END IF;
 
 		/*busca si existe ese tipo de habitación.*/
-		SELECT COUNT(*) INTO vnConteo FROM tipoHabitacion
+		/*SELECT COUNT(*) INTO vnConteo FROM tipoHabitacion
 		WHERE idTipoHabitacion = pnTipoHabitacion;
-		
-		IF vnConteo = 0 THEN 
+		*/
+		/*IF vnConteo = 0 THEN 
 			SET pcMensaje = CONCAT('Este tipo de habitación: ',pnTipoHabitacion,' no existe.');
 			LEAVE SP;
 		END IF;
-
+		*/
 		/*busca si existe ese tipo de categoría.*/
-		SELECT COUNT(*) INTO vnConteo FROM TipoCategoria
+		/*SELECT COUNT(*) INTO vnConteo FROM TipoCategoria
 		WHERE idTipoCategoria = pnTipoCategoria;
 		
 		IF vnConteo = 0 THEN 
 			SET pcMensaje = CONCAT('Este tipo de categoría: ',pnTipoCategoria,' no existe.');
 			LEAVE SP;
 		END IF;
-
+*/
 		/*verifica que la fecha de reservación sea válida.*/
 		/*SELECT fechaReservacion INTO pfFechaReservacion FROM reservacion
 		WHERE fechaReservacion = pfFechaReservacion;
@@ -945,23 +942,23 @@ SP:BEGIN
 		END IF;*/
 
 		/*verifica que la fecha de entrada sea válida.*/
-		SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
+		/*SELECT fechaEntrada INTO pfFechaEntrada FROM reservacion
 		WHERE fechaEntrada = pfFechaEntrada;
-		
+		/*
 		IF pfFechaEntrada < CURDATE() THEN
 			SET pcMensaje = CONCAT('Esta fecha de entrada: ',pfFechaEntrada,' no es válida.');
 			LEAVE SP;
 		END IF;
-
+*/
 		/*verifica que la fecha de salida sea después de la fecha de entrada.*/
-		SELECT fechaSalida INTO pfFechaSalida FROM reservacion
+		/*SELECT fechaSalida INTO pfFechaSalida FROM reservacion
 		WHERE fechaSalida = pfFechaSalida;
 		
 		IF pfFechaSalida <= pfFechaEntrada THEN
 			SET pcMensaje = CONCAT('Esta fecha de salida: ',pfFechaSalida,' no es válida.');
 			LEAVE SP;
 		END IF;
-
+*/
 		/*verifica que la habitación no esté ocupada.*/
 		SELECT estado INTO vnEstadoHab FROM habitacion h
 		INNER JOIN tipoHabitacion th ON (th.idTipoHabitacion = h.idTipoHabitacion)
@@ -1005,7 +1002,7 @@ SP:BEGIN
 						END IF;
 
 			/*Edita la reservación*/
-			WHEN pcAccion='Editar' THEN 
+			WHEN pcAccion='Actualizar' THEN 
 						UPDATE reservacion SET
 								idReservacion = pnIdReservacion,
 								fechaReservacion = pfFechaReservacion,
@@ -1018,6 +1015,7 @@ SP:BEGIN
 								noNinos = pnNoNinos,
 								idCliente = pnIdCliente
 						WHERE idReservacion = pnIdReservacion;
+						
 						IF pbOcurrioError THEN
 							SET pcMensaje = 'Error al editar reservación.';
 							SET pbOcurrioError = TRUE;

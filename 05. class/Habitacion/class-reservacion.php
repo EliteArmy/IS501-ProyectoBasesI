@@ -239,11 +239,11 @@
 		// --- Función Futura ---
 		public function registrarReservacion ($conexion){
 
-			$accion = "Actualizar";
+			$accion = "Agregar";
 			$null = "null";
 			echo "Id: ". $this->idCliente;
 			
-			$sql_callSP = "CALL SP_RegistrarEmpleado("
+			$sql_callSP = "CALL SP_RegistrarReservaciones("
 						.$null. "," 
 					  .$null. "," . 
 					  "'".$this->fechaEntrada. "',".
