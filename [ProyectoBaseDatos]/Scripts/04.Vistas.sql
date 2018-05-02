@@ -78,7 +78,7 @@ SELECT * FROM vw_platos;
 
 -- -------------------------------
 -- 08. Vista que muestra el tipo de habitación, precio, nombre de sucursal y fecha de reservación en la sucursal choluteca, estado de habitación = disponible y 
---la fecha de registro = 28/2/2016
+/*la fecha de registro = 28/2/2016*/
 CREATE VIEW vw_habdisponibles
 AS (
 SELECT th.tipoHabitacion, p.precio, s.nombre, r.fechaReservacion FROM habitacion h 
@@ -102,7 +102,7 @@ INNER JOIN cliente cli ON per.idPersona = cli.idPersona);
 SELECT * FROM wv_EmpleadoCliente;
 
 -- -------------------------------
---10. Obtiene la informacion del cliente y la ultima Fecha que registro Factura:
+-- 10. Obtiene la informacion del cliente y la ultima Fecha que registro Factura:
 CREATE VIEW vw_ultimaFactura
 AS (
 	SELECT c.idCliente, p.primerNombre, p.primerApellido, (
@@ -116,7 +116,7 @@ INNER JOIN cliente c ON c.idPersona = p.idPersona);
 SELECT * FROM vw_ultimaFactura;
 
 -- -------------------------------
---11. Obtiene la edad de las personas
+-- 11. Obtiene la edad de las personas
 
 CREATE VIEW vw_edad AS(
 SELECT p.idPersona, p.primerNombre, p.primerApellido, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) edad FROM persona p);

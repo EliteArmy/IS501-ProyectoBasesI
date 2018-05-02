@@ -4,14 +4,14 @@ Create, Read, Update, Delete
 -----------------------------
 Cosas que hace el Proyecto:
 -----------------------------
-• 
-• Mostrar todos los clientes
+• Registrar un Cliente
+• Mostrar todos los Clientes
 • Actualizar un Cliente
 • Eliminar un Cliente
 
-• 
+• Registrar un Empleado
 • Mostrar todas los Empleados
-• 
+• Actualizar un Empleado
 • Eliminar un Empleado
 
 • Mostrar todas las Sucursales
@@ -25,8 +25,6 @@ Cosas que hace el Proyecto:
 -----------------------------
 Cosas por Hacer: 
 -----------------------------
-• Insertar un Empleado
-• Actualizar Empleados
 
 • Insertar una Reservacion
 
@@ -34,12 +32,3 @@ Cosas por Hacer:
 
 • Insertar una Sucursal
 • Eliminar una sucursal
-
-• Terminar el Procedimiento Almacenado de Empleado
-• Terminar el Procedimiento Almacenado de Clientes
-• Terminar el procedimiento Almacenado de Persona
-
-• Login podria no funcionar cuando se trata de cliente o empleado
-• Denegar Login cuando el empleado ya no esta activo
-
-• Poner password visible en los modales

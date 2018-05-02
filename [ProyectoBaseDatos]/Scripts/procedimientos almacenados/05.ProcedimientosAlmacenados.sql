@@ -1,157 +1,6 @@
-/*-- Procedimiento 01:
--- Obtiene la Lista de Empleados de la Base
-DROP PROCEDURE IF EXISTS SP_ObtenerEmpleados;
- 
-DELIMITER $$
-CREATE PROCEDURE SP_ObtenerEmpleados()
-
-BEGIN
-
-  SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
-		emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
-	FROM Persona per 
-	INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)
-	WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18";
-
-END $$
-DELIMITER ;
-
--- CALL SP_ObtenerEmpleados;
--- El comando CALL invoca un procedimiento definido préviamente con CREATE PROCEDURE.
-
-
--- -------------------------------
--- Procedimiento 02:
--- Obtiene la Lista de Clientes de la Base
-DROP PROCEDURE IF EXISTS SP_ObtenerClientes;
-
-DELIMITER $$
-CREATE PROCEDURE SP_ObtenerClientes()
-
-BEGIN
-
-		SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
-				cli.fechaRegistro, cli.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
-			FROM Persona per
-			INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)
-			WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= '18';
-
-END $$
-DELIMITER ;
-
--- CALL SP_ObtenerClientes;
-
--- -------------------------------
--- Procedimiento 03:
-
-/*DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
-
-DELIMITER $$
-CREATE PROCEDURE SP_RegistrarCliente(
-						IN primerNombre VARCHAR(20),
-						IN segundoNombre VARCHAR(20),
-						IN primerApellido VARCHAR(20),
-						IN segundoApellido VARCHAR(20),
-						IN email VARCHAR(50),
-						IN password VARCHAR(45),
-						IN genero VARCHAR(1),
-						IN direccion VARCHAR(100),
-						IN fechaNacimiento DATE,
-						IN telefono VARCHAR(15),
-						IN pnEdad INT;
-						OUT mensaje VARCHAR(200),
-						OUT ocurrioError BOOLEAN)
-
-SP:BEGIN
-
-	DECLARE tempMensaje VARCHAR(200);
-
-	START TRANSACTION;
-
-	SET tempMensaje = '';
-	SET mensaje = '';
-	SET ocurrioError = TRUE;
-
-
-		IF primerNombre = '' THEN
-			SET mensaje='Nombre de usuario es un campo requerido';
-			LEAVE SP;
-		END IF;
-
-		IF primerApellido = '' THEN
-			SET mensaje='Apellido de usuario es un campo requerido';
-			LEAVE SP;
-		END IF;
-
-		IF email = '' THEN
-			SET mensaje='El Correo de usuario es un campo requerido';
-			LEAVE SP;
-		END IF;
-
-		IF password = '' THEN
-			SET mensaje='La password de usuario es un campo requerido';
-			LEAVE SP;
-		END IF;
-
-		IF direccion = '' THEN
-			SET mensaje='La direccion de usuario es un campo requerido';
-			LEAVE SP;
-		END IF;
-
-		INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password,
-		 genero, direccion, fechaNacimiento, imagenIdentificacion) 
-		VALUES (NULL, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password,
-		 genero, direccion, fechaNacimiento, NULL);
-
-		INSERT INTO cliente (idCliente, fechaRegistro, estado, idPersona) 
-		VALUES (NULL, NOW(), 'Activo', LAST_INSERT_ID());
-
-		SET ocurrioError = FALSE;
-		SET mensaje = "Cliente Registrado Exitosamente";
-		COMMIT;
-
-END $$ 
-DELIMITER ;
-
-
--- -------------------------------
--- Procedimiento 04:
-
-/*DROP PROCEDURE IF EXISTS SP_SucursalReservacion;
-
-DELIMITER $$
-CREATE PROCEDURE SP_SucursalReservacion(
-						IN pcSucursal VARCHAR(100),
-						OUT pcMensaje VARCHAR(200),
-						OUT pbOcurrioError BOOLEAN)
-
-SP:BEGIN
-
-		DECLARE temMensaje VARCHAR(2000);
-		DECLARE vnConteo INT;
-
-		START TRANSACTION;
-		SET temMensaje='';
-			/*Asignacion de Variables.*//*
-	SET pbOcurrioError=TRUE;
-			SELECT COUNT(*) AS 'cantidad reservaciones' INTO vnConteo, s.nombre INTO pcSucursal FROM reservacion r
-			INNER JOIN habitacion_reservacion hr ON (r.idReservacion = hr.idReservacion)
-			INNER JOIN habitacion h ON (h.idHabitacion = hr.idHabitacion)
-			INNER JOIN sucursal s ON (s.idSucursal = h.idSucursal)
-            GROUP BY s.nombre
-		IF vnConteo=0 THEN
-			SET pcMensaje=CONCAT('La sucursal',pcSucursal,' no tiene reservaciones confirmadas');
-			LEAVE SP;
-		END IF;
-		
-
-
-END $$
-
-DELIMITER ;*/
-
 -- -------------------------------
 -- Procedimiento 01: Registrar personas
+-- -------------------------------
 DROP PROCEDURE IF EXISTS SP_RegistrarPersona;
 
 DELIMITER $$
@@ -185,7 +34,7 @@ SP:BEGIN
 
 	/*Asignacion de Variables*/
 	SET temMensaje = '';
-	SET pcMensaje = 'MENSAJEEEEEEEEEEEE';
+	SET pcMensaje = '';
 	SET idPersonaTemp = '';
 	SET pbOcurrioError = FALSE;
 
@@ -246,8 +95,8 @@ SP:BEGIN
 					IF pbOcurrioError THEN
 						SET pcMensaje = CONCAT ('El correo', vcValidarCorreo, 'no es válido');
 						LEAVE SP;
-					END IF;
-					*/
+					END IF;*/
+					
 					INSERT INTO persona 
 					VALUES (null,
 							pcPrimerNombre,
@@ -336,6 +185,7 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 02: Registrar clientes
+-- -------------------------------
 
 DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
 
@@ -403,14 +253,6 @@ SP:BEGIN
 
 	END IF;
 
-	/*si la fecha de registro es distinta a la fecha actual, no se podrá registrar.*/
-	/*SELECT fechaRegistro INTO pfFechaRegistro FROM cliente
-	WHERE fechaRegistro = pfFechaRegistro;
-	IF pfFechaRegistro != CURDATE() THEN 
-		SET pcMensaje = CONCAT('Esta fecha de registro: ',pfFechaRegistro,' no es válida.');
-		LEAVE SP;
-	END IF;*/
-
 	/*busca si el cliente es mayor de edad para poder registrarlo.*/
 	/*SELECT TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) INTO vnEdad FROM persona
 	WHERE idPersona = pnIdPersona;
@@ -436,30 +278,6 @@ SP:BEGIN
 		SET pcMensaje = CONCAT('Cliente con id: ',pnIdCliente,' ya existe.');
 		/*LEAVE SP;*/
 	END IF;	
-
-	/*Manda a llamar al procedimiento SP_RegistrarPersona.*/
-	
-	/*CALL SP_RegistrarPersona(
-					null,
-					pcPrimerNombre,
-					pcSegundoNombre,
-					pcPrimerApellido,
-					pcSegundoApellido,
-					pcEmail,
-					pcPassword,
-					pcGenero,
-					pcDireccion,
-					pfFechaNacimiento,
-         	pcImagenIdentificacion,
-	         	pcTelefono,
-	         	pcAccion,
-         	pcMensaje,
-					pbOcurrioError);
-
-	
-	IF pbOcurrioError = TRUE THEN
-		LEAVE SP;
-	END IF;*/
 
 	/* -- Inicio del Case. -- */
 	CASE 
@@ -547,6 +365,7 @@ SP:BEGIN
 
 		/*elimina el cliente.*/
 		WHEN pcAccion = 'Eliminar' THEN
+			
 			DELETE FROM cliente
 			WHERE idCliente = pnIdCliente;
 			
@@ -570,6 +389,7 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 03: Registrar empleados
+-- -------------------------------
 DROP PROCEDURE IF EXISTS SP_RegistrarEmpleado;
 
 DELIMITER $$
@@ -680,7 +500,6 @@ SP:BEGIN
 
 	END IF;
 
-
 	/*IF pcAccion = "Agregar" THEN
 
 		Verifica si ya existe un empleado con ese codigo de empleado.
@@ -716,8 +535,6 @@ SP:BEGIN
 		SET pcMensaje =('No pueden existir empleados menores de edad.');
 		LEAVE SP;
 	END IF;*/
-	
-	
 
 	/* -- Inicio del Case. -- */
 	CASE 
@@ -844,6 +661,7 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 04: Registrar reservaciones
+-- -------------------------------
 DROP PROCEDURE IF EXISTS SP_RegistrarReservaciones;
 
 DELIMITER $$
@@ -1048,7 +866,8 @@ END $$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 07: Registrar Facturas
+-- Procedimiento 05: Registrar Facturas
+-- -------------------------------
 
 DROP PROCEDURE IF EXISTS SP_RegistrarFacturas;
 
@@ -1225,7 +1044,8 @@ DELIMITER ;
 
 
 -- -------------------------------
--- Procedimiento 07: Eliminar reservaciones
+-- Procedimiento 06: Eliminar reservaciones
+-- -------------------------------
 /*DROP PROCEDURE IF EXISTS SP_EliminarReservaciones;
 
 DELIMITER $$
@@ -1277,8 +1097,8 @@ END$$
 DELIMITER ;*/
 
 -- -------------------------------
--- Procedimiento 05: Registrar hoteles
-
+-- Procedimiento 06: Registrar hoteles
+-- -------------------------------
 
 DROP PROCEDURE IF EXISTS SP_RegistrarHoteles;
 
@@ -1365,8 +1185,8 @@ END$$
 DELIMITER ;
 
 -- -------------------------------
--- Procedimiento 06: Registrar sucursales
-
+-- Procedimiento 07: Registrar sucursales
+-- -------------------------------
 DROP PROCEDURE IF EXISTS SP_RegistrarSucursales;
 
 DELIMITER $$
@@ -1399,7 +1219,6 @@ SP:BEGIN
 	SET pcMensaje = '';
 	SET pbOcurrioError = FALSE;
 	
-
 	/*Valida que los campos no sean nulos*/
 	IF (pcAccion = "Agregar" or pcAccion = 'Actualizar') THEN
 
@@ -1423,7 +1242,6 @@ SP:BEGIN
 			SET temMensaje=CONCAT(temMensaje,'Id del restaurante, ');
 		END IF;
 
-
 		/*compara si el temMensaje es diferente a vacío.*/
 		IF temMensaje<>'' THEN
 			SET pcMensaje=CONCAT('Campos requeridos para poder registrar/actualizar la Sucursal:',temMensaje);
@@ -1441,14 +1259,11 @@ SP:BEGIN
 
 	END IF;
 
-	
-
 	IF (pcAccion = 'Actualizar') THEN
 
 		IF pnIdHotel ='' or pnIdHotel IS NULL THEN
 			SET temMensaje = CONCAT(temMensaje,'Id del hotel, ');
 		END IF;
-
 
 		/*Busca si ya existe una sucursal con ese id*/
 		SELECT COUNT(*) INTO vnConteo FROM sucursal
@@ -1468,8 +1283,6 @@ SP:BEGIN
 
 	END IF;
 
-
-	
 	/*--- Incio del Case ---*/
 	CASE 
 		/*registra la sucursal*/
@@ -1569,7 +1382,7 @@ DELIMITER ;
 
 -- -------------------------------
 -- Procedimiento 08: Registrar habitación
-
+-- -------------------------------
 DROP PROCEDURE IF EXISTS SP_RegistrarHabitacion;
 
 DELIMITER $$
@@ -1721,4 +1534,160 @@ SP:BEGIN
 
 
 END$$
+
 DELIMITER ;
+
+
+-- -------------------------------
+/*-- Procedimiento 01:
+-- -------------------------------
+-- Obtiene la Lista de Empleados de la Base
+DROP PROCEDURE IF EXISTS SP_ObtenerEmpleados;
+ 
+DELIMITER $$
+CREATE PROCEDURE SP_ObtenerEmpleados()
+
+BEGIN
+
+  SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento,
+		emp.fechaIngreso, emp.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
+	FROM Persona per 
+	INNER JOIN Empleado emp ON (per.idPersona = emp.idPersona)
+	WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= "18";
+
+END $$
+DELIMITER ;
+
+-- CALL SP_ObtenerEmpleados;
+-- El comando CALL invoca un procedimiento definido préviamente con CREATE PROCEDURE.
+
+
+-- -------------------------------
+-- Procedimiento 02:
+-- Obtiene la Lista de Clientes de la Base
+DROP PROCEDURE IF EXISTS SP_ObtenerClientes;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ObtenerClientes()
+
+BEGIN
+
+		SELECT per.idPersona, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
+				cli.fechaRegistro, cli.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS edad
+			FROM Persona per
+			INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)
+			WHERE TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) >= '18';
+
+END $$
+DELIMITER ;
+
+-- CALL SP_ObtenerClientes;
+
+-- -------------------------------
+-- Procedimiento 03:
+
+/*DROP PROCEDURE IF EXISTS SP_RegistrarCliente;
+
+DELIMITER $$
+CREATE PROCEDURE SP_RegistrarCliente(
+						IN primerNombre VARCHAR(20),
+						IN segundoNombre VARCHAR(20),
+						IN primerApellido VARCHAR(20),
+						IN segundoApellido VARCHAR(20),
+						IN email VARCHAR(50),
+						IN password VARCHAR(45),
+						IN genero VARCHAR(1),
+						IN direccion VARCHAR(100),
+						IN fechaNacimiento DATE,
+						IN telefono VARCHAR(15),
+						IN pnEdad INT;
+						OUT mensaje VARCHAR(200),
+						OUT ocurrioError BOOLEAN)
+
+SP:BEGIN
+
+	DECLARE tempMensaje VARCHAR(200);
+
+	START TRANSACTION;
+
+	SET tempMensaje = '';
+	SET mensaje = '';
+	SET ocurrioError = TRUE;
+
+
+		IF primerNombre = '' THEN
+			SET mensaje='Nombre de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		IF primerApellido = '' THEN
+			SET mensaje='Apellido de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		IF email = '' THEN
+			SET mensaje='El Correo de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		IF password = '' THEN
+			SET mensaje='La password de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		IF direccion = '' THEN
+			SET mensaje='La direccion de usuario es un campo requerido';
+			LEAVE SP;
+		END IF;
+
+		INSERT INTO persona (idPersona, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password,
+		 genero, direccion, fechaNacimiento, imagenIdentificacion) 
+		VALUES (NULL, primerNombre, segundoNombre, primerApellido, segundoApellido, email, password,
+		 genero, direccion, fechaNacimiento, NULL);
+
+		INSERT INTO cliente (idCliente, fechaRegistro, estado, idPersona) 
+		VALUES (NULL, NOW(), 'Activo', LAST_INSERT_ID());
+
+		SET ocurrioError = FALSE;
+		SET mensaje = "Cliente Registrado Exitosamente";
+		COMMIT;
+
+END $$ 
+DELIMITER ;
+
+
+-- -------------------------------
+-- Procedimiento 04:
+
+/*DROP PROCEDURE IF EXISTS SP_SucursalReservacion;
+
+DELIMITER $$
+CREATE PROCEDURE SP_SucursalReservacion(
+						IN pcSucursal VARCHAR(100),
+						OUT pcMensaje VARCHAR(200),
+						OUT pbOcurrioError BOOLEAN)
+
+SP:BEGIN
+
+		DECLARE temMensaje VARCHAR(2000);
+		DECLARE vnConteo INT;
+
+		START TRANSACTION;
+		SET temMensaje='';
+			/*Asignacion de Variables.*//*
+	SET pbOcurrioError=TRUE;
+			SELECT COUNT(*) AS 'cantidad reservaciones' INTO vnConteo, s.nombre INTO pcSucursal FROM reservacion r
+			INNER JOIN habitacion_reservacion hr ON (r.idReservacion = hr.idReservacion)
+			INNER JOIN habitacion h ON (h.idHabitacion = hr.idHabitacion)
+			INNER JOIN sucursal s ON (s.idSucursal = h.idSucursal)
+            GROUP BY s.nombre
+		IF vnConteo=0 THEN
+			SET pcMensaje=CONCAT('La sucursal',pcSucursal,' no tiene reservaciones confirmadas');
+			LEAVE SP;
+		END IF;
+		
+
+
+END $$
+
+DELIMITER ;*/
