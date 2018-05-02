@@ -157,17 +157,36 @@ function registrarReservacion(){
 		"txt-observacion="+$("#txt-observacion").val()+"&"+
 		"slc-adultos="+$("#slc-adultos").val()+"&"+
 		"slc-ninos="+$("#slc-ninos").val();
-
-		//var parametros2 = 
+		
+	var parametros2 =	"slc-precio="+$("#slc-precio").val()+"&"+
+		"txt-cambio="+$("#txt-cambio").val()+"&"+
+		"txt-observacion-factura="+$("#txt-observacion-factura").val()+"&"+
+		"txt-idcliente="+$("#txt-idcliente").val()+"&"+
+		"slc-tipo-factura="+$("#slc-tipo-factura").val()+"&"+
+		"slc-modo-pago="+$("#slc-modo-pago").val();
 
 	$.ajax({
 		url: "../ajax/get-info-reservacion.php?accion=registrar-reservacion",
 		method: "POST",
 		data: parametros,
-		success:function(resultado){
+		success: function(resultado){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+
+	$.ajax({
+		url: "../ajax/get-info-reservacion.php?accion=registrar-factura",
+		method: "POST",
+		data: parametros2,
+		success: function(resultado){
+			//alert(resultado);
+			$("#div-resultado-mensaje2").html(resultado);
+			$("#div-resultado2").show();
 		},
 		error:function(){
 			alert("error");
@@ -232,6 +251,9 @@ function obtenerDetalleCliente(correo){
 $("#btn-cerrar-mensaje").click(function(){
 	$("#div-resultado-mensaje").empty();
 	$("#div-resultado").hide();
+
+	$("#div-resultado-mensaje2").empty();
+	$("#div-resultado2").hide();
 });
 
 /*

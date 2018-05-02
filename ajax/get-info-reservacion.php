@@ -70,9 +70,27 @@
 	 			$_POST["txt-idcliente"]  //idCliente
 	 		);
 
-	 		$reservacion->registrarReservacion($conexion);
+			$reservacion->registrarReservacion($conexion);
 
-	 		$factua = new Factura (
+	 		/*$detalleFactura = new DetalleFactura(
+		 		null, // idDetalleFactura
+				null, // cantidad
+				null, // descripcionReser
+				$_POST[""], // idFactura
+				null, // idProducto
+				null, // idPedido
+				$_POST[""], // idReservacion
+	 		);
+			*/
+	 		//$detalleFactura->registrarDetalle();
+
+		break;
+
+		case 'registrar-factura':
+			
+			include ("../05. class/Contabilidad/class-factura.php");
+
+	 		$factura = new Factura (
 	 			null, // idFactura
 				null, // numFactura
 				null, // fechaEmision
@@ -81,27 +99,14 @@
 				null, // costeProducto
 				$_POST["slc-precio"], // costeTotal
 				$_POST["txt-cambio"], // cambio
-				$_POST[""], // observacion
-				$_POST[""], // idCliente
-				$_POST[""], // idEmpleado
-				$_POST[""], // idTipoFactura
-				$_POST[""], // idModoPago
+				$_POST["txt-observacion-factura"], // observacion
+				$_POST["txt-idcliente"], // idCliente
+				$_SESSION["idEmpleado"], // idEmpleado
+				$_POST["slc-tipo-factura"], // idTipoFactura
+				$_POST["slc-modo-pago"] // idModoPago
 	 		);
 
-	 		$factua->registrarFactura();
-
-	 		$detalleFactura = new DetalleFactura(
-		 		null, // idDetalleFactura
-				$_POST[""], // cantidad
-				$_POST[""], // descripcionReser
-				$_POST[""], // idFactura
-				null, // idProducto
-				null, // idPedido
-				$_POST[""], // idReservacion
-	 		);
-
-	 		$detalleFactura->registrarDetalle(
-	 		);
+	 		$factura->registrarFactura($conexion);
 		break;
 
 	 	default:
