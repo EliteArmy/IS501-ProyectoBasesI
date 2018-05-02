@@ -17,6 +17,18 @@
 			Reservacion::obtenerListaTipos($conexion);
 	 	break;
 
+	 	case "obtener-pago":
+	 		//echo "Entra en el case ";
+	 		include ("../05. class/Habitacion/class-reservacion.php");
+			Reservacion::obtenerModoPago($conexion);
+	 	break;
+
+	 	case "obtener-factura":
+	 		//echo "Entra en el case ";
+	 		include ("../05. class/Habitacion/class-reservacion.php");
+			Reservacion::obtenerTipoFactura($conexion);
+	 	break;
+
 	 	case "obtener-sucursal":
 	 		//echo "Entra en el case ";
 	 		include ("../05. class/Habitacion/class-reservacion.php");
@@ -60,6 +72,36 @@
 
 	 		$reservacion->registrarReservacion($conexion);
 
+	 		$factua = new Factura (
+	 			null, // idFactura
+				null, // numFactura
+				null, // fechaEmision
+				$_POST["slc-precio"], // costeReservacion
+				null, // costePedido
+				null, // costeProducto
+				$_POST["slc-precio"], // costeTotal
+				$_POST["txt-cambio"], // cambio
+				$_POST[""], // observacion
+				$_POST[""], // idCliente
+				$_POST[""], // idEmpleado
+				$_POST[""], // idTipoFactura
+				$_POST[""], // idModoPago
+	 		);
+
+	 		$factua->registrarFactura();
+
+	 		$detalleFactura = new DetalleFactura(
+		 		null, // idDetalleFactura
+				$_POST[""], // cantidad
+				$_POST[""], // descripcionReser
+				$_POST[""], // idFactura
+				null, // idProducto
+				null, // idPedido
+				$_POST[""], // idReservacion
+	 		);
+
+	 		$detalleFactura->registrarDetalle(
+	 		);
 		break;
 
 	 	default:

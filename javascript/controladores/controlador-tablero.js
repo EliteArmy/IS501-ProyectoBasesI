@@ -48,6 +48,34 @@ $(document).ready(function(){
 		}
 	});
 
+	$.ajax({
+		url: "../ajax/get-info-reservacion.php?accion=obtener-pago",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado)
+			$("#slc-modo-pago").html(resultado);
+		},
+		error: function(e){
+			//alert ("Error: " + e);
+			//$("#reporte-error").html(e);
+		}
+	});
+
+	$.ajax({
+		url: "../ajax/get-info-reservacion.php?accion=obtener-factura",
+		data: "",
+		method: "POST",
+		success: function(resultado){
+			//alert(resultado)
+			$("#slc-tipo-factura").html(resultado);
+		},
+		error: function(e){
+			//alert ("Error: " + e);
+			//$("#reporte-error").html(e);
+		}
+	});
+
 	cargarLista();
 
 	//alert("Se termino de cargar");
@@ -129,6 +157,8 @@ function registrarReservacion(){
 		"txt-observacion="+$("#txt-observacion").val()+"&"+
 		"slc-adultos="+$("#slc-adultos").val()+"&"+
 		"slc-ninos="+$("#slc-ninos").val();
+
+		//var parametros2 = 
 
 	$.ajax({
 		url: "../ajax/get-info-reservacion.php?accion=registrar-reservacion",

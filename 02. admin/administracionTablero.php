@@ -26,6 +26,7 @@
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
+    <link href="../css/factura-custom.css" rel="stylesheet">
 
   </head>
 
@@ -354,6 +355,8 @@
                           <option value="2">Dos Adultos</option>
                           <option value="3">Tres Adultos</option>
                           <option value="4">Cuatro Adultos</option>
+                          <option value="5">Cuatro Adultos</option>
+                          <option value="6">Cuatro Adultos</option>
                         </select>
                       </div>
 
@@ -379,6 +382,7 @@
                     <div class="form-group">
                       <label for="slc-supletoria">Cama Supletoria</label>
                       <select id="slc-supletoria" class="form-control">
+                        <option value="0">Sin Cama Extra</option>
                         <option value="1">Una Cama Extra</option>
                         <option value="2">Dos Camas Extra</option>
                       </select>
@@ -387,6 +391,36 @@
                     <div class="form-group">
                       <label for="txt-observacion">Observación</label>
                       <textarea class="form-control" id="txt-observacion" placeholder="Ingrese alguna Observación del cliente"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-modo-pago">Modo de Pago</label>
+                        <select id="slc-modo-pago" class="form-control">
+                          <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
+
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-tipo-factura">Tipo de Factura</label>
+                        <select id="slc-tipo-factura" class="form-control">
+                          <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div style="width: 49%; display: inline-block">
+                        <label for="txt-cambio">Pago</label>
+                        <input type="text" class="form-control" id="txt-cambio" placeholder="">
+                      </div>
+
+                      <div style="width: 49%; display: inline-block">
+                        <label for="slc-tipo-factura">Factura</label>
+                        <select id="slc-tipo-factura" class="form-control">
+                          <!--Informacion generada por la Base -->
+                        </select>
+                      </div>
                     </div>
 
                     <button type="button" class="btn btn-primary submitBtn" onclick="registrarReservacion()">Reservar</button>
@@ -406,6 +440,135 @@
               </div>
             </div>
           </div>
+
+
+          <div id="factura-cliente" style="display: none;" class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <i class="fa fa-search-plus pull-left icon"></i>
+                  <h2>Factura</h2>
+                </div>
+                <hr>
+              
+                <div class="row">
+                  <div class="col-xs-12 col-md-3 col-lg-3 pull-left">
+                    <div class="panel panel-default height">
+                      <div class="panel-heading">Detalles de Fatura</div>
+                      <div class="panel-body">
+                        <strong>David Peere:</strong><br>
+                        1111 Army Navy Drive<br>
+                        Arlington<br>
+                        VA<br>
+                        <strong>22 203</strong><br>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xs-12 col-md-3 col-lg-3">
+                    <div class="panel panel-default height">
+                      <div class="panel-heading">Payment Information</div>
+                      <div class="panel-body">
+                          <strong>Card Name:</strong> Visa<br>
+                          <strong>Card Number:</strong> ***** 332<br>
+                          <strong>Exp Date:</strong> 09/2020<br>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xs-12 col-md-3 col-lg-3">
+                    <div class="panel panel-default height">
+                      <div class="panel-heading">Order Preferences</div>
+                      <div class="panel-body">
+                          <strong>Gift:</strong> No<br>
+                          <strong>Express Delivery:</strong> Yes<br>
+                          <strong>Insurance:</strong> No<br>
+                          <strong>Coupon:</strong> No<br>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xs-12 col-md-3 col-lg-3 pull-right">
+                    <div class="panel panel-default height">
+                      <div class="panel-heading">Shipping Address</div>
+                      <div class="panel-body">
+                          <strong>David Peere:</strong><br>
+                          1111 Army Navy Drive<br>
+                          Arlington<br>
+                          VA<br>
+                          <strong>22 203</strong><br>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+      
+            <div class="row">
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h3 class="text-center"><strong>Order summary</strong></h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="table-responsive">
+                      <table class="table table-condensed">
+                        <thead>
+                          <tr>
+                            <td><strong>Item Name</strong></td>
+                            <td class="text-center"><strong>Item Price</strong></td>
+                            <td class="text-center"><strong>Item Quantity</strong></td>
+                            <td class="text-right"><strong>Total</strong></td>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                          <tr>
+                            <td>Samsung Galaxy S5</td>
+                            <td class="text-center">$900</td>
+                            <td class="text-center">1</td>
+                            <td class="text-right">$900</td>
+                          </tr>
+                          <tr>
+                            <td>Samsung Galaxy S5 Extra Battery</td>
+                            <td class="text-center">$30.00</td>
+                            <td class="text-center">1</td>
+                            <td class="text-right">$30.00</td>
+                          </tr>
+                          <tr>
+                            <td>Screen protector</td>
+                            <td class="text-center">$7</td>
+                            <td class="text-center">4</td>
+                            <td class="text-right">$28</td>
+                          </tr>
+                          <tr>
+                            <td class="highrow"></td>
+                            <td class="highrow"></td>
+                            <td class="highrow text-center"><strong>Subtotal</strong></td>
+                            <td class="highrow text-right">$958.00</td>
+                          </tr>
+                          <tr>
+                            <td class="emptyrow"></td>
+                            <td class="emptyrow"></td>
+                            <td class="emptyrow text-center"><strong>Shipping</strong></td>
+                            <td class="emptyrow text-right">$20</td>
+                          </tr>
+                          <tr>
+                            <td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
+                            <td class="emptyrow"></td>
+                            <td class="emptyrow text-center"><strong>Total</strong></td>
+                            <td class="emptyrow text-right">$978.00</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
         </main>
 

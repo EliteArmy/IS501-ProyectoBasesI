@@ -158,7 +158,30 @@
 				echo '<option value="'.$fila["0"].'">'.$fila["1"].'</option>';
 			}
 		}
+		
+		// --- Función Futura ---
+		public static function obtenerTipoFactura ($conexion){
+			$resultado = $conexion->ejecutarConsulta (
+				"SELECT idTipoFactura, nombre, descripcion 
+				FROM TipoFactura
+			");
 
+			while (($fila = $conexion->obtenerFila($resultado))){
+				echo '<option value="'.$fila["0"].'">'.$fila["1"].'</option>';
+			}
+		}
+
+		// --- Función Futura ---
+		public static function obtenerModoPago ($conexion){
+			$resultado = $conexion->ejecutarConsulta (
+				"SELECT idModoPago, modoPago 
+				FROM ModoPago
+			");
+
+			while (($fila = $conexion->obtenerFila($resultado))){
+				echo '<option value="'.$fila["0"].'">'.$fila["1"].'</option>';
+			}
+		}
 		// --- Función Futura ---
 		public static function obtenerPrecio ($conexion, $categoria, $tipos){
 
@@ -241,7 +264,7 @@
 
 			$accion = "Agregar";
 			$null = "null";
-			echo "Id: ". $this->idCliente;
+			//echo "Id: ". $this->idCliente;
 			
 			$sql_callSP = "CALL SP_RegistrarReservaciones("
 						.$null. "," 
@@ -258,7 +281,7 @@
 					  "@pcMensaje, 
 					  @pbOcurrioError)";
 
-			echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+			//echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
