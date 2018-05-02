@@ -17,6 +17,18 @@
 			Reservacion::obtenerListaTipos($conexion);
 	 	break;
 
+	 	case "obtener-pago":
+	 		//echo "Entra en el case ";
+	 		include ("../05. class/Habitacion/class-reservacion.php");
+			Reservacion::obtenerModoPago($conexion);
+	 	break;
+
+	 	case "obtener-factura":
+	 		//echo "Entra en el case ";
+	 		include ("../05. class/Habitacion/class-reservacion.php");
+			Reservacion::obtenerTipoFactura($conexion);
+	 	break;
+
 	 	case "obtener-sucursal":
 	 		//echo "Entra en el case ";
 	 		include ("../05. class/Habitacion/class-reservacion.php");
@@ -60,6 +72,36 @@
 
 	 		$reservacion->registrarReservacion($conexion);
 
+	 		$factua = new Factura (
+	 			null, // idFactura
+				// numFactura
+				null, // fechaEmision
+				// costeReservacion
+				null, // costePedido
+				null, // costeProducto
+				// costeTotal
+				// cambio
+				// observacion
+				// idCliente
+				// idEmpleado
+				// idTipoFactura
+				// idModoPago
+	 		);
+
+	 		$factua->registrarFactura();
+
+	 		$detalleFactura = new DetalleFactura(
+		 		null, // idDetalleFactura
+				// cantidad
+				// descripcionReser
+				// idFactura
+				null, // idProducto
+				null, // idPedido
+				// idReservacion
+	 		);
+
+	 		$detalleFactura->registrarDetalle(
+	 		);
 		break;
 
 	 	default:
