@@ -136,7 +136,7 @@
 
 			foreach ($data as $key) {
 				$data[$i]['opciones'] = '<td><button type="button" onclick="obtenerDetalleCliente('.$data[$i]["idCliente"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button> 
-						<button type="button" onclick="obtenerDetalleCliente('.$data[$i]["idCliente"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+						<button type="button" onclick="eliminarCliente('.$data[$i]["idCliente"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
 				$i++;
 			}
 

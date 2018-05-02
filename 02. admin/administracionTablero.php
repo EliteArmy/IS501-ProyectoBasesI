@@ -435,7 +435,7 @@
                       </div>
 
                       <div style="width: 49%; display: inline-block">
-                        <label for="txt-num-factura">Cantidad Pagada</label>
+                        <label for="txt-num-factura">Numero Factura</label>
                         <input type="text" class="form-control" id="txt-num-factura" placeholder="Numero de Factura">
                       </div>
                     </div>

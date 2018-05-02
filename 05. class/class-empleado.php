@@ -243,7 +243,7 @@
 					  "@pcMensaje, 
 					  @pbOcurrioError)";
 
-			echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+			//echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 
@@ -260,7 +260,7 @@
           echo '<b>'. $mensajeSP . '</b>'." !@!true" . " <br>";
       } else {
       	echo "<b>Registro Insertado con Exito</b><br>";
-        echo $mensajeSP . " !@!false" . " <br>";
+        //echo $mensajeSP . " !@!false" . " <br>";
       }
 
       //echo "Final Funcion";
@@ -305,7 +305,7 @@
 		}
 
 		// --- Función que Actualizara la información ---
-		public function actualizarEmpleado ($conexion){
+		public function actualizarEmpleadoNuevo ($conexion){
 
 			//$passwordHash = md5($this->password);
 			$telefono = $this->telefono->getNumeroTelefono();
@@ -358,7 +358,7 @@
 		}
 
 		// --- Función que Actualizara la información ---
-		/*public function actualizarEmpleadoViejo ($conexion){
+		public function actualizarEmpleado ($conexion){
 
 			$telefono = $this->telefono->getNumeroTelefono();
 			//echo $telefono;
@@ -381,7 +381,7 @@
 
 			echo "<b>Registro actualizado con Exito</b>";
 
-		}*/
+		}
 
 		// --- Función para Eliminar Empleados de la Base de Datos ---
 		public static function eliminarEmpleado ($conexion, $idEmpleado) {

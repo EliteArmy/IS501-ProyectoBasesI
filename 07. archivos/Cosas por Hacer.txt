@@ -4,6 +4,11 @@ Create, Read, Update, Delete
 -----------------------------
 Cosas que hace el Proyecto:
 -----------------------------
+• Registrar un Persona
+• Mostrar todos los Persona
+• Actualizar un Persona
+• Eliminar un Persona
+
 • Registrar un Cliente
 • Mostrar todos los Clientes
 • Actualizar un Cliente
@@ -14,13 +19,40 @@ Cosas que hace el Proyecto:
 • Actualizar un Empleado
 • Eliminar un Empleado
 
-• Mostrar todas las Sucursales
-
-• Mostrar todoas las Facturas
-
 • Mostrar todas las Habitaciones
+• Registrar una Habitacion
+• Actualizar una Habitacion
+• Eliminar una Habitacion
+
+• 
+• Mostrar todas las Sucursales
+• 
+• Eliminar una Sucursal
+
+• Mostrar todas las Facturas
+
+• Crear una Reservacion con su Factura
+
+• Descargar el Manual de usuario
+
+• Buscar por Categoria en Empleado y Cliente
 
 • Iniciar y Cerrar Sesion como Administrador y como Cliente
+
+- Empleado:
+Ferdinand_Wenger4@unah.hn
+qwerty
+d8578edf8458ce06fbc5bb76a58c5ca4
+
+- Cliente: 
+Zelma_Goney@live.com
+123456
+e10adc3949ba59abbe56e057f20f883e
+
+- Cliente y Empleado:
+Ryon_Brand-Hardy13@live.com
+holamundo
+1c7a92ae351d4e21ebdfb897508f59d6
 
 -----------------------------
 Cosas por Hacer: 

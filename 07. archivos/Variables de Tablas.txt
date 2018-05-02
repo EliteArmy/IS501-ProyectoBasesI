@@ -259,10 +259,12 @@ idServicio
 tipoServicio
 descripcion
 
-
-
-
-
+----------------------
+Gestion de Aplicativo:
+1. ../index.php
+2. ../javascript/controlador.js
+3. ../ajax/get-info.php
+4. ../class/Obtener la info de cada pagina
 
 
 
