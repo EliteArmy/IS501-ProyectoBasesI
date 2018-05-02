@@ -152,8 +152,10 @@
             <div class="btn-toolbar mb-2 mb-md-0">
 
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Compartir</button>
-                <button class="btn btn-sm btn-outline-secondary">Exportar</button>
+                <button class="btn btn-sm btn-outline-secondary">
+                  <a href="../07. archivos/Manual de Usuario.docx">Descargar Manual</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary">Opción</button>
               </div>
 
               <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
