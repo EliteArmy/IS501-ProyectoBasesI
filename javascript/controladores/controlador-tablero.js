@@ -119,19 +119,24 @@ function cambiosHabitacion(){
 // Función para Registrar una Reservación
 function registrarReservacion(){
 		
-	var parametros = "idCliente=" + idCliente +"&"+
-		"txt-idcliente="+$("#txt-idcliente").val()+"&"+
+		if($("#txt-idcliente").val() == ""){
+			alert("Debe de buscar un cliente primero");
+			return 0;
+		}
+
+	var parametros = "txt-idcliente="+$("#txt-idcliente").val()+"&"+
 		"txt-primer-nombre="+$("#txt-primer-nombre").val()+"&"+
+		"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
 		"txt-fecha-entrada="+$("#txt-fecha-entrada").val()+"&"+
 		"txt-fecha-salid="+$("#txt-fecha-salid").val()+"&"+
+		"slc-supletoria="+$("#slc-supletoria").val()+"&"+
+		"slc-estado="+$("#slc-estado").val()+"&"+
 		"txt-observacion="+$("#ttxt-observacion").val()+"&"+
-		"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
-		"txt-primer-apellido="+$("#txt-primer-apellido").val()+"&"+
-
-		"txt-email="+$("#txt-email").val();
+		"slc-adultos="+$("#slc-adultos").val()+"&"+
+		"slc-ninos="+$("#slc-ninos").val();
 
 	$.ajax({
-		url: "../ajax/gestion-info-tablero.php?accion=",
+		url: "../ajax/gestion-info-tablero.php?accion=registrar-reservacion",
 		method: "POST",
 		data: parametros,
 		success:function(resultado){
@@ -158,8 +163,11 @@ function obtenerDetalleCliente(correo){
 			console.log(respuesta);
 
 			if(respuesta.mensaje == "No Existe Registro"){
-				$("#txt-respuesta").html(respuesta);
-				$("#txt-respuesta").show();
+				$("#txt-respuesta").html(respuesta.mensaje);
+				$("#box-respuesta").show();
+
+				$("#box-primer-nombre").hide();
+				$("#box-primer-apellido").hide();
 			} else {
 			//alert(respuesta);
 				$("#txt-idcliente").html(respuesta.cliente);
@@ -176,6 +184,8 @@ function obtenerDetalleCliente(correo){
 				$("#txt-email").html(respuesta.email);
 				$("#txt-telefono").html(respuesta.numeroTelefono);
 				$("#txt-fecha-nacimiento").html(respuesta.fechaNacimiento);
+
+				$("#box-respuesta").hide();
 			}
 
 			// Falta Implementar:

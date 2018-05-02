@@ -256,9 +256,11 @@
                       </div>
                     </div>
 
-                    <div style="display: none;" class="form-group">
+                    <div style="display: none;" id="box-respuesta" class="form-group">
                       <label for="txt-respuesta">Respuesta: </label>
-                      <div class="form-control alert alert-primary" id="txt-respuesta"></div>
+                      <div class="form-control alert alert-warning" id="txt-respuesta">
+                        
+                      </div>
                     </div>
 
                     <div style="display: none;" id="box-idCliente" class="form-group">
@@ -387,7 +389,7 @@
                       <textarea class="form-control" id="txt-observacion" placeholder="Ingrese alguna Observación del cliente"></textarea>
                     </div>
 
-                    <button type="button" class="btn btn-primary submitBtn" onclick="actualizarDato(document.getElementById('txt-id').value)">Reservar</button>
+                    <button type="button" class="btn btn-primary submitBtn" onclick="registrarReservacion()">Reservar</button>
 
                     <button type="reset" value="Reset" class="btn btn-warning">Limpiar Formulario</button>
                     

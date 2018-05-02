@@ -55,7 +55,7 @@
 	 			$_POST["txt-observacion"], //observacion
 	 			$_POST["slc-adultos"], //$noAdultos
 	 			$_POST["slc-ninos"], //noNinos
-	 			$_POST["txt-idcliente"]  //idCliente
+	 			$_POST["idCliente"]  //idCliente
 	 		);
 
 	 		$reservacion->registrarReservacion($conexion);
