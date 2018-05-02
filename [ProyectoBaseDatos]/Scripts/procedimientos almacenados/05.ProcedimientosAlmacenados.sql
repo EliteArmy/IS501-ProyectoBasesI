@@ -623,9 +623,6 @@ SP:BEGIN
 			SET temMensaje = CONCAT(temMensaje, 'Id del empleado superior, ');
 		END IF;
 
-		IF pnCodigoEmpleado ='' or pnCodigoEmpleado IS NULL THEN
-			SET temMensaje = CONCAT(temMensaje, 'Código de empleado, ');
-		END IF;
 
 		/*compara si temMensaje es diferente de vacío.*/
 		IF temMensaje<>'' THEN
@@ -660,6 +657,21 @@ SP:BEGIN
 
 	IF pnIdPersona ='' or pnIdPersona IS NULL THEN
 			SET temMensaje = CONCAT(temMensaje,'Id de la persona, ');
+		END IF;
+
+		/*compara si temMensaje es diferente de vacío.*/
+		IF temMensaje<>'' THEN
+			SET pcMensaje = CONCAT('Campos requeridos para poder Actualizar el empleado: ', temMensaje);
+			SET pbOcurrioError = TRUE;
+			LEAVE SP;
+		END IF;
+
+	END IF;
+
+	IF (pcAccion = 'Agregar') THEN
+
+		IF pnCodigoEmpleado ='' or pnCodigoEmpleado IS NULL THEN
+			SET temMensaje = CONCAT(temMensaje, 'Código de empleado, ');
 		END IF;
 
 		/*compara si temMensaje es diferente de vacío.*/
