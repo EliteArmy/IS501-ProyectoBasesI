@@ -1068,6 +1068,7 @@ CREATE PROCEDURE SP_RegistrarFacturas(
 						IN pnIdEmpleado INT,
 						IN pnIdTipoFactura INT,
 						IN pnIdModoPago INT,
+							IN pcAccion VARCHAR(50),
 						OUT pcMensaje VARCHAR(1000),
 						OUT pbOcurrioError BOOLEAN)
 
@@ -1075,8 +1076,7 @@ SP:BEGIN
 
 	/*Declaracion de Variables.*/
 	DECLARE temMensaje VARCHAR(2000);
-	DECLARE vnConteo,
-			vnIdSucursal INT;
+	DECLARE vnConteo, vnIdSucursal INT;
 	
 	SET autocommit=0;
 	START TRANSACTION;		
@@ -1117,34 +1117,33 @@ SP:BEGIN
 		SET temMensaje=CONCAT(temMensaje,'Id del modo de pago, ');
 	END IF;
 
-
 	/*Busca si existe una factura con el numero de factura*/
-	SELECT COUNT(numFactura) INTO vnConteo FROM factura 
+	/*SELECT COUNT(numFactura) INTO vnConteo FROM factura 
 	WHERE numFactura = pnNumFactura;
 	
 	IF vnConteo>0 THEN
 		SET pcMensaje=CONCAT('Factura con el número: ',pnNumFactura,' ya esta registrada.');
 		LEAVE SP;
 	END IF;
-
+	*/
 	/*Verifica que el coste total sea el correcto*/
-	SELECT costeTotal INTO pdCosteTotal FROM factura
+	/*SELECT costeTotal INTO pdCosteTotal FROM factura
 	WHERE costeTotal = pdCosteTotal;
 	
 	IF pdCosteTotal<0 THEN
 		SET pcMensaje=CONCAT('El coste total: ',pdCosteTotal,' no es correcto.');
 		LEAVE SP;
 	END IF;
-
+	*/
 	/*Busca si existe el cliente*/
-	SELECT COUNT(*) INTO vnConteo FROM cliente
+	/*SELECT COUNT(*) INTO vnConteo FROM cliente
 	WHERE idCliente = pnIdCliente;
 	
 	IF vnConteo=0 THEN
 		SET pcMensaje = ('El cliente no existe');
 		LEAVE SP;
 	END IF;
-
+	*/
 	/*Busca si existe el empleado*/
 	SELECT COUNT(*) INTO vnConteo FROM empleado
 	WHERE idEmpleado = pnIdEmpleado;
@@ -1173,7 +1172,7 @@ SP:BEGIN
 	END IF;
 
 	/*Verifica que los costes sean válidos de acuerdo al tipo de factura*/
-	SELECT idTipoFactura INTO pnIdTipoFactura FROM tipoFactura
+	/*SELECT idTipoFactura INTO pnIdTipoFactura FROM tipoFactura
 	WHERE idTipoFactura = pnIdTipoFactura;
 	
 	IF pnIdTipoFactura=1 AND pdCosteReservacion='' or pdCosteReservacion IS NULL THEN
@@ -1188,15 +1187,14 @@ SP:BEGIN
 		SET pcMensaje = ('El coste de pedido y coste de producto no pueden ir nulos y el coste de reservación debe de ir nulo');
 		LEAVE SP;
 	END IF;
-
-	/*Verifica */
+	*/
 
 	/*Busca si existe una factura con ese id*/
 	SELECT COUNT(*) INTO vnConteo FROM factura 
 	WHERE idFactura = pnIdFactura;
 	
-	IF vnConteo>0 THEN
-		SET pcMensaje=CONCAT('Factura con id: ',pnIdFactura,' ya esta registrada.');
+	IF vnConteo > 0 THEN
+		SET pcMensaje = CONCAT('Factura con id: ',pnIdFactura,' ya esta registrada.');
 		LEAVE SP;
 	/*Registra la factura*/
 	ELSE

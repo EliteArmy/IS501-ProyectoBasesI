@@ -197,6 +197,7 @@
 					  .$this->idEmpleado. ","
 					  .$this->idTipoFactura. ",".
 					  .$this->idModoPago.",". 
+					  "'".$accion."',". 
 					  "@pcMensaje, 
 					  @pbOcurrioError)";
 
