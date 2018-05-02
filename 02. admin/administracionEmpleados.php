@@ -476,13 +476,11 @@
     <!-- Bootstrap core JavaScript -->
     <script src="../javascript/bootstrap.min.js"></script>
 
-
     <!-- DataTables core Javascript -->
     <script src="../javascript/datatables.js"></script>
     
     <!-- DataTables Style Javascript -->
     <script src="../javascript/dataTables.bootstrap4.js"></script> 
-    
 
     <!-- Custom Javascript -->
     <script src="../javascript/controladores/controlador-empleado.js"></script>

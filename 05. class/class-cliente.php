@@ -115,6 +115,36 @@
 			}
 		} 
 
+		// --- Función para obtener la Lista de Clientes ---
+		public static function obtenerListaClientes2 ($conexion) {
+			
+			$resultado = $conexion->ejecutarConsulta (
+				'SELECT cli.idCliente, per.primerNombre, per.primerApellido, per.email, per.fechaNacimiento, 
+						cli.fechaRegistro, cli.estado, per.direccion, TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) AS Edad
+				FROM Persona per
+				INNER JOIN Cliente cli ON (per.idPersona = cli.idPersona)
+				WHERE TIMESTAMPDIFF(MONTH, fechaNacimiento, CURDATE()) >= "216"'
+			);
+			
+			$data = array();
+
+			while ($fila = $conexion->obtenerFila($resultado)){
+				$data[] = $fila;
+			}
+
+			$i = 0;
+
+			foreach ($data as $key) {
+				$data[$i]['opciones'] = '<td><button type="button" onclick="obtenerDetalleCliente('.$data[$i]["idCliente"].')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modalForm"><span class="fas fa-edit"></span></button> 
+						<button type="button" onclick="obtenerDetalleCliente('.$data[$i]["idCliente"].')" class="btn btn-default btn-sm"><span class="fas fa-trash-alt"></span></button></td>';
+				$i++;
+			}
+
+			$datax = array('data' => $data);
+
+			echo json_encode($datax);
+		}
+
 		// --- Función que Prepopula la informacion en el Modal ---
 		public static function obtenerDetalleCliente ($conexion, $idCliente){
 			//echo "Entra en la funcion";
@@ -156,22 +186,6 @@
 
 			echo "<b>Registro actualizado con Exito</b>";
 			
-			/*
-			Actualizar Clientes en varias tablas:
-			UPDATE persona per
-				INNER JOIN cliente cli ON (per.idPersona = cli.idPersona)
-			  INNER JOIN telefono tel ON (per.idPersona = tel.idPersona)
-			SET per.primerNombre = 'prueba',
-				per.segundoNombre = 'prueba2',
-				per.primerApellido = 'Prueba3',
-				per.segundoApellido = 'dfgdf' ,
-				per.email = 'asdf156@gmail.com',
-				per.direccion = 'esta es una direccion',
-				per.fechaNacimiento = '1995-12-12',
-			  tel.numeroTelefono = '+50822548698',
-			  cli.estado = 'Inactivo'
-			WHERE per.idPersona = '105';
-			*/
 		}
 
 		// --- Función para Eliminar Clientes de la Base de Datos ---
@@ -189,7 +203,7 @@
 		}
 
 		// --- Función que Guardara un nuevo Registro ---
-		public  function registrarCliente($conexion){
+		public function registrarCliente($conexion){
 
 			$passwordHash = md5($this->password);
 			$telefono = $this->telefono->getNumeroTelefono();
@@ -272,7 +286,6 @@
 		public static function nombreFuncion2($conexion){
 
 		}
-
 
 	}
 ?>

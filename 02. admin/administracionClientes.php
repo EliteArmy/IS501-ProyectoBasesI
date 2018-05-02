@@ -27,8 +27,11 @@
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
     
-    <!-- DataTables custom CSS -->
-    <link href="../css/datatables.min.css" rel="stylesheet">
+    <!-- DataTables custom CSS-->
+    <link href="../css/datatables.css" rel="stylesheet"> 
+    
+    <!-- DataTables custom CSS  -->
+    <link href="../css/dataTables.bootstrap4.css" rel="stylesheet">
   
   </head>
 
@@ -178,11 +181,10 @@
           <h2>Lista de Clientes</h2>
 
           <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <div id="">
+            <table id="tabla-informacion" class="table table-striped table-sm">
               
                 <thead>
-                  <tr>
+                  <tr class="tableheader">
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
@@ -227,7 +229,6 @@
                   -->
                 </tbody>
 
-              </div>
             </table>
 
           </div>
@@ -434,7 +435,10 @@
     <script src="../javascript/bootstrap.min.js"></script>
     
     <!-- DataTables core Javascript -->
-    <script src="../javascript/datatables.min.js"></script>
+    <script src="../javascript/datatables.js"></script>
+    
+    <!-- DataTables Style Javascript -->
+    <script src="../javascript/dataTables.bootstrap4.js"></script> 
     
     <!-- Custom Javascript -->
     <script src="../javascript/controladores/controlador-cliente.js"></script>

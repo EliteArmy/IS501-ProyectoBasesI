@@ -3,61 +3,44 @@ $(document).ready(function(){
 	
 	//alert("Se cargo el documento");
 		
-	/*
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_categorias",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#div-categorias").html(resultado);
-		},
-		error:function(){
-
-		}
-	});	
-
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_empresas",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#slc-empresa").html(resultado);
-		},
-		error:function(e){
-			alert("Error: " + e);
-		}
-	});	
-
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_tipos_calificaciones",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#slc-tipos-calificaciones").html(resultado);
-		},
-		error:function(e){
-			alert("Error: " + e);
-		}
-	});	
-
-	$.ajax({
-		url:"ajax/get-info.php?accion=obtener_tipos_contenidos",
-		data:"",
-		method:"POST",
-		success:function(resultado){
-			$("#slc-tipos-contenidos").html(resultado);
-		},
-		error:function(e){
-			alert("Error: " + e);
-		}
-	});	
-*/
-	cargarListaClientes();
+	//cargarListaClientes();
+	cargarClientesNuevo();
 
 	//alert("Se termino de cargar");
 
 });
 /* --- Fin --- */
+
+function cargarClientesNuevo(){
+
+	$('#tabla-informacion').DataTable({
+    "processing": true,
+    "paging": true,
+    "lengthChange": true,
+    "searching": true,
+    "ordering": true,
+    "info": false,
+    "responsive": true,
+    "autoWidth": false,
+    "pageLength": 10,
+    
+    "ajax": {
+      "url": "../ajax/get-info.php?accion=obtener-clientes2",
+      "type": "POST"
+    },
+    "columns": [
+      { "data": "idCliente" },
+      { "data": "primerNombre" },
+      { "data": "primerApellido" },
+      { "data": "email" },
+      { "data": "fechaNacimiento" },
+      { "data": "fechaRegistro" },
+      { "data": "estado" },
+      { "data": "direccion" },
+      { "data": "opciones" }
+    ]
+	});
+}
 
 // -- Funcion que Obtiene la lista de Clientes -- 
 function cargarListaClientes(){
@@ -112,7 +95,8 @@ function registrarCliente(){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			cargarListaClientes();
+			//$("#div-resultado").fadeOut(4500);
+			//cargarListaClientes();
 		},
 		error:function(){
 			alert("error");
@@ -145,9 +129,6 @@ function obtenerDetalleCliente(idCliente){
 			$("#slc-estado").val(respuesta.estado);
 			$("#txt-direccion").val(respuesta.direccion);
 			
-			// Falta Implementar:
-			//$("#btn-guardar").hide();
-			//$("#btn-actualizar").show();
 		},
 		error: function(err){
 			alert("Error: " + err);
@@ -179,7 +160,7 @@ function actualizarCliente(idCliente){
 			"txt-direccion="+$("#txt-direccion").val();
 	
 	//console.log(parametros);
-	alert(parametros);
+	//alert(parametros);
 	
 	$.ajax({
 		url: "../ajax/gestion-info-cliente.php?accion=actualizar-cliente",
@@ -189,7 +170,7 @@ function actualizarCliente(idCliente){
 			//alert(resultado);
 			$("#div-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			cargarListaClientes();
+			//cargarListaClientes();
 		},
 		error:function(){
 			alert("error");
@@ -209,7 +190,7 @@ function eliminarCliente(idCliente){
 			//alert(resultado);
 			$("#ddiv-resultado-mensaje").html(resultado);
 			$("#div-resultado").show();
-			cargarListaClientes();
+			//cargarListaClientes();
 
 		},
 		error: function(err){
@@ -220,98 +201,8 @@ function eliminarCliente(idCliente){
 
 
 $("#btn-cerrar-mensaje").click(function(){
-	$("#div-resultado").empty();
+	$("#div-resultado-mensaje").empty();
 	$("#div-resultado").hide();
 });
 
-
-
-// --- --- --- ---
-$("#btn-actualizar").click(function(){
-	var categorias = "";
-	//categorias[]=1&lista[]=2&lista[]=3&
-
-	$("input[name='categorias[]']:checked").map(function(){
-		categorias += "categorias[]="+$(this).val()+"&";
-	});
-	//alert(categorias);
-
-	var parametros= categorias + "txt-codigo-aplicacion="+$("#txt-codigo-aplicacion").val()+"&"+
-					"txt-nombre-aplicacion="+$("#txt-nombre-aplicacion").val()+"&"+
-					"txt-descripcion="+$("#txt-descripcion").val()+"&"+
-					"txt-fecha-publicacion="+$("#txt-fecha-publicacion").val()+"&"+
-					"txt-calificacion="+$("#txt-calificacion").val()+"&"+
-					"slc-url-icono="+$("#slc-url-icono").val()+"&"+
-					"txt-version="+$("#txt-version").val()+"&"+
-					"slc-empresa="+$("#slc-empresa").val()+"&"+
-					"slc-tipos-calificaciones="+$("#slc-tipos-calificaciones").val()+"&"+
-					"slc-tipos-contenidos="+$("#slc-tipos-contenidos").val();
-	
-	alert(parametros);
-
-	$.ajax({
-		url:"ajax/gestion-aplicaciones.php?accion=actualizar",
-		data:parametros,
-		method:"POST",
-		success:function(respuesta){
-			$("#div-resultado-insert").html(respuesta);
-			cargarListaAplicaciones();
-		},
-		error:function(err){
-			alert("Error: " + err);
-		}
-	});
-
-});
-
-
-$("#btn-guardar").click(function(){
-	var categorias = "";
-	//categorias[]=1&lista[]=2&lista[]=3&
-
-	$("input[name='categorias[]']:checked").map(function(){
-		categorias += "categorias[]="+$(this).val()+"&";
-	});
-	alert(categorias);
-
-	var parametros= categorias + "txt-nombre-aplicacion="+$("#txt-nombre-aplicacion").val()+"&"+
-					"txt-descripcion="+$("#txt-descripcion").val()+"&"+
-					"txt-fecha-publicacion="+$("#txt-fecha-publicacion").val()+"&"+
-					"txt-calificacion="+$("#txt-calificacion").val()+"&"+
-					"slc-url-icono="+$("#slc-url-icono").val()+"&"+
-					"txt-version="+$("#txt-version").val()+"&"+
-					"slc-empresa="+$("#slc-empresa").val()+"&"+
-					"slc-tipos-calificaciones="+$("#slc-tipos-calificaciones").val()+"&"+
-					"slc-tipos-contenidos="+$("#slc-tipos-contenidos").val();
-	alert(parametros);
-	
-	$.ajax({
-		url:"ajax/gestion-aplicaciones.php?accion=guardar",
-		data:parametros,
-		method:"POST",
-		success:function(respuesta){
-			$("#div-resultado-insert").html(respuesta);
-			cargarListaAplicaciones();
-		},
-		error:function(err){
-			alert("Error: " + err);
-		}
-	});
-});
-
-
-$("#btn-limpiar").click(function(){
-		$("#txt-nombre-aplicacion").val(null);
-		$("#txt-descripcion").val(null);
-		$("#txt-fecha-publicacion").val(null);
-		$("#txt-version").val(null);
-		$("#txt-calificacion").val(null);
-		$("#slc-empresa").val(null);
-		$("#slc-tipos-contenidos").val(null);
-		$("#slc-tipos-calificaciones").val(null);
-		$("#slc-url-icono").val(null);
-
-		$("#btn-guardar").show();
-		$("#btn-actualizar").hide();
-});
 

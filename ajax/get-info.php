@@ -11,6 +11,12 @@
 	 		include ("../05. class/class-cliente.php");
 			Cliente::obtenerListaClientes($conexion);
 	 	break;
+
+		case "obtener-clientes2":
+			//echo "Entra en el case Cliente";
+	 		include ("../05. class/class-cliente.php");
+			Cliente::obtenerListaClientes2($conexion);
+	 	break;
 	 	
 	 	case "obtener-detalle-cliente":
 	 	//echo "Entra en el case Obtener Cliente";
