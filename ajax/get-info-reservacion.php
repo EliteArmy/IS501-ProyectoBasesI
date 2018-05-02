@@ -49,13 +49,13 @@
 	 			null, //idReservacion
 	 			null, //fechaReservacion
 	 			$_POST["txt-fecha-entrada"], //fechaEntrada
-	 			$_POST["txt-fecha-salid"], //fechaSalida
+	 			$_POST["txt-fecha-salida"], //fechaSalida
 	 			$_POST["slc-supletoria"], //camaSupletoria
 	 			$_POST["slc-estado"], //estado
 	 			$_POST["txt-observacion"], //observacion
-	 			$_POST["slc-adultos"], //$noAdultos
+	 			$_POST["slc-adultos"], //noAdultos
 	 			$_POST["slc-ninos"], //noNinos
-	 			$_POST["idCliente"]  //idCliente
+	 			$_POST["txt-idcliente"]  //idCliente
 	 		);
 
 	 		$reservacion->registrarReservacion($conexion);
