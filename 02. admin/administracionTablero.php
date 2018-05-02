@@ -435,10 +435,8 @@
                       </div>
 
                       <div style="width: 49%; display: inline-block">
-                        <label for="slc-tipo-factura">Factura</label>
-                        <select id="slc-tipo-factura" class="form-control">
-                          <!--Informacion generada por la Base -->
-                        </select>
+                        <label for="txt-num-factura">Cantidad Pagada</label>
+                        <input type="text" class="form-control" id="txt-num-factura" placeholder="Numero de Factura">
                       </div>
                     </div>
 

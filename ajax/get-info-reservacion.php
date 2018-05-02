@@ -92,7 +92,7 @@
 
 	 		$factura = new Factura (
 	 			null, // idFactura
-				null, // numFactura
+				$_POST["txt-num-factura"], // numFactura
 				null, // fechaEmision
 				$_POST["slc-precio"], // costeReservacion
 				null, // costePedido
@@ -101,7 +101,7 @@
 				$_POST["txt-cambio"], // cambio
 				$_POST["txt-observacion-factura"], // observacion
 				$_POST["txt-idcliente"], // idCliente
-				$_SESSION["idEmpleado"], // idEmpleado
+				$_POST["idEmpleado"], // idEmpleado
 				$_POST["slc-tipo-factura"], // idTipoFactura
 				$_POST["slc-modo-pago"] // idModoPago
 	 		);

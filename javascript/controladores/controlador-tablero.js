@@ -146,6 +146,8 @@ function cambiosHabitacion(){
 
 // Función para Registrar una Reservación
 function registrarReservacion(){
+	
+	var empleado = 10;
 
 	var parametros = "txt-idcliente="+$("#txt-idcliente").val()+"&"+
 		"txt-primer-nombre="+$("#txt-primer-nombre").val()+"&"+
@@ -163,6 +165,8 @@ function registrarReservacion(){
 		"txt-observacion-factura="+$("#txt-observacion-factura").val()+"&"+
 		"txt-idcliente="+$("#txt-idcliente").val()+"&"+
 		"slc-tipo-factura="+$("#slc-tipo-factura").val()+"&"+
+		"idEmpleado="+empleado+"&"+
+		"txt-num-factura="+$("#txt-num-factura").val()+"&"+
 		"slc-modo-pago="+$("#slc-modo-pago").val();
 
 	$.ajax({

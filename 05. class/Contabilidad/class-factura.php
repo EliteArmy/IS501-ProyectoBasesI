@@ -185,7 +185,7 @@
 			
 			$sql_callSP = "CALL SP_RegistrarFacturas("
 						.$null. "," 
-					  .$null. ","
+					  .$this->numFactura. ","
 					  .$null. ","
 					  .$this->costeReservacion. ","
 					  .$null. ","
@@ -201,7 +201,7 @@
 					  "@pcMensaje, 
 					  @pbOcurrioError)";
 
-			//echo "<br>Lammado: " .$sql_callSP ."<br>"; 
+			echo "<br>Lammado: " .$sql_callSP ."<br>"; 
 
 			$resultado = $conexion->ejecutarConsulta($sql_callSP); // mysqli_query ($this->link, $sql);
 

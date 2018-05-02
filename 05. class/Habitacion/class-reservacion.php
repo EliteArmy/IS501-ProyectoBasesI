@@ -194,7 +194,7 @@
 			");
 
 			while (($fila = $conexion->obtenerFila($resultado))){
-				echo '<option value="'.$fila["0"].'">'."Precio: ".$fila["1"]." ".$fila["2"].'</option>';
+				echo '<option value="'.$fila["1"].'">'."Precio: ".$fila["1"]." ".$fila["2"].'</option>';
 			}
 
 			//echo "Finalizo en la funcion";
