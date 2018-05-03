@@ -72,18 +72,6 @@
 
 			$reservacion->registrarReservacion($conexion);
 
-	 		/*$detalleFactura = new DetalleFactura(
-		 		null, // idDetalleFactura
-				null, // cantidad
-				null, // descripcionReser
-				$_POST[""], // idFactura
-				null, // idProducto
-				null, // idPedido
-				$_POST[""], // idReservacion
-	 		);
-			*/
-	 		//$detalleFactura->registrarDetalle();
-
 		break;
 
 		case 'registrar-factura':
